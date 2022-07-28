@@ -2,29 +2,14 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+<!--
 	<typeAliases>
-		<typeAlias alias="project" type="team5.vo.Project"/>
-		<typeAlias alias="projectmemberjoin" type="team5.vo.ProjectMemberJoin"/>
-		<typeAlias alias="member" type="team5.vo.Member"/>
-		<typeAlias alias="memberaccountjoin" type="team5.vo.MemberAccountJoin"/>
-		<typeAlias alias="account" type="team5.vo.Account"/>
-		<typeAlias alias="names" type="team5.vo.Names"/>
-		<typeAlias alias="notice" type="team5.vo.Notice"/>
-		<typeAlias alias="mplist" type="team5.vo.MypageList"/>
-		<typeAlias alias="schedule" type="team5.vo.Schedule"/>	
-		<typeAlias alias="alert" type="team5.vo.Alert"/>	
-		<typeAlias alias="log" type="team5.vo.Log"/>
 
 	</typeAliases>
+	-->
 	<mappers>
 		<mapper resource="resource/team5Mapper.xml"/>
-		<mapper resource="resource/accountMapper.xml"/>
-		<mapper resource="resource/projectMapper.xml"/>
-		<mapper resource="resource/memberMapper.xml"/>
-		<mapper resource="resource/noticeMapper.xml"/>
-		<mapper resource="resource/mainMapper.xml"/>
-		<mapper resource="resource/alertMapper.xml"/>
-		<mapper resource="resource/LogMapper.xml"/>
+		<mapper resource="resource/testMapper.xml"/>
 	</mappers>
 	
 </configuration>

@@ -11,7 +11,7 @@ public class TestCtrl {
     @Autowired(required=false)
     private TestService service;
     
-    // http://localhost:7080/team5/main.do
+    // http://localhost:7080/PMS/main.do
     @RequestMapping("main.do")
     public String main() {
     	return "WEB-INF\\views\\index.jsp";
