@@ -31,7 +31,7 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd   
       " >
-      <context:component-scan base-package="pms">
+      <context:component-scan base-package="PMS">
       	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
       	<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
       	<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
@@ -49,7 +49,7 @@
 			<property name="configLocation" value="classpath:resource/mybatis.Spring.xml"/>
 		</bean>
 		 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		 	<property name="basePackage" value="team5.dao"/>
+		 	<property name="basePackage" value="PMS.dao"/>
 		 
 		 </bean>
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
