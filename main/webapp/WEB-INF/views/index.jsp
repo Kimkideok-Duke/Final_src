@@ -13,7 +13,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>PMS</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -744,19 +744,20 @@
                   <table class="table table-borderless datatable">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">번호</th>
+                        <th scope="col">일정명</th>
+                        <th scope="col">진행도</th>
+                        <th scope="col">마감일</th>
+                        <th scope="col">상태</th>
+                        <th scope="col">코멘트</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <th scope="row"><a href="#">#2457</a></th>
-                        <td>Brandon Jacob</td>
-                        <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                        <td>$64</td>
+                        <td>요구사항 정의서</td>
+                        <td>@@진행도바 추가@@</td>
+                        <td>8월20일</td>
                         <td><span class="badge bg-success">완료</span></td>
                         <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
                       </tr>
