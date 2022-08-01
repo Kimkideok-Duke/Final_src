@@ -3,7 +3,7 @@
 사원번호 (userno) 기본키
 
 권한(auth)
-master (전체 관리자)
+admin (전체 관리자)
 pm (프로젝트 관리자)
 um (유저 관리자)
 user (일반 사용자)
@@ -14,12 +14,13 @@ CREATE TABLE account(
 	pw varchar2(16) NOT NULL,
 	name varchar2(30) NOT NULL,
 	email varchar2(100),
+	dept varchar2(30),
 	position varchar2(30),
 	address varchar2(200),
 	hpnum varchar2(15),
 	birthdate DATE,
 	joindate DATE NOT NULL,
-	auth varchar2(30) CHECK(auth IN('master','pm','um','user'))
+	auth varchar2(30) CHECK(auth IN('admin','pm','um','user'))
 );
 
 
@@ -35,8 +36,11 @@ CREATE SEQUENCE acc_seq
        NOCYCLE;
 
 
-INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','홍길동','himan7777@naver.com',
-	'과장','서울시 마포구 서교동 447-5 201호','010-1234-5678',NULL,sysdate,'master');
+INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','홍길동','himan7777@naver.com', '본부',
+	'ceo','서울시 마포구 서교동 447-5 201호','010-1234-5678',NULL,sysdate,'admin');
+
+INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','김길동','himan7777@naver.com', '개발부',
+	'부장','서울시 마포구 서교동 447-5 201호','010-1234-5678',NULL,sysdate,'pm');
 
 SELECT * FROM account;
 
