@@ -23,7 +23,14 @@ CREATE TABLE account(
 	auth varchar2(30) CHECK(auth IN('admin','pm','um','user'))
 );
 
-
+/*
+프로필 이미지 테이블 생성
+ */
+CREATE TABLE profile(
+	userno REFERENCES account(userno),
+	PATH varchar2(120),
+	fname varchar2(50)
+);
 
 /*
 사원번호(userno) 시퀀스 생성 / 숫자8자리
@@ -43,7 +50,7 @@ INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','김길동'
 	'부장','서울시 마포구 서교동 447-5 201호','010-1234-5678',NULL,sysdate,'pm');
 
 SELECT * FROM account;
-
+SELECT * FROM profile;
 
 
 
