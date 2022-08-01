@@ -2,14 +2,16 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<!--
+	<!--
 	<typeAliases>
-
+	
 	</typeAliases>
-	-->
+  -->
 	<mappers>
 		<mapper resource="resource/team5Mapper.xml"/>
 		<mapper resource="resource/testMapper.xml"/>
+		<mapper resource="resource/ganttMapper.xml"/>
+		<mapper resource="resource/alertMapper.xml"/>
 	</mappers>
 	
 </configuration>
