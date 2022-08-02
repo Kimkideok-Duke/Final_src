@@ -34,12 +34,16 @@ public class AccountController {
 	@RequestMapping("loginCheck.do")
 	public String loginCheck(HttpServletRequest request,Account sch, Model d) {
 		HttpSession session = request.getSession();
-		if(service.loginCheck(sch).equals("pass")) {
-			session.setAttribute("userno", sch.getUserno());
-			session.setAttribute("auth", service.getUserDetail(sch.getUserno()).getAuth());
-			d.addAttribute("passVal", "P");
+		if(service.isMember(sch)) {
+			if(service.loginCheck(sch).equals("pass")) {
+				session.setAttribute("userno", sch.getUserno());
+				session.setAttribute("auth", service.getUserDetail(sch.getUserno()).getAuth());
+				d.addAttribute("passVal", "P");
+			}else {
+				d.addAttribute("passVal", "B");
+			}
 		}else {
-			d.addAttribute("passVal", "B");
+			d.addAttribute("passVal","N");
 		}
 		return "loginPage.do";
 	}

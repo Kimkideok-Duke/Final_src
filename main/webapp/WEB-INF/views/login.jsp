@@ -54,14 +54,25 @@
       
 		--%>   
 		$("[name=loginBtn]").click(function(){
+			<%--
+			if($("#yourUsername").val()==""){
+				$("#yourUsername").css({"border-color":"red"})
+				$("")
+				return
+			}--%>
 			$("form").submit();
 		})
 	});
+	if("${passVal}"=="N"){
+		alert("존재하지 않는 사원번호입니다.")
+		location.href="${path}/loginPage.do"
+	}
 	if("${passVal}"=="P"){
 		alert("로그인 성공")
 	}
 	if("${passVal}"=="B"){
-		alert("사원번호, 비밀번호가 일치하지 않습니다.")
+		alert("비밀번호가 일치하지 않습니다.")
+		location.href="${path}/loginPage.do"
 	}
 </script>
 </head>
@@ -93,7 +104,7 @@
                   <form action="${path}/loginCheck.do" class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">사원번호</label>
+                      <label for="yourUsername" class="form-label" value="${param.userno}">사원번호</label>
                       <div class="input-group has-validation ">
                         <input type="text" name="userno" class="form-control" id="yourUsername" required>
                         <div class="invalid-feedback">사원번호를 입력하세요</div>
