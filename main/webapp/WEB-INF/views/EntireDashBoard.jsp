@@ -793,14 +793,16 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <c:forEach var="my" items="${mylist}">
                       <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>요구사항 정의서</td>
-                        <td>@@진행도바 추가@@</td>
-                        <td>8월20일</td>
-                        <td><span class="badge bg-success">완료</span></td>
+                        <th scope="row"><a href="#">${my.sno}</a></th>
+                        <td>${my.sname}</td>
+                        <td><span class="badge bg-success">${my.status}</span></td>
+                        <td><fmt:formatDate value="${my.startDate}" pattern="yyyy-MM-dd"/></td>
+                        <td>${my.progress}</td>
                         <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
                       </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
 

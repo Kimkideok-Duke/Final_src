@@ -3,17 +3,17 @@ package PMS.vo;
 public class Project {
 	private int pno;
 	private String title;
-	private String team;
+	private String dept;
 	private String userno;
 	public Project() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Project(int pno, String title, String team, String userno) {
+	public Project(int pno, String title, String dept, String userno) {
 		super();
 		this.pno = pno;
 		this.title = title;
-		this.team = team;
+		this.dept = dept;
 		this.userno = userno;
 	}
 	public int getPno() {
@@ -28,11 +28,11 @@ public class Project {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getTeam() {
-		return team;
+	public String getDept() {
+		return dept;
 	}
-	public void setTeam(String team) {
-		this.team = team;
+	public void setDept(String dept) {
+		this.dept = dept;
 	}
 	public String getUserno() {
 		return userno;

@@ -5,6 +5,7 @@
 
 	<typeAliases>
 		<typeAlias alias="account" type="PMS.vo.Account"/>
+		<typeAlias alias="mySchedule" type="PMS.vo.mySchedule"/>
 	</typeAliases>
 
 	<mappers>
@@ -13,6 +14,7 @@
 		<mapper resource="resource/ganttMapper.xml"/>
 		<mapper resource="resource/alertMapper.xml"/>
 		<mapper resource="resource/accountMapper.xml"/>
+		<mapper resource="resource/projectMapper.xml"/>
 	</mappers>
 	
 </configuration>
