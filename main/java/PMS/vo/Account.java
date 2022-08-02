@@ -47,6 +47,11 @@ public class Account {
 		this.joindateS = joindateS;
 		this.auth = auth;
 	}
+	
+	public Account(String userno, String pw) {
+		this.userno = userno;
+		this.pw = pw;
+	}
 	public String getUserno() {
 		return userno;
 	}

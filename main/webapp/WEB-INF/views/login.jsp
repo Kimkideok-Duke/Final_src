@@ -45,12 +45,24 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		<%-- 
       
 		--%>   
+		$("[name=loginBtn]").click(function(){
+			$("form").submit();
+		})
 	});
+	if("${passVal}"=="P"){
+		alert("로그인 성공")
+	}
+	if("${passVal}"=="B"){
+		alert("사원번호, 비밀번호가 일치하지 않습니다.")
+	}
 </script>
 </head>
 <body>
@@ -78,19 +90,19 @@
                     <p class="text-center small">사원번호 & 비밀번호를 입력하세요</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form action="${path}/loginCheck.do" class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">사원번호</label>
                       <div class="input-group has-validation ">
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        <input type="text" name="userno" class="form-control" id="yourUsername" required>
                         <div class="invalid-feedback">사원번호를 입력하세요</div>
                       </div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">비밀번호</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <input type="password" name="pw" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">비밀번호를 입력하세요</div>
                     </div>
 
@@ -101,7 +113,7 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">로그인</button>
+                      <button class="btn btn-primary w-100" type="button" name="loginBtn">로그인</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0 text-center">비밀번호를 잊으셨나요? <a href="${path}/pwPage.do">비밀번호 찾기</a></p>

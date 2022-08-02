@@ -52,5 +52,22 @@ INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','김길동'
 SELECT * FROM account;
 SELECT * FROM profile;
 
+/*
+로그인 sql
+사원번호 존재 확인
+사원번호, 비밀번호 일치 확인
+ */
+SELECT count(*)
+FROM account
+WHERE userno='E10000003';
+
+SELECT count(*)
+FROM account
+WHERE userno = 'E10000003'
+AND pw = 'abcabc123';
 
 
+-- 사원번호로 사원 상세정보 조회
+SELECT *
+FROM account
+WHERE userno = 'E10000003';
