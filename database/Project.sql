@@ -1,3 +1,6 @@
+/*
+ * 프로젝트
+ */
 CREATE TABLE PROJECT (
     pno NUMBER PRIMARY KEY,
     title varchar2(50) NOT NULL,
@@ -22,6 +25,14 @@ INSERT INTO PROJECT values(seq_pno.nextval, #{title}, #{team}, #{userno});
 */
 SELECT * FROM PROJECT;
 
+
+
+
+
+
+/*
+ * 일정
+ */
 CREATE TABLE SCHEDULE(
 	sno NUMBER PRIMARY KEY,
 	pno NUMBER NOT NULL,
@@ -45,7 +56,34 @@ INSERT INTO SCHEDULE values(seq_sno.nextval, #{pno}, #{sname}, #{progress},
 							to_date(#{startDate_s}, 'YYYY-MM-DD'), to_date(#{endDate_s}, 'YYYY-MM-DD'));
 */
 SELECT * FROM SCHEDULE;
+SELECT *
+FROM SCHEDULE
+WHERE pno = 2
+ORDER BY sno;
+SELECT AVG(progress)
+FROM SCHEDULE
+WHERE pno = 2;
 
+/*
+프로젝트 별 일정 리스트 
+SELECT *
+FROM SCHEDULE
+WHERE pno = #{pno}
+
+프로젝트별 진행도
+SELECT AVG(progress)
+FROM SCHEDULE
+WHERE pno = #{pno}
+*/
+
+
+
+
+
+
+/*
+ * 참가자
+ */
 CREATE TABLE PARTICIPANT (
 	userno varchar2(9) NOT NULL,
 	sno NUMBER NOT NULL,
@@ -65,10 +103,20 @@ FROM SCHEDULE s, PROJECT pj, PARTICIPANT p
 WHERE pj.PNO = s.PNO AND pj.PNO = p.PNO AND s.SNO = p.SNO
 AND p.USERNO = 'E10000020';
 
+SELECT pj.*
+FROM PROJECT pj, PARTICIPANT p
+WHERE pj.PNO = p.PNO
+AND p.USERNO = 'E10000020';
 /*
-내 프로젝트 보기
+내 업무 보기
 SELECT p.USERNO, pj.TITLE, pj.TEAM, s.*
 FROM SCHEDULE s, PROJECT pj, PARTICIPANT p
 WHERE pj.PNO = s.PNO AND pj.PNO = p.PNO AND s.SNO = p.SNO
+AND p.USERNO = #{userno}
+
+내 프로젝트 보기
+SELECT pj.*
+FROM PROJECT pj, PARTICIPANT p
+WHERE pj.PNO = p.PNO
 AND p.USERNO = #{userno}
 */
