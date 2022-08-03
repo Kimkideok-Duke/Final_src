@@ -162,19 +162,19 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link active" href="index.html">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed active" href="#">
           <i class="bi bi-calendar-plus"></i><span>Plan</span>
         </a>
       </li><!-- End 일정관리 Nav -->
 
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="${path}/goAlert.do">
           <i class="bi bi-bell"></i><span>Notifications</span>
         </a>
@@ -212,6 +212,20 @@
 
   <main id="main" class="main">
   <div class="pagetitle">
-  
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/chart.js/chart.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/quill/quill.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="NiceAdmin/assets/js/main.js"></script>
+
 </body>
 </html>
