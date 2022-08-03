@@ -47,4 +47,12 @@ public class AccountController {
 		}
 		return "loginPage.do";
 	}
+	
+	// 로그아웃
+	@RequestMapping("logout.do")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "WEB-INF\\views\\login.jsp";
+	}
 }
