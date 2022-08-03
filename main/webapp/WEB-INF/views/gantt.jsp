@@ -30,7 +30,10 @@
 		fill: tomato;
 	}
 	.box{
-	margin:30px 0 20px 0;
+	margin:20px 0 20px 0;
+	}
+	.box_1{
+	margin:0 0 30px 0;
 	}
 </style>
 <link rel="stylesheet" href="gantt-master/gantt-master/dist/frappe-gantt.css" />
@@ -42,24 +45,51 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
-   $(document).ready(function(){
-   });
+	function SetValue(this){
+	range_val.value = this.value;
+	}
+	$("#frm01 [name=title]").val(event.title)
+	$("#frm01 [name=startdate]").val(event.startdate)
+	$("#frm01 [name=enddate]").val(event.enddate)
+	$("#frm01 [name=progress]").val(event.progress)
 </script>
 </head>
-
+<%@ include file="/WEB-INF/views/Modal.html" %>
 <body>
 <jsp:include page="navi.jsp"/>
-	  <h1>간트차트</h1>
+
+	  <h1>간트차트
+	     <a class="btn-open-popup">
+           <i class="bi bi-plus-circle-fill"></i>
+         </a>
+	  </h1>
 	   <div class="box"></div>
-		<div class="gantt-target"></div>
+		<div class="gantt-target">
+		 <div class="modal">
+      	  <div class="modal_body">
+      	  <form id="frm01"  method="post">
+      	  <h1 style="text-align: center">일정추가</h1>
+      	  <div class="box">일정명 <input type="text" name="title" class="form-control"style="width:300px"></div>
+      	  <div class="box">시작일 <input type="date" name="startdate" class="form-control" style="width:300px"></div>
+      	  <div class="box">마감일 <input type="date" name="enddate" class="form-control" style="width:300px"></div><br>
+      	  <div class="box_1">
+      	   진행도 <input type="range" name="progress" class="form-range" id="customRange1" value="0" min="0" max="100" style="width:220px"
+      	   oninput="document.getElementById('value1').innerHTML=this.value;">
+      	   <span id="value1">0</span>%
+      	   </div>
+      	   </form>
+      	   <button type="submit" class="btn btn-primary" style="margin:auto; display:block;">등록</button>
+      	  </div>
+    	 </div>
+		</div>
 	<script>
 	var tasks = [
 		{
-			start: '2022-07-29',
-			end: '2022-08-02',
-			name: '요구사항정의서',
-			id: "Task 3",
-			progress: 40
+			start: $("#frm01 [name=startdate]").val(event.startdate),
+			end: $("#frm01 [name=enddate]").val(event.enddate),
+			name: $("#frm01 [name=title]").val(event.title),
+			id: "",
+			progress: $("#frm01 [name=progress]").val(event.progress)
 		},
 		{
 			start: '2022-07-15',
@@ -83,10 +113,33 @@ var gantt_chart = new Gantt(".gantt-target", tasks, {
 	on_view_change: function(mode) {
 		console.log(mode);
 	},
-	view_mode: 'Month',
+	view_mode: 'Day',
 	language: 'en'
 });
 console.log(gantt_chart);
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
+const btnOpenPopup = document.querySelector('.btn-open-popup');
+
+btnOpenPopup.addEventListener('click', () => {
+  modal.classList.toggle('show');
+
+  if (modal.classList.contains('show')) {
+    body.style.overflow = 'hidden';
+  }
+});
+
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    modal.classList.toggle('show');
+
+    if (!modal.classList.contains('show')) {
+      body.style.overflow = 'auto';
+    }
+  }
+});
+
+
 </script>
 
 </body>
