@@ -3,6 +3,6 @@ package PMS.dao;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TestDao {
+public interface MainDao {
 
 }

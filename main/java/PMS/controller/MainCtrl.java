@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import PMS.service.TestService;
+import PMS.service.MainService;
 
 @Controller
-public class TestCtrl {
+public class MainCtrl {
     @Autowired(required=false)
-    private TestService service;
+    private MainService service;
     
     // http://localhost:7080/PMS/main.do
     @RequestMapping("main.do")
