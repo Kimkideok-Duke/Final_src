@@ -62,4 +62,11 @@ public class AccountController {
 	public String samplePage() {
 		return "WEB-INF\\views\\sample.jsp";
 	}
+	
+	// 마이페이지 호출
+	// http://localhost:7080/PMS/goMyPage.do
+	@RequestMapping("goMyPage.do")
+	public String goMyPage() {
+		return "WEB-INF\\views\\mypage.jsp";
+	}
 }
