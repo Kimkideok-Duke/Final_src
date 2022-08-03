@@ -56,7 +56,7 @@ public class AccountController {
 		return "WEB-INF\\views\\login.jsp";
 	}
 	
-	// 샘플페이지
+	// 샘플페이지#########################
 	// http://localhost:7080/PMS/samplePage.do
 	@RequestMapping("samplePage.do")
 	public String samplePage() {
@@ -66,7 +66,18 @@ public class AccountController {
 	// 마이페이지 호출
 	// http://localhost:7080/PMS/goMyPage.do
 	@RequestMapping("goMyPage.do")
-	public String goMyPage() {
+	public String goMyPage(HttpServletRequest request, Model d) {
+		HttpSession session = request.getSession();
+		String userno = (String)session.getAttribute("userno");
+		d.addAttribute("userInfo", service.getUserDetail(userno));
+		return "WEB-INF\\views\\mypage.jsp";
+	}
+	
+	//비밀번호 변경
+	@RequestMapping("changePw.do")
+	public String changePw(Account upt, Model d) {
+		service.uptPw(upt);
+		d.addAttribute("proc", "pwC");
 		return "WEB-INF\\views\\mypage.jsp";
 	}
 }

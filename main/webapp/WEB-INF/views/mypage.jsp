@@ -52,7 +52,65 @@
 		<%-- 
       
 		--%>   
+		$("#pwCor").hide()
+		$("#pwDif").hide()		
+		var pwPattern = /^(?=.*[a-z])(?=.*\d)[a-z0-9_-]{8,16}$/
+		$("#pwChBtn").click(function(){
+			if($("#currentPassword").val()!="${userInfo.pw}"){
+				alert("현재 비밀번호가 일치하지 않습니다.")
+				return
+			}
+			if($("#newPassword").val().length < 8 || $("#newPassword").val().length > 16 || !$("#newPassword").val().match(pwPattern)){
+				alert("비밀번호는 8~16자 영문+숫자 조합입니다.");
+				$("#newPassword").focus();
+				return
+			}
+			if($("[name=pwCheck]").val() != "cor"){
+				console.log($("[name=pwCheck]").val())
+				alert("새 비밀번호와 비밀번호 확인을 일치시켜주세요")
+				return
+			}
+			$("#pwCForm").attr("action","${path}/changePw.do")
+			$("#pwCForm").submit()
+		})
+		
+		$("#renewPassword").keyup(function(){
+		     var pw1 = $("#newPassword").val()
+		     var pw2 = $("#renewPassword").val()
+		     if(pw1 != '' && pw2 !='') {
+		 		if(pw1 == pw2) {
+		 			$("#pwCor").show()
+		 			$("#pwDif").hide()
+		 			$("#pwCor").css({"color":"green"})
+		 			$("[name=pwCheck]").val("cor")
+		 		} else {
+		 			$("#pwDif").show()
+		 			$("#pwCor").hide()
+		 			$("#pwDif").css({"color":"red"})
+		 			$("[name=pwCheck]").val("dif")
+		 		}
+		 	}
+		})
+		$("#newPassword").keyup(function(){
+		     var pw1 = $("#newPassword").val()
+		     var pw2 = $("#renewPassword").val()
+		     if(pw1 != '' && pw2 !='') {
+		 		if(pw1 == pw2) {
+		 			$("#pwCor").show()
+		 			$("#pwDif").hide()
+		 			$("#pwCor").css({"color":"green"})
+		 			$("[name=pwCheck]").val("cor")
+		 		} else {
+		 			$("#pwDif").show()
+		 			$("#pwCor").hide()
+		 			$("#pwDif").css({"color":"red"})
+		 			$("[name=pwCheck]").val("dif")
+		 		}
+		 	}
+		})
 	});
+	
+
 </script>
 </head>
 <body>
@@ -79,8 +137,8 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <img src="NiceAdmin/assets/img/profile/default.png" alt="Profile" class="rounded-circle">
-              <h2>김길동</h2>
-              <h3>개발부</h3>
+              <h2>${userInfo.name}</h2>
+              <h3>${userInfo.dept}</h3>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -119,37 +177,37 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">이름</div>
-                    <div class="col-lg-9 col-md-8">김길동</div>
+                    <div class="col-lg-9 col-md-8">${userInfo.name}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">부서</div>
-                    <div class="col-lg-9 col-md-8">개발부</div>
+                    <div class="col-lg-9 col-md-8">${userInfo.dept}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">직급</div>
-                    <div class="col-lg-9 col-md-8">대리</div>
+                    <div class="col-lg-9 col-md-8">${userInfo.position}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">주소</div>
-                    <div class="col-lg-9 col-md-8">서울특별시 마포구 서교동 447-5 201호</div>
+                    <div class="col-lg-9 col-md-8">${userInfo.address}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">생년월일</div>
-                    <div class="col-lg-9 col-md-8">1999-06-03</div>
+                    <div class="col-lg-9 col-md-8"><fmt:formatDate value="${userInfo.birthdate}" pattern="yyyy-MM-dd"/></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">휴대폰 번호</div>
-                    <div class="col-lg-9 col-md-8">010-1234-5678</div>
+                    <div class="col-lg-9 col-md-8">${userInfo.hpnum}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">이메일</div>
-                    <div class="col-lg-9 col-md-8">gildong@naver.com</div>
+                    <div class="col-lg-9 col-md-8">${userInfo.email}</div>
                   </div>
 
                 </div>
@@ -170,30 +228,30 @@
                     </div>
 
                     <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">이메일</label>
+                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">이메일</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke">
+                        <input name="email" type="text" class="form-control" id="Email" value="${userInfo.email}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">주소</label>
+                      <label for="Address" class="col-md-4 col-lg-3 col-form-label">주소</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="job" type="text" class="form-control" id="Job" value="Web Designer">
+                        <input name="address" type="text" class="form-control" id="Address" value="${userInfo.address}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">생년월일</label>
+                      <label for="Birthdate" class="col-md-4 col-lg-3 col-form-label">생년월일</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value="USA">
+                        <input name="birthdate" type="date" class="form-control" id="Birthdate" value="${userInfo.birthdate}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Address" class="col-md-4 col-lg-3 col-form-label">휴대폰 번호</label>
+                      <label for="Hpnum" class="col-md-4 col-lg-3 col-form-label">휴대폰 번호</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
+                        <input name="hpnum" type="text" class="form-control" id="Hpnum" value="${userInfo.hpnum}">
                       </div>
                     </div>
 
@@ -207,31 +265,34 @@
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form>
+                  <form id="pwCForm">
 
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">현재 비밀번호</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
+                        <input name="cpw" type="password" class="form-control" id="currentPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">새 비밀번호</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                        <input name="pw" type="password" class="form-control" id="newPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">비밀번호 확인</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                        <input name="repw" type="password" class="form-control" id="renewPassword">
+                        <div id="pwDif">비밀번호가 일치하지 않습니다.</div>
+                        <div id="pwCor">비밀번호가 일치합니다.</div>
                       </div>
                     </div>
-
+						<input type="hidden" name="pwCheck" value=""/>
+						<input type="hidden" name="userno" value="${userInfo.userno}"/>
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">비밀번호 변경</button>
+                      <button type="button" class="btn btn-primary" id="pwChBtn">비밀번호 변경</button>
                     </div>
                   </form><!-- End Change Password Form -->
 
@@ -307,5 +368,14 @@
 
   <!-- Template Main JS File -->
   <script src="NiceAdmin/assets/js/main.js"></script>
+<script type="text/javascript">
+if("${proc}"!=""){
+	if("${proc}"=="pwC"){
+		alert("비밀번호가 변경되었습니다.")
+		location.href="${path}/goMyPage.do"
+	}
+}
+
+</script>
 </body>
 </html>

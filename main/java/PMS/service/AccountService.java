@@ -32,4 +32,8 @@ public class AccountService {
 	public Account getUserDetail(String userno) {
 		return dao.getUserDetail(userno);
 	}
+	// 비밀번호 변경
+	public void uptPw(Account upt) {
+		dao.uptPw(upt);
+	}
 }

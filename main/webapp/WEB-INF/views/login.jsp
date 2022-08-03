@@ -68,7 +68,7 @@
 		location.href="${path}/loginPage.do"
 	}
 	if("${passVal}"=="P"){
-		alert("로그인 성공")
+		location.href="${path}/goMyPage.do"
 	}
 	if("${passVal}"=="B"){
 		alert("비밀번호가 일치하지 않습니다.")

@@ -19,6 +19,11 @@
 		FROM account
 		WHERE userno = #{userno}
 	</select>
+	<update id="uptPw" parameterType="account">
+		UPDATE ACCOUNT 
+		SET pw = #{pw}
+		WHERE userno = #{userno}
+	</update>
 </mapper>
 
 

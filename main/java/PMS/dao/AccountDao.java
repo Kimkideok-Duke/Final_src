@@ -12,4 +12,6 @@ public interface AccountDao {
 	public String loginCheck(Account sch);
 	// 사원번호 입력받고 사원정보 리턴
 	public Account getUserDetail(String userno);
+	// 비밀번호 변경
+	public void uptPw(Account upt);
 }

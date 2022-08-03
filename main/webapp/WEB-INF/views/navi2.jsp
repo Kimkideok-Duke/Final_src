@@ -65,8 +65,8 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6>김길동</h6>
+              <span>개발부</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -154,7 +154,7 @@
       </li><!-- End 풀캘린더 Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="${path}/goMyPage.do">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>

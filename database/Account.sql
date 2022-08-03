@@ -72,7 +72,10 @@ SELECT *
 FROM account
 WHERE userno = 'E10000003';
 
--- 사원번호 일정번호 프로젝트번호
+-- 비밀번호 변경
+UPDATE ACCOUNT 
+SET pw = 'abcabc123'
+WHERE userno = 'E10000003';
 
 
 
