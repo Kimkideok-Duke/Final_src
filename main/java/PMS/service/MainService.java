@@ -9,4 +9,8 @@ import PMS.dao.MainDao;
 public class MainService {
 	@Autowired(required=false)
 	private MainDao dao;
+	
+	public String getPname(int pno) {
+		return dao.getPname(pno);
+	}
 }
