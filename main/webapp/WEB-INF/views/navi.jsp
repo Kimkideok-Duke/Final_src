@@ -162,19 +162,19 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link active" href="index.html">
+        <a class="nav-link collapsed" href="index.html">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed active" href="#">
+        <a class="nav-link collapsed" href="#">
           <i class="bi bi-calendar-plus"></i><span>Plan</span>
         </a>
       </li><!-- End 일정관리 Nav -->
 
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="${path}/goAlert.do">
           <i class="bi bi-bell"></i><span>Notifications</span>
         </a>
@@ -210,8 +210,6 @@
 
   </aside><!-- End Sidebar-->
 
-  <main id="main" class="main">
-  <div class="pagetitle">
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->

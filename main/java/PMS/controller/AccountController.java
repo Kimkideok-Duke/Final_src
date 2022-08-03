@@ -55,4 +55,11 @@ public class AccountController {
 		session.invalidate();
 		return "WEB-INF\\views\\login.jsp";
 	}
+	
+	// 샘플페이지
+	// http://localhost:7080/PMS/samplePage.do
+	@RequestMapping("samplePage.do")
+	public String samplePage() {
+		return "WEB-INF\\views\\sample.jsp";
+	}
 }

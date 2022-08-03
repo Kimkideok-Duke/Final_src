@@ -71,3 +71,10 @@ AND pw = 'abcabc123';
 SELECT *
 FROM account
 WHERE userno = 'E10000003';
+
+-- 사원번호 일정번호 프로젝트번호
+
+
+
+
+
