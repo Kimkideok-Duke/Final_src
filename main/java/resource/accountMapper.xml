@@ -24,6 +24,42 @@
 		SET pw = #{pw}
 		WHERE userno = #{userno}
 	</update>
+	<update id="uptUserInfo" parameterType="account">
+		UPDATE ACCOUNT 
+			SET email = #{email},
+				address = #{address},
+				birthdate = to_date(#{birthdateS},'YYYY-MM-DD'),
+				hpnum = #{hpnum}
+		WHERE userno = #{userno}
+	</update>
+	<select id="getMySList" resultType="mpsl" parameterType="string">
+		SELECT distinct p2.title, s.sname, a.name, a.position
+		FROM SCHEDULE s, PARTICIPANT p, PROJECT p2, ACCOUNT a 
+		WHERE s.sno in (
+			SELECT SNO
+			FROM PARTICIPANT
+			WHERE userno = #{userno})
+		AND p2.pno in (
+			SELECT PNO
+			FROM PARTICIPANT
+			WHERE userno = #{userno}
+		)
+		AND p.userno = #{userno}
+		AND a.userno in (
+			SELECT p2.PMNO 
+			FROM SCHEDULE s, PARTICIPANT p, PROJECT p2
+			WHERE s.sno in (
+				SELECT SNO
+				FROM PARTICIPANT
+				WHERE userno = #{userno})
+			AND p2.pno in (
+				SELECT PNO
+				FROM PARTICIPANT
+				WHERE userno = #{userno}
+			)
+			AND p.userno = #{userno}
+		)
+	</select>
 </mapper>
 
 

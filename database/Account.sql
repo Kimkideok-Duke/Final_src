@@ -77,7 +77,39 @@ UPDATE ACCOUNT
 SET pw = 'abcabc123'
 WHERE userno = 'E10000003';
 
+-- 마이페이지 개인정보수정
+UPDATE ACCOUNT 
+	SET email = 'himan7777@naver.com',
+		address = '서울시 마포구 서교동 447-5 201호',
+		birthdate = to_date('1996-06-03','YYYY-MM-DD'),
+		hpnum = '010-5678-1234'
+WHERE userno = 'E10000003';
 
-
-
-
+-- 내가 참여한 일정 (오류체크)
+SELECT distinct p2.title, s.sname, a.name, a.position
+FROM SCHEDULE s, PARTICIPANT p, PROJECT p2, ACCOUNT a 
+WHERE s.sno in (
+	SELECT SNO
+	FROM PARTICIPANT
+	WHERE userno = 'E10000020')
+AND p2.pno in (
+	SELECT PNO
+	FROM PARTICIPANT
+	WHERE userno = 'E10000020'
+)
+AND p.userno = 'E10000020'
+AND a.userno in (
+	SELECT p2.PMNO 
+	FROM SCHEDULE s, PARTICIPANT p, PROJECT p2
+	WHERE s.sno in (
+		SELECT SNO
+		FROM PARTICIPANT
+		WHERE userno = 'E10000020')
+	AND p2.pno in (
+		SELECT PNO
+		FROM PARTICIPANT
+		WHERE userno = 'E10000020'
+	)
+	AND p.userno = 'E10000020'
+)
+;

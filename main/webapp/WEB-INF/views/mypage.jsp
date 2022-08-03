@@ -66,7 +66,6 @@
 				return
 			}
 			if($("[name=pwCheck]").val() != "cor"){
-				console.log($("[name=pwCheck]").val())
 				alert("새 비밀번호와 비밀번호 확인을 일치시켜주세요")
 				return
 			}
@@ -107,6 +106,10 @@
 		 			$("[name=pwCheck]").val("dif")
 		 		}
 		 	}
+		})
+		$("#infoChBtn").click(function(){
+			$("#infoCForm").attr("action","${path}/changeInfoMypage.do")
+			$("#infoCForm").submit()
 		})
 	});
 	
@@ -215,7 +218,7 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form id="infoCForm">
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">프로필 이미지</label>
                       <div class="col-md-8 col-lg-9">
@@ -244,7 +247,7 @@
                     <div class="row mb-3">
                       <label for="Birthdate" class="col-md-4 col-lg-3 col-form-label">생년월일</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="birthdate" type="date" class="form-control" id="Birthdate" value="${userInfo.birthdate}">
+                        <input name="birthdateS" type="date" class="form-control" id="Birthdate" value="<fmt:formatDate value="${userInfo.birthdate}" pattern="yyyy-MM-dd"/>">
                       </div>
                     </div>
 
@@ -254,10 +257,10 @@
                         <input name="hpnum" type="text" class="form-control" id="Hpnum" value="${userInfo.hpnum}">
                       </div>
                     </div>
-
+					<input type="hidden" name="userno" value="${userInfo.userno}"/>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">변경</button>
+                      <button type="button" class="btn btn-primary" id="infoChBtn">변경</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
 
@@ -321,30 +324,16 @@
                   </tr>
                 </thead>
                 <tbody>
+                 
+                <c:forEach var="scd" items="${userSList}" varStatus="sts">
                   <tr>
-                    <th scope="row">1</th>
-                    <td>B2E, B2B 건물 입주 고객용 모바일 앱 구축</td>
-                    <td>민원업무(신청, 처리) 전체 기능 개발</td>
-                    <td>홍길동 부장</td>
+                    <th scope="row">${sts.count}</th>
+                    <td>${scd.title}</td>
+                    <td>${scd.sname}</td>
+                    <td>${scd.name} ${scd.position}</td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>고객 관리용 자동 문자, 전화 서비스 구축</td>
-                    <td>이벤트 홍보/안내 전체 기능 개발</td>
-                    <td>오길동 부장</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>사내 관리 솔루션 프로그램 개발</td>
-                    <td>부가기능 中 "우산대여", "세차 서비스 신청" 기능 개발</td>
-                    <td>라길동 부장</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>대출비교 플랫폼 프론트 및 백엔드 개발</td>
-                    <td>기 개발된 앱 연계 中 당사 소유의 앱 연계 (※ 이때, 앱 연계 시 별도 사용자 로그인 작업 필요)</td>
-                    <td>하길동 부장</td>
-                  </tr>
+                 </c:forEach>
+                  
                 </tbody>
               </table>
               <!-- End Table with hoverable rows -->
@@ -372,6 +361,10 @@
 if("${proc}"!=""){
 	if("${proc}"=="pwC"){
 		alert("비밀번호가 변경되었습니다.")
+		location.href="${path}/goMyPage.do"
+	}
+	if("${proc}"=="infoC"){
+		alert("개인정보가 수정되었습니다.")
 		location.href="${path}/goMyPage.do"
 	}
 }

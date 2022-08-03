@@ -1,10 +1,13 @@
 package PMS.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import PMS.dao.AccountDao;
 import PMS.vo.Account;
+import PMS.vo.MypageScheduleList;
 
 @Service
 public class AccountService {
@@ -35,5 +38,13 @@ public class AccountService {
 	// 비밀번호 변경
 	public void uptPw(Account upt) {
 		dao.uptPw(upt);
+	}
+	// 마이페이지에서 개인정보 수정
+	public void uptUserInfo(Account upt) {
+		dao.uptUserInfo(upt);
+	}
+	// 마이페이지 내 일정목록 조회
+	public List<MypageScheduleList> getMySList(String userno) {
+		return dao.getMySList(userno);
 	}
 }

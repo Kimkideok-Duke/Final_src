@@ -70,6 +70,7 @@ public class AccountController {
 		HttpSession session = request.getSession();
 		String userno = (String)session.getAttribute("userno");
 		d.addAttribute("userInfo", service.getUserDetail(userno));
+		d.addAttribute("userSList", service.getMySList(userno));
 		return "WEB-INF\\views\\mypage.jsp";
 	}
 	
@@ -78,6 +79,14 @@ public class AccountController {
 	public String changePw(Account upt, Model d) {
 		service.uptPw(upt);
 		d.addAttribute("proc", "pwC");
+		return "WEB-INF\\views\\mypage.jsp";
+	}
+	
+	// 마이페이지에서 개인정보 수정
+	@RequestMapping("changeInfoMypage.do")
+	public String changeInfoMypage(Account upt, Model d) {
+		service.uptUserInfo(upt);
+		d.addAttribute("proc", "infoC");
 		return "WEB-INF\\views\\mypage.jsp";
 	}
 }
