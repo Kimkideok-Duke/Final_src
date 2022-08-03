@@ -14,7 +14,7 @@ public class TestCtrl {
     // http://localhost:7080/PMS/main.do
     @RequestMapping("main.do")
     public String main() {
-    	return "WEB-INF\\views\\index.jsp";
+    	return "WEB-INF\\views\\Main.jsp";
     }
     
 }

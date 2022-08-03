@@ -10,7 +10,7 @@
 
 	<mappers>
 		<mapper resource="resource/team5Mapper.xml"/>
-		<mapper resource="resource/testMapper.xml"/>
+		<mapper resource="resource/mainMapper.xml"/>
 		<mapper resource="resource/ganttMapper.xml"/>
 		<mapper resource="resource/alertMapper.xml"/>
 		<mapper resource="resource/accountMapper.xml"/>
