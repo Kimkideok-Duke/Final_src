@@ -3,11 +3,43 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="PMS.dao.ProjectDao">
-	<select id="showMyProject" resultType="mySchedule" parameterType="string">
+	
+	<!-- 전체 프로젝트 보기 -->
+	<select id="showAllProject" resultType="Project" parameterType="hashMap">
+		SELECT * FROM PROJECT
+		where 1=1
+		<if test="title != null">
+		and title like '%'||#{title}||'%'
+		</if>
+		<if test="dept != null">
+		and dept like '%'||#{dept}||'%'			
+		</if>
+	</select>
+	
+	<!-- 내 프로젝트 보기 -->
+	<select id="showMyProject" resultType="Project" parameterType="string">
+		SELECT DISTINCT
+			   pj.*
+		FROM PROJECT pj, SCHPARTICIPANT p
+		WHERE pj.PNO = p.PNO
+		AND p.USERNO = #{userno}
+		ORDER BY pj.pno
+	</select>
+	
+	<!-- 내 업무 보기 -->
+	<select id="showMySchedule" resultType="mySchedule" parameterType="string">
 		SELECT p.USERNO, pj.TITLE, pj.DEPT, s.*
-		FROM SCHEDULE s, PROJECT pj, PARTICIPANT p
+		FROM SCHEDULE s, PROJECT pj, SCHPARTICIPANT p
 		WHERE pj.PNO = s.PNO AND pj.PNO = p.PNO AND s.SNO = p.SNO
 		AND p.USERNO = #{userno}
+		ORDER BY s.SNO
+	</select>
+	
+	<!-- 프로젝트별 일정표시 -->
+	<select id="showSchedule" resultType="Schedule" parameterType="int">
+		SELECT *
+		FROM SCHEDULE
+		WHERE pno = #{pno}
 		ORDER BY s.SNO
 	</select>
 </mapper>

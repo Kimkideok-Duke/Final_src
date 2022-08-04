@@ -7,6 +7,8 @@
 		<typeAlias alias="account" type="PMS.vo.Account"/>
 		<typeAlias alias="mpsl" type="PMS.vo.MypageScheduleList"/>
 		<typeAlias alias="mySchedule" type="PMS.vo.mySchedule"/>
+		<typeAlias alias="Project" type="PMS.vo.Project"/>
+		<typeAlias alias="Schedule" type="PMS.vo.Schedule"/>
 	</typeAliases>
 
 	<mappers>
