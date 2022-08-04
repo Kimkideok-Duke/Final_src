@@ -38,6 +38,8 @@ public class AccountController {
 			if(service.loginCheck(sch).equals("pass")) {
 				session.setAttribute("userno", sch.getUserno());
 				session.setAttribute("auth", service.getUserDetail(sch.getUserno()).getAuth());
+				session.setAttribute("name", service.getUserDetail(sch.getUserno()).getName());
+				session.setAttribute("userInfo", service.getUserDetail(sch.getUserno()));
 				d.addAttribute("passVal", "P");
 			}else {
 				d.addAttribute("passVal", "B");

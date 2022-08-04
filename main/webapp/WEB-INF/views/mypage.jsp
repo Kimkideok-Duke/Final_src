@@ -122,12 +122,12 @@
 	<%-- main태그 안에 body 코드 작성 --%>
   <main id="main" class="main">
     <div class="pagetitle">
-	  <h1>마이페이지<%--페이지 제목 입력 --%></h1>
+	  <h1>My Page<%--페이지 제목 입력 --%></h1>
 
       <nav> <%-- 페이지 경로 --%>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="${path}/entire.do">Main</a></li>
-          <li class="breadcrumb-item active">마이페이지</li>
+          <li class="breadcrumb-item active">My Page</li>
         </ol>
       </nav>
     </div>

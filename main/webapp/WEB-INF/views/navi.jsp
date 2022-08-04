@@ -60,7 +60,7 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="NiceAdmin/assets/img/profile/default.png" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">김길동</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><%--<%=session.getAttribute("name")--%>김길동</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -159,25 +159,29 @@
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
-
+	<% if(!((String)session.getAttribute("auth")).equals("user")){ %>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#admin-nav" data-bs-toggle="collapse"  href="#">
           <i class="bi bi-person-check"></i>
           <span>Manager</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="admin-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <%if(((String)session.getAttribute("auth")).equals("um") || ((String)session.getAttribute("auth")).equals("admin")){ %>
           <li>
             <a href="${path}/goUmPage.do">
               <i class="bi bi-circle"></i><span>User Management</span>
             </a>
           </li>
+          <%} %>
+          <%if(!((String)session.getAttribute("auth")).equals("um")){ %>
           <li>
             <a href="${path}/goAdminPage.do">
               <i class="bi bi-circle"></i><span>Project Management</span>
             </a>
           </li>
+          <%} %>
         </ul>
-      </li><!-- End 관리자페이지 Page Nav -->
+      </li><%}%><!-- End 관리자페이지 Page Nav -->
 
     </ul>
 

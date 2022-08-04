@@ -53,6 +53,11 @@
       
 		--%>   
 	});
+	var auth = "<%= (String)session.getAttribute("auth") %>"
+	if(auth != "pm" && auth != "admin"){
+		alert("접근이 불가한 페이지입니다.")
+		location.href="${path}/entire.do"
+	}
 </script>
 </head>
 <body>
@@ -142,7 +147,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">프로젝트명</th>
-                    <th scope="col">진행률</th>
+                    <th scope="col">진행도</th>
                     <th scope="col">담당자</th>
                   </tr>
                 </thead>
