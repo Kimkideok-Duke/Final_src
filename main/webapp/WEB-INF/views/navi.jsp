@@ -6,45 +6,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>     
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>PMS</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="NiceAdmin/assets/img/favicon.png" rel="icon">
-  <link href="NiceAdmin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="NiceAdmin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="NiceAdmin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="NiceAdmin/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="NiceAdmin/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="NiceAdmin/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="NiceAdmin/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="NiceAdmin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="NiceAdmin/assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.3.1
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-<body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -98,14 +59,14 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="NiceAdmin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <img src="NiceAdmin/assets/img/profile/default.png" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">김길동</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6>김길동</h6>
+              <span>개발부</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -193,7 +154,7 @@
       </li><!-- End 풀캘린더 Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="${path}/goMyPage.do">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
@@ -209,21 +170,3 @@
     </ul>
 
   </aside><!-- End Sidebar-->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="NiceAdmin/assets/vendor/chart.js/chart.min.js"></script>
-  <script src="NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
-  <script src="NiceAdmin/assets/vendor/quill/quill.min.js"></script>
-  <script src="NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="NiceAdmin/assets/js/main.js"></script>
-
-</body>
-</html>

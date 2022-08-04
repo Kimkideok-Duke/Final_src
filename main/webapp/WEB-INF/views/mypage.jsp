@@ -117,7 +117,7 @@
 </script>
 </head>
 <body>
-<jsp:include page="navi2.jsp"/>
+<jsp:include page="navi.jsp"/>
 
 	<%-- main태그 안에 body 코드 작성 --%>
   <main id="main" class="main">
