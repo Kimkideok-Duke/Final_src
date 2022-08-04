@@ -15,7 +15,7 @@ public class MainCtrl {
     private MainService service;
     
     // http://localhost:6080/PMS/main.do
-    @RequestMapping("main.do")
+    @RequestMapping("goMain.do")
     public String main(HttpServletRequest request) {
     	HttpSession session = request.getSession();
     	//int pno = (int)session.getAttribute("pno");

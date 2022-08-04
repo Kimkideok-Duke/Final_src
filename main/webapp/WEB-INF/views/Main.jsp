@@ -223,17 +223,6 @@
 <jsp:include page="navi.jsp"/>
 
   <main id="main" class="main">
-    <div class="pagetitle">
-	  <h1>페이지 제목<%--페이지 제목 입력 --%></h1>
-
-      <nav> <%-- 페이지 경로 --%>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Main</a></li>
-          <li class="breadcrumb-item active">경로</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-
     <section class="section dashboard">
       <div class="row">
 
@@ -261,22 +250,67 @@
 
                 <div class="card-body">
                   <h5 class="card-title">${title}<span>| 프로젝트명</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>1244</h6>
-                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
-                    </div>
-                  </div>
-
+					
+					진행도 : 
+					<div class="progress">
+	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 36%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">36%</div>
+	              	</div>
                 </div>
               </div>
 
             </div><!-- End Customers Card -->
+
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">일정 목록 <span>| </span></h5>
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col">일정명</th>
+                        <th scope="col">진행도</th>
+                        <th scope="col">마감일</th>
+                        <th scope="col">상태</th>
+                        <th scope="col">코멘트</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">#1</th>
+                        <td>요구사항 정의서</td>
+                        <td>
+							<div class="progress">
+			                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+			              	</div>
+						</td>
+                        <td>8월20일</td>
+                        <td><span class="badge bg-success">완료</span></td>
+                        <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
 
             <!-- Reports -->
             <div class="col-12">
@@ -359,54 +393,6 @@
 
               </div>
             </div><!-- End Reports -->
-
-            <!-- Recent Sales -->
-            <div class="col-12">
-              <div class="card recent-sales overflow-auto">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">번호</th>
-                        <th scope="col">일정명</th>
-                        <th scope="col">진행도</th>
-                        <th scope="col">마감일</th>
-                        <th scope="col">상태</th>
-                        <th scope="col">코멘트</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>요구사항 정의서</td>
-                        <td>@@진행도바 추가@@</td>
-                        <td>8월20일</td>
-                        <td><span class="badge bg-success">완료</span></td>
-                        <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div><!-- End Recent Sales -->
 
           </div>
         </div><!-- End Left side columns -->
