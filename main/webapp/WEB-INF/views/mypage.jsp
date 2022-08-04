@@ -126,7 +126,7 @@
 
       <nav> <%-- 페이지 경로 --%>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Main</a></li>
+          <li class="breadcrumb-item"><a href="${path}/entire.do">Main</a></li>
           <li class="breadcrumb-item active">마이페이지</li>
         </ol>
       </nav>

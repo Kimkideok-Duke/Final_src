@@ -89,4 +89,16 @@ public class AccountController {
 		d.addAttribute("proc", "infoC");
 		return "WEB-INF\\views\\mypage.jsp";
 	}
+	
+	// 인사 관리 시스템 페이지 호출
+	@RequestMapping("goUmPage.do")
+	public String goUmPage() {
+		return "WEB-INF\\views\\um-page.jsp";
+	}
+	
+	// 관리자 페이지(프로젝트) 호출
+	@RequestMapping("goAdminPage.do")
+	public String goAdminPage() {
+		return "WEB-INF\\views\\admin-page.jsp";
+	}
 }

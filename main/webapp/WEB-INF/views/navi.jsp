@@ -73,7 +73,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="${path}/goMyPage.do">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -161,10 +161,22 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" data-bs-target="#admin-nav" data-bs-toggle="collapse"  href="#">
           <i class="bi bi-person-check"></i>
-          <span>Manager</span>
+          <span>Manager</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
+        <ul id="admin-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="${path}/goUmPage.do">
+              <i class="bi bi-circle"></i><span>User Management</span>
+            </a>
+          </li>
+          <li>
+            <a href="${path}/goAdminPage.do">
+              <i class="bi bi-circle"></i><span>Project Management</span>
+            </a>
+          </li>
+        </ul>
       </li><!-- End 관리자페이지 Page Nav -->
 
     </ul>
