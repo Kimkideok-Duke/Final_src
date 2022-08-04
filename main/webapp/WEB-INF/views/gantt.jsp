@@ -13,10 +13,33 @@
  --%>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<style>
+  <title>PMS</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="NiceAdmin/assets/img/favicon.png" rel="icon">
+  <link href="NiceAdmin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="NiceAdmin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="NiceAdmin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="NiceAdmin/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="NiceAdmin/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="NiceAdmin/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="NiceAdmin/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="NiceAdmin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="NiceAdmin/assets/css/style.css" rel="stylesheet">
+  <style>
 	body {
 		font-family: sans-serif;
 		background: #ccc;
@@ -38,12 +61,15 @@
 </style>
 <link rel="stylesheet" href="gantt-master/gantt-master/dist/frappe-gantt.css" />
 <script src="gantt-master/gantt-master/dist/frappe-gantt.js"></script>
-<script src="${path}/a00_com/jquery.min.js"></script>
-<script src="${path}/a00_com/popper.min.js"></script>
-<script src="${path}/a00_com/bootstrap.min.js"></script>
-<script src="${path}/a00_com/jquery-ui.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
+  
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.3.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 	function SetValue(this){
 	range_val.value = this.value;
@@ -53,44 +79,55 @@
 	$("#frm01 [name=enddate]").val(event.enddate)
 	$("#frm01 [name=progress]").val(event.progress)
 </script>
+
 </head>
-<%@ include file="/WEB-INF/views/Modal.html" %>
 <body>
 <jsp:include page="navi.jsp"/>
 
-	  <h1>간트차트
-	     <a class="btn-open-popup">
+	<%-- main태그 안에 body 코드 작성 --%>
+  <main id="main" class="main">
+    <div class="pagetitle">
+	  <h1>간트차트<%--페이지 제목 입력 --%>
+	  <a data-bs-toggle="modal" data-bs-target="#basicModal">
            <i class="bi bi-plus-circle-fill"></i>
-         </a>
+      </a>
 	  </h1>
-	   <div class="box"></div>
+
+      <nav> <%-- 페이지 경로 --%>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="${path}/entire.do">Main</a></li>
+          <li class="breadcrumb-item active">간트차트<li>
+        </ol>
+      </nav>
+    </div>
+	  <div class="box"></div>
 		<div class="gantt-target">
-		 <div class="modal">
-      	  <div class="modal_body">
-      	  <form id="frm01"  method="post">
-      	  <h1 style="text-align: center">일정추가</h1>
-      	  <div class="box">일정명 <input type="text" name="title" class="form-control"style="width:300px"></div>
-      	  <div class="box">시작일 <input type="date" name="startdate" class="form-control" style="width:300px"></div>
-      	  <div class="box">마감일 <input type="date" name="enddate" class="form-control" style="width:300px"></div><br>
-      	  <div class="box_1">
-      	   진행도 <input type="range" name="progress" class="form-range" id="customRange1" value="0" min="0" max="100" style="width:220px"
-      	   oninput="document.getElementById('value1').innerHTML=this.value;">
-      	   <span id="value1">0</span>%
-      	   </div>
-      	   </form>
-      	   <button type="submit" class="btn btn-primary" style="margin:auto; display:block;">등록</button>
+          <div class="modal fade" id="basicModal" tabindex="-1">
+              <div class="modal-dialog">
+                 <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">일정추가</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+			      	  <div class="box">일정명 <input type="text" name="title" class="form-control"style="width:300px"></div>
+			      	  <div class="box">시작일 <input type="date" name="startdate" class="form-control" style="width:300px"></div>
+			      	  <div class="box">마감일 <input type="date" name="enddate" class="form-control" style="width:300px"></div><br>
+			      	  <div class="box_1">
+			      	   진행도 <input type="range" name="progress" class="form-range" id="customRange1" value="0" min="0" max="100" style="width:220px"
+			      	   oninput="document.getElementById('value1').innerHTML=this.value;">
+			      	   <span id="value1">0</span>%
+                     </div>
+                    <div class="modal-footer">
+                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" style="margin:auto; display:block;">등록</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Basic Modal-->
       	  </div>
-    	 </div>
-		</div>
+    	</div>
 	<script>
 	var tasks = [
-		{
-			start: $("#frm01 [name=startdate]").val(event.startdate),
-			end: $("#frm01 [name=enddate]").val(event.enddate),
-			name: $("#frm01 [name=title]").val(event.title),
-			id: "",
-			progress: $("#frm01 [name=progress]").val(event.progress)
-		},
 		{
 			start: '2022-07-15',
 			end: '2022-07-20',
@@ -117,30 +154,23 @@ var gantt_chart = new Gantt(".gantt-target", tasks, {
 	language: 'en'
 });
 console.log(gantt_chart);
-const body = document.querySelector('body');
-const modal = document.querySelector('.modal');
-const btnOpenPopup = document.querySelector('.btn-open-popup');
+	</script>
 
-btnOpenPopup.addEventListener('click', () => {
-  modal.classList.toggle('show');
+</main>
 
-  if (modal.classList.contains('show')) {
-    body.style.overflow = 'hidden';
-  }
-});
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-modal.addEventListener('click', (event) => {
-  if (event.target === modal) {
-    modal.classList.toggle('show');
+  <!-- Vendor JS Files -->
+  <script src="NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/chart.js/chart.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/quill/quill.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
 
-    if (!modal.classList.contains('show')) {
-      body.style.overflow = 'auto';
-    }
-  }
-});
-
-
-</script>
-
+  <!-- Template Main JS File -->
+  <script src="NiceAdmin/assets/js/main.js"></script>
 </body>
 </html>
