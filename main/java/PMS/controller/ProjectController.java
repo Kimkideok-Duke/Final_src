@@ -20,10 +20,4 @@ public class ProjectController {
     	d.addAttribute("mySlist", service.showMySchedule(userno));
     	return "WEB-INF/views/EntireDashBoard.jsp";
     }
-    
-    @RequestMapping("mainDashboard.do")
-    public String mainDashboard(@RequestParam(value="pno", defaultValue="2") String pno, Model d) {
-    	
-    	return "WEB-INF/views/MainDashboard.jsp";
-    }
 }
