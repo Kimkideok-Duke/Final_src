@@ -53,6 +53,11 @@
       
 		--%>   
 	});
+	var auth = "<%= (String)session.getAttribute("auth") %>"
+	if(auth != "um" && auth != "admin"){
+		alert("접근이 불가한 페이지입니다.")
+		location.href="${path}/entire.do"
+	}
 </script>
 </head>
 <body>

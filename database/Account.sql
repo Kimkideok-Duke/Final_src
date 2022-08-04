@@ -49,6 +49,9 @@ INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','홍길동'
 INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','김길동','himan7777@naver.com', '개발부',
 	'부장','서울시 마포구 서교동 447-5 201호','010-1234-5678',NULL,sysdate,'pm');
 
+INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','서길동','himan7777@naver.com', '개발부',
+	'과장','서울시 마포구 서교동 447-5 204호','010-1934-5978',NULL,sysdate,'um');
+
 SELECT * FROM account;
 SELECT * FROM profile;
 
@@ -87,27 +90,27 @@ WHERE userno = 'E10000003';
 
 -- 내가 참여한 일정 (오류체크)
 SELECT distinct p2.title, s.sname, a.name, a.position
-FROM SCHEDULE s, PARTICIPANT p, PROJECT p2, ACCOUNT a 
+FROM SCHEDULE s, SCHPARTICIPANT p, PROJECT p2, ACCOUNT a 
 WHERE s.sno in (
 	SELECT SNO
-	FROM PARTICIPANT
+	FROM SCHPARTICIPANT
 	WHERE userno = 'E10000020')
 AND p2.pno in (
 	SELECT PNO
-	FROM PARTICIPANT
+	FROM SCHPARTICIPANT
 	WHERE userno = 'E10000020'
 )
 AND p.userno = 'E10000020'
 AND a.userno in (
 	SELECT p2.PMNO 
-	FROM SCHEDULE s, PARTICIPANT p, PROJECT p2
+	FROM SCHEDULE s, SCHPARTICIPANT p, PROJECT p2
 	WHERE s.sno in (
 		SELECT SNO
-		FROM PARTICIPANT
+		FROM SCHPARTICIPANT
 		WHERE userno = 'E10000020')
 	AND p2.pno in (
 		SELECT PNO
-		FROM PARTICIPANT
+		FROM SCHPARTICIPANT
 		WHERE userno = 'E10000020'
 	)
 	AND p.userno = 'E10000020'
