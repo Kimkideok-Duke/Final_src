@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import PMS.service.MainService;
@@ -16,11 +17,10 @@ public class MainCtrl {
     
     // http://localhost:6080/PMS/main.do
     @RequestMapping("goMain.do")
-    public String main(HttpServletRequest request) {
+    public String main(HttpServletRequest request, Model d) {
     	HttpSession session = request.getSession();
-    	//int pno = (int)session.getAttribute("pno");
-    	int pno = 1;
-    	String title = (String)session.getAttribute(service.getTitle(pno));
+    	int pno = (int)session.getAttribute("pno");
+    	String title = service.getTitleByNo(pno);
     	session.setAttribute("title", title);
     	return "WEB-INF\\views\\Main.jsp";
     }

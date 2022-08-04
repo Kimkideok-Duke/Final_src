@@ -13,7 +13,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>PMS</title>
+  <title>Fine PMS</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -249,11 +249,12 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">${title}<span>| 프로젝트명</span></h5>
-					
+                  <h5 class="card-title">${title}</h5>
+					<div style= "display:inline;">
 					진행도 : 
 					<div class="progress">
 	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 36%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">36%</div>
+	              	</div>
 	              	</div>
                 </div>
               </div>
@@ -297,13 +298,40 @@
                         <td>요구사항 정의서</td>
                         <td>
 							<div class="progress">
-			                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+			                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
 			              	</div>
 						</td>
-                        <td>8월20일</td>
+                        <td>8월3일</td>
                         <td><span class="badge bg-success">완료</span></td>
                         <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
                       </tr>
+
+                      <tr>
+                        <th scope="row">#2</th>
+                        <td>플로우 차트</td>
+                        <td>
+							<div class="progress">
+			                	<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 70%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">70%</div>
+			              	</div>
+						</td>
+                        <td>8월10일</td>
+                        <td><span class="badge bg-success">진행중</span></td>
+                        <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">#3</th>
+                        <td>화면설계서</td>
+                        <td>
+							<div class="progress">
+			                	<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 50%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">50%</div>
+			              	</div>
+						</td>
+                        <td>8월12일</td>
+                        <td><span class="badge bg-success">진행중</span></td>
+                        <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
+                      </tr>
+
                     </tbody>
                   </table>
 
@@ -416,7 +444,7 @@
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+              <h5 class="card-title">타임라인 <span>| Today</span></h5>
 
               <div class="activity">
 
