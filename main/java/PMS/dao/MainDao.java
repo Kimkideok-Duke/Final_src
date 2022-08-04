@@ -4,5 +4,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MainDao {
-	public String getPname(int pno);
+	public String getTitle(int pno);
 }

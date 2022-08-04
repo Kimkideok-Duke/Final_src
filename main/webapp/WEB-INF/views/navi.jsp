@@ -13,7 +13,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="NiceAdmin/assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">@@ PMS</span>
+        <span class="d-none d-lg-block">Fine PMS</span>
       </a>
     </div><!-- End Logo -->
 

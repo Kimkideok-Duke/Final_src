@@ -10,7 +10,8 @@ public class MainService {
 	@Autowired(required=false)
 	private MainDao dao;
 	
-	public String getPname(int pno) {
-		return dao.getPname(pno);
+	public String getTitle(int pno) {
+		return dao.getTitle(pno);
 	}
+
 }

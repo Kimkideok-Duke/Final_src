@@ -3,8 +3,8 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="PMS.dao.MainDao">
-	<select id="getPname" resultType="string" parameterType="int">
-		SELECT pname
+	<select id="getTitle" resultType="string" parameterType="int">
+		SELECT title
 		FROM project
 		WHERE pno = #{pno}
 	</select>
