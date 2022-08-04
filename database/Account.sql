@@ -116,3 +116,8 @@ AND a.userno in (
 	AND p.userno = 'E10000020'
 )
 ;
+
+-- um page 사원 추가
+INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','김영수','himan7788@naver.com', null,
+	null,null,null,NULL,sysdate,null);
+SELECT * FROM account;
