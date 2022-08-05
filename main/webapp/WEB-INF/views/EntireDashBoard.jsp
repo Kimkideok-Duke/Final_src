@@ -72,7 +72,7 @@
                     </div>
                     <c:forEach var="myP" items="${myPlist}">
                     <div class="ps-3">
-                      <h6><a class="dropdown-item" href="${path}/goMain.do?pno="+${myP.pno}>${myP.title}</a></h6>
+                      <h6><a class="dropdown-item" href="${path}/goMain.do?pno=${myP.pno}">${myP.title}</a></h6>
                     </div>
 					<div class="progress">
 	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
@@ -125,7 +125,17 @@
                         <th scope="row"><%=cnt++ %></th>
                         <td>${myS.title}</td>
                         <td>${myS.sname}</td>
-                        <td><span class="badge bg-primary">${myS.status}</span></td>
+                        <td>
+                        <c:if test="${myS.status eq '진행중'}">
+                        	<span class="badge bg-primary">${myS.status}</span>
+                        </c:if>
+                        <c:if test="${myS.status eq '완료'}">
+                        	<span class="badge bg-success">${myS.status}</span>
+                        </c:if>
+                        <c:if test="${myS.status eq '막힘'}">
+                        	<span class="badge bg-warning">${myS.status}</span>
+                        </c:if>
+                        </td>
                         <td><fmt:formatDate value="${myS.startDate}" pattern="yyyy-MM-dd"/></td>
                         <td>
 	                        <div class="progress">
