@@ -74,7 +74,7 @@
 						alert("신규사원이 등록되었습니다.\n사원번호 : "+data.newUser.userno+"\n임시비밀번호 :"+data.newUser.pw)
 						$("[name=name]").val("")
 						$("[name=email]").val("")
-						
+						acclistajax()
 					}
 				}
 			})
@@ -116,13 +116,17 @@
 				$("#accList").html(addHTML)
 				var accountSch = data.accountSch
 				var addHTML2 = ""; 
+				var isActive = "";
 				var startB = accountSch.startBlock
 				var endB = accountSch.endBlock
-				console.log(startB)
-				console.log(endB) 
 				addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+startB+')">Previous</a></li>'
 				for(var cnt=startB; cnt<=endB; cnt++){
-					addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>' 
+					if(accountSch.curPage==cnt){
+						isActive='active'
+					}else{
+						isActive=''
+					}
+					addHTML2 += '<li class="page-item"><a class="page-link '+isActive+'" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>' 
 				}
 				addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+endB+')">Next</a></li>'
 				console.log(addHTML2)
