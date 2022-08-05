@@ -60,6 +60,45 @@
 			AND p.userno = #{userno}
 		)
 	</select>
+	<insert id="insAccount" parameterType="account">
+	INSERT INTO account values('E'||to_char(acc_seq.nextval),#{pw},#{name},#{email}, '미정',
+		'사원',null,null,NULL,sysdate,'user')
+	</insert>
+	<select id="recentAccount" resultType="account">
+		SELECT *
+		FROM account
+		WHERE joindate = (
+			SELECT max(JOINDATE) 
+			FROM account
+		)
+	</select>
+	<select id="AccountList" resultType="account" parameterType="accountsch">
+		SELECT *
+		FROM (
+			SELECT rownum cnt, a.*
+			FROM account a
+			WHERE 1=1
+			<if test="userno != null">
+			AND userno LIKE '%'||#{userno}||'%'
+			</if>
+			<if test="name != null">
+			AND name LIKE '%'||#{name}||'%'
+			</if>
+			ORDER BY userno DESC)
+		where cnt between #{start} and #{end}
+		ORDER BY cnt
+	</select>
+	<select id="totCnt" parameterType="accountsch" resultType="int">
+		SELECT count(*)
+		FROM account
+		WHERE 1=1
+		<if test="userno != null">
+		AND userno LIKE '%'||#{userno}||'%'
+		</if>
+		<if test="name != null">
+		AND name LIKE '%'||#{name}||'%'
+		</if>
+	</select>
 </mapper>
 
 

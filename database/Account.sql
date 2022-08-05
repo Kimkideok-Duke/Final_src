@@ -121,3 +121,23 @@ AND a.userno in (
 INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','김영수','himan7788@naver.com', '미정',
 	'사원',null,null,NULL,sysdate,'user');
 SELECT * FROM account;
+
+-- 가장 최근에 등록된 사원정보
+SELECT *
+FROM account
+WHERE joindate = (
+	SELECT max(JOINDATE) 
+	FROM account
+);
+
+-- 인사관리페이지에서 인원목록 조회 페이징처리
+SELECT *
+FROM (
+	SELECT rownum cnt, a.*
+	FROM account a
+	WHERE 1=1
+	AND userno LIKE '%'||''||'%'
+	AND name LIKE '%'||''||'%'
+	ORDER BY userno DESC)
+where cnt between 1 and 10
+ORDER BY cnt;

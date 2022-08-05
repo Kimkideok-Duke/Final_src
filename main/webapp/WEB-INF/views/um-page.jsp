@@ -51,7 +51,54 @@
 	$(document).ready(function(){
 		<%-- 
       
-		--%>   
+		--%>
+		$("#newAccBtn").click(function(){
+			if($("[name=name]").val()==""){
+				alert("신규사원 이름을 입력해주세요")
+				$("[name=name]").focus()
+				return
+			}
+			if($("[name=email]").val()==""){
+				alert("신규사원 이메일을 입력해주세요")
+				$("[name=email]").focus()
+				return
+			}
+			var name = $("[name=name]").val()
+			var email = $("[name=email]").val()
+			$.ajax({
+				url:"${path}/addAccount.do",
+				data:"name="+name+"&email="+email,
+				dataType:"json",
+				success:function(data){
+					if(data.proc=="userI"){
+						alert("신규사원이 등록되었습니다.\n사원번호 : "+data.newUser.userno+"\n임시비밀번호 :"+data.newUser.pw)
+						$("[name=name]").val("")
+						$("[name=email]").val("")
+						
+					}
+				}
+			})
+			<%--
+			$.ajax({
+				url:"${path}/ajaxEmp.do",
+				data:"ename="+enameVal+"&job="+jobVal,
+				dataType:"json",
+				success:function(data){
+					// data.모델명 : m.addAttribute("empList",serv..)
+					var list = data.empList
+					var addHTML = "";
+					$(list).each(function(idx, emp){ //변수명이 중요하지 않고, 순서가 중요하다.
+						// each(function(1,2){}) 1이 인덱스, 2가 단위객체이다.
+						addHTML+="<tr><td>"+emp.empno+"</td><td>"+emp.ename+"</td><td>"+emp.job+
+							"</td><td>"+emp.sal+"</td><td>"+emp.deptno+"</td></tr>"
+						
+					});
+					console.log(addHTML);
+					$("#empList").html(addHTML)
+				}
+			});
+			--%>
+		})
 	});
 	var auth = "<%= (String)session.getAttribute("auth") %>"
 	if(auth != "um" && auth != "admin"){
@@ -85,7 +132,7 @@
               <form class="row g-3 needs-validation" novalidate>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name" required>
+                    <input name="name" type="text" class="form-control" id="floatingName" placeholder="Your Name" required>
                     <label for="floatingName">이름</label>
 	                  <div class="invalid-feedback">
 	                    필수 입력정보 입니다.
@@ -95,7 +142,7 @@
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingEmail" placeholder="Your Email" required>
+                    <input name="email" type="email" class="form-control" id="floatingEmail" placeholder="Your Email" required>
                     <label for="floatingEmail">이메일</label>
 	                  <div class="invalid-feedback">
 	                    필수 입력정보 입니다.
@@ -104,7 +151,7 @@
                 </div>
                 
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary">신규사원 등록</button>
+                  <button type="button" id="newAccBtn" class="btn btn-primary">신규사원 등록</button>
                 </div>
               </form><!-- End floating Labels Form -->
 
@@ -147,7 +194,8 @@
 		<div class="card">
             <div class="card-body">
               <h5 class="card-title">전체 인원 현황</h5>
-			  <form class="row g-3" name="schUserForm">
+			  <form class="row g-3" method="post" name="schUserForm">
+			  	<input type="hidden" name="curPage" value="0">
                 <div class="col-md-4">
                   <label for="inputUserno" class="form-label">사원번호</label>
                   <input type="text" class="form-control" id="inputUserno">
@@ -156,7 +204,32 @@
                   <label for="inputName" class="form-label">이름</label>
                   <input type="text" class="form-control" id="inputName">
                 </div>
+                <div class="col-md-2">
+	                <div class="form-floating mb-3">
+	                  <select name="pageSize" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+	                    <option selected>선택</option>
+	                    <option>10</option>
+	                    <option>15</option>
+	                    <option>20</option>
+	                  </select>
+	                  <label for="floatingSelect">총 : @@건</label>
+	                </div>
+				</div>
               </form>
+         <script type="text/javascript">
+         	// 선택된 페이지 크기 설정
+         	//$("[name=pageSize]").val("${boardSch.pageSize}");
+         	// 페이지 크기 변경 시 마다 controller 단 호출
+         	//$("[name=pageSize]").change(function(){
+         		//$("[name=curPage]").val("1");
+         		//$("form").submit();
+         	//});
+         </script>
+
+                
+
+              
+
 
               <!-- Table with hoverable rows -->
               <table class="table table-hover">
@@ -177,47 +250,47 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#verticalycentered">수정</button></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><button type="button" class="btn btn-outline-primary">수정</button></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><button type="button" class="btn btn-outline-primary">수정</button></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><button type="button" class="btn btn-outline-primary">수정</button></td>
-                  </tr>
+						<tr ondblclick="">
+							<td>번호</td>
+							<td>사원번호</td>
+							<td>이름</td>
+							<td>부서</td>
+							<td>직급</td>
+							<td><button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#verticalycentered">수정</button></td>
+							</tr>
+                  <%--
+					<c:forEach var="bd" items="${blist}">
+						<tr ondblclick="goDetail(${bd.no})"><td>${bd.cnt}</td>
+							<td style="text-align:left;">${bd.subject}</td>
+							<td>${bd.writer}</td>
+							<td><fmt:formatDate value="${bd.regdte}"/></td>
+							<td>${bd.readcnt}</td></tr>
+					</c:forEach>
+                   --%>
                 </tbody>
               </table>
               <!-- End Table with hoverable rows -->
-
+				<%--<ul class="pagination justify-content-end">
+			
+					<li class="page-item"><a class="page-link" href="javascript:goPage(${boardSch.startBlock-1})">Previous</a></li>
+					<c:forEach var="cnt" begin="${boardSch.startBlock}" end="${boardSch.endBlock}">
+						<li class="page-item ${boardSch.curPage==cnt?'active':''}"><a class="page-link" href="javascript:goPage(${cnt})">${cnt}</a></li>
+					</c:forEach>
+			  
+					<li class="page-item"><a class="page-link" href="javascript:goPage(${boardSch.endBlock+1})">Next</a></li>
+				</ul> --%>
             </div>
-            
-          </div>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+              </nav>
+      	</div>
     </div>
-    
 	<div class="modal fade" id="verticalycentered" tabindex="-1">
        <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">

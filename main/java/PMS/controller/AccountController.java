@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import PMS.service.AccountService;
 import PMS.vo.Account;
+import PMS.vo.AccountSch;
 
 @Controller
 public class AccountController {
@@ -101,5 +102,23 @@ public class AccountController {
 	@RequestMapping("goAdminPage.do")
 	public String goAdminPage() {
 		return "WEB-INF\\views\\admin-page.jsp";
+	}
+	
+	// 인사관리페이지에서 신규사원 등록
+	// http://localhost:7080/PMS/addAccount.do?name=테스트&email=asdf@naver.com
+	@RequestMapping("addAccount.do")
+	public String addAccount(Account ins, Model d) {
+		service.insAccount(ins);
+		d.addAttribute("proc", "userI");
+		d.addAttribute("newUser",service.recentAccount());
+		return "pageJsonReport";
+	}
+	
+	// 인사관리페이지에서 인원목록 출력
+	// http://localhost:7080/PMS/accountList.do?curPage=0&pageSize=5
+	@RequestMapping("accountList.do")
+	public String accountList(AccountSch ins, Model d) {
+		d.addAttribute("accList", service.AccountList(ins));
+		return "pageJsonReport";
 	}
 }

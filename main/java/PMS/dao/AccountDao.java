@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import PMS.vo.Account;
+import PMS.vo.AccountSch;
 // PMS.dao.AccountDao
 import PMS.vo.MypageScheduleList;
 @Repository
@@ -21,4 +22,13 @@ public interface AccountDao {
 	public void uptUserInfo(Account upt);
 	// 마이페이지 내가 참여한 일정
 	public List<MypageScheduleList> getMySList(String userno);
+	// 인사관리페이지 신규사원등록
+	public void insAccount(Account ins);
+	// 가장 최근에 등록한 사원정보 리턴(임시..)
+	public Account recentAccount();
+	// 인사관리페이지 사원목록 조회 + 페이징처리
+	public List<Account> AccountList(AccountSch sch);
+	// 전체 사원목록 개수
+	public int totCnt(AccountSch sch);
+		
 }
