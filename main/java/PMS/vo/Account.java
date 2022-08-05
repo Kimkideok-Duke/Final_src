@@ -52,6 +52,11 @@ public class Account {
 		this.userno = userno;
 		this.pw = pw;
 	}
+	/*
+	public Account(String name, String email) {
+		this.name = name;
+		this.email = email;
+	}*/
 	public String getUserno() {
 		return userno;
 	}
