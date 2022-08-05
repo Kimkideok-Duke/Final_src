@@ -14,9 +14,9 @@ public class MainCtrl {
     @Autowired(required=false)
     private MainService service;
     
-    // http://localhost:6080/PMS/main.do
+    // http://localhost:6080/PMS/goMain.do
     @RequestMapping("goMain.do")
-    public String main(@RequestParam("pno") int pno, Model d) {
+    public String main(@RequestParam(value="pno", defaultValue="1") int pno, Model d) {
     	String title = service.getTitleByNo(pno);
     	d.addAttribute("title", title);
     	return "WEB-INF\\views\\Main.jsp";
@@ -24,7 +24,6 @@ public class MainCtrl {
     
     @RequestMapping("goSchedule")
     public String goSchedule(@RequestParam("itemno") int itemno, Model d) {
-    	
     	return "WEB-INF\\views\\Schedule.jsp";
     }
     
