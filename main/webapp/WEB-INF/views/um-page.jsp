@@ -47,8 +47,8 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
+<script type="text/javascript"> 
+	$(document).ready(function(){ 
 		<%-- 
       
 		--%>
@@ -62,7 +62,7 @@
 				alert("신규사원 이메일을 입력해주세요")
 				$("[name=email]").focus()
 				return
-			}
+			} 
 			var name = $("[name=name]").val()
 			var email = $("[name=email]").val()
 			$.ajax({
@@ -78,26 +78,17 @@
 					}
 				}
 			})
-			<%--
-			$.ajax({
-				url:"${path}/ajaxEmp.do",
-				data:"ename="+enameVal+"&job="+jobVal,
-				dataType:"json",
-				success:function(data){
-					// data.모델명 : m.addAttribute("empList",serv..)
-					var list = data.empList
-					var addHTML = "";
-					$(list).each(function(idx, emp){ //변수명이 중요하지 않고, 순서가 중요하다.
-						// each(function(1,2){}) 1이 인덱스, 2가 단위객체이다.
-						addHTML+="<tr><td>"+emp.empno+"</td><td>"+emp.ename+"</td><td>"+emp.job+
-							"</td><td>"+emp.sal+"</td><td>"+emp.deptno+"</td></tr>"
-						
-					});
-					console.log(addHTML);
-					$("#empList").html(addHTML)
-				}
-			});
-			--%>
+		})
+		acclistajax()
+		$("[name=pageSize]").change(function(){
+			$("[name=curPage]").val("1");
+			acclistajax()
+		})
+		$("[name=userno]").keyup(function(){
+			acclistajax()
+		})
+		$("[name=name2]").keyup(function(){
+			acclistajax()
 		})
 	});
 	var auth = "<%= (String)session.getAttribute("auth") %>"
@@ -105,6 +96,42 @@
 		alert("접근이 불가한 페이지입니다.")
 		location.href="${path}/entireDashboard.do"
 	}
+	function acclistajax(){
+		var curPage = $("[name=curPage]").val()
+		var pageSize = $("[name=pageSize]").val()
+		var userno = $("[name=userno]").val()
+		var name = $("[name=name2]").val()
+		$.ajax({
+			url:"${path}/accountList.do",
+			data:"curPage="+curPage+"&pageSize="+pageSize+"&userno="+userno+"&name="+name,
+			dataType:"json",
+			success:function(data){
+				var alist = data.accList
+				var addHTML = "";
+				$(alist).each(function(idx, acc){
+					addHTML+="<tr><td>"+(idx+1)+"</td><td>"+acc.userno+"</td><td>"+
+					acc.name+"</td><td>"+acc.dept+"</td><td>"+acc.position+
+						"</td><td><button type='button' class='btn btn-outline-primary'  data-bs-toggle='modal' data-bs-target='#verticalycentered'>수정</button></td></tr>"
+				})
+				$("#accList").html(addHTML)
+				var accountSch = data.accountSch
+				var addHTML2 = ""; 
+				var startB = accountSch.startBlock
+				var endB = accountSch.endBlock
+				console.log(startB)
+				console.log(endB) 
+				addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+startB+')">Previous</a></li>'
+				for(var cnt=startB; cnt<=endB; cnt++){
+					addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>' 
+				}
+				addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+endB+')">Next</a></li>'
+				console.log(addHTML2)
+				$("#acclistBlock").html(addHTML2)
+
+			}
+		})
+	}
+
 </script>
 </head>
 <body>
@@ -198,19 +225,19 @@
 			  	<input type="hidden" name="curPage" value="0">
                 <div class="col-md-4">
                   <label for="inputUserno" class="form-label">사원번호</label>
-                  <input type="text" class="form-control" id="inputUserno">
+                  <input type="text" name="userno" class="form-control" id="inputUserno">
                 </div>
                 <div class="col-md-4">
                   <label for="inputName" class="form-label">이름</label>
-                  <input type="text" class="form-control" id="inputName">
+                  <input type="text" name="name2" class="form-control" id="inputName">
                 </div>
                 <div class="col-md-2">
 	                <div class="form-floating mb-3">
 	                  <select name="pageSize" class="form-select" id="floatingSelect" aria-label="Floating label select example">
-	                    <option selected>선택</option>
+	                    <option>5</option>
 	                    <option>10</option>
-	                    <option>15</option>
-	                    <option>20</option>
+	                    <option>25</option>
+	                    <option>50</option>
 	                  </select>
 	                  <label for="floatingSelect">총 : @@건</label>
 	                </div>
@@ -218,19 +245,12 @@
               </form>
          <script type="text/javascript">
          	// 선택된 페이지 크기 설정
-         	//$("[name=pageSize]").val("${boardSch.pageSize}");
-         	// 페이지 크기 변경 시 마다 controller 단 호출
-         	//$("[name=pageSize]").change(function(){
-         		//$("[name=curPage]").val("1");
-         		//$("form").submit();
-         	//});
+         	if("${accountSch.pageSize}"==""){
+         		$("[name=pageSize]").val("10");
+         	}else{
+         		$("[name=pageSize]").val("${accountSch.pageSize}");
+         	}
          </script>
-
-                
-
-              
-
-
               <!-- Table with hoverable rows -->
               <table class="table table-hover">
 			      <col width="5%">
@@ -249,46 +269,22 @@
                     <th scope="col">&nbsp;</th>
                   </tr>
                 </thead>
-                <tbody>
-						<tr ondblclick="">
-							<td>번호</td>
-							<td>사원번호</td>
-							<td>이름</td>
-							<td>부서</td>
-							<td>직급</td>
-							<td><button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#verticalycentered">수정</button></td>
-							</tr>
-                  <%--
-					<c:forEach var="bd" items="${blist}">
-						<tr ondblclick="goDetail(${bd.no})"><td>${bd.cnt}</td>
-							<td style="text-align:left;">${bd.subject}</td>
-							<td>${bd.writer}</td>
-							<td><fmt:formatDate value="${bd.regdte}"/></td>
-							<td>${bd.readcnt}</td></tr>
-					</c:forEach>
-                   --%>
+                <tbody id="accList">
                 </tbody>
               </table>
               <!-- End Table with hoverable rows -->
-				<%--<ul class="pagination justify-content-end">
-			
-					<li class="page-item"><a class="page-link" href="javascript:goPage(${boardSch.startBlock-1})">Previous</a></li>
-					<c:forEach var="cnt" begin="${boardSch.startBlock}" end="${boardSch.endBlock}">
-						<li class="page-item ${boardSch.curPage==cnt?'active':''}"><a class="page-link" href="javascript:goPage(${cnt})">${cnt}</a></li>
-					</c:forEach>
-			  
-					<li class="page-item"><a class="page-link" href="javascript:goPage(${boardSch.endBlock+1})">Next</a></li>
-				</ul> --%>
             </div>
               <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <ul class="pagination justify-content-center" id="acclistBlock">
+
                 </ul>
               </nav>
+              <script type="text/javascript">
+              	function goPage(cnt){
+              		$("[name=curPage]").val(cnt);
+         
+              	}
+              </script>
       	</div>
     </div>
 	<div class="modal fade" id="verticalycentered" tabindex="-1">
@@ -361,5 +357,11 @@
 
   <!-- Template Main JS File -->
   <script src="NiceAdmin/assets/js/main.js"></script>
+	<script type="text/javascript">
+		function goPage(cnt){
+			$("[name=curPage]").val(cnt);
+			acclistajax()
+		}
+	</script>
 </body>
 </html>
