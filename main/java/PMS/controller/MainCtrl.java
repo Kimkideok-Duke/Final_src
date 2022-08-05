@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import PMS.service.MainService;
 
@@ -17,12 +18,10 @@ public class MainCtrl {
     
     // http://localhost:6080/PMS/main.do
     @RequestMapping("goMain.do")
-    public String main(HttpServletRequest request, Model d) {
+    public String main(HttpServletRequest request, @RequestParam("pno") int pno, Model d) {
     	HttpSession session = request.getSession();
-    	//int pno = (int)session.getAttribute("pno");
-    	int pno=2;
     	String title = service.getTitleByNo(pno);
-    	session.setAttribute("title", title);
+    	d.addAttribute("title", title);
     	return "WEB-INF\\views\\Main.jsp";
     }
     

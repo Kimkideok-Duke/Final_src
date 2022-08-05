@@ -47,169 +47,7 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
-
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="NiceAdmin/assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">@@ PMS</span>
-      </a>
-    </div><!-- End Logo -->
-
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">1</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown pe-3">
-
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="NiceAdmin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-          </a><!-- End Profile Iamge Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="${path}/logout.do">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
-
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link active" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed active" href="#">
-          <i class="bi bi-calendar-plus"></i><span>Plan</span>
-        </a>
-      </li><!-- End 일정관리 Nav -->
-
-      <li class="nav-item active">
-        <a class="nav-link collapsed" href="${path}/goAlert.do">
-          <i class="bi bi-bell"></i><span>Notifications</span>
-        </a>
-      </li><!-- End 알림 Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="${path}/goGnatt.do">
-          <i class="bi bi-bar-chart"></i><span>Gantt Chart</span></i>
-        </a>
-      </li><!-- End 간트차트 Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="bi bi-calendar3"></i><span>fullcalendar</span>
-        </a>
-      </li><!-- End 풀캘린더 Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="bi bi-person-check"></i>
-          <span>Manager</span>
-        </a>
-      </li><!-- End 관리자페이지 Page Nav -->
-
-    </ul>
-
-  </aside><!-- End Sidebar-->
+ <jsp:include page="navi.jsp"/>
 
   <main id="main" class="main">
 
@@ -267,6 +105,7 @@
                     <thead>
                       <tr>
                         <th scope="col">번호</th>
+                        <th scope="col">프로젝트명</th>
                         <th scope="col">일정명</th>
                         <th scope="col">진행도</th>
                         <th scope="col">마감일</th>
@@ -275,15 +114,17 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <%int cnt=1; %>
                     <c:forEach var="myS" items="${mySlist}">
-                      <tr ondblclick="goMain()">
-                        <th scope="row"><a href="#">${myS.sno}</a></th>
+                      <tr ondblclick="goMain(${myS.pno})">
+                        <th scope="row"><%=cnt++ %></th>
+                        <td>${myS.title}</td>
                         <td>${myS.sname}</td>
                         <td><span class="badge bg-primary">${myS.status}</span></td>
                         <td><fmt:formatDate value="${myS.startDate}" pattern="yyyy-MM-dd"/></td>
                         <td>
 	                        <div class="progress">
-		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
+		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 		              		</div>
 	              		</td>
                         <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
@@ -292,9 +133,9 @@
                     </tbody>
                   </table>
 				<script type="text/javascript">
-					function goMain(){
-						location.href="${path}/goMain.do"
-					}
+				function goMain(pno){
+					location.href="${path}/goMain.do?pno="+pno
+				}
 				</script>
                 </div>
 
