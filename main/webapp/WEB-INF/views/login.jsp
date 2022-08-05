@@ -49,31 +49,74 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
+	function setCookie(name, value, expireDay) {
+		var today = new Date();
+		today.setDate(today.getDate() + expireDay);
+		document.cookie = name + '=' + escape(value) + '; path=/; expires='
+			+ today.toGMTString() + ';';
+	}
+	function getCookie(name) {
+		var cook = document.cookie + ';';
+		var idx = cook.indexOf(name, 0);
+		var val = '';
+		if (idx != -1) {
+			cook = cook.substring(idx, cook.length);
+			begin = cook.indexOf('=', 0) + 1;
+			end = cook.indexOf(';', begin);
+			val = unescape(cook.substring(begin, end));
+		}
+		return val;
+	}
+	function isEmpty(arg){
+		if(arg == "" || arg == null || arg == undefined || 
+			(arg != null && typeof arg == "object" && !Object.keys(arg).length)){
+			return true;
+		}
+		return false;
+	}
 	$(document).ready(function(){
 		<%-- 
       
 		--%>   
 		$("[name=loginBtn]").click(function(){
-			<%--
-			if($("#yourUsername").val()==""){
-				$("#yourUsername").css({"border-color":"red"})
-				$("")
-				return
-			}--%>
-			$("form").submit();
+			loginfunc()
 		})
+		$("#yourPassword").keyup(function(){
+			if(event.keyCode==13){
+				loginfunc()
+			}
+		})
+
 	});
+	function loginfunc(){
+		if($("#yourUsername").val()==""){
+			alert("사원번호를 입력해주세요")
+			return
+		}
+		if($("#yourPassword").val()==""){
+			alert("비밀번호를 입력해주세요")
+			return
+		}
+		var saveId = document.querySelector("[name=check_saveid]");
+		if(saveId.checked){
+			setCookie('saveId', $("#yourUsername").val(), 3);
+		} else {
+			setCookie('saveId', 0, -1);
+		}
+		$("form").submit();
+	}
 	if("${passVal}"=="N"){
 		alert("존재하지 않는 사원번호입니다.")
 		location.href="${path}/loginPage.do"
 	}
 	if("${passVal}"=="P"){
-		location.href="${path}/entire.do"
+		location.href="${path}/entireDashboard.do"
 	}
 	if("${passVal}"=="B"){
 		alert("비밀번호가 일치하지 않습니다.")
 		location.href="${path}/loginPage.do"
 	}
+	
 </script>
 </head>
 <body>
@@ -101,7 +144,7 @@
                     <p class="text-center small">사원번호 & 비밀번호를 입력하세요</p>
                   </div>
 
-                  <form action="${path}/loginCheck.do" class="row g-3 needs-validation" novalidate>
+                  <form action="${path}/loginCheck.do" method="post" class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label" value="${param.userno}">사원번호</label>
@@ -119,7 +162,7 @@
 
                     <div class="col-12">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                        <input class="form-check-input" type="checkbox" name="check_saveid" value="true" id="rememberMe">
                         <label class="form-check-label" for="rememberMe">아이디 저장</label>
                       </div>
                     </div>
@@ -142,7 +185,15 @@
 
     </div>
   </main><!-- End #main -->
-
+<script type="text/javascript">
+var cookie_id = getCookie('saveId');
+if(!isEmpty(cookie_id)){
+	var id = document.querySelector("[name=userno]");
+	var saveId = document.querySelector("[name=check_saveid]");
+	id.value = cookie_id;
+	saveId.checked = true;
+}
+</script>
   <!-- Vendor JS Files -->
   <script src="NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

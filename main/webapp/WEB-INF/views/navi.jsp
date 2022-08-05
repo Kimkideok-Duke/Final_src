@@ -123,7 +123,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="${path}/goMain.do">
+        <a class="nav-link collapsed" href="${path}/entireDashboard.do">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -134,24 +134,25 @@
           <i class="bi bi-calendar-plus"></i><span>Plan</span>
         </a>
       </li><!-- End 일정관리 Nav -->
-
+	  <%--<c:if test="${not empty param.pno}"> --%>
       <li class="nav-item">
         <a class="nav-link collapsed" href="${path}/goAlert.do">
           <i class="bi bi-bell"></i><span>Notifications</span>
         </a>
       </li><!-- End 알림 Nav -->
-
+	  
       <li class="nav-item">
         <a class="nav-link collapsed" href="${path}/goGnatt.do">
           <i class="bi bi-bar-chart"></i><span>Gantt Chart</span></i>
         </a>
       </li><!-- End 간트차트 Nav -->
-
+      
       <li class="nav-item">
         <a class="nav-link collapsed" href="#">
           <i class="bi bi-calendar3"></i><span>fullcalendar</span>
         </a>
       </li><!-- End 풀캘린더 Nav -->
+      <%-- </c:if>--%>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="${path}/goMyPage.do">

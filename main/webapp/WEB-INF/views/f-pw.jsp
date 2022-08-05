@@ -45,6 +45,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		<%-- 
@@ -63,9 +64,9 @@
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
               <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">ProjectManager</span>
+                <a href="${path}/loginPage.do" class="logo d-flex align-items-center w-auto">
+                  <img src="NiceAdmin/assets/img/logo.png" alt="">
+                  <span class="d-none d-lg-block">Fine PMS</span>
                 </a>
               </div>
               <div class="card mb-3">

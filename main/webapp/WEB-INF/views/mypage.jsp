@@ -111,10 +111,18 @@
 			$("#infoCForm").attr("action","${path}/changeInfoMypage.do")
 			$("#infoCForm").submit()
 		})
+		$(".mypageSchList").click(function(){
+			location.href="${path}/goMain.do"
+		})
 	});
 	
 
 </script>
+<style type="text/css">
+.mypageSchList:hover{
+	cursor:pointer;
+}
+</style>
 </head>
 <body>
 <jsp:include page="navi.jsp"/>
@@ -326,7 +334,7 @@
                 <tbody>
                  
                 <c:forEach var="scd" items="${userSList}" varStatus="sts">
-                  <tr>
+                  <tr class="mypageSchList">
                     <th scope="row">${sts.count}</th>
                     <td>${scd.title}</td>
                     <td>${scd.sname}</td>

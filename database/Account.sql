@@ -118,6 +118,6 @@ AND a.userno in (
 ;
 
 -- um page 사원 추가
-INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','김영수','himan7788@naver.com', null,
-	null,null,null,NULL,sysdate,null);
+INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','김영수','himan7788@naver.com', '미정',
+	'사원',null,null,NULL,sysdate,'user');
 SELECT * FROM account;

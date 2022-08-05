@@ -9,6 +9,7 @@
 		<typeAlias alias="mySchedule" type="PMS.vo.mySchedule"/>
 		<typeAlias alias="Project" type="PMS.vo.Project"/>
 		<typeAlias alias="Schedule" type="PMS.vo.Schedule"/>
+		<typeAlias alias="Alert" type="PMS.vo.Alert"/>
 	</typeAliases>
 
 	<mappers>

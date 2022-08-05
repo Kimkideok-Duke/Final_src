@@ -19,7 +19,8 @@ public class MainCtrl {
     @RequestMapping("goMain.do")
     public String main(HttpServletRequest request, Model d) {
     	HttpSession session = request.getSession();
-    	int pno = (int)session.getAttribute("pno");
+    	//int pno = (int)session.getAttribute("pno");
+    	int pno=2;
     	String title = service.getTitleByNo(pno);
     	session.setAttribute("title", title);
     	return "WEB-INF\\views\\Main.jsp";
