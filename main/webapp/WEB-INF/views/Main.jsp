@@ -48,7 +48,9 @@
 <body>
 
   <!-- ======= Sidebar ======= -->
+<!--
 <jsp:include page="navi.jsp"/>
+-->
 
   <main id="main" class="main">
     <section class="section dashboard">
@@ -77,7 +79,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">${title}</h5>
+                  <h5 class="card-title">프로젝트명</h5>
 					<div style= "display:inline;">
 					진행도 : 
 					<div class="progress">
