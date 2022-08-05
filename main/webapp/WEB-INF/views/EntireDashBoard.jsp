@@ -67,17 +67,21 @@
 
                 <div class="card-body">
                   <h5 class="card-title">내 프로젝트</h5>
-
+				<c:if test="${not empty myPlist}">
                   <div class="d-flex align-items-center">
                     </div>
                     <c:forEach var="myP" items="${myPlist}">
                     <div class="ps-3">
-                      <h6><a class="dropdown-item" href="#">${myP.title}</a></h6>
+                      <h6><a class="dropdown-item" href="${path}/goMain.do?pno="+${myP.pno}>${myP.title}</a></h6>
                     </div>
 					<div class="progress">
 	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
 	              	</div>
 	              	</c:forEach>
+              	</c:if>
+              	<c:if test="${empty myPlist}">
+              		<h6>참가중인 프로젝트가 없습니다.</h6>
+              	</c:if>
                   </div>
                   
                 </div>
@@ -114,6 +118,7 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${not empty mySlist}">
                     <%int cnt=1; %>
                     <c:forEach var="myS" items="${mySlist}">
                       <tr ondblclick="goMain(${myS.pno})">
@@ -130,6 +135,10 @@
                         <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
                       </tr>
                       </c:forEach>
+                    </c:if>
+                    <c:if test="${empty mySlist}">
+                    	<tr><td></td><td></td><td>업무 목록이 없습니다.</td></tr>
+                    </c:if>
                     </tbody>
                   </table>
 				<script type="text/javascript">
