@@ -12,10 +12,10 @@ import PMS.service.AlertService;
 public class AlertController {
 	@Autowired(required=false)
 	private AlertService service;
-	// http://localhost:7080/PMS/goAlert.do
-	@RequestMapping("goAlert.do")
-	public String goAlert(@RequestParam(value="userno")String userno, Model d) {
-		d.addAttribute(userno);
+	// http://localhost:7080/PMS/getAlert.do
+	@RequestMapping("getAlert.do")
+	public String getAlert(@RequestParam(value="userno", defaultValue="")String userno, Model d) {
+		d.addAttribute("art",service.getAlert(userno));
 		return "WEB-INF\\views\\alert.jsp";
 	}
 }

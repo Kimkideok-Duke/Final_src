@@ -1,22 +1,18 @@
 package PMS.vo;
 
-import java.util.Date;
-
 public class Alert {
 	private String userno;
-	private int pno;
-	private int sno;
+	private String title;
 	private String sname;
 	private String status;
-	private Date dday;
+	private int dday;
 	public Alert() {
 		// TODO Auto-generated constructor stub
 	}
-	public Alert(String userno, int pno, int sno, String sname, String status, Date dday) {
+	public Alert(String userno, String title, String sname, String status, int dday) {
 		super();
 		this.userno = userno;
-		this.pno = pno;
-		this.sno = sno;
+		this.title = title;
 		this.sname = sname;
 		this.status = status;
 		this.dday = dday;
@@ -27,17 +23,11 @@ public class Alert {
 	public void setUserno(String userno) {
 		this.userno = userno;
 	}
-	public int getPno() {
-		return pno;
+	public String getTitle() {
+		return title;
 	}
-	public void setPno(int pno) {
-		this.pno = pno;
-	}
-	public int getSno() {
-		return sno;
-	}
-	public void setSno(int sno) {
-		this.sno = sno;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getSname() {
 		return sname;
@@ -51,12 +41,11 @@ public class Alert {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getDday() {
+	public int getDday() {
 		return dday;
 	}
-	public void setDday(Date dday) {
+	public void setDday(int dday) {
 		this.dday = dday;
 	}
-	
 
 }

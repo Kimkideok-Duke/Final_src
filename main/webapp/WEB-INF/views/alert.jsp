@@ -65,16 +65,17 @@
 </head>
 <body>
 <jsp:include page="navi.jsp"/>
+<%=session.getAttribute("userno")%>
 
 	<%-- main태그 안에 body 코드 작성 --%>
   <main id="main" class="main">
     <div class="pagetitle">
-	  <h1>페이지 제목<%--페이지 제목 입력 --%></h1>
+	  <h1>알림<%--페이지 제목 입력 --%></h1>
 
       <nav> <%-- 페이지 경로 --%>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="${path}/entire.do">Main</a></li>
-          <li class="breadcrumb-item active">경로</li>
+          <li class="breadcrumb-item active">알림</li>
         </ol>
       </nav>
     </div>
@@ -90,14 +91,16 @@
 	            </tr>
 	          </thead>
 	          <tbody>
+	          <c:forEach var="art" items="${art}">
 	            <tr>
 	            	<!-- 프로젝트명 -->
-	              <td>프로젝트명</td>
+	              <td>${art.title}</td>
 	              <!-- 일정명 -->
-	              <td>일정명</td>
+	              <td>${art.sname}</td>
 	              <!-- 마감 며칠전입니다.-->
-	              <td>마감 4일전 입니다.</td>
+	              <td>마감 ${art.dday}일전 입니다.</td>
 	            </tr>
+	           </c:forEach> 
 	          </tbody>
 	        </table>
 	      </div>

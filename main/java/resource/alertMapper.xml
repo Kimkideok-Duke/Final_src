@@ -4,9 +4,9 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="PMS.dao.AlertDao">
 	<select id="getAlert" resultType="Alert" parameterType="string">
-		SELECT sp.userno, sp.pno, sp.sno, s.sname, s.status,TO_DATE(ENDDATE , 'YYYY-MM-DD') -TO_DATE(SYSDATE , 'YYYY-MM-DD')dday
-		FROM SCHEDULE s ,SCHPARTICIPANT sp
-		WHERE s.sno = sp.sno
-		AND userno = #{userno};
+		SELECT sp.userno, p.title, s.sname, s.status,TO_DATE(ENDDATE , 'YYYY-MM-DD') -TO_DATE(SYSDATE , 'YYYY-MM-DD')dday
+		FROM SCHEDULE s ,SCHPARTICIPANT sp, PROJECT p
+		WHERE s.sno = sp.sno AND sp.pno = p.pno
+		AND userno = #{userno} AND STATUS!='완료'
 	</select>	
 </mapper>
