@@ -111,7 +111,7 @@
 				$(alist).each(function(idx, acc){
 					addHTML+="<tr><td>"+(idx+1)+"</td><td>"+acc.userno+"</td><td>"+
 					acc.name+"</td><td>"+acc.dept+"</td><td>"+acc.position+
-						"</td><td><button type='button' class='btn btn-outline-primary'  data-bs-toggle='modal' data-bs-target='#verticalycentered'>수정</button></td></tr>"
+						"</td><td><button type='button'class='btn btn-outline-primary' onclick='clickBtn(this)' value='"+acc.userno+"'  data-bs-toggle='modal' data-bs-target='#verticalycentered'>수정</button></td></tr>"
 				})
 				$("#accList").html(addHTML)
 				var accountSch = data.accountSch
@@ -129,7 +129,6 @@
 					addHTML2 += '<li class="page-item"><a class="page-link '+isActive+'" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>' 
 				}
 				addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+endB+')">Next</a></li>'
-				console.log(addHTML2)
 				$("#acclistBlock").html(addHTML2)
 
 			}
@@ -300,11 +299,11 @@
            </div>
            <br>
            <div class="modal-body">
-			  <form name="uptForm" class="row g-3 needs-validation" novalidate>
+			  <form id="uptForm" class="row g-3 needs-validation" novalidate>
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">이름</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" required>
+                    <input type="text" id="uptName" name="name" class="form-control" value="" required>
 	                  <div class="invalid-feedback">
 	                    필수 입력정보 입니다.
 	                  </div>
@@ -313,25 +312,25 @@
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">부서</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" id="uptDept" name="dept" class="form-control" value="" >
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">직급</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" id="uptPosition" name="position" class="form-control" value="" >
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">권한</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" id="uptAuth" name="auth">
                       <option>권한 선택</option> 
-                      <option value="1">일반 사용자</option>
-                      <option value="2">인사 관리자</option>
-                      <option value="3">프로젝트 관리자</option>
-                      <option value="4">총 관리자</option>
+                      <option value="user">일반 사용자</option>
+                      <option value="um">인사 관리자</option>
+                      <option value="pm">프로젝트 관리자</option>
+                      <option value="admin">총 관리자</option>
                     </select>
                   </div>
                 </div>
@@ -366,6 +365,36 @@
 			$("[name=curPage]").val(cnt);
 			acclistajax()
 		}
+		function clickBtn(btn){
+			var value = $(btn).val()
+			$.ajax({
+				url:"${path}/uptModal.do",
+				data:"userno="+value,
+				dataType:"json",
+				success:function(data){
+					var uVal = data.uptModalInfo
+					$("#uptName").val(uVal.name)
+					$("#uptDept").val(uVal.dept)
+					$("#uptPosition").val(uVal.position)
+					$('#uptAuth').val(uVal.auth).prop("selected",true)
+				}
+			})
+		}
+		<%-- 
+		$.ajax({
+			url:"${path}/addAccount.do",
+			data:"name="+name+"&email="+email,
+			dataType:"json",
+			success:function(data){
+				if(data.proc=="userI"){
+					alert("신규사원이 등록되었습니다.\n사원번호 : "+data.newUser.userno+"\n임시비밀번호 :"+data.newUser.pw)
+					$("[name=name]").val("")
+					$("[name=email]").val("")
+					acclistajax()
+				}
+			}
+		})
+		--%>
 	</script>
 </body>
 </html>

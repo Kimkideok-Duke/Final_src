@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import PMS.service.AccountService;
 import PMS.vo.Account;
@@ -119,6 +120,14 @@ public class AccountController {
 	@RequestMapping("accountList.do")
 	public String accountList(AccountSch ins, Model d) {
 		d.addAttribute("accList", service.AccountList(ins));
+		return "pageJsonReport";
+	}
+	
+	// 인사관리페이지 모달창 ajax
+	// http://localhost:7080/PMS/uptModal.do?userno=E10000003
+	@RequestMapping("uptModal.do")
+	public String uptModal(@RequestParam(value = "userno", defaultValue = "") String userno, Model d) {
+		d.addAttribute("uptModalInfo", service.getUserDetail(userno));
 		return "pageJsonReport";
 	}
 }
