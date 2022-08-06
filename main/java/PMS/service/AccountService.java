@@ -66,55 +66,59 @@ public class AccountService {
 	public List<Account> AccountList(AccountSch sch){
 		// 페이징처리 코드 추가
 		// 1. 전체 데이터 건수 생성
-				sch.setCount(dao.totCnt(sch));
-				System.out.println("총건수 : "+sch.getCount());
-				// 2. 선언한 한번에 보여줄 데이터건수(요청값)
-				// 		초기화면을 대비하여 한번에 보여줄 데이터 건수를 선언
-				if(sch.getPageSize()==0) {
-					sch.setPageSize(5);
-				} // 초기 페이지 수를 5로 설정
-				
-				// 3. 총 페이지수 : 총 데이터 건수/한번에 보여줄 페이지 크기
-				sch.setPageCount((int)Math.ceil(sch.getCount()/(double)sch.getPageSize()));
-				
-				// 4. 클릭한 현재 페이지 번호 (요청값)
-				//	초기에 화면은 0으로 처리되기에 default값을 1로 처리한다.
-				if(sch.getCurPage()==0) {
-					sch.setCurPage(1);
-				}
-				// 블록단위로 next를 눌렀을 때, cupage가 페이지 수 이상으로 증가되는 것을 방지
-				if(sch.getCurPage() > sch.getPageCount()) {
-					sch.setCurPage(sch.getPageCount());
-				}
-				
-				// 5. 마지막번호(현재페이지*한번에보여줄페이지건수)
-				int end = sch.getCurPage()*sch.getPageSize();
-				if(end>=sch.getCount()) { // 마지막번호가 총 데이터 건수보다 크면
-					sch.setEnd(sch.getCount());
-				}else {
-					sch.setEnd(end);
-				}
-				// 끝 번호가 18인데 4페이지에서 20까지 출력하라는 명령이 들어가도
-				// db에서는 상관 없지만(18까지 나온다) 정확하게 하기 위해 조건문 작성
-				
-				sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
-				// 하단에 블록 처리
-				// 1. 블록의 크기 지정
-				sch.setBlockSize(5);
-				// 2. 블록의 번호 지정
-				int blocknum = (int)(Math.ceil(sch.getCurPage()/(double)sch.getBlockSize()));
-				
-				// 만약 페이지블록이 13개까지만 있다면 블록은 15까지 처리되어 에러가 발생한다.
-				// DB에서 가져오는 데이터가 아니기 때문에 에러가 발생하므로
-				// 조건문으로 처리
-				
-				int endBlock = blocknum*sch.getBlockSize();
-				if(endBlock>=sch.getPageCount()) {
-					endBlock = sch.getPageCount();
-				}
-				sch.setEndBlock(endBlock);
-				sch.setStartBlock((blocknum-1)*sch.getBlockSize()+1);
+		sch.setCount(dao.totCnt(sch));
+		// 2. 선언한 한번에 보여줄 데이터건수(요청값)
+		// 		초기화면을 대비하여 한번에 보여줄 데이터 건수를 선언
+		if(sch.getPageSize()==0) {
+			sch.setPageSize(5);
+		} // 초기 페이지 수를 5로 설정
+		
+		// 3. 총 페이지수 : 총 데이터 건수/한번에 보여줄 페이지 크기
+		sch.setPageCount((int)Math.ceil(sch.getCount()/(double)sch.getPageSize()));
+		
+		// 4. 클릭한 현재 페이지 번호 (요청값)
+		//	초기에 화면은 0으로 처리되기에 default값을 1로 처리한다.
+		if(sch.getCurPage()==0) {
+			sch.setCurPage(1);
+		}
+		// 블록단위로 next를 눌렀을 때, cupage가 페이지 수 이상으로 증가되는 것을 방지
+		if(sch.getCurPage() > sch.getPageCount()) {
+			sch.setCurPage(sch.getPageCount());
+		}
+		
+		// 5. 마지막번호(현재페이지*한번에보여줄페이지건수)
+		int end = sch.getCurPage()*sch.getPageSize();
+		if(end>=sch.getCount()) { // 마지막번호가 총 데이터 건수보다 크면
+			sch.setEnd(sch.getCount());
+		}else {
+			sch.setEnd(end);
+		}
+		// 끝 번호가 18인데 4페이지에서 20까지 출력하라는 명령이 들어가도
+		// db에서는 상관 없지만(18까지 나온다) 정확하게 하기 위해 조건문 작성
+		
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		// 하단에 블록 처리
+		// 1. 블록의 크기 지정
+		sch.setBlockSize(5);
+		// 2. 블록의 번호 지정
+		int blocknum = (int)(Math.ceil(sch.getCurPage()/(double)sch.getBlockSize()));
+		
+		// 만약 페이지블록이 13개까지만 있다면 블록은 15까지 처리되어 에러가 발생한다.
+		// DB에서 가져오는 데이터가 아니기 때문에 에러가 발생하므로
+		// 조건문으로 처리
+		
+		int endBlock = blocknum*sch.getBlockSize();
+		if(endBlock>=sch.getPageCount()) {
+			endBlock = sch.getPageCount();
+		}
+		sch.setEndBlock(endBlock);
+		sch.setStartBlock((blocknum-1)*sch.getBlockSize()+1);
 		return dao.AccountList(sch);
+	}
+	
+	// 인사관리페이지에서 유저정보 수정
+	public void uptUserInfoUmPage(Account upt) {
+		dao.uptUserInfoUmPage(upt);
 	}
 	
 }

@@ -90,11 +90,41 @@
 		$("[name=name2]").keyup(function(){
 			acclistajax()
 		})
+		$("#uptBtn").click(function(){
+			if($("#uptName").val()==""){
+				alert("사원 이름을 입력해주세요")
+				$("#uptName").focus()
+				return
+			}
+			if($("#uptDept").val()==""){
+				alert("부서를 입력해주세요")
+				$("#uptDept").focus()
+				return
+			}
+			if($("#uptPosition").val()==""){
+				alert("직급을 입력해주세요")
+				$("#uptPosition").focus()
+				return
+			}
+			if($("#uptAuth").val()==""){
+				alert("권한을 선택해주세요")
+				$("#uptAuth").focus()
+				return
+			}
+			$("#uptForm").attr("action","${path}/uptUserInfoUm.do")
+			$("#uptForm").submit()
+		})
 	});
 	var auth = "<%= (String)session.getAttribute("auth") %>"
 	if(auth != "um" && auth != "admin"){
 		alert("접근이 불가한 페이지입니다.")
 		location.href="${path}/entireDashboard.do"
+	}
+	if("${proc}"!=null){
+		if("${proc}"=="upt"){
+			alert("사원정보가 수정되었습니다.")
+			location.href="${path}/goUmPage.do"
+		}
 	}
 	function acclistajax(){
 		var curPage = $("[name=curPage]").val()
@@ -126,7 +156,9 @@
 					}else{
 						isActive=''
 					}
-					addHTML2 += '<li class="page-item"><a class="page-link '+isActive+'" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>' 
+					if(cnt>0){
+						addHTML2 += '<li class="page-item"><a class="page-link '+isActive+'" href="javascript:goPage('+cnt+')">'+cnt+'</a></li>' 
+					}
 				}
 				addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+endB+')">Next</a></li>'
 				$("#acclistBlock").html(addHTML2)
@@ -321,6 +353,7 @@
                     <input type="text" id="uptPosition" name="position" class="form-control" value="" >
                   </div>
                 </div>
+                <input type="hidden" name="userno" id="uptUserno" value="">
 
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">권한</label>
@@ -334,7 +367,7 @@
                     </select>
                   </div>
                 </div>
-             <button type="submit" class="btn btn-primary">수정</button>
+             <button type="button" id="uptBtn" class="btn btn-primary">수정</button>
               </form>
            </div>
            <div class="modal-footer">
@@ -377,24 +410,11 @@
 					$("#uptDept").val(uVal.dept)
 					$("#uptPosition").val(uVal.position)
 					$('#uptAuth').val(uVal.auth).prop("selected",true)
+					$("#uptUserno").val(value)
 				}
 			})
 		}
-		<%-- 
-		$.ajax({
-			url:"${path}/addAccount.do",
-			data:"name="+name+"&email="+email,
-			dataType:"json",
-			success:function(data){
-				if(data.proc=="userI"){
-					alert("신규사원이 등록되었습니다.\n사원번호 : "+data.newUser.userno+"\n임시비밀번호 :"+data.newUser.pw)
-					$("[name=name]").val("")
-					$("[name=email]").val("")
-					acclistajax()
-				}
-			}
-		})
-		--%>
+		
 	</script>
 </body>
 </html>

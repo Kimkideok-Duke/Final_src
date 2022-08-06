@@ -30,5 +30,7 @@ public interface AccountDao {
 	public List<Account> AccountList(AccountSch sch);
 	// 전체 사원목록 개수
 	public int totCnt(AccountSch sch);
+	// 인사관리페이지 사원정보수정
+	public void uptUserInfoUmPage(Account upt);
 		
 }

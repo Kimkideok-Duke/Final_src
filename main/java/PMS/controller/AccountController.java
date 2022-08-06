@@ -130,4 +130,12 @@ public class AccountController {
 		d.addAttribute("uptModalInfo", service.getUserDetail(userno));
 		return "pageJsonReport";
 	}
+	
+	// 인사관리페이지에서 유저정보 수정
+	@RequestMapping("uptUserInfoUm.do")
+	public String uptUserInfoUm(Account upt, Model d) {
+		service.uptUserInfoUmPage(upt);
+		d.addAttribute("proc", "upt");
+		return "WEB-INF\\views\\um-page.jsp";
+	}
 }

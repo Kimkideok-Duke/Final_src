@@ -62,7 +62,7 @@
 	</select>
 	<insert id="insAccount" parameterType="account">
 	INSERT INTO account values('E'||to_char(acc_seq.nextval),#{pw},#{name},#{email}, '미정',
-		'사원',null,null,NULL,sysdate,'user')
+		'신입',null,null,NULL,sysdate,'user')
 	</insert>
 	<select id="recentAccount" resultType="account">
 		SELECT *
@@ -99,6 +99,14 @@
 		AND name LIKE '%'||#{name}||'%'
 		</if>
 	</select>
+	<update id="uptUserInfoUmPage" parameterType="account">
+		UPDATE ACCOUNT 
+			SET name = #{name},
+				dept = #{dept},
+				position = #{position},
+				auth = #{auth}
+		WHERE userno = #{userno}
+	</update>
 </mapper>
 
 

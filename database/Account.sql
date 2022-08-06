@@ -141,3 +141,42 @@ FROM (
 	ORDER BY userno DESC)
 where cnt between 1 and 10
 ORDER BY cnt;
+
+-- 인사관리페이지에서 유저정보 수정
+UPDATE ACCOUNT 
+	SET name = '테스터',
+		dept = '개발부',
+		position = '대리',
+		auth = 'user'
+WHERE userno = 'E10000065';
+SELECT *
+FROM (
+	SELECT rownum cnt, a.*
+	FROM account a
+	WHERE 1=1
+	AND userno LIKE '%'||''||'%'
+	AND name LIKE '%'||''||'%'
+	ORDER BY userno desc
+)
+WHERE cnt BETWEEN 1 AND 10
+ORDER BY cnt;
+
+-- 인사페이지 페이징처리 순서 버그있으면 교체할 코드
+/*
+SELECT *
+FROM (
+	SELECT rownum cnt, a.*
+	FROM (
+		SELECT a.*
+		FROM account a
+		WHERE 1=1
+		AND userno LIKE '%'||''||'%'
+		AND name LIKE '%'||''||'%'
+		ORDER BY userno DESC
+	) a
+)
+WHERE cnt BETWEEN 1 AND 10
+ORDER BY cnt
+;
+ */
+
