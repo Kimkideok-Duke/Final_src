@@ -107,6 +107,11 @@
 				auth = #{auth}
 		WHERE userno = #{userno}
 	</update>
+	<select id="getDeptCount" resultType="accountdc">
+		SELECT dept, count(*) count
+		FROM account
+		GROUP BY dept
+	</select>
 </mapper>
 
 

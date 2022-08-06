@@ -149,17 +149,9 @@ UPDATE ACCOUNT
 		position = '대리',
 		auth = 'user'
 WHERE userno = 'E10000065';
-SELECT *
-FROM (
-	SELECT rownum cnt, a.*
-	FROM account a
-	WHERE 1=1
-	AND userno LIKE '%'||''||'%'
-	AND name LIKE '%'||''||'%'
-	ORDER BY userno desc
-)
-WHERE cnt BETWEEN 1 AND 10
-ORDER BY cnt;
+
+SELECT * FROM account;
+
 
 -- 인사페이지 페이징처리 순서 버그있으면 교체할 코드
 /*
@@ -177,6 +169,11 @@ FROM (
 )
 WHERE cnt BETWEEN 1 AND 10
 ORDER BY cnt
-;
+; 
  */
+
+SELECT dept, count(*) count
+FROM account
+GROUP BY dept;
+
 

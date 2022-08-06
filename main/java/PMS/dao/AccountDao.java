@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import PMS.vo.Account;
+import PMS.vo.AccountDeptCount;
 import PMS.vo.AccountSch;
 // PMS.dao.AccountDao
 import PMS.vo.MypageScheduleList;
@@ -32,5 +33,7 @@ public interface AccountDao {
 	public int totCnt(AccountSch sch);
 	// 인사관리페이지 사원정보수정
 	public void uptUserInfoUmPage(Account upt);
+	// 인사관리페이지 차트 (부서별 인원수)
+	public List<AccountDeptCount> getDeptCount(); 
 		
 }

@@ -99,6 +99,14 @@ public class AccountController {
 		return "WEB-INF\\views\\um-page.jsp";
 	}
 	
+	// http://localhost:7080/PMS/deptCnt.do
+	// 인사관리페이지 차트정보
+	@RequestMapping("deptCnt.do")
+	public String deptCnt(Model d) {
+		d.addAttribute("deptCnt", service.getDeptCount());
+		return "pageJsonReport";
+	}
+	
 	// 관리자 페이지(프로젝트) 호출
 	@RequestMapping("goAdminPage.do")
 	public String goAdminPage() {

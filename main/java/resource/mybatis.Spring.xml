@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias alias="account" type="PMS.vo.Account"/>
 		<typeAlias alias="accountsch" type="PMS.vo.AccountSch"/>
+		<typeAlias alias="accountdc" type="PMS.vo.AccountDeptCount"/>
 		<typeAlias alias="mpsl" type="PMS.vo.MypageScheduleList"/>
 		<typeAlias alias="mySchedule" type="PMS.vo.mySchedule"/>
 		<typeAlias alias="Project" type="PMS.vo.Project"/>

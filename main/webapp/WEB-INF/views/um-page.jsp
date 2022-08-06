@@ -230,9 +230,23 @@
               <div id="donutChart"></div>
 
               <script>
+				
+				var count = []
+				var dept = []
+				$.ajax({
+					url:"${path}/deptCnt.do",
+					dataType:"json",
+					success:function(data){
+						var data = data.deptCnt
+						$(data).each(function(idx, d){
+							count.push(Number(d.count))
+							dept.push(d.dept)
+						})
+					}
+				})
                 document.addEventListener("DOMContentLoaded", () => {
                   new ApexCharts(document.querySelector("#donutChart"), {
-                    series: [44, 55, 13, 43, 22],
+                    series: count,
                     chart: {
                       height: 250,
                       type: 'donut',
@@ -240,7 +254,7 @@
                         show: true
                       }
                     },
-                    labels: ['총무부', '회계부', '개발부', '인사부', '홍보부'],
+                    labels: dept,
                   }).render();
                 });
               </script>
