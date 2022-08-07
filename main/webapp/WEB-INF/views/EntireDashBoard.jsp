@@ -46,7 +46,12 @@
 </head>
 
 <body>
-
+<script type="text/javascript">
+  	var isAddPrj = '${isAddPrj}'
+  	if(isAddPrj == "Y"){
+  		location.href="${path}/entireDashboard.do"
+  	}
+</script>
  <jsp:include page="navi.jsp"/>
 
   <main id="main" class="main">
@@ -71,26 +76,83 @@
                   <div class="d-flex align-items-center">
                     </div>
                     <c:forEach var="myP" items="${myPlist}">
-                    <div class="ps-3">
-                      <h6><a class="dropdown-item" href="${path}/goMain.do?pno=${myP.pno}">${myP.title}</a></h6>
-                    </div>
-					<div class="progress">
-	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
+                    <div class="list-group">
+                    	<a href="${path}/goMain.do?pno=${myP.pno}" class="list-group-item list-group-item-action">
+                    		<h2 class="mb-1">${myP.title}</h2>
+							<div class="progress">
+			                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
+			              	</div>
+		              	</a>
 	              	</div>
 	              	</c:forEach>
               	</c:if>
-              	<c:if test="${empty myPlist}">
-              		<h6>참가중인 프로젝트가 없습니다.</h6>
-              	</c:if>
+	              	<c:if test="${empty myPlist}">
+	              		<h6>참가중인 프로젝트가 없습니다.</h6>
+	              	</c:if>
                   </div>
-                  
+                  <c:if test="${auth eq 'admin'}">
+	                  <div class="text-center"> 
+	                  	<button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#verticalycentered">프로젝트 등록</button>
+	                  </div>
+	              </c:if>
+	              <c:if test="${auth eq 'pm'}">
+	                  <div class="text-center"> 
+	                  	<button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#verticalycentered">프로젝트 등록</button>
+	                  </div>
+	              </c:if>
                 </div>
               </div>
+              
+              
+	     <div class="modal fade" id="verticalycentered" tabindex="-1">
+	       <div class="modal-dialog modal-dialog-centered">
+	         <div class="modal-content">
+	           <div class="modal-header">
+	             <h5 class="modal-title">프로젝트 등록</h5>
+	             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	           </div>
+	           <br>
+	           <div class="modal-body">
+				 <form class="row g-3 needs-validation" action="${path}/addProject.do" novalidate>
+				 	<div class="row mb-3">
+	                  <label class="col-sm-2 col-form-label">PM번호</label>
+	                  <div class="col-sm-10">
+	                    <input type="text" class="form-control" name="pmno" value="${userno}" readonly>
+	                  </div>
+	               	</div>
+	                <div class="col-md-6">
+	                  <div class="form-floating">
+	                    <input type="text" class="form-control" id="floatingName" name="title" placeholder="프로젝트명" required>
+	                    <label for="floatingName">프로젝트명</label>
+		                  <div class="invalid-feedback">
+		                    필수 입력정보 입니다.
+		                  </div>
+	                  </div>
+	                </div>
+	                <div class="col-sm-4">
+	                  <div class="form-floating mb-3">
+	                    <select name="dept" class="form-select" id="floatingDept" aria-label="Dept">
+	                      <option value="개발">개발</option>
+	                      <option value="본부">본부</option>
+	                      <option value="영업">영업</option>
+	                      <option value="인사">인사</option>
+	                    </select>
+	                    <label for="floatingDept">부서</label>
+	                  </div>
+	                </div>
+	                <div class="text-center">
+	                  <button type="submit" class="btn btn-primary">신규 프로젝트 등록</button>
+	                </div>
+	              </form>			  
+	           </div>
+	         </div>
+	       </div>
+	     </div>
+         
+        
 		<script>
 			$(document).ready(function(){
-			     if($('.table table-borderless datatable').find('span.badge bg-primary').text()=="완료"){
-			    	 $("span.badge bg-primary").attr("class","span.badge bg-success");
-			     }
+				
 			});
 		</script>
             <!-- Recent Sales -->
@@ -101,11 +163,6 @@
                 <div class="card-body">
                   <h5 class="card-title">내 업무목록</h5>
                   <table class="table table-borderless datatable" >
-                  <style>
-				  th,td {        
-				  	text-align: center;
-			      }
-				  </style>
                     <thead>
                       <tr>
                         <th scope="col">번호</th>
@@ -147,7 +204,7 @@
                       </c:forEach>
                     </c:if>
                     <c:if test="${empty mySlist}">
-                    	<tr><td></td><td></td><td>업무 목록이 없습니다.</td></tr>
+                    	<tr><td></td><td></td><td align="center">업무 목록이 없습니다.</td></tr>
                     </c:if>
                     </tbody>
                   </table>

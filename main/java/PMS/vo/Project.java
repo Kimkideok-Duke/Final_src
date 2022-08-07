@@ -4,17 +4,23 @@ public class Project {
 	private int pno;
 	private String title;
 	private String dept;
-	private String userno;
+	private String pmno;
 	public Project() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Project(int pno, String title, String dept, String userno) {
+	public Project(int pno, String title, String dept, String pmno) {
 		super();
 		this.pno = pno;
 		this.title = title;
 		this.dept = dept;
-		this.userno = userno;
+		this.pmno = pmno;
+	}
+	public Project(String title, String dept, String pmno) {
+		super();
+		this.title = title;
+		this.dept = dept;
+		this.pmno = pmno;
 	}
 	public int getPno() {
 		return pno;
@@ -34,11 +40,12 @@ public class Project {
 	public void setDept(String dept) {
 		this.dept = dept;
 	}
-	public String getUserno() {
-		return userno;
+	public String getPmno() {
+		return pmno;
 	}
-	public void setUserno(String userno) {
-		this.userno = userno;
+	public void setPmno(String pmno) {
+		this.pmno = pmno;
 	}
+	
 	
 }

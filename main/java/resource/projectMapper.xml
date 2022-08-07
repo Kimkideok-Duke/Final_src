@@ -18,13 +18,28 @@
 	
 	<!-- 내 프로젝트 보기 -->
 	<select id="showMyProject" resultType="Project" parameterType="string">
-		SELECT DISTINCT
-			   pj.*
-		FROM PROJECT pj, SCHPARTICIPANT p
-		WHERE pj.PNO = p.PNO
-		AND p.USERNO = #{userno}
-		ORDER BY pj.pno
+		SELECT p.*
+		FROM PROJECT p, PRJPARTICIPANT pp
+		WHERE p.PNO = pp.PNO
+		AND pp.USERNO = #{userno}
+		ORDER BY p.PNO
 	</select>
+	
+	<!-- 프로젝트 추가 -->
+	<insert id="addProject" parameterType="Project">
+		INSERT INTO PROJECT values(seq_pno.nextval, #{title}, #{dept}, #{pmno})
+	</insert>
+	
+	<!-- 방금 생성된 프로젝트 번호 추출 -->
+	<select id="getMaxPno" resultType="int" parameterType="string">
+		SELECT max(pno) FROM PROJECT
+		WHERE PMNO = #{pmno}
+	</select>
+	
+	<!-- 프로젝트 참가자 추가 -->
+	<insert id="addPrjParticipant" parameterType="prjParticipant">
+		INSERT INTO PRJPARTICIPANT values(#{userno}, #{pno})
+	</insert>
 	
 	<!-- 내 업무 보기 -->
 	<select id="showMySchedule" resultType="mySchedule" parameterType="string">
