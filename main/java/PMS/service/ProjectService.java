@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import PMS.dao.ProjectDao;
 import PMS.vo.PrjParticipant;
 import PMS.vo.Project;
+import PMS.vo.ProjectScheduleJoin;
+import PMS.vo.myProject;
 import PMS.vo.mySchedule;
 
 @Service
@@ -22,10 +24,15 @@ public class ProjectService {
 	}
 	
 	// 내 프로젝트 보기
-	public List<Project> showMyProject(String userno){
+	public List<myProject> showMyProject(String userno){
 		return dao.showMyProject(userno);
 	}
 			
+	// 관리하는 모든 일정리스트(pm)
+	public List<ProjectScheduleJoin> managingSchedule(String pmno){
+		return dao.managingSchedule(pmno);
+	}
+		
 	// 내가 소속된 프로젝트 표시
 	public List<mySchedule> showMySchedule(String userno){
 		return dao.showMySchedule(userno);

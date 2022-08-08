@@ -26,6 +26,7 @@ public class ProjectController {
     	String auth = (String)session.getAttribute("auth");
     	d.addAttribute("myPlist", service.showMyProject(userno));
     	d.addAttribute("mySlist", service.showMySchedule(userno));
+    	d.addAttribute("pmSlist", service.managingSchedule(userno));
     	d.addAttribute("userno", userno);
     	d.addAttribute("auth", auth);
     	return "WEB-INF/views/EntireDashBoard.jsp";

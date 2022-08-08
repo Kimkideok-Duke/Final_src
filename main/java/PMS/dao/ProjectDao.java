@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import PMS.vo.PrjParticipant;
 import PMS.vo.Project;
+import PMS.vo.ProjectScheduleJoin;
 import PMS.vo.Schedule;
+import PMS.vo.myProject;
 import PMS.vo.mySchedule;
 
 @Repository
@@ -16,7 +18,7 @@ public interface ProjectDao {
 	public List<Project> showAllProject(Map map);
 	
 	// 내 프로젝트 보기
-	public List<Project> showMyProject(String userno);
+	public List<myProject> showMyProject(String userno);
 	
 	// 프로젝트 추가
 	public void addProject(Project ins);
@@ -32,4 +34,7 @@ public interface ProjectDao {
 	
 	// 프로젝트별 일정표시
 	public List<Schedule> showSchedule(int pno);
+	
+	// 관리하는 모든 일정리스트(pm)
+	public List<ProjectScheduleJoin> managingSchedule(String pmno);
 }

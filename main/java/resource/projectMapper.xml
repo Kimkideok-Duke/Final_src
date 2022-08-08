@@ -17,12 +17,20 @@
 	</select>
 	
 	<!-- 내 프로젝트 보기 -->
-	<select id="showMyProject" resultType="Project" parameterType="string">
-		SELECT p.*
-		FROM PROJECT p, PRJPARTICIPANT pp
-		WHERE p.PNO = pp.PNO
+	<select id="showMyProject" resultType="myProject" parameterType="string">
+		SELECT p.*, AVG(progress) progAvg
+		FROM PROJECT p, PRJPARTICIPANT pp, SCHEDULE s
+		WHERE p.PNO = pp.PNO AND p.PNO = s.PNO
 		AND pp.USERNO = #{userno}
-		ORDER BY p.PNO
+		GROUP BY p.PNO, p.TITLE, p.DEPT, p.PMNO
+	</select>
+	
+	<!-- 관리하는 모든 일정리스트(pm) -->
+	<select id="managingSchedule" resultType="ProjectScheduleJoin" parameterType="string">
+		SELECT p.TITLE, p.DEPT, p.PMNO, s.* 
+		FROM PROJECT p, SCHEDULE s
+		WHERE p.PNO = s.PNO
+		AND p.PMNO = #{pmno}
 	</select>
 	
 	<!-- 프로젝트 추가 -->

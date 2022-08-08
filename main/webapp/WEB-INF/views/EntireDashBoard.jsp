@@ -80,7 +80,7 @@
                     	<a href="${path}/goMain.do?pno=${myP.pno}" class="list-group-item list-group-item-action">
                     		<h2 class="mb-1">${myP.title}</h2>
 							<div class="progress">
-			                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
+			                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: ${myP.progAvg}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myP.progAvg}%</div>
 			              	</div>
 		              	</a>
 	              	</div>
@@ -155,26 +155,31 @@
 				
 			});
 		</script>
-            <!-- Recent Sales -->
+		
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
 
-
+				
                 <div class="card-body">
+                  <c:if test="${auth eq 'user'}">
                   <h5 class="card-title">내 업무목록</h5>
+                  </c:if>
+                  <c:if test="${auth eq 'pm'}">
+                  <h5 class="card-title">관리 업무목록</h5>
+                  </c:if>
                   <table class="table table-borderless datatable" >
                     <thead>
                       <tr>
                         <th scope="col">번호</th>
                         <th scope="col">프로젝트명</th>
                         <th scope="col">일정명</th>
-                        <th scope="col">진행도</th>
-                        <th scope="col">마감일</th>
                         <th scope="col">상태</th>
-                        <th scope="col">코멘트</th>
+                        <th scope="col">마감일</th>
+                        <th scope="col">진행도</th>
                       </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${auth eq 'user'}">
                     <c:if test="${not empty mySlist}">
                     <%int cnt=1; %>
                     <c:forEach var="myS" items="${mySlist}">
@@ -190,7 +195,7 @@
                         	<span class="badge bg-success">${myS.status}</span>
                         </c:if>
                         <c:if test="${myS.status eq '막힘'}">
-                        	<span class="badge bg-warning">${myS.status}</span>
+                        	<span class="badge bg-danger">${myS.status}</span>
                         </c:if>
                         </td>
                         <td><fmt:formatDate value="${myS.startDate}" pattern="yyyy-MM-dd"/></td>
@@ -199,12 +204,45 @@
 		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 		              		</div>
 	              		</td>
-                        <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
                       </tr>
                       </c:forEach>
                     </c:if>
                     <c:if test="${empty mySlist}">
                     	<tr><td></td><td></td><td align="center">업무 목록이 없습니다.</td></tr>
+                    </c:if>
+                    </c:if>
+                    
+                    <c:if test="${auth eq 'pm'}">
+                    <c:if test="${not empty pmSlist}">
+                    <%int cnt=1; %>
+                    <c:forEach var="pmS" items="${pmSlist}">
+                      <tr ondblclick="goMain(${pmS.pno})">
+                        <th scope="row"><%=cnt++ %></th>
+                        <td>${pmS.title}</td>
+                        <td>${pmS.sname}</td>
+                        <td>
+                        <c:if test="${pmS.status eq '진행중'}">
+                        	<span class="badge bg-primary">${pmS.status}</span>
+                        </c:if>
+                        <c:if test="${pmS.status eq '완료'}">
+                        	<span class="badge bg-success">${pmS.status}</span>
+                        </c:if>
+                        <c:if test="${pmS.status eq '막힘'}">
+                        	<span class="badge bg-danger">${pmS.status}</span>
+                        </c:if>
+                        </td>
+                        <td><fmt:formatDate value="${pmS.startDate}" pattern="yyyy-MM-dd"/></td>
+                        <td>
+	                        <div class="progress">
+		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${pmS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+		              		</div>
+	              		</td>
+                      </tr>
+                      </c:forEach>
+                    </c:if>
+                    <c:if test="${empty pmSlist}">
+                    	<tr><td></td><td></td><td align="center">업무 목록이 없습니다.</td></tr>
+                    </c:if>
                     </c:if>
                     </tbody>
                   </table>

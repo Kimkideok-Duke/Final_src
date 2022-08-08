@@ -9,7 +9,7 @@ CREATE TABLE PROJECT (
 );
 DROP TABLE PROJECT;
 DELETE FROM PROJECT
-WHERE PNO = 24;
+WHERE PNO = 31;
 CREATE SEQUENCE seq_pno
 			INCREMENT BY 1
 			START WITH 1
@@ -37,7 +37,11 @@ SELECT max(pno) FROM PROJECT
 WHERE PMNO = 'E10000004'
 ORDER BY PNO;
 
-
+SELECT p.*, AVG(progress) progAvg
+FROM PROJECT p, PRJPARTICIPANT pp, SCHEDULE s
+WHERE p.PNO = pp.PNO AND p.PNO = s.PNO
+AND pp.USERNO = 'E10000004'
+GROUP BY p.PNO, p.TITLE, p.DEPT, p.PMNO;
 
 
 
@@ -61,6 +65,7 @@ CREATE SEQUENCE seq_sno
 DROP SEQUENCE seq_sno;
 INSERT INTO SCHEDULE values(seq_sno.nextval, 2, '첫일정', '진행중', 0, sysdate, to_date('2022-08-05','YYYY-MM-DD'));
 INSERT INTO SCHEDULE values(seq_sno.nextval, 2, '완료일정', '완료', 100, sysdate, to_date('2022-08-03','YYYY-MM-DD'));
+INSERT INTO SCHEDULE values(seq_sno.nextval, 21, '신규일정1', '막힘', 60, sysdate, to_date('2022-08-03','YYYY-MM-DD'));
 /*
 일정 생성
 INSERT INTO SCHEDULE values(seq_sno.nextval, #{pno}, #{sname}, #{progress}, 
@@ -75,16 +80,22 @@ SELECT AVG(progress)
 FROM SCHEDULE
 WHERE pno = 2;
 
+SELECT p.TITLE, p.DEPT, p.PMNO, s.* 
+FROM PROJECT p, SCHEDULE s
+WHERE p.PNO = s.PNO
+AND p.PMNO = 'E10000004';
+
 /*
 프로젝트 별 일정 리스트 
 SELECT *
 FROM SCHEDULE
 WHERE pno = #{pno}
 
-프로젝트별 진행도
-SELECT AVG(progress)
-FROM SCHEDULE
-WHERE pno = #{pno}
+관리하는 모든 일정리스트(pm)
+SELECT p.TITLE, p.DEPT, p.PMNO, s.* 
+FROM PROJECT p, SCHEDULE s
+WHERE p.PNO = s.PNO
+AND p.PMNO = #{pmno}
 */
 
 
@@ -120,11 +131,17 @@ SELECT * FROM PRJPARTICIPANT;
 INSERT INTO PRJPARTICIPANT values(#{userno}, #{pno})
 
 내 프로젝트 보기
-SELECT p.*
-FROM PROJECT p, PRJPARTICIPANT pp
-WHERE p.PNO = pp.PNO
+SELECT p.*, AVG(progress) 
+FROM PROJECT p, PRJPARTICIPANT pp, SCHEDULE s
+WHERE p.PNO = pp.PNO AND p.PNO = s.PNO
 AND pp.USERNO = #{userno}
+GROUP BY p.PNO, p.TITLE, p.DEPT, p.PMNO
  */
+
+
+SELECT PNO, AVG(PROGRESS) 
+FROM SCHEDULE
+GROUP BY pno;
 
 
 
@@ -137,7 +154,7 @@ CREATE TABLE SCHPARTICIPANT (
 	pno NUMBER NOT NULL
 );
 DROP TABLE SCHPARTICIPANT;
-INSERT INTO SCHPARTICIPANT values('E10000004', 2, 2);
+INSERT INTO SCHPARTICIPANT values('E10000004', 21, 21);
 INSERT INTO SCHPARTICIPANT values('E10000020', 3, 2);
 /*
 참가자 추가
