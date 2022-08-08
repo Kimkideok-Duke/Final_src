@@ -13,7 +13,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>PMS</title>
+  <title>Entire DashBoard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -71,17 +71,25 @@
               <div class="card info-card customers-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">내 프로젝트</h5>
+                  <c:if test="${auth eq 'user'}">
+                  <h5 class="card-title">내 프로젝트 목록</h5>
+                  </c:if>
+                  <c:if test="${auth eq 'pm'}">
+                  <h5 class="card-title">관리 프로젝트 목록</h5>
+                  </c:if>
 				<c:if test="${not empty myPlist}">
                   <div class="d-flex align-items-center">
                     </div>
                     <c:forEach var="myP" items="${myPlist}">
                     <div class="list-group">
                     	<a href="${path}/goMain.do?pno=${myP.pno}" class="list-group-item list-group-item-action">
+                    	  <div class="d-flex w-100 justify-content-between">
                     		<h2 class="mb-1">${myP.title}</h2>
-							<div class="progress">
+                    		<small>${myP.dept}</small>
+			              </div>
+			              <div class="progress">
 			                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: ${myP.progAvg}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myP.progAvg}%</div>
-			              	</div>
+		              	  </div>
 		              	</a>
 	              	</div>
 	              	</c:forEach>
