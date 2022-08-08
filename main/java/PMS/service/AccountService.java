@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import PMS.dao.AccountDao;
 import PMS.vo.Account;
 import PMS.vo.AccountDeptCount;
+import PMS.vo.AccountProfile;
 import PMS.vo.AccountSch;
 import PMS.vo.MypageScheduleList;
 
@@ -125,5 +126,10 @@ public class AccountService {
 	// 인사관리페이지 차트 (부서별 인원수)
 	public List<AccountDeptCount> getDeptCount(){
 		return dao.getDeptCount();
+	}
+	
+	// 마이페이지 프로필이미지 경로조회
+	public AccountProfile getProfilePath(String userno) {
+		return dao.getProfilePath(userno);
 	}
 }

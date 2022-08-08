@@ -33,7 +33,7 @@
 		WHERE userno = #{userno}
 	</update>
 	<select id="getMySList" resultType="mpsl" parameterType="string">
-		SELECT distinct p2.title, s.sname, a.name, a.position
+		SELECT distinct p2.title, s.sname, a.name, a.position, p.pno
 		FROM SCHEDULE s, SCHPARTICIPANT p, PROJECT p2, ACCOUNT a 
 		WHERE s.sno in (
 			SELECT SNO
@@ -111,6 +111,11 @@
 		SELECT dept, count(*) count
 		FROM account
 		GROUP BY dept
+	</select>
+	<select id="getProfilePath" resultType="accountp" parameterType="string">
+		SELECT *
+		FROM profile
+		WHERE userno = #{userno}
 	</select>
 </mapper>
 

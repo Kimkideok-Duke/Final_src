@@ -5,6 +5,7 @@ public class MypageScheduleList {
 	private String sname;
 	private String name;
 	private String position;
+	private int pno;
 	public MypageScheduleList() {
 		// TODO Auto-generated constructor stub
 	}
@@ -13,6 +14,21 @@ public class MypageScheduleList {
 		this.sname = sname;
 		this.name = name;
 		this.position = position;
+	}
+	
+	public MypageScheduleList(String title, String sname, String name, String position, int pno) {
+		this.title = title;
+		this.sname = sname;
+		this.name = name;
+		this.position = position;
+		this.pno = pno;
+	}
+	
+	public int getPno() {
+		return pno;
+	}
+	public void setPno(int pno) {
+		this.pno = pno;
 	}
 	public String getTitle() {
 		return title;

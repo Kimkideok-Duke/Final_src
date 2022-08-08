@@ -111,9 +111,7 @@
 			$("#infoCForm").attr("action","${path}/changeInfoMypage.do")
 			$("#infoCForm").submit()
 		})
-		$(".mypageSchList").click(function(){
-			location.href="${path}/goMain.do"
-		})
+
 	});
 	
 
@@ -146,8 +144,14 @@
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
-              <img src="NiceAdmin/assets/img/profile/default.png" alt="Profile" class="rounded-circle">
+			<c:choose>
+				<c:when test="${not empty profile.fname}">
+					<img src="${path}/NiceAdmin/assets/img/profile/${profile.fname}" alt="Profile" class="rounded-circle">
+				</c:when>
+				<c:otherwise>
+					<img src="${path}/NiceAdmin/assets/img/profile/default.png" alt="Profile" class="rounded-circle">
+				</c:otherwise>
+			</c:choose>
               <h2>${userInfo.name}</h2>
               <h3>${userInfo.dept}</h3>
               <div class="social-links mt-2">
@@ -230,7 +234,14 @@
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">프로필 이미지</label>
                       <div class="col-md-8 col-lg-9">
-                        <img src="NiceAdmin/assets/img/profile/default.png" alt="Profile">
+						<c:choose>
+							<c:when test="${not empty profile.fname}">
+								<img src="${path}/NiceAdmin/assets/img/profile/${profile.fname}" alt="Profile" class="rounded-circle">
+							</c:when>
+							<c:otherwise>
+								<img src="${path}/NiceAdmin/assets/img/profile/default.png" alt="Profile" class="rounded-circle">
+							</c:otherwise>
+						</c:choose>
                         <div class="pt-2">
                           <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
@@ -334,7 +345,7 @@
                 <tbody>
                  
                 <c:forEach var="scd" items="${userSList}" varStatus="sts">
-                  <tr class="mypageSchList">
+                  <tr class="mypageSchList" onclick="goMain(${scd.pno})">
                     <th scope="row">${sts.count}</th>
                     <td>${scd.title}</td>
                     <td>${scd.sname}</td>
@@ -376,7 +387,14 @@ if("${proc}"!=""){
 		location.href="${path}/goMyPage.do"
 	}
 }
-
+function goMain(pno){
+	location.href="${path}/goMain.do?pno="+pno
+}
+<%--
+$(".mypageSchList").click(function(){
+	location.href="${path}/goMain.do"
+})
+--%>
 </script>
 </body>
 </html>

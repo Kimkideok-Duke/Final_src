@@ -74,6 +74,7 @@ public class AccountController {
 		String userno = (String)session.getAttribute("userno");
 		d.addAttribute("userInfo", service.getUserDetail(userno));
 		d.addAttribute("userSList", service.getMySList(userno));
+		d.addAttribute("profile",service.getProfilePath(userno));
 		return "WEB-INF\\views\\mypage.jsp";
 	}
 	

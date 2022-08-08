@@ -176,4 +176,36 @@ SELECT dept, count(*) count
 FROM account
 GROUP BY dept;
 
+SELECT distinct p2.title, s.sname, a.name, a.POSITION, p.pno
+FROM SCHEDULE s, SCHPARTICIPANT p, PROJECT p2, ACCOUNT a 
+WHERE s.sno in (
+	SELECT SNO
+	FROM SCHPARTICIPANT
+	WHERE userno = 'E10000020')
+AND p2.pno in (
+	SELECT PNO
+	FROM SCHPARTICIPANT
+	WHERE userno = 'E10000020'
+)
+AND p.userno = 'E10000020'
+AND a.userno in (
+	SELECT p2.PMNO 
+	FROM SCHEDULE s, SCHPARTICIPANT p, PROJECT p2
+	WHERE s.sno in (
+		SELECT SNO
+		FROM SCHPARTICIPANT
+		WHERE userno = 'E10000020')
+	AND p2.pno in (
+		SELECT PNO
+		FROM SCHPARTICIPANT
+		WHERE userno = 'E10000020'
+	)
+	AND p.userno = 'E10000020'
+);
 
+SELECT * FROM profile;
+INSERT INTO profile values('E10000020', 'C:/a01_javaexp/workspace/PMS/src/main/webapp/NiceAdmin/assets/img/profile/', 'default.png');
+SELECT *
+FROM profile
+WHERE userno = 'E10000020';
+DELETE FROM profile WHERE userno = 'E10000020'
