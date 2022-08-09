@@ -16,14 +16,15 @@ public class MainCtrl {
     
     // http://localhost:6080/PMS/goMain.do
     @RequestMapping("goMain.do")
-    public String main(@RequestParam(value="pno", defaultValue="1") int pno, Model d) {
+    public String main(@RequestParam(value="pno", defaultValue="2") int pno, Model d) {
     	String title = service.getTitleByNo(pno);
     	d.addAttribute("title", title);
     	return "WEB-INF\\views\\Main.jsp";
     }
     
+    // http://localhost:6080/PMS/goSchedule.do
     @RequestMapping("goSchedule")
-    public String goSchedule(@RequestParam("itemno") int itemno, Model d) {
+    public String goSchedule(@RequestParam(value="sno", defaultValue="1") int sno, Model d) {
     	return "WEB-INF\\views\\Schedule.jsp";
     }
     

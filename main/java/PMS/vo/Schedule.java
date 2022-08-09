@@ -12,11 +12,13 @@ public class Schedule {
 	private Date endDate;
 	private String startDate_s;
 	private String endDate_s;
+	private int budget;
+	
 	public Schedule() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Schedule(int sno, int pno, String sname, String status, int progress, Date startDate, Date endDate) {
+	public Schedule(int sno, int pno, String sname, String status, int progress, Date startDate, Date endDate, int budget) {
 		super();
 		this.sno = sno;
 		this.pno = pno;
@@ -25,8 +27,9 @@ public class Schedule {
 		this.progress = progress;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.budget = budget;
 	}
-	public Schedule(int sno, int pno, String sname, String status, int progress, String startDate_s, String endDate_s) {
+	public Schedule(int sno, int pno, String sname, String status, int progress, String startDate_s, String endDate_s, int budget) {
 		super();
 		this.sno = sno;
 		this.pno = pno;
@@ -35,7 +38,22 @@ public class Schedule {
 		this.progress = progress;
 		this.startDate_s = startDate_s;
 		this.endDate_s = endDate_s;
+		this.budget = budget;
 	}
+	public Schedule(int sno, int progress) {
+		super();
+		this.sno = sno;
+		this.progress = progress;
+	}
+	public Schedule(String sname, String status, int progress, String startDate_s, String endDate_s, int budget) {
+			super();
+			this.sname = sname;
+			this.status = status;
+			this.progress = progress;
+			this.startDate_s = startDate_s;
+			this.endDate_s = endDate_s;
+			this.budget = budget;
+		}
 	public int getSno() {
 		return sno;
 	}

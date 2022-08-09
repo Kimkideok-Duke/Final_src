@@ -1,5 +1,7 @@
 package PMS.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,14 @@ public class MainService {
 	public String getTitleByNo(int pno) {
 		return dao.getTitleByNo(pno);
 	}
-
+	public List<Schedule> getScheduleList(int pno) {
+		return dao.getScheduleList(pno);
+	}
+	
 	public void uptSchedule(Schedule upt) {
 		dao.uptSchedule(upt);
 	}
+	
+	
 
 }
