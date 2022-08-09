@@ -55,7 +55,8 @@ CREATE TABLE SCHEDULE(
 	status varchar2(50) NOT NULL,
 	progress NUMBER NOT NULL,
 	startDate DATE NOT NULL,
-	endDate DATE NOT NULL
+	endDate DATE NOT NULL,
+	budget NUMBER NOT NULL
 );
 DROP TABLE SCHEDULE;
 CREATE SEQUENCE seq_sno
@@ -63,9 +64,10 @@ CREATE SEQUENCE seq_sno
 			START WITH 1
 			MAXVALUE 9999;
 DROP SEQUENCE seq_sno;
-INSERT INTO SCHEDULE values(seq_sno.nextval, 2, '첫일정', '진행중', 0, sysdate, to_date('2022-08-05','YYYY-MM-DD'));
-INSERT INTO SCHEDULE values(seq_sno.nextval, 2, '완료일정', '완료', 100, sysdate, to_date('2022-08-03','YYYY-MM-DD'));
-INSERT INTO SCHEDULE values(seq_sno.nextval, 21, '신규일정1', '막힘', 60, sysdate, to_date('2022-08-03','YYYY-MM-DD'));
+INSERT INTO SCHEDULE values(seq_sno.nextval, 2, '첫일정', '진행중', 0, sysdate, to_date('2022-08-05','YYYY-MM-DD'), 100000);
+INSERT INTO SCHEDULE values(seq_sno.nextval, 2, '완료일정', '완료', 100, sysdate, to_date('2022-08-03','YYYY-MM-DD'), 150000);
+INSERT INTO SCHEDULE values(seq_sno.nextval, 21, '신규일정1', '막힘', 60, sysdate, to_date('2022-08-03','YYYY-MM-DD'), 200000);
+SELECT * FROM SCHEDULE;
 /*
 일정 생성
 INSERT INTO SCHEDULE values(seq_sno.nextval, #{pno}, #{sname}, #{progress}, 
