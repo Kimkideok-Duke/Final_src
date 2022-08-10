@@ -19,7 +19,7 @@
 			to_date(#{startDate_s}, 'YYYY-MM-DD'), to_date(#{endDate_s}, 'YYYY-MM-DD'), #{budget});
 	</insert>
 	<update id="uptSchedule" parameterType="schedule">
-		UPDATE SCHEDULE 
+		UPDATE SCHEDULE
 		SET progress = #{progress},
 		WHERE sno = #{sno}
 	</update>

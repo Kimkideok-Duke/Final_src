@@ -45,6 +45,7 @@ public class Schedule {
 		this.sno = sno;
 		this.progress = progress;
 	}
+	
 	public Schedule(String sname, String status, int progress, String startDate_s, String endDate_s, int budget) {
 			super();
 			this.sname = sname;
@@ -107,6 +108,12 @@ public class Schedule {
 	}
 	public void setEndDate_s(String endDate_s) {
 		this.endDate_s = endDate_s;
+	}
+	public int getBudget() {
+		return budget;
+	}
+	public void setBudget(int budget) {
+		this.budget = budget;
 	}
 	
 }

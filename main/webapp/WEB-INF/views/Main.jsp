@@ -80,16 +80,16 @@
 
                 <div class="card-body">
                   <h5 class="card-title">프로젝트명</h5>
-					<div style= "display:inline;">
 					진행도 : 
 					<div class="progress">
 	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 36%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">36%</div>
-	              	</div>
 	              	</div>
                 </div>
               </div>
 
             </div><!-- End Customers Card -->
+
+            <!-- 일정 관리 -->
 
             <!-- Recent Sales -->
             <div class="col-12">
@@ -168,7 +168,8 @@
                 </div>
 
               </div>
-            </div><!-- End Recent Sales -->
+            </div>
+            <!-- End Recent Sales -->
 
             <!-- Reports -->
             <div class="col-12">

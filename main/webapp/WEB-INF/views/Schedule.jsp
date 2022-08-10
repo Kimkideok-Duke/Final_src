@@ -40,24 +40,83 @@
 </head>
 
 <body>
-      <h2>일정 관리</h2>
-<div>
-	<form method="post">
-		<input type="hidden" name="itemno" value=""/>
-		<input type="hidden" name="pno" value=""/>
-		<div class="input">진행도 <input name="progress"></div>
-		<div class="input">마감일 <input type="date" name="deadline_s" value="" /> </div>
-		<div class="input">댓글 <input name="comm" value=""/></div>
-		<div class="input"><input type="hidden" name="auth" value=""/></div>
-		<div class="btn"><button type="button" onclick="regeProc()">등록</button></div>
-		<div class="btn"><button type="button" onclick="updateProc()">수정</button></div>
-		<div class="btn"><button type="button" onclick="deleteProc()">삭제</button></div>
-		<div class="btn"><button type="button" onclick="goMain()">메인화면</button></div>
-	</form>
+<h2>일정 관리</h2>
+      <div class="col-12">
+        <div class="card recent-sales overflow-auto">
+
+          <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <li class="dropdown-header text-start">
+                <h6>Filter</h6>
+              </li>
+
+              <li><a class="dropdown-item" href="#">Today</a></li>
+              <li><a class="dropdown-item" href="#">This Month</a></li>
+              <li><a class="dropdown-item" href="#">This Year</a></li>
+            </ul>
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title">일정 목록 <span>| </span></h5>
+
+            <table class="table table-borderless datatable">
+            <thead>
+              	<tr>
+           	    <th scope="col">번호</th>
+				<th scope="col">일정명</th>
+				<th scope="col">상태</th>
+				<th scope="col">진행도</th>
+				<th scope="col">시작일</th>
+				<th scope="col">마감일</th>
+				<th scope="col">예산</th>
+                </tr>
+			</thead>
+			<tbody>
+				<% int no = 1; %>
+				<c:forEach var="schedule" items="${slist}">
+				<tr data-bs-toggle="modal" data-bs-target="#basicModal">
+				<th scope="row"><%=no++ %></th>
+				<td>${schedule.sname}</td>
+				<td>${schedule.status}</td>
+				<td>${schedule.progress}</td>
+				<td>${schedule.startDate}</td>
+				<td>${schedule.endDate}</td>
+				<td>${schedule.budget}</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+			</table>
+   		 </div>
+	</div>
 </div>
 
+<!-- Basic Modal -->
+<div class="modal fade" id="basicModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Basic Modal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" value="">
+        모달 내용
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary">저장</button>
+      </div>
+    </div>
+  </div>
+</div><!-- End Basic Modal-->
+
 <script type="text/javascript">
-function updateProc(){
+function uptModal(){
+	
+}
+
+function updateProc(){	
 	if(confirm("수정하시겠습니까?")){
 		$("form").attr("action","${path}/updateSchedule.do");
 		$("form").submit();
