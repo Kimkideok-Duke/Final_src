@@ -136,13 +136,13 @@
       </li><!-- End 일정관리 Nav -->
 	  
       <li class="nav-item">
-        <a class="nav-link collapsed" href="${path}/getAlert.do?=+<%=(String)session.getAttribute("userno")%>">
+        <a class="nav-link collapsed" href="${path}/getAlert.do?userno=<%=(String)session.getAttribute("userno")%>">
           <i class="bi bi-bell"></i><span>Notifications</span>
         </a>
       </li><!-- End 알림 Nav -->
 	  <c:if test="${not empty param.pno}">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="${path}/goGnatt.do?pno=${param.pno}">
+        <a class="nav-link collapsed" href="${path}/getGantt.do?pno=${param.pno}">
           <i class="bi bi-bar-chart"></i><span>Gantt Chart</span></i>
         </a>
       </li><!-- End 간트차트 Nav -->
