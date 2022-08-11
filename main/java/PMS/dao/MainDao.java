@@ -11,4 +11,5 @@ public interface MainDao {
 	public String getTitleByNo(int pno);
 	public List<Schedule> getScheduleList(int pno);
 	public void uptSchedule(Schedule upt);
+	public Schedule getSchedule(int sno);
 }

@@ -29,13 +29,16 @@ public class MainCtrl {
     	return "WEB-INF\\views\\Schedule.jsp";
     }
 
+	@RequestMapping("scheduleModal.do")
+	public String scheduleModal(@RequestParam(value = "sno", defaultValue = "1") int sno, Model d) {
+		d.addAttribute("schedule", service.getSchedule(sno));
+		return "pageJsonReport";
+	}
     @RequestMapping("uptSchedule.do")
 	public String uptSchedule(Schedule upt, Model d) {
 		service.uptSchedule(upt);
 		d.addAttribute("proc", "upt");
 		return "WEB-INF\\views\\Schedule.jsp";
 	}
-
-    
 	
 }

@@ -13,6 +13,11 @@
 		FROM SCHEDULE
 		WHERE pno = #{pno}
 	</select>
+	<select id="getSchedule" resultType="schedule" parameterType="int">
+		SELECT *
+		FROM SCHEDULE
+		WHERE sno = #{sno}
+	</select>
 	<insert id="insSchedule" parameterType="schedule">
 		INSERT INTO SCHEDULE
 		values(seq_sno.nextval, #{pno}, #{sname}, #{status}, #{progress}, 

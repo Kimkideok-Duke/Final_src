@@ -19,7 +19,9 @@ public class MainService {
 	public List<Schedule> getScheduleList(int pno) {
 		return dao.getScheduleList(pno);
 	}
-	
+	public Schedule getSchedule(int sno) {
+		return dao.getSchedule(sno);
+	}
 	public void uptSchedule(Schedule upt) {
 		dao.uptSchedule(upt);
 	}
