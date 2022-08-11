@@ -46,6 +46,14 @@
 .box{
 	margin:30px 0 20px 0;
 }
+.card-foot{
+	display: block;
+   	width: 100%;
+    height: 5%;
+    position: absolute;  
+    bottom: 3%;
+    left: 0;
+}
 </style>
 
   <!-- =======================================================
@@ -65,24 +73,23 @@
 </head>
 <body>
 <jsp:include page="navi.jsp"/>
-<%=session.getAttribute("userno")%>
 
 	<%-- main태그 안에 body 코드 작성 --%>
   <main id="main" class="main">
     <div class="pagetitle">
-	  <h1>알림<%--페이지 제목 입력 --%></h1>
+	  <h1>Notification<%--페이지 제목 입력 --%></h1>
 
       <nav> <%-- 페이지 경로 --%>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="${path}/entire.do">Main</a></li>
-          <li class="breadcrumb-item active">알림</li>
+          <li class="breadcrumb-item active">Notification</li>
         </ol>
       </nav>
     </div>
 	<div class="box"></div>
-	    <div class="card" id="card">
+	    <div class="card" id="card" style="margin-left: auto; margin-right: auto; width:70%; height:100vh;padding:3%"">
 	      <div class="card-body">
-	        <table class="table">
+	        <table class="table" style="margin-left: auto; margin-right: auto; width:90%;">
 	          <thead>
 	            <tr>
 	              <th scope="col">프로젝트</th>
@@ -98,11 +105,34 @@
 	              <!-- 일정명 -->
 	              <td>${art.sname}</td>
 	              <!-- 마감 며칠전입니다.-->
-	              <td>마감 ${art.dday}일전 입니다.</td>
+	              <c:choose>
+					<c:when test="${art.dday > 0}">
+						<td>마감기한 ${art.dday}일전 입니다.</td>
+					</c:when>
+					<c:when test="${art.dday == 0}">
+						<td style="color:red">마감 당일 입니다.</td>
+					</c:when>
+					<c:otherwise>
+						<td style="color:red">마감기한이 ${art.dday-(art.dday*2)}일 지났습니다.</td>
+					</c:otherwise>
+				</c:choose>
 	            </tr>
 	           </c:forEach> 
 	          </tbody>
 	        </table>
+	      <div class="card-foot">
+	     <!--
+            <nav aria-label="Page navigation example">
+              <ul class="pagination" style=" justify-content : center;">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+            </nav>
+            -->
+	      </div>
 	      </div>
 	    </div>
    </main>
