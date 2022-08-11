@@ -22,10 +22,14 @@ public class MainService {
 	public Schedule getSchedule(int sno) {
 		return dao.getSchedule(sno);
 	}
+	public void regSchedule(Schedule reg) {
+		
+	}
 	public void uptSchedule(Schedule upt) {
 		dao.uptSchedule(upt);
 	}
-	
-	
+	public void delSchedule() {
+
+	}
 
 }

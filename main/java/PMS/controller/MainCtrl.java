@@ -29,16 +29,33 @@ public class MainCtrl {
     	return "WEB-INF\\views\\Schedule.jsp";
     }
 
-	@RequestMapping("scheduleModal.do")
-	public String scheduleModal(@RequestParam(value = "sno", defaultValue = "1") int sno, Model d) {
-		d.addAttribute("schedule", service.getSchedule(sno));
-		return "pageJsonReport";
+    // http://localhost:6080/PMS/goScheduleManage.do
+    @RequestMapping("goScheduleManage.do")
+    public String goScheduleManage(@RequestParam(value="sno", defaultValue="1") int sno, Model d) {
+    	d.addAttribute("schedule",service.getSchedule(sno));
+    	return "WEB-INF\\views\\ScheduleManage.jsp";
+    }
+    
+//	public String scheduleModal(@RequestParam(value = "sno", defaultValue = "1") int sno, Model d) {
+//		d.addAttribute("schedule", service.getSchedule(sno));
+//		return "pageJsonReport";
+//	}
+    @RequestMapping("regSchedule.do")
+	public String regSchedule(Schedule reg, Model d) {
+		service.regSchedule(reg);
+		return "WEB-INF\\views\\ScheduleManage.jsp";
 	}
     @RequestMapping("uptSchedule.do")
 	public String uptSchedule(Schedule upt, Model d) {
 		service.uptSchedule(upt);
 		d.addAttribute("proc", "upt");
-		return "WEB-INF\\views\\Schedule.jsp";
+		return "WEB-INF\\views\\ScheduleManage.jsp";
+	}
+    @RequestMapping("delSchedule.do")
+	public String delSchedule(Model d) {
+		service.delSchedule();
+		d.addAttribute("proc", "del");
+		return "WEB-INF\\views\\ScheduleManage.jsp";
 	}
 	
 }
