@@ -17,14 +17,13 @@ public class MainCtrl {
     // http://localhost:6080/PMS/goMain.do
     @RequestMapping("goMain.do")
     public String main(@RequestParam(value="pno", defaultValue="2") int pno, Model d) {
-    	String title = service.getTitleByNo(pno);
-    	d.addAttribute("title", title);
+    	d.addAttribute("title", service.getTitleByNo(pno));
     	d.addAttribute("slist",service.getScheduleList(pno));
     	return "WEB-INF\\views\\Main.jsp";
     }
     
     // http://localhost:6080/PMS/goSchedule.do
-    @RequestMapping("goSchedule")
+    @RequestMapping("goSchedule.do")
     public String goSchedule(@RequestParam(value="pno", defaultValue="2") int pno, Model d) {
     	d.addAttribute("slist",service.getScheduleList(pno));
     	return "WEB-INF\\views\\Schedule.jsp";
@@ -36,7 +35,11 @@ public class MainCtrl {
 		d.addAttribute("proc", "upt");
 		return "WEB-INF\\views\\Schedule.jsp";
 	}
-
+    
+//	public String uptModal(@RequestParam(value = "userno", defaultValue = "") String userno, Model d) {
+//		d.addAttribute("uptModalInfo", service.getUserDetail(userno));
+//		return "pageJsonReport";
+//	}
     
 	
 }

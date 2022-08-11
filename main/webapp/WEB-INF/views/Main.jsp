@@ -48,9 +48,6 @@
 <body>
 
   <!-- ======= Sidebar ======= -->
-<!--
-<jsp:include page="navi.jsp"/>
--->
 
   <main id="main" class="main">
     <section class="section dashboard">
@@ -79,7 +76,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">프로젝트명</h5>
+                  <h5 class="card-title">${title}</h5>
 					진행도 : 
 					<div class="progress">
 	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 36%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">36%</div>
@@ -91,85 +88,69 @@
 
             <!-- 일정 관리 -->
 
-            <!-- Recent Sales -->
-            <div class="col-12">
-              <div class="card recent-sales overflow-auto">
+     <div class="col-12">
+        <div class="card recent-sales overflow-auto">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
+          <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <li class="dropdown-header text-start">
+                <h6>Filter</h6>
+              </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
+              <li><a class="dropdown-item" href="#">Today</a></li>
+              <li><a class="dropdown-item" href="#">This Month</a></li>
+              <li><a class="dropdown-item" href="#">This Year</a></li>
+            </ul>
+          </div>
 
-                <div class="card-body">
-                  <h5 class="card-title">일정 목록 <span>| </span></h5>
+          <div class="card-body">
+            <h5 class="card-title">일정 목록 <span>| </span></h5>
 
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">번호</th>
-                        <th scope="col">일정명</th>
-                        <th scope="col">진행도</th>
-                        <th scope="col">마감일</th>
-                        <th scope="col">상태</th>
-                        <th scope="col">코멘트</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">#1</th>
-                        <td>요구사항 정의서</td>
-                        <td>
-							<div class="progress">
-			                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
-			              	</div>
-						</td>
-                        <td>8월3일</td>
-                        <td><span class="badge bg-success">완료</span></td>
-                        <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
-                      </tr>
-
-                      <tr>
-                        <th scope="row">#2</th>
-                        <td>플로우 차트</td>
-                        <td>
-							<div class="progress">
-			                	<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 70%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">70%</div>
-			              	</div>
-						</td>
-                        <td>8월10일</td>
-                        <td><span class="badge bg-success">진행중</span></td>
-                        <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
-                      </tr>
-
-                      <tr>
-                        <th scope="row">#3</th>
-                        <td>화면설계서</td>
-                        <td>
-							<div class="progress">
-			                	<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 50%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">50%</div>
-			              	</div>
-						</td>
-                        <td>8월12일</td>
-                        <td><span class="badge bg-success">진행중</span></td>
-                        <td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
-                      </tr>
-
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div>
-            <!-- End Recent Sales -->
+            <table class="table table-borderless datatable">
+            <thead>
+              	<tr>
+           	    <th scope="col">번호</th>
+				<th scope="col">일정명</th>
+				<th scope="col">상태</th>
+				<th scope="col">진행도</th>
+				<th scope="col">시작일</th>
+				<th scope="col">마감일</th>
+				<th scope="col">예산</th>
+				<th scope="col">코멘트</th>
+                </tr>
+			</thead>
+			<tbody>
+				<c:forEach var="schedule" items="${slist}">
+				<tr ondblclick="goSchedule()">
+				<th scope="row">${schedule.sno }</th>
+				<td>${schedule.sname}</td>
+				<td>${schedule.status}</td>
+				<td>진행도 :
+				<c:set var="status" value="" />
+				<c:choose>
+                <c:when test="${schedule.progress eq 100}">
+                	<c:set var="status" value="success" /></c:when>
+               	<c:when test="${schedule.progress > 50 and schedule.progress < 100}">
+	               	<c:set var="status" value="warning" /></c:when>
+				<c:otherwise>
+					<c:set var="status" value="danger" /></c:otherwise>
+                </c:choose>
+				<div class="progress">
+            	   	<div class="progress-bar progress-bar-striped bg-${status}" role="progressbar" style="width: ${schedule.progress}%" aria-valuenow="${schedule.progress}" aria-valuemin="0" aria-valuemax="100">${schedule.progress}%</div>
+              	</div></td>
+				<td>${schedule.startDate}</td>
+				<td>${schedule.endDate}</td>
+				<td>${schedule.budget}원</td>
+				<td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
+				</tr>
+				</c:forEach>
+			</tbody>
+			</table>
+   		 </div>
+	</div>
+</div>
+            <!-- 일정관리 -->
 
             <!-- Reports -->
             <div class="col-12">
@@ -416,6 +397,12 @@
     </section>
 
   </main><!-- End #main -->
+
+<script type="text/javascript">
+function goSchedule(){
+	location.href="${path}/goSchedule.do"
+}
+</script>
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
