@@ -7,8 +7,9 @@
 	<!-- 전체 프로젝트 보기 -->
 	<select id="showAllProject" resultType="Project">
 		SELECT p.*, a.NAME
-		FROM PROJECT p, PRJPARTICIPANT pp, ACCOUNT a
-		WHERE p.PNO = pp.PNO AND p.PMNO = a.USERNO
+		FROM PROJECT p, ACCOUNT a
+		WHERE p.PMNO = a.USERNO
+		ORDER BY pno
 	</select>
 	
 	<!-- 전체 일정 보기 -->

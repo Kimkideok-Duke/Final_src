@@ -139,7 +139,7 @@
 	                    data: {
 	                      labels: cntdept,
 	                      datasets: [{
-	                        label: 'Bar Chart',
+	                        label: '프로젝트 수',
 	                        data: deptcnt,
 	                        backgroundColor: [
 	                          'rgba(255, 99, 132, 0.2)',
@@ -244,10 +244,13 @@
                         <td>${p.dept}</td>
                         <td>${p.name}</td>
                       </tr>
-                      </c:forEach>
+                    </c:forEach>
                     </c:if>
                     </tbody>
                   </table>
+	                  <div class="text-center"> 
+	                  	<button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#verticalycentered">프로젝트 등록</button>
+	                  </div>
                   </div>
               </div>
             </div>
@@ -296,11 +299,7 @@
 	              		<h6>참가중인 프로젝트가 없습니다.</h6>
 	              	</c:if>
                   </div>
-                  <c:if test="${auth eq 'admin'}">
-	                  <div class="text-center"> 
-	                  	<button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#verticalycentered">프로젝트 등록</button>
-	                  </div>
-	              </c:if>
+                  
 	              <c:if test="${auth eq 'pm'}">
 	                  <div class="text-center"> 
 	                  	<button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#verticalycentered">프로젝트 등록</button>
