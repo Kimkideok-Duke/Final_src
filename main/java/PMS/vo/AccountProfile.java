@@ -1,9 +1,12 @@
 package PMS.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class AccountProfile {
 	private String userno;
 	private String path;
 	private String fname;
+	private MultipartFile report;
 	public AccountProfile() {
 		// TODO Auto-generated constructor stub
 	}
@@ -29,6 +32,12 @@ public class AccountProfile {
 	}
 	public void setFname(String fname) {
 		this.fname = fname;
+	}
+	public MultipartFile getReport() {
+		return report;
+	}
+	public void setReport(MultipartFile report) {
+		this.report = report;
 	}
 	
 }

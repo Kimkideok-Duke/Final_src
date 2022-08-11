@@ -204,11 +204,17 @@ AND a.userno in (
 );
 
 SELECT * FROM profile;
+-- 프로필사진 등록
 INSERT INTO profile values('E10000020', 'C:/a01_javaexp/workspace/PMS/src/main/webapp/NiceAdmin/assets/img/profile/', 'test.png');
 SELECT *
 FROM profile
 WHERE userno = 'E10000020';
-
+-- 프로필사진 삭제
+DELETE FROM profile WHERE userno = 'E10000020';
+-- 프로필사진 있는지 확인
+SELECT count(*)
+FROM PROFILE
+WHERE userno = 'E10000020';
 SELECT * FROM account ORDER BY userno desc;
 
 -- 사원정보 삭제

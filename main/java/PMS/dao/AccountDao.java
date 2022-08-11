@@ -40,4 +40,10 @@ public interface AccountDao {
 	public AccountProfile getProfilePath(String userno);
 	// 인사관리페이지 사원 삭제
 	public void delAccount(String userno);
+	// 마이페이지 프로필사진 업로드
+	public void insProfileImg(AccountProfile ins);
+	// 마이페이지 프로필사진 삭제
+	public void delProfileImg(String userno);
+	// 현재 프로필사진 등록되어있는지 확인
+	public String checkProfileImg(String userno);
 }

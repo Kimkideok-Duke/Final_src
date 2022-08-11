@@ -1,9 +1,13 @@
 package PMS.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import PMS.dao.AccountDao;
 import PMS.vo.Account;
@@ -136,5 +140,31 @@ public class AccountService {
 	// 인사관리페이지에서 사원정보 삭제
 	public void delAccount(String userno) {
 		dao.delAccount(userno);
+	}
+	@Value("${uploadpf}")
+	private String path;
+	// 마이페이지 프로필사진 업로드
+	public void insProfileImg(AccountProfile ins) {
+		MultipartFile mpf = ins.getReport();
+		String fname = mpf.getOriginalFilename();
+		
+		File f = new File(path+fname);
+		try {
+			mpf.transferTo(f);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(dao.checkProfileImg(ins.getUserno()).equals("1")) {
+			dao.delProfileImg(ins.getUserno());
+		}
+		dao.insProfileImg(new AccountProfile(ins.getUserno(),path,fname));
+	}
+	// 마이페이지 프로필사진 삭제
+	public void delProfileImg(String userno) {
+		dao.delProfileImg(userno);
 	}
 }
