@@ -86,6 +86,11 @@
 				loginfunc()
 			}
 		})
+		$("#yourUsername").keyup(function(){
+			if(event.keyCode==13){
+				loginfunc()
+			}
+		})
 
 	});
 	function loginfunc(){

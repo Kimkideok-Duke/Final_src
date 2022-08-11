@@ -61,5 +61,24 @@
 	<bean id="pageJsonReport" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<property name="contentType" value="text/html;charset=utf-8"/>
 	</bean>
-      
+	<!-- # 메일 발송 모듈 선언 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<!-- 구글 계정(본인 - 발신자) -->
+		<property name="username" value="ssangyongTeam5@gmail.com"/>
+		<!-- 해당 사이트에서 만들어진 앱 비밀번호 (계정 비밀번호 아님) -->
+		<property name="password" value="vksnnavezksxbrsd"/>
+		<!-- 메일 보안관련 옵션 설정 -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+			</props>
+		</property>
+	</bean>
 </beans>

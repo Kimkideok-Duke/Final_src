@@ -132,4 +132,9 @@ public class AccountService {
 	public AccountProfile getProfilePath(String userno) {
 		return dao.getProfilePath(userno);
 	}
+	
+	// 인사관리페이지에서 사원정보 삭제
+	public void delAccount(String userno) {
+		dao.delAccount(userno);
+	}
 }

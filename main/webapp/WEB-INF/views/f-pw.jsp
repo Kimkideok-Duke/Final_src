@@ -51,7 +51,25 @@
 		<%-- 
       
 		--%>   
+		$("#sendBtn").click(function(){
+			if($("[name=userno]").val()==''){
+				alert("사원번호를 입력해주세요")
+				return
+			}
+			$("form").submit()
+		})
 	});
+	var proc = "${proc}"
+	if(proc != ''){
+		if(proc=="Y"){
+			alert("등록된 이메일로 임시비밀번호가 전송되었습니다.")
+			location.href="${path}/loginPage.do"
+		}
+		if(proc=="N"){
+			alert("등록되지 않은 사원번호입니다.\n사원번호를 확인해주세요")
+			$("[name=userno]").focus()
+		}
+	}
 </script>
 </head>
 <body>
@@ -78,17 +96,17 @@
                     <p class="text-center small">사원번호를 입력하세요</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form action="${path}/rePw.do" class="row g-3 needs-validation" method="post" novalidate>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">사원번호</label>
                       <div class="input-group has-validation ">
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        <input type="text" name="userno" class="form-control" id="yourUsername" required>
                         <div class="invalid-feedback">사원번호를 입력하세요</div>
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">임시 비밀번호 전송</button>
+                      <button class="btn btn-primary w-100" type="button" id="sendBtn">임시 비밀번호 전송</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0 text-center"><a href="${path}/loginPage.do">로그인 페이지</a></p>

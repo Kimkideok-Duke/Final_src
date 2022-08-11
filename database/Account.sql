@@ -204,8 +204,13 @@ AND a.userno in (
 );
 
 SELECT * FROM profile;
-INSERT INTO profile values('E10000020', 'C:/a01_javaexp/workspace/PMS/src/main/webapp/NiceAdmin/assets/img/profile/', 'default.png');
+INSERT INTO profile values('E10000020', 'C:/a01_javaexp/workspace/PMS/src/main/webapp/NiceAdmin/assets/img/profile/', 'test.png');
 SELECT *
 FROM profile
 WHERE userno = 'E10000020';
-DELETE FROM profile WHERE userno = 'E10000020'
+
+SELECT * FROM account ORDER BY userno desc;
+
+-- 사원정보 삭제
+DELETE FROM account
+WHERE userno = 'E10000080';

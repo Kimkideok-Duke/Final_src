@@ -125,6 +125,10 @@
 			alert("사원정보가 수정되었습니다.")
 			location.href="${path}/goUmPage.do"
 		}
+		if("${proc}"=="del"){
+			alert("사원정보가 삭제되었습니다.")
+			location.href="${path}/goUmPage.do"
+		}
 	}
 	function acclistajax(){
 		var curPage = $("[name=curPage]").val()
@@ -149,6 +153,7 @@
 				var isActive = "";
 				var startB = accountSch.startBlock
 				var endB = accountSch.endBlock
+				$("#dataCnt").text(accountSch.count)
 				addHTML2 += '<li class="page-item"><a class="page-link" href="javascript:goPage('+startB+')">Previous</a></li>'
 				for(var cnt=startB; cnt<=endB; cnt++){
 					if(accountSch.curPage==cnt){
@@ -288,7 +293,7 @@
 	                    <option>25</option>
 	                    <option>50</option>
 	                  </select>
-	                  <label for="floatingSelect">총 : @@건</label>
+	                  <label for="floatingSelect">총 : <span id="dataCnt"></span>건</label>
 	                </div>
 				</div>
               </form>
@@ -385,7 +390,7 @@
               </form>
            </div>
            <div class="modal-footer">
-             <button type="button" class="btn btn-danger" >삭제</button>         
+             <button type="button" class="btn btn-danger" id="delBtn">삭제</button>         
              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
            </div>
          </div>
@@ -428,7 +433,10 @@
 				}
 			})
 		}
-		
+		$("#delBtn").click(function(){
+			var delUserno = $("#uptUserno").val()
+			location.href="${path}/delAcc.do?userno="+delUserno
+		})
 	</script>
 </body>
 </html>

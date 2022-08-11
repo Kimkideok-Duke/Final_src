@@ -117,6 +117,10 @@
 		FROM profile
 		WHERE userno = #{userno}
 	</select>
+	<delete id="delAccount" parameterType="string">
+		DELETE FROM account
+		WHERE userno = #{userno}
+	</delete>
 </mapper>
 
 

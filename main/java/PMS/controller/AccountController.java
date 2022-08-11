@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import PMS.service.AccountService;
+import PMS.service.MailSenderSerivce;
 import PMS.vo.Account;
 import PMS.vo.AccountSch;
 
@@ -17,6 +18,8 @@ import PMS.vo.AccountSch;
 public class AccountController {
 	@Autowired(required=false)
 	private AccountService service;
+	@Autowired(required=false)
+	private MailSenderSerivce service2;
 	
 	// 로그인 페이지 호출
 	// http://localhost:7080/PMS/loginPage.do
@@ -41,6 +44,10 @@ public class AccountController {
 				session.setAttribute("userno", sch.getUserno());
 				session.setAttribute("auth", service.getUserDetail(sch.getUserno()).getAuth());
 				session.setAttribute("name", service.getUserDetail(sch.getUserno()).getName());
+				session.setAttribute("dept", service.getUserDetail(sch.getUserno()).getDept());
+				if(service.getProfilePath(sch.getUserno()) != null) {
+					session.setAttribute("pfImg", service.getProfilePath(sch.getUserno()).getFname());
+				}
 				d.addAttribute("passVal", "P");
 			}else {
 				d.addAttribute("passVal", "B");
@@ -49,6 +56,18 @@ public class AccountController {
 			d.addAttribute("passVal","N");
 		}
 		return "loginPage.do";
+	}
+	
+	// 비밀번호 찾기
+	@RequestMapping("rePw.do")
+	public String rePw(Account sch, Model d) {
+		if(service.isMember(sch)) {
+			service2.sendMailPw(sch);
+			d.addAttribute("proc", "Y");
+		}else {
+			d.addAttribute("proc", "N");
+		}
+		return "WEB-INF\\views\\f-pw.jsp";
 	}
 	
 	// 로그아웃
@@ -119,6 +138,7 @@ public class AccountController {
 	@RequestMapping("addAccount.do")
 	public String addAccount(Account ins, Model d) {
 		service.insAccount(ins);
+		service2.sendMailNew(ins);
 		d.addAttribute("proc", "userI");
 		d.addAttribute("newUser",service.recentAccount());
 		return "pageJsonReport";
@@ -145,6 +165,14 @@ public class AccountController {
 	public String uptUserInfoUm(Account upt, Model d) {
 		service.uptUserInfoUmPage(upt);
 		d.addAttribute("proc", "upt");
+		return "WEB-INF\\views\\um-page.jsp";
+	}
+	
+	// 인사관리페이지에서 사원정보 삭제
+	@RequestMapping("delAcc.do")
+	public String delAcc(@RequestParam(value = "userno", defaultValue = "") String userno, Model d) {
+		service.delAccount(userno);
+		d.addAttribute("proc", "del");
 		return "WEB-INF\\views\\um-page.jsp";
 	}
 }
