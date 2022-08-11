@@ -3,7 +3,7 @@ package PMS.vo;
 import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
-// PMS_Fin.vo.Comment
+// PMS.vo.Comment
 
 public class Comment {
 	private int cno;

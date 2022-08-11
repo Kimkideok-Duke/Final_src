@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="PMS.dao.commentDao">
+
+	<!-- commentList -->
+	<select id="commentList" resultType="comment">
+		SELECT * FROM smcomment
+		ORDER BY regdte desc
+	</select>
+
+	<!-- comment 등록 -->
+	<insert id="insertComment" parameterType="comment">
+		insert into smcomment
+		values(seq_comm.nextval,1,
+		2,#{content},sysdate,sysdate)
+	</insert>
+	
+	<!-- comment 첨부파일 등록 -->
+	<insert id="insertFile" parameterType="commentfile">
+		insert into smFile values(seq_comm.currval,
+		#{fpath}, #{fname}, '')
+	</insert>
+
+	<!-- comment Detail -->
+	<select id="getDetail" parameterType="int" resultType="comment">
+		SELECT s.*, f.fname 
+		FROM SMCOMMENT s , smFile f
+		WHERE s.CNO =f.CNO(+)
+		and s.cno = #{cno}
+	</select>
+
+    <!-- comment 수정 -->
+	<update id="updateComment" parameterType="comment">
+		update SMCOMMENT
+		set
+		content = #{content},
+		updte = sysdate
+		where cno = #{cno}
+	</update>
+	
+	<!-- comment 삭제 -->
+	<delete id="deleteComment" parameterType="int">
+		delete
+		from smcomment
+		where rno = #{rno}
+	</delete>
+
+	
+
+</mapper>
+
