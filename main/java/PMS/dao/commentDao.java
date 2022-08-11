@@ -9,7 +9,7 @@ import PMS.vo.CommentFile;
 
 @Repository
 public interface commentDao {
-	public List<Comment> commentList();
+	public List<Comment> commentList(int sno);
 	public void insertComment(Comment ins);
 	public Comment getDetail(int cno);
 	public void updateComment(Comment upt);		

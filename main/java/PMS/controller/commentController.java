@@ -2,6 +2,8 @@ package PMS.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +20,10 @@ public class commentController {
 	@Autowired(required=false)
 	private commentService service;
 	
-	// http://localhost:7080/PMS_Fin/commentList.do
+	// http://localhost:7080/PMS/commentList.do
 		@RequestMapping("commentList.do")
-		public String commentList(Model d) {
-			d.addAttribute("clist", service.commentList());
+		public String commentList(@RequestParam("sno") int sno, Model d) {
+			d.addAttribute("clist", service.commentList(sno));
 			
 			return "WEB-INF\\views\\Comment.jsp";
 		}	

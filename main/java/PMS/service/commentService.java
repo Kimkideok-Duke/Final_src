@@ -20,8 +20,8 @@ public class commentService {
 	@Autowired(required=false)
 	private commentDao dao;
 	
-	public List<Comment> commentList(){	
-		return dao.commentList();
+	public List<Comment> commentList(int sno){	
+		return dao.commentList(sno);
 	}
 	
 	// 파일서버 정보(공통정보)
@@ -59,6 +59,7 @@ public class commentService {
 	public void deleteComment(int cno) {
 		dao.deleteComment(cno);
 	}
+
 	
 }
 

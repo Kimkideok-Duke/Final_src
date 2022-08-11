@@ -7,9 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Comment {
 	private int cno;
-	private int pno;  
-	private int itemno;
+	private int sno;
+	private String userno;  
 	private String content;
+	private String writer;
 	private Date regdte;
 	private Date updte;
 	private MultipartFile report;
@@ -20,13 +21,17 @@ public class Comment {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comment(int cno, int pno, int itemno, String content, Date regdte, Date updte) {
+	public Comment(int cno, int sno, String userno, String content, String writer, Date regdte, Date updte,
+			MultipartFile report, String fname) {
 		this.cno = cno;
-		this.pno = pno;
-		this.itemno = itemno;
+		this.sno = sno;
+		this.userno = userno;
 		this.content = content;
+		this.writer = writer;
 		this.regdte = regdte;
 		this.updte = updte;
+		this.report = report;
+		this.fname = fname;
 	}
 
 	public int getCno() {
@@ -37,20 +42,20 @@ public class Comment {
 		this.cno = cno;
 	}
 
-	public int getPno() {
-		return pno;
+	public int getSno() {
+		return sno;
 	}
 
-	public void setPno(int pno) {
-		this.pno = pno;
+	public void setSno(int sno) {
+		this.sno = sno;
 	}
 
-	public int getItemno() {
-		return itemno;
+	public String getUserno() {
+		return userno;
 	}
 
-	public void setItemno(int itemno) {
-		this.itemno = itemno;
+	public void setUserno(String userno) {
+		this.userno = userno;
 	}
 
 	public String getContent() {
@@ -59,6 +64,14 @@ public class Comment {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 
 	public Date getRegdte() {
@@ -76,16 +89,19 @@ public class Comment {
 	public void setUpdte(Date updte) {
 		this.updte = updte;
 	}
-	
+
 	public MultipartFile getReport() {
 		return report;
 	}
+
 	public void setReport(MultipartFile report) {
 		this.report = report;
 	}
+
 	public String getFname() {
 		return fname;
 	}
+
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
