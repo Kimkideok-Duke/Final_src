@@ -35,11 +35,7 @@ public class MainCtrl {
 		d.addAttribute("proc", "upt");
 		return "WEB-INF\\views\\Schedule.jsp";
 	}
-    
-//	public String uptModal(@RequestParam(value = "userno", defaultValue = "") String userno, Model d) {
-//		d.addAttribute("uptModalInfo", service.getUserDetail(userno));
-//		return "pageJsonReport";
-//	}
+
     
 	
 }

@@ -48,6 +48,7 @@
 <body>
 
   <!-- ======= Sidebar ======= -->
+<jsp:include page="navi.jsp"/>
 
   <main id="main" class="main">
     <section class="section dashboard">
