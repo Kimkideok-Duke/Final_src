@@ -225,7 +225,7 @@
       		<div class="card recent-sales overflow-auto">
 	      		<div class="card-body">
 	      		<h5 class="card-title">전체 프로젝트 목록</h5>
-	      		<table class="table table-borderless datatable" >
+	      		<table class="table datatable" >
                     <thead>
                       <tr>
                         <th scope="col">번호</th>
@@ -268,6 +268,9 @@
               <div class="card info-card customers-card">
                 <div class="card-body">
                   <c:if test="${auth eq 'user'}">
+                  <h5 class="card-title">내 프로젝트 목록</h5>
+                  </c:if>
+                  <c:if test="${auth eq 'um'}">
                   <h5 class="card-title">내 프로젝트 목록</h5>
                   </c:if>
                   <c:if test="${auth eq 'pm'}">
@@ -418,10 +421,13 @@
                   <c:if test="${auth eq 'user'}">
                   <h5 class="card-title">내 업무목록</h5>
                   </c:if>
+                  <c:if test="${auth eq 'um'}">
+                  <h5 class="card-title">내 업무목록</h5>
+                  </c:if>
                   <c:if test="${auth eq 'pm'}">
                   <h5 class="card-title">관리 업무목록</h5>
                   </c:if>
-                  <table class="table table-borderless datatable" >
+                  <table class="table datatable" >
                     <thead>
                       <tr>
                         <th scope="col">번호</th>
