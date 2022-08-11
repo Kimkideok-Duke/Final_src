@@ -81,4 +81,10 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!-- 파일업로드 뷰 --> 
+	<bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>	
+	<!-- 다운로드 뷰 -->
+	<bean id="downloadViewer" class="PMS.util.DownloadViewer"></bean> 
 </beans>
