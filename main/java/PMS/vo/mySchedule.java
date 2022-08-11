@@ -13,12 +13,14 @@ public class mySchedule {
 	private int progress;
 	private Date startDate;
 	private Date endDate;
+	private double budget;
 	public mySchedule() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public mySchedule(String userno, String title, String dept, int sno, int pno, String sname, String status,
-			int progress, Date startDate, Date endDate) {
+			int progress, Date startDate, Date endDate, double budget) {
 		super();
 		this.userno = userno;
 		this.title = title;
@@ -30,7 +32,24 @@ public class mySchedule {
 		this.progress = progress;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.budget = budget;
 	}
+
+	public mySchedule(String title, String dept, int sno, int pno, String sname, String status, int progress,
+			Date startDate, Date endDate, double budget) {
+		super();
+		this.title = title;
+		this.dept = dept;
+		this.sno = sno;
+		this.pno = pno;
+		this.sname = sname;
+		this.status = status;
+		this.progress = progress;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.budget = budget;
+	}
+
 	public String getUserno() {
 		return userno;
 	}
@@ -90,6 +109,14 @@ public class mySchedule {
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public double getBudget() {
+		return budget;
+	}
+
+	public void setBudget(double budget) {
+		this.budget = budget;
 	}
 	
 	

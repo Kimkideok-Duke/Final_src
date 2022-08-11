@@ -12,6 +12,8 @@
 		<typeAlias alias="mySchedule" type="PMS.vo.mySchedule"/>
 		<typeAlias alias="myProject" type="PMS.vo.myProject"/>
 		<typeAlias alias="Project" type="PMS.vo.Project"/>
+		<typeAlias alias="DeptBudget" type="PMS.vo.DeptBudget"/>
+		<typeAlias alias="DeptCnt" type="PMS.vo.getDeptCnt"/>
 		<typeAlias alias="ProjectScheduleJoin" type="PMS.vo.ProjectScheduleJoin"/>
 		<typeAlias alias="prjParticipant" type="PMS.vo.PrjParticipant"/>
 		<typeAlias alias="Schedule" type="PMS.vo.Schedule"/>

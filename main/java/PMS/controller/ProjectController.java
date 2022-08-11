@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import PMS.service.ProjectService;
 import PMS.vo.PrjParticipant;
 import PMS.vo.Project;
+import oracle.net.aso.d;
 
 @Controller
 public class ProjectController {
@@ -24,6 +25,8 @@ public class ProjectController {
     	HttpSession session = request.getSession();
     	String userno = (String)session.getAttribute("userno");
     	String auth = (String)session.getAttribute("auth");
+    	d.addAttribute("plist", service.showAllProject());
+    	d.addAttribute("slist", service.showAllSchedule());
     	d.addAttribute("myPlist", service.showMyProject(userno));
     	d.addAttribute("mySlist", service.showMySchedule(userno));
     	d.addAttribute("pmSlist", service.managingSchedule(userno));
@@ -48,5 +51,19 @@ public class ProjectController {
     	service.addPrjParticipant(pp);
     	d.addAttribute("isAddPrj", "Y");
     	return "WEB-INF/views/EntireDashBoard.jsp";
+    }
+    
+    // 부서별 예산
+    @RequestMapping("getDeptBudget.do")
+    public String getDeptBudget(Model d) {
+    	d.addAttribute("deptbudget", service.getDeptBudget());
+    	return "pageJsonReport";
+    }
+    
+    // 부서별 프로젝트 갯수
+    @RequestMapping("getDeptCnt.do")
+    public String getDeptCnt(Model d) {
+    	d.addAttribute("deptcnt", service.getDeptCnt());
+    	return "pageJsonReport";
     }
 }

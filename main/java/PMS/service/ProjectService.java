@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import PMS.dao.ProjectDao;
+import PMS.vo.DeptBudget;
 import PMS.vo.PrjParticipant;
 import PMS.vo.Project;
 import PMS.vo.ProjectScheduleJoin;
+import PMS.vo.getDeptCnt;
 import PMS.vo.myProject;
 import PMS.vo.mySchedule;
 
@@ -19,8 +21,13 @@ public class ProjectService {
 	private ProjectDao dao;
 	
 	// 전체 프로젝트 표시
-	public List<Project> showAllProject(Map map){
-		return dao.showAllProject(map);
+	public List<Project> showAllProject(){
+		return dao.showAllProject();
+	}
+	
+	// 전체 일정 표시
+	public List<mySchedule> showAllSchedule(){
+		return dao.showAllSchedule();
 	}
 	
 	// 내 프로젝트 보기
@@ -51,5 +58,15 @@ public class ProjectService {
 	// 방금 생성된 프로젝트 번호 추출
 	public int getMaxPno(String pmno) {
 		return dao.getMaxPno(pmno);
+	}
+	
+	// 부서별 예산
+	public List<DeptBudget> getDeptBudget(){
+		return dao.getDeptBudget();
+	}
+	
+	// 부서별 프로젝트 갯수
+	public List<getDeptCnt> getDeptCnt(){
+		return dao.getDeptCnt();
 	}
 }

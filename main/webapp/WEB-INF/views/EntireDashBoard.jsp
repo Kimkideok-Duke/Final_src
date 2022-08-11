@@ -67,9 +67,202 @@
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
-      <div class="row">
+    	<div class="row">
+    	<c:if test="${auth eq 'admin'}">
+	       <div class="col-lg-4">
+	       	 <div class="card">
+	            <div class="card-body">
+	              <h5 class="card-title">부서별 예산</h5>
+	
+	              <!-- Donut Chart -->
+	              <div class="budgetChart" id="donutChart"></div>
+	
+	              <script>
+					
+					var deptbudget = []
+					var dept = []
+					$.ajax({
+						url:"${path}/getDeptBudget.do",
+						dataType:"json",
+						success:function(data){
+							var data = data.deptbudget
+							$(data).each(function(idx, d){
+								deptbudget.push(Number(d.deptbudget))
+								dept.push(d.dept)
+							})
+						}
+					})
+	                document.addEventListener("DOMContentLoaded", () => {
+	                  new ApexCharts(document.querySelector(".budgetChart"), {
+	                    series: deptbudget,
+	                    chart: {
+	                      height: 250,
+	                      type: 'donut',
+	                      toolbar: {
+	                        show: true
+	                      }
+	                    },
+	                    labels: dept,
+	                  }).render();
+	                });
+	              </script>
+	              <!-- End Donut Chart -->
+	
+	            </div>
+	          </div>
+            </div>
+            
+            <div class="col-lg-4">
+	          <div class="card">
+	            <div class="card-body">
+	              <h5 class="card-title">부서별 프로젝트 수</h5>
+	
+	              <!-- Bar Chart -->
+	              <canvas id="barChart" style="max-height: 183px;"></canvas>
+	              <script>
+	              	var deptcnt = []
+					var cntdept = []
+					$.ajax({
+						url:"${path}/getDeptCnt.do",
+						dataType:"json",
+						success:function(data){
+							var data = data.deptcnt
+							$(data).each(function(idx, d){
+								deptcnt.push(Number(d.deptcnt))
+								cntdept.push(d.dept)
+							})
+						}
+					})
+	                document.addEventListener("DOMContentLoaded", () => {
+	                  new Chart(document.querySelector('#barChart'), {
+	                    type: 'bar',
+	                    data: {
+	                      labels: cntdept,
+	                      datasets: [{
+	                        label: 'Bar Chart',
+	                        data: deptcnt,
+	                        backgroundColor: [
+	                          'rgba(255, 99, 132, 0.2)',
+	                          'rgba(255, 159, 64, 0.2)',
+	                          'rgba(255, 205, 86, 0.2)',
+	                          'rgba(75, 192, 192, 0.2)',
+	                          'rgba(54, 162, 235, 0.2)',
+	                          'rgba(153, 102, 255, 0.2)',
+	                          'rgba(201, 203, 207, 0.2)'
+	                        ],
+	                        borderColor: [
+	                          'rgb(255, 99, 132)',
+	                          'rgb(255, 159, 64)',
+	                          'rgb(255, 205, 86)',
+	                          'rgb(75, 192, 192)',
+	                          'rgb(54, 162, 235)',
+	                          'rgb(153, 102, 255)',
+	                          'rgb(201, 203, 207)'
+	                        ],
+	                        borderWidth: 1
+	                      }]
+	                    },
+	                    options: {
+	                      scales: {
+	                        y: {
+	                          beginAtZero: true
+	                        }
+	                      }
+	                    }
+	                  });
+	                });
+	              </script>
+	              <!-- End Bar CHart -->
+	
+	            </div>
+	          </div>
+        	</div>
+		       <div class="col-lg-4">
+		       	 <div class="card">
+		            <div class="card-body">
+		              <h5 class="card-title">인원 현황 차트</h5>
+		
+		              <!-- Donut Chart -->
+		              <div class="memberChart" id="donutChart"></div>
+		
+		              <script>
+						
+						var count = []
+						var deptmem = []
+						$.ajax({
+							url:"${path}/deptCnt.do",
+							dataType:"json",
+							success:function(data){
+								var data = data.deptCnt
+								$(data).each(function(idx, d){
+									count.push(Number(d.count))
+									deptmem.push(d.dept)
+								})
+							}
+						})
+		                document.addEventListener("DOMContentLoaded", () => {
+		                  new ApexCharts(document.querySelector(".memberChart"), {
+		                    series: count,
+		                    chart: {
+		                      height: 250,
+		                      type: 'donut',
+		                      toolbar: {
+		                        show: true
+		                      }
+		                    },
+		                    labels: deptmem,
+		                  }).render();
+		                });
+		              </script>
+		              <!-- End Donut Chart -->
+		
+		            </div>
+		          </div>
+	            </div> 
+            </c:if>
+    	<c:if test="${auth eq 'admin'}">
+      		<div class="col-lg-12">
+      		<div class="card recent-sales overflow-auto">
+	      		<div class="card-body">
+	      		<h5 class="card-title">전체 프로젝트 목록</h5>
+	      		<table class="table table-borderless datatable" >
+                    <thead>
+                      <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col">프로젝트명</th>
+                        <th scope="col">부서</th>
+                        <th scope="col">담당자</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <c:if test="${not empty plist}">
+                    <%int cnt=1; %>
+                    <c:forEach var="p" items="${plist}">
+                      <tr ondblclick="goMain(${p.pno})">
+                        <th scope="row"><%=cnt++ %></th>
+                        <td>${p.title}</td>
+                        <td>${p.dept}</td>
+                        <td>${p.name}</td>
+                      </tr>
+                      </c:forEach>
+                    </c:if>
+                    </tbody>
+                  </table>
+                  </div>
+              </div>
+            </div>
+      	</c:if>
+      	<c:if test="${auth ne 'admin'}">
+      	<c:if test="${auth eq 'pm'}">
+      	<div class="col-lg-12">
+      	</c:if>
+      	<c:if test="${auth eq 'user'}">
+      	<div class="col-lg-12">
+      	</c:if>
+      	<c:if test="${auth eq 'um'}">
+      	<div class="col-lg-12">
+      	</c:if>
               <div class="card info-card customers-card">
-
                 <div class="card-body">
                   <c:if test="${auth eq 'user'}">
                   <h5 class="card-title">내 프로젝트 목록</h5>
@@ -88,7 +281,12 @@
                     		<small>${myP.dept}</small>
 			              </div>
 			              <div class="progress">
+			              	<c:if test="${not empty myP.progAvg}">
 			                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: ${myP.progAvg}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myP.progAvg}%</div>
+		              	  	</c:if>
+		              	  	<c:if test="${empty myP.progAvg}">
+			                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 0%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">0%</div>
+		              	  	</c:if>
 		              	  </div>
 		              	</a>
 	              	</div>
@@ -110,6 +308,7 @@
 	              </c:if>
                 </div>
               </div>
+            </c:if>
               
               
 	     <div class="modal fade" id="verticalycentered" tabindex="-1">
@@ -140,10 +339,10 @@
 	                <div class="col-sm-4">
 	                  <div class="form-floating mb-3">
 	                    <select name="dept" class="form-select" id="floatingDept" aria-label="Dept">
-	                      <option value="개발">개발</option>
+	                      <option value="개발부">개발</option>
 	                      <option value="본부">본부</option>
-	                      <option value="영업">영업</option>
-	                      <option value="인사">인사</option>
+	                      <option value="영업부">영업</option>
+	                      <option value="인사부">인사</option>
 	                    </select>
 	                    <label for="floatingDept">부서</label>
 	                  </div>
@@ -151,13 +350,58 @@
 	                <div class="text-center">
 	                  <button type="submit" class="btn btn-primary">신규 프로젝트 등록</button>
 	                </div>
-	              </form>			  
-	           </div>
-	         </div>
-	       </div>
-	     </div>
-         
-        
+	              </form>
+	              			  
+	           	</div>
+	          </div>
+	       	</div>
+	       
+         </div>
+         <%-- <c:if test="${auth eq 'admin'}">
+	       <div class="col-lg-5">
+	       	 <div class="card">
+	            <div class="card-body">
+	              <h5 class="card-title">인원 현황 차트</h5>
+	
+	              <!-- Donut Chart -->
+	              <div id="donutChart"></div>
+	
+	              <script>
+					
+					var count = []
+					var dept = []
+					$.ajax({
+						url:"${path}/deptCnt.do",
+						dataType:"json",
+						success:function(data){
+							var data = data.deptCnt
+							$(data).each(function(idx, d){
+								count.push(Number(d.count))
+								dept.push(d.dept)
+							})
+						}
+					})
+	                document.addEventListener("DOMContentLoaded", () => {
+	                  new ApexCharts(document.querySelector("#donutChart"), {
+	                    series: count,
+	                    chart: {
+	                      height: 250,
+	                      type: 'donut',
+	                      toolbar: {
+	                        show: true
+	                      }
+	                    },
+	                    labels: dept,
+	                  }).render();
+	                });
+	              </script>
+	              <!-- End Donut Chart -->
+	
+	            </div>
+	          </div>
+            </div> 
+            </c:if> --%>
+          </div>
 		<script>
 			$(document).ready(function(){
 				
@@ -169,6 +413,9 @@
 
 				
                 <div class="card-body">
+               	  <c:if test="${auth eq 'admin'}">
+                  <h5 class="card-title">전체 업무 목록</h5>
+                  </c:if>
                   <c:if test="${auth eq 'user'}">
                   <h5 class="card-title">내 업무목록</h5>
                   </c:if>
@@ -184,9 +431,47 @@
                         <th scope="col">상태</th>
                         <th scope="col">마감일</th>
                         <th scope="col">진행도</th>
+                        <c:if test="${auth eq 'admin'}">
+                        <th scope="col">부서</th>
+                        </c:if>
                       </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${auth eq 'admin'}">
+                    <c:if test="${not empty slist}">
+                    <%int cnt=1; %>
+                    <c:forEach var="s" items="${slist}">
+                      <tr ondblclick="goMain(${s.pno})">
+                        <th scope="row"><%=cnt++ %></th>
+                        <td>${s.title}</td>
+                        <td>${s.sname}</td>
+                        <td>
+                        <c:if test="${s.status eq '진행중'}">
+                        	<span class="badge bg-primary">${s.status}</span>
+                        </c:if>
+                        <c:if test="${s.status eq '완료'}">
+                        	<span class="badge bg-success">${s.status}</span>
+                        </c:if>
+                        <c:if test="${s.status eq '막힘'}">
+                        	<span class="badge bg-danger">${s.status}</span>
+                        </c:if>
+                        </td>
+                        <td><fmt:formatDate value="${s.startDate}" pattern="yyyy-MM-dd"/></td>
+                        <td>
+	                        <div class="progress">
+		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${s.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+		              		</div>
+	              		</td>
+	              		<td>${s.dept}</td>
+                      </tr>
+                      </c:forEach>
+                    </c:if>
+                    <c:if test="${empty slist}">
+                    	<tr><td></td><td></td><td align="center">업무 목록이 없습니다.</td></tr>
+                    </c:if>
+                    </c:if>
+                    
+                    
                     <c:if test="${auth eq 'user'}">
                     <c:if test="${not empty mySlist}">
                     <%int cnt=1; %>
@@ -260,9 +545,9 @@
 				}
 				</script>
                 </div>
-
-              </div>
+			  </div>
             </div>
+            
     </section>
 
   </main><!-- End #main -->

@@ -5,10 +5,21 @@ public class Project {
 	private String title;
 	private String dept;
 	private String pmno;
+	private String name;
 	public Project() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Project(int pno, String title, String dept, String pmno, String name) {
+		super();
+		this.pno = pno;
+		this.title = title;
+		this.dept = dept;
+		this.pmno = pmno;
+		this.name = name;
+	}
+
 	public Project(int pno, String title, String dept, String pmno) {
 		super();
 		this.pno = pno;
@@ -45,6 +56,14 @@ public class Project {
 	}
 	public void setPmno(String pmno) {
 		this.pmno = pmno;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

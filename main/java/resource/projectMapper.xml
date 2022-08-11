@@ -5,24 +5,27 @@
 <mapper namespace="PMS.dao.ProjectDao">
 	
 	<!-- 전체 프로젝트 보기 -->
-	<select id="showAllProject" resultType="Project" parameterType="hashMap">
-		SELECT * FROM PROJECT
-		where 1=1
-		<if test="title != null">
-		and title like '%'||#{title}||'%'
-		</if>
-		<if test="dept != null">
-		and dept like '%'||#{dept}||'%'			
-		</if>
+	<select id="showAllProject" resultType="Project">
+		SELECT p.*, a.NAME
+		FROM PROJECT p, PRJPARTICIPANT pp, ACCOUNT a
+		WHERE p.PNO = pp.PNO AND p.PMNO = a.USERNO
+	</select>
+	
+	<!-- 전체 일정 보기 -->
+	<select id="showAllSchedule" resultType="mySchedule">
+		SELECT p.TITLE, p.DEPT, s.*
+		FROM PROJECT p, SCHEDULE s
+		WHERE p.PNO = s.PNO
 	</select>
 	
 	<!-- 내 프로젝트 보기 -->
 	<select id="showMyProject" resultType="myProject" parameterType="string">
 		SELECT p.*, AVG(progress) progAvg
 		FROM PROJECT p, PRJPARTICIPANT pp, SCHEDULE s
-		WHERE p.PNO = pp.PNO AND p.PNO = s.PNO
+		WHERE p.PNO = pp.PNO AND p.PNO = s.PNO(+)
 		AND pp.USERNO = #{userno}
 		GROUP BY p.PNO, p.TITLE, p.DEPT, p.PMNO
+		ORDER BY p.pno desc
 	</select>
 	
 	<!-- 관리하는 모든 일정리스트(pm) -->
@@ -64,6 +67,21 @@
 		FROM SCHEDULE
 		WHERE pno = #{pno}
 		ORDER BY s.SNO
+	</select>
+	
+	<!-- 부서별 예산 -->
+	<select id="getDeptBudget" resultType="DeptBudget">
+		SELECT p.DEPT, SUM(s.BUDGET) deptbudget
+		FROM PROJECT p, SCHEDULE s
+		WHERE p.PNO = s.PNO(+)
+		GROUP BY p.DEPT
+	</select>
+	
+	<!-- 부서별 프로젝트 갯수 -->
+	<select id="getDeptCnt" resultType="DeptCnt">
+		SELECT DEPT, count(*) deptcnt
+		FROM PROJECT
+		GROUP BY DEPT
 	</select>
 </mapper>
 

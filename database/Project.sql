@@ -29,6 +29,17 @@ INSERT INTO PROJECT values(seq_pno.nextval, #{title}, #{dept}, #{userno});
 SELECT max(pno) FROM PROJECT
 WHERE PMNO = 'E10000004'
 ORDER BY PNO
+
+부서별 프로젝트 갯수
+SELECT DEPT, count(*) deptcnt
+FROM PROJECT
+GROUP BY DEPT
+
+부서별 예산
+SELECT p.DEPT, SUM(s.BUDGET) deptbudget
+FROM PROJECT p, SCHEDULE s
+WHERE p.PNO = s.PNO(+)
+GROUP BY p.DEPT
 */
 SELECT * FROM PROJECT
 ORDER BY PNO;
@@ -39,9 +50,29 @@ ORDER BY PNO;
 
 SELECT p.*, AVG(progress) progAvg
 FROM PROJECT p, PRJPARTICIPANT pp, SCHEDULE s
-WHERE p.PNO = pp.PNO AND p.PNO = s.PNO
+WHERE p.PNO = pp.PNO AND p.PNO = s.PNO(+)
 AND pp.USERNO = 'E10000004'
-GROUP BY p.PNO, p.TITLE, p.DEPT, p.PMNO;
+GROUP BY p.PNO, p.TITLE, p.DEPT, p.PMNO
+ORDER BY p.pno desc;
+
+SELECT p.*, a.NAME
+FROM PROJECT p, PRJPARTICIPANT pp, ACCOUNT a
+WHERE p.PNO = pp.PNO AND p.PMNO = a.USERNO;
+
+SELECT DEPT, count(*)
+FROM PROJECT
+GROUP BY DEPT;
+
+SELECT p.DEPT, SUM(s.BUDGET) deptbudget
+FROM PROJECT p, SCHEDULE s
+WHERE p.PNO = s.PNO(+)
+GROUP BY p.DEPT; 
+
+
+
+
+
+
 
 
 
@@ -87,6 +118,17 @@ FROM PROJECT p, SCHEDULE s
 WHERE p.PNO = s.PNO
 AND p.PMNO = 'E10000004';
 
+SELECT p.DEPT, count(*) 
+FROM PROJECT p, SCHEDULE s
+WHERE p.PNO = s.PNO
+AND p.PMNO = 'E10000004'
+GROUP BY p.DEPT;
+
+SELECT p.TITLE, p.DEPT, s.*
+FROM PROJECT p, SCHEDULE s
+WHERE p.PNO = s.PNO;
+
+
 /*
 프로젝트 별 일정 리스트 
 SELECT *
@@ -98,6 +140,11 @@ SELECT p.TITLE, p.DEPT, p.PMNO, s.*
 FROM PROJECT p, SCHEDULE s
 WHERE p.PNO = s.PNO
 AND p.PMNO = #{pmno}
+
+모든 일정 보기
+SELECT p.TITLE, p.DEPT, s.*
+FROM PROJECT p, SCHEDULE s
+WHERE p.PNO = s.PNO
 */
 
 
@@ -135,7 +182,7 @@ INSERT INTO PRJPARTICIPANT values(#{userno}, #{pno})
 내 프로젝트 보기
 SELECT p.*, AVG(progress) 
 FROM PROJECT p, PRJPARTICIPANT pp, SCHEDULE s
-WHERE p.PNO = pp.PNO AND p.PNO = s.PNO
+WHERE p.PNO = pp.PNO AND p.PNO = s.PNO(+)
 AND pp.USERNO = #{userno}
 GROUP BY p.PNO, p.TITLE, p.DEPT, p.PMNO
  */
