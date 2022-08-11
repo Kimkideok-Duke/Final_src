@@ -61,6 +61,12 @@
 	<bean id="pageJsonReport" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<property name="contentType" value="text/html;charset=utf-8"/>
 	</bean>
+	<!-- 파일업로드 뷰 --> 
+	<bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>	
+	<!-- 다운로드 뷰 -->
+	<bean id="downloadViewer" class="PMS.util.DownloadViewer"></bean> 
+	
 	<!-- # 메일 발송 모듈 선언 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com"/>
@@ -81,10 +87,4 @@
 			</props>
 		</property>
 	</bean>
-	
-	<!-- 파일업로드 뷰 --> 
-	<bean id="multipartResolver" 
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>	
-	<!-- 다운로드 뷰 -->
-	<bean id="downloadViewer" class="PMS.util.DownloadViewer"></bean> 
 </beans>
