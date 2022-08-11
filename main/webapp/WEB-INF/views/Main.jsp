@@ -143,7 +143,7 @@
 				<td>${schedule.startDate}</td>
 				<td>${schedule.endDate}</td>
 				<td>${schedule.budget}원</td>
-				<td><img src="a00_com/images/comment.png" width="30" height="30"/></td>
+				<td><img src="a00_com/images/comment.png" width="30" height="30" onclick="goComment(${schedule.sno})"/></td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -402,6 +402,10 @@
 <script type="text/javascript">
 function goSchedule(){
 	location.href="${path}/goSchedule.do"
+}
+
+function goComment(){
+	location.href="${path}/commentList.do"
 }
 </script>
 

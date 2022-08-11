@@ -6,34 +6,34 @@
 
 	<!-- commentList -->
 	<select id="commentList" resultType="comment">
-		SELECT * FROM smcomment
+		SELECT * FROM comment_tb
 		ORDER BY regdte desc
 	</select>
 
 	<!-- comment 등록 -->
 	<insert id="insertComment" parameterType="comment">
-		insert into smcomment
+		insert into comment_tb
 		values(seq_comm.nextval,1,
 		2,#{content},sysdate,sysdate)
 	</insert>
 	
 	<!-- comment 첨부파일 등록 -->
 	<insert id="insertFile" parameterType="commentfile">
-		insert into smFile values(seq_comm.currval,
+		insert into File_tb values(seq_comm.currval,
 		#{fpath}, #{fname}, '')
 	</insert>
 
 	<!-- comment Detail -->
 	<select id="getDetail" parameterType="int" resultType="comment">
 		SELECT s.*, f.fname 
-		FROM SMCOMMENT s , smFile f
+		FROM comment_tb c , File_tb f
 		WHERE s.CNO =f.CNO(+)
 		and s.cno = #{cno}
 	</select>
 
     <!-- comment 수정 -->
 	<update id="updateComment" parameterType="comment">
-		update SMCOMMENT
+		update comment_tb
 		set
 		content = #{content},
 		updte = sysdate
@@ -43,7 +43,7 @@
 	<!-- comment 삭제 -->
 	<delete id="deleteComment" parameterType="int">
 		delete
-		from smcomment
+		from comment_tb
 		where rno = #{rno}
 	</delete>
 
