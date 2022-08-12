@@ -404,8 +404,10 @@ function goSchedule(){
 	location.href="${path}/goSchedule.do"
 }
 
-function goComment(){
-	location.href="${path}/commentList.do"
+
+function goComment(sno){
+	location.href="${path}/commentList.do?sno="+sno;
+	
 }
 </script>
 
