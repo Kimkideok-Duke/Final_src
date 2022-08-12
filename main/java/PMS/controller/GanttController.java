@@ -14,6 +14,6 @@ public class GanttController {
 	// http://localhost:7080/PMS/goGnatt.do
 	@RequestMapping("goGnatt.do")
 	public String goGnatt() {
-		return "WEB-INF\\views\\gantt.jsp";
+		return "WEB-INF/views/gantt_googleTest.jsp";
 	}
 }
