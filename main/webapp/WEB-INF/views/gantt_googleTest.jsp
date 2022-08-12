@@ -71,26 +71,71 @@
   ======================================================== -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	var task = new Vue({
-		el:".gantt-target",
-		data:{start:"",end:"",name:"",progress:"",
-			ganttList:[] // 검색된 리스트데이터
-		}
-	});	
-
 	function SetValue(this){
 	range_val.value = this.value;
 	}
-	var tasks = [
-		{
-			start: {{gantt.start}},
-			end: {{gantt.end}},
-			name: {{gantt.name}},
-			progress:{{gantt.progress}}
-		}
-	]
+	$("#frm01 [name=title]").val(event.title)
+	$("#frm01 [name=startdate]").val(event.startdate)
+	$("#frm01 [name=enddate]").val(event.enddate)
+	$("#frm01 [name=progress]").val(event.progress)
 </script>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['gantt']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Task ID');
+      data.addColumn('string', 'Task Name');
+      data.addColumn('date', 'Start Date');
+      data.addColumn('date', 'End Date');
+      data.addColumn('number', 'Duration');
+      data.addColumn('number', 'Percent Complete');
+      data.addColumn('string', 'Dependencies');
+
+      data.addRows([
+        ['2014Spring', 'Spring 2014',
+         new Date(2014, 2, 22), new Date(2014, 5, 20), null, 100, null],
+        ['2014Summer', 'Summer 2014',
+         new Date(2014, 5, 21), new Date(2014, 8, 20), null, 100, null],
+        ['2014Autumn', 'Autumn 2014',
+         new Date(2014, 8, 21), new Date(2014, 11, 20), null, 100, null],
+        ['2014Winter', 'Winter 2014',
+         new Date(2014, 11, 21), new Date(2015, 2, 21), null, 100, null],
+        ['2015Spring', 'Spring 2015',
+         new Date(2015, 2, 22), new Date(2015, 5, 20), null, 50, null],
+        ['2015Summer', 'Summer 2015',
+         new Date(2015, 5, 21), new Date(2015, 8, 20), null, 0, null],
+        ['2015Autumn', 'Autumn 2015',
+         new Date(2015, 8, 21), new Date(2015, 11, 20), null, 0, null],
+        ['2015Winter', 'Winter 2015',
+         new Date(2015, 11, 21), new Date(2016, 2, 21), null, 0, null],
+        ['Football', 'Football Season',
+         new Date(2014, 8, 4), new Date(2015, 1, 1), null, 100, null],
+        ['Baseball', 'Baseball Season',
+         new Date(2015, 2, 31), new Date(2015, 9, 20), null, 14, null],
+        ['Basketball', 'Basketball Season',
+         new Date(2014, 9, 28), new Date(2015, 5, 20), null, 86, null],
+        ['Hockey', 'Hockey Season',
+         new Date(2014, 9, 8), new Date(2015, 5, 21), null, 89, null]
+      ]);
+
+      var options = {
+        height: 400,
+        gantt: {
+          trackHeight: 30
+        }
+      };
+
+      var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+  </script>
 
 </head>
 <body>
@@ -123,14 +168,12 @@ $(document).ready(function(){
                     </div>
                     <div class="modal-body">
 			      	  <div class="box">일정명 <input type="text" name="title" class="form-control"style="width:300px"></div>
-			      	  <div class="box">시작일 <input type="date" name="startDate" class="form-control" style="width:300px"></div>
-			      	  <div class="box">마감일 <input type="date" name="endDate" class="form-control" style="width:300px"></div>
-			      	  <div class="box">예산 <input type="text" name="budget" class="form-control" style="width:300px"></div>			      	  <div class="box_1">
-			      	  <!--
+			      	  <div class="box">시작일 <input type="date" name="startdate" class="form-control" style="width:300px"></div>
+			      	  <div class="box">마감일 <input type="date" name="enddate" class="form-control" style="width:300px"></div><br>
+			      	  <div class="box_1">
 			      	   진행도 <input type="range" name="progress" class="form-range" id="customRange1" value="0" min="0" max="100" style="width:220px"
 			      	   oninput="document.getElementById('value1').innerHTML=this.value;">
 			      	   <span id="value1">0</span>%
-			      	    -->
                      </div>
                     <div class="modal-footer">
                      <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" style="margin:auto; display:block;">등록</button>
@@ -140,68 +183,9 @@ $(document).ready(function(){
               </div><!-- End Basic Modal-->
       	  </div>
     	</div>
-    	<div class="chart-controls">
-		    <p>Change Chart Timescale</p>
-		    <div class="button-cont">
-		        <button id="day-btn">
-		            Day
-		        </button>
-		
-		        <button id="week-btn">
-		            Week
-		        </button>
-		
-		        <button id="month-btn">
-		            Month
-		        </button>
-		    </div>
-		</div>
-	<script>
-document.querySelector(".chart-controls #day-btn").addEventListener("click", () => {
-    ganttChart.change_view_mode("Day");
-})
-document.querySelector(".chart-controls #week-btn").addEventListener("click", () => {
-    ganttChart.change_view_mode("Week");
-})
-document.querySelector(".chart-controls #month-btn").addEventListener("click", () => {
-    ganttChart.change_view_mode("Month");
-})	
-var gantt_chart = new Gantt(".gantt-target", tasks, {
-	on_click: function (task) {
-		console.log(task);
-	},
-	on_date_change: function(task, start, end) {
-		console.log(task, start, end);
-	},
-	on_progress_change: function(task, progress) {
-		console.log(task, progress);
-	},
-	on_view_change: function(mode) {
-		console.log(mode);
-	},
-	view_mode: 'Day',
-	language: 'en'
-});
-var gantt = new Gantt('#gantt', tasks, {
-	// can be a function that returns html
-	// or a simple html string
-	custom_popup_html: function(task) {
-	  // the task object will contain the updated
-	  // dates and progress value
-	  const end_date = task._end.format('MMM D');
-	  return `
-		<div class="details-container">
-		  <h5>${task.name}</h5>
-		  <p>Expected to finish by ${end_date}</p>
-		  <p>${task.progress}% completed!</p>
-		</div>
-	  `;
-	}
-});	
-	gantt.change_view_mode('Week')
-console.log(gantt_chart);
-	</script>
-
+    	<div class="card">
+	<div id="chart_div"></div>
+	</div>
 </main>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

@@ -121,6 +121,17 @@
 		DELETE FROM account
 		WHERE userno = #{userno}
 	</delete>
+	<insert id="insProfileImg" parameterType="accountp">
+		INSERT INTO profile values(#{userno}, #{path}, #{fname})
+	</insert>
+	<delete id="delProfileImg" parameterType="string">
+		DELETE FROM profile WHERE userno = #{userno}
+	</delete>
+	<select id="checkProfileImg" resultType="string" parameterType="string">
+		SELECT count(*)
+		FROM PROFILE
+		WHERE userno = #{userno}
+	</select>
 </mapper>
 
 

@@ -167,7 +167,7 @@
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
-	<% if(!((String)session.getAttribute("auth")).equals("user")){ %>
+	<% if(!((String)session.getAttribute("auth")).equals("user")&&!((String)session.getAttribute("auth")).equals("pm")){ %>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#admin-nav" data-bs-toggle="collapse"  href="#">
           <i class="bi bi-person-check"></i>
@@ -181,13 +181,13 @@
             </a>
           </li>
           <%} %>
-          <%if(!((String)session.getAttribute("auth")).equals("um")){ %>
+          <%-- <%if(!((String)session.getAttribute("auth")).equals("um")){ %>
           <li>
             <a href="${path}/goAdminPage.do">
               <i class="bi bi-circle"></i><span>Project Management</span>
             </a>
           </li>
-          <%} %>
+          <%} %> --%>
         </ul>
       </li><%}%><!-- End 관리자페이지 Page Nav -->
 

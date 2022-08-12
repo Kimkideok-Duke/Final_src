@@ -34,13 +34,15 @@
 	function goMain(){
 		location.href="${path}/Main.do"
 	}
-	
+	function goScheduleManage(sno){
+		location.href="${path}/goScheduleManage.do?sno="+sno
+	}
 
 </script>
 </head>
 
 <body>
-<h2>일정 관리</h2>
+<h2>일정 목록</h2>
       <div class="col-12">
         <div class="card recent-sales overflow-auto">
 
@@ -69,14 +71,13 @@
 				<th scope="col">진행도</th>
 				<th scope="col">시작일</th>
 				<th scope="col">마감일</th>
-				<th scope="col">예산</th>
+				<th scope="col">예산</th>	
                 </tr>
 			</thead>
 			<tbody>
-				<% int no = 1; %>
 				<c:forEach var="schedule" items="${slist}">
-				<tr data-bs-toggle="modal" data-bs-target="#basicModal">
-				<th scope="row"><%=no++ %></th>
+				<tr ondblclick="goScheduleManage(${schedule.sno})">
+				<th scope="row">${schedule.sno}</th>
 				<td>${schedule.sname}</td>
 				<td>${schedule.status}</td>
 				<td>${schedule.progress}</td>
@@ -92,51 +93,89 @@
 </div>
 
 <!-- Basic Modal -->
+<!--
 <div class="modal fade" id="basicModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Basic Modal</h5>
+        <h5 class="modal-title">일정 수정</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input type="text" value="">
-        모달 내용
-      </div>
+  		<form id="uptSchedule" class="row g-3 needs-validation" novalidate>
+             <div class="row mb-3">
+               <label for="inputText" class="col-sm-2 col-form-label">일정명</label>
+               <div class="col-sm-10">
+                 <input type="text" id="sname" name="sname" class="form-control" value="">
+               </div>
+             </div>
+             <div class="row mb-3">
+               <label for="inputText" class="col-sm-2 col-form-label">상태</label>
+               <div class="col-sm-10">
+                 <input type="text" id="status" name="status" class="form-control" value="" >
+               </div>
+             </div>
+             <div class="row mb-3">
+               <label for="inputText" class="col-sm-2 col-form-label">진행도</label>
+               <div class="col-sm-10">
+                 <input type="text" id="progress" name="progress" class="form-control" value="" >
+               </div>
+             </div>
+			<div class="row mb-3">
+               <label for="inputText" class="col-sm-2 col-form-label">시작일</label>
+               <div class="col-sm-10">
+                 <input type="text" id="startDate" name="startDate" class="form-control" value="" >
+               </div>
+             </div>
+             <div class="row mb-3">
+               <label for="inputText" class="col-sm-2 col-form-label">마감일</label>
+               <div class="col-sm-10">
+                 <input type="text" id="endDate" name="endDate" class="form-control" value="" >
+               </div>
+             </div>
+             <div class="row mb-3">
+               <label for="inputText" class="col-sm-2 col-form-label">예산</label>
+               <div class="col-sm-10">
+                 <input type="text" id="budget" name="budget" class="form-control" value="" >
+               </div>
+             </div>
+             	<button type="button" id="uptBtn" class="btn btn-primary">수정</button>
+              </form>
+           </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
         <button type="button" class="btn btn-primary">저장</button>
       </div>
     </div>
   </div>
-</div><!-- End Basic Modal-->
+</div>
+-->
+<!-- End Basic Modal-->
 
 <script type="text/javascript">
-function uptModal(){
+<%--
+$("#basicModal").click(function(){
+	var sno = $("#sno").val()
+	$.ajax({
+		url:"${path}/scheduleModal.do",
+		data:"sno="sno,
+		dataType:"json",
+		success:function(data){
+			console.log(data)
+			var schedule = data.schedule
+			$('input[name=sname]').attr('value',schedule.sname);
+			$('input[name=status]').attr('value',schedule.status);
+			$('input[name=progress]').attr('value',schedule.progress);
+			$('input[name=startDate]').attr('value',schedule.startDate);
+			$('input[name=endDate]').attr('value',schedule.endDate);
+			$('input[name=budget]').attr('value',schedule.budget);
+			$("#sno").html(addHTML);
+		}
+	});
 	
-}
+});
+--%>
 
-function updateProc(){	
-	if(confirm("수정하시겠습니까?")){
-		$("form").attr("action","${path}/updateSchedule.do");
-		$("form").submit();
-	}
-}
-function deleteProc(){
-	if(confirm("삭제하시겠습니까?")){
-		$("form").attr("action","${path}/deleteSchedule.do");
-		$("form").submit();
-	}
-}
-var proc = "${proc}";
-if(proc=="upt"){
-	alert("수정성공!\n메인화면으로 이동합니다");
-	location.href="${path}/goMain.do";
-}
-if(proc=="del"){
-	alert("삭제성공!\n메인화면으로 이동합니다");
-	location.href="${path}/goMain.do";
-}
 </script>   
   
   <!-- ======= Footer ======= -->

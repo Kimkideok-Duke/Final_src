@@ -3,5 +3,36 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="PMS.dao.GanttDao">
-
+	<resultMap type="gantt" id="ganttResult"> <!-- DB와 VO 네임이 다른것들 같다고 선언 -->
+		<result column="startDate" property="start"/>
+		<result column="endDate" property="end"/>
+		<result column="sname" property="name"/>
+	</resultMap>
+	<select id="getGantt" resultType="gantt" parameterType="int">
+		SELECT *
+		FROM SCHEDULE
+		WHERE pno= #{pno}
+	</select>
+	<select id="detailGantt" resultType="gantt" parameterType="int">
+		SELECT *
+		FROM SCHEDULE
+		WHERE sno= #{sno}
+	</select>
+	<insert id="insertGantt" parameterType="gantt">
+		INSERT INTO SCHEDULE values
+			(seq_sno.nextval, #{pno}, #{name}, '진행중', 0, sysdate, to_date(#{end},'YYYY-MM-DD'), #{budget})
+	</insert>
+	<update id="updateGantt" parameterType="gantt">
+		UPDATE SCHEDULE 
+			SET sname = #{name},
+				status = #{status},
+				startdate = to_date(#{start},'YYYY-MM-DD'),
+				enddate = to_date(#{end},'YYYY-MM-DD'),
+				budget = #{budget}
+		WHERE sno = #{sno}
+	</update>
+	<delete id="deleteGantt" parameterType="int">
+		DELETE FROM SCHEDULE
+		WHERE sno = #{sno}
+	</delete>
 </mapper>

@@ -13,16 +13,26 @@
 		FROM SCHEDULE
 		WHERE pno = #{pno}
 	</select>
-	<insert id="insSchedule" parameterType="schedule">
+	<select id="getSchedule" resultType="schedule" parameterType="int">
+		SELECT *
+		FROM SCHEDULE
+		WHERE sno = #{sno}
+	</select>
+	<insert id="regSchedule" parameterType="schedule">
 		INSERT INTO SCHEDULE
 		values(seq_sno.nextval, #{pno}, #{sname}, #{status}, #{progress}, 
 			to_date(#{startDate_s}, 'YYYY-MM-DD'), to_date(#{endDate_s}, 'YYYY-MM-DD'), #{budget});
 	</insert>
 	<update id="uptSchedule" parameterType="schedule">
 		UPDATE SCHEDULE
-		SET progress = #{progress},
+		SET progress = #{progress}
 		WHERE sno = #{sno}
 	</update>
+	<delete id="delSchedule" parameterType="int">
+		DELETE
+		FROM SCHEDULE
+		WHERE sno = #{sno}
+	</delete>
 	<update id="uptScheduleByPM" parameterType="schedule">
 		UPDATE SCHEDULE 
 		SET sname = #{sname},

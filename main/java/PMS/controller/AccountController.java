@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import PMS.service.AccountService;
 import PMS.service.MailSenderSerivce;
 import PMS.vo.Account;
+import PMS.vo.AccountProfile;
 import PMS.vo.AccountSch;
 
 @Controller
@@ -174,5 +175,25 @@ public class AccountController {
 		service.delAccount(userno);
 		d.addAttribute("proc", "del");
 		return "WEB-INF\\views\\um-page.jsp";
+	}
+	
+	// 마이페이지에서 프로필사진 업로드
+	@RequestMapping("uptPfImg.do")
+	public String uptPfImg(HttpServletRequest request, AccountProfile ins, Model d) {
+		HttpSession session = request.getSession();
+		service.insProfileImg(ins);
+		session.setAttribute("pfImg", ins.getFname());
+		d.addAttribute("proc", "uptImg");
+		return "WEB-INF\\views\\mypage.jsp";
+	}
+	// 마이페이지 프로필사진 삭제
+	@RequestMapping("delPfImg.do")
+	public String delPfImg(HttpServletRequest request, Model d) {
+		HttpSession session = request.getSession();
+		String userno = (String)session.getAttribute("userno");
+		service.delProfileImg(userno);
+		session.removeAttribute("pfImg");
+		d.addAttribute("proc", "delImg");
+		return "WEB-INF\\views\\mypage.jsp";
 	}
 }

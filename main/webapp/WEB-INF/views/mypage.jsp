@@ -111,7 +111,16 @@
 			$("#infoCForm").attr("action","${path}/changeInfoMypage.do")
 			$("#infoCForm").submit()
 		})
-
+		$("#fileUptBtn").click(function(){
+			$("#inputFile").click()
+		})
+		$("#inputFile").change(function(){
+			$("#infoCForm").attr("action","${path}/uptPfImg.do")
+			$("#infoCForm").submit()
+		})
+		$("#fileDelBtn").click(function(){
+			location.href="${path}/delPfImg.do"
+		})
 	});
 	
 
@@ -230,7 +239,7 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form id="infoCForm">
+                  <form id="infoCForm" enctype="multipart/form-data" method="post">
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">프로필 이미지</label>
                       <div class="col-md-8 col-lg-9">
@@ -243,8 +252,9 @@
 							</c:otherwise>
 						</c:choose>
                         <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                        	<input type="file" name="report" id="inputFile" style="display:none" />
+                          <button type="button" class="btn btn-primary btn-sm" id="fileUptBtn" title="Upload new profile image"><i class="bi bi-upload"></i></button>
+                          <button type="button" class="btn btn-danger btn-sm" id="fileDelBtn" title="Remove my profile image"><i class="bi bi-trash"></i></button>
                         </div>
                       </div>
                     </div>
@@ -384,6 +394,14 @@ if("${proc}"!=""){
 	}
 	if("${proc}"=="infoC"){
 		alert("개인정보가 수정되었습니다.")
+		location.href="${path}/goMyPage.do"
+	}
+	if("${proc}"=="uptImg"){
+		alert("프로필 이미지가 업로드되었습니다.")
+		location.href="${path}/goMyPage.do"
+	}
+	if("${proc}"=="delImg"){
+		alert("프로필 이미지가 삭제되었습니다.")
 		location.href="${path}/goMyPage.do"
 	}
 }

@@ -139,7 +139,7 @@
 	                    data: {
 	                      labels: cntdept,
 	                      datasets: [{
-	                        label: 'Bar Chart',
+	                        label: '프로젝트 수',
 	                        data: deptcnt,
 	                        backgroundColor: [
 	                          'rgba(255, 99, 132, 0.2)',
@@ -225,7 +225,7 @@
       		<div class="card recent-sales overflow-auto">
 	      		<div class="card-body">
 	      		<h5 class="card-title">전체 프로젝트 목록</h5>
-	      		<table class="table table-borderless datatable" >
+	      		<table class="table datatable" >
                     <thead>
                       <tr>
                         <th scope="col">번호</th>
@@ -244,10 +244,13 @@
                         <td>${p.dept}</td>
                         <td>${p.name}</td>
                       </tr>
-                      </c:forEach>
+                    </c:forEach>
                     </c:if>
                     </tbody>
                   </table>
+	                  <div class="text-center"> 
+	                  	<button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#verticalycentered">프로젝트 등록</button>
+	                  </div>
                   </div>
               </div>
             </div>
@@ -265,6 +268,9 @@
               <div class="card info-card customers-card">
                 <div class="card-body">
                   <c:if test="${auth eq 'user'}">
+                  <h5 class="card-title">내 프로젝트 목록</h5>
+                  </c:if>
+                  <c:if test="${auth eq 'um'}">
                   <h5 class="card-title">내 프로젝트 목록</h5>
                   </c:if>
                   <c:if test="${auth eq 'pm'}">
@@ -296,11 +302,7 @@
 	              		<h6>참가중인 프로젝트가 없습니다.</h6>
 	              	</c:if>
                   </div>
-                  <c:if test="${auth eq 'admin'}">
-	                  <div class="text-center"> 
-	                  	<button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#verticalycentered">프로젝트 등록</button>
-	                  </div>
-	              </c:if>
+                  
 	              <c:if test="${auth eq 'pm'}">
 	                  <div class="text-center"> 
 	                  	<button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#verticalycentered">프로젝트 등록</button>
@@ -419,10 +421,13 @@
                   <c:if test="${auth eq 'user'}">
                   <h5 class="card-title">내 업무목록</h5>
                   </c:if>
+                  <c:if test="${auth eq 'um'}">
+                  <h5 class="card-title">내 업무목록</h5>
+                  </c:if>
                   <c:if test="${auth eq 'pm'}">
                   <h5 class="card-title">관리 업무목록</h5>
                   </c:if>
-                  <table class="table table-borderless datatable" >
+                  <table class="table datatable" >
                     <thead>
                       <tr>
                         <th scope="col">번호</th>
