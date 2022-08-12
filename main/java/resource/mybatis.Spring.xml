@@ -18,6 +18,7 @@
 		<typeAlias alias="prjParticipant" type="PMS.vo.PrjParticipant"/>
 		<typeAlias alias="Schedule" type="PMS.vo.Schedule"/>
 		<typeAlias alias="Alert" type="PMS.vo.Alert"/>
+		<typeAlias alias="ganttData" type="PMS.vo.GanttData"/>
 		<typeAlias alias="comment" type="PMS.vo.Comment"/>
 		<typeAlias alias="commentfile" type="PMS.vo.CommentFile"/>
 		<typeAlias alias="gantt" type="PMS.vo.Gantt"/>

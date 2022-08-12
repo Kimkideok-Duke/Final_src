@@ -35,4 +35,9 @@
 		DELETE FROM SCHEDULE
 		WHERE sno = #{sno}
 	</delete>
+	<select id="getGanttData" resultType="ganttData" parameterType="int">
+		SELECT SNO, SNAME, STARTDATE, ENDDATE, PROGRESS
+		FROM SCHEDULE
+		WHERE PNO = #{pno}
+	</select>
 </mapper>

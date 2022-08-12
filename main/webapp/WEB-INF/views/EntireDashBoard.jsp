@@ -84,6 +84,7 @@
 					$.ajax({
 						url:"${path}/getDeptBudget.do",
 						dataType:"json",
+						async:false,
 						success:function(data){
 							var data = data.deptbudget
 							$(data).each(function(idx, d){
@@ -125,6 +126,7 @@
 					$.ajax({
 						url:"${path}/getDeptCnt.do",
 						dataType:"json",
+						async:false,
 						success:function(data){
 							var data = data.deptcnt
 							$(data).each(function(idx, d){
@@ -192,6 +194,7 @@
 						$.ajax({
 							url:"${path}/deptCnt.do",
 							dataType:"json",
+							async:false,
 							success:function(data){
 								var data = data.deptCnt
 								$(data).each(function(idx, d){
@@ -257,25 +260,23 @@
       	</c:if>
       	<c:if test="${auth ne 'admin'}">
       	<c:if test="${auth eq 'pm'}">
-      	<div class="col-lg-12">
+      	<div class="col-lg-7">
+      		<div class="card info-card customers-card">
+                <div class="card-body">
+      				<h5 class="card-title">관리 프로젝트 목록</h5>
       	</c:if>
       	<c:if test="${auth eq 'user'}">
       	<div class="col-lg-12">
+      		<div class="card info-card customers-card">
+                <div class="card-body">
+                	<h5 class="card-title">내 프로젝트 목록</h5>
       	</c:if>
       	<c:if test="${auth eq 'um'}">
-      	<div class="col-lg-12">
-      	</c:if>
-              <div class="card info-card customers-card">
+      	<div class="col-lg-7">
+      		<div class="card info-card customers-card">
                 <div class="card-body">
-                  <c:if test="${auth eq 'user'}">
-                  <h5 class="card-title">내 프로젝트 목록</h5>
-                  </c:if>
-                  <c:if test="${auth eq 'um'}">
-                  <h5 class="card-title">내 프로젝트 목록</h5>
-                  </c:if>
-                  <c:if test="${auth eq 'pm'}">
-                  <h5 class="card-title">관리 프로젝트 목록</h5>
-                  </c:if>
+                	<h5 class="card-title">내 프로젝트 목록</h5>
+      	</c:if>
 				<c:if test="${not empty myPlist}">
                   <div class="d-flex align-items-center">
                     </div>
@@ -359,7 +360,7 @@
 	       	</div>
 	       
          </div>
-         <%-- <c:if test="${auth eq 'admin'}">
+         <c:if test="${auth eq 'um'}">
 	       <div class="col-lg-5">
 	       	 <div class="card">
 	            <div class="card-body">
@@ -375,6 +376,7 @@
 					$.ajax({
 						url:"${path}/deptCnt.do",
 						dataType:"json",
+						async:false,
 						success:function(data){
 							var data = data.deptCnt
 							$(data).each(function(idx, d){
@@ -402,7 +404,54 @@
 	            </div>
 	          </div>
             </div> 
-            </c:if> --%>
+            </c:if>
+            
+            
+            <c:if test="${auth eq 'pm'}">
+	       <div class="col-lg-4">
+	       	 <div class="card">
+	            <div class="card-body">
+	              <h5 class="card-title">부서별 예산</h5>
+	
+	              <!-- Donut Chart -->
+	              <div class="budgetChart" id="donutChart"></div>
+	
+	              <script>
+					
+					var deptbudget = []
+					var dept = []
+					$.ajax({
+						url:"${path}/getDeptBudget.do",
+						dataType:"json",
+						async:false,
+						success:function(data){
+							var data = data.deptbudget
+							$(data).each(function(idx, d){
+								deptbudget.push(Number(d.deptbudget))
+								dept.push(d.dept)
+							})
+						}
+					})
+	                document.addEventListener("DOMContentLoaded", () => {
+	                  new ApexCharts(document.querySelector(".budgetChart"), {
+	                    series: deptbudget,
+	                    chart: {
+	                      height: 250,
+	                      type: 'donut',
+	                      toolbar: {
+	                        show: true
+	                      }
+	                    },
+	                    labels: dept,
+	                  }).render();
+	                });
+	              </script>
+	              <!-- End Donut Chart -->
+	
+	            </div>
+	          </div>
+            </div>
+            </c:if>
           </div>
 		<script>
 			$(document).ready(function(){
@@ -472,7 +521,7 @@
                       </c:forEach>
                     </c:if>
                     <c:if test="${empty slist}">
-                    	<tr><td></td><td></td><td align="center">업무 목록이 없습니다.</td></tr>
+						<tr><td colspan="7" align="center">업무 목록이 없습니다.</td></tr>
                     </c:if>
                     </c:if>
                     
@@ -506,7 +555,40 @@
                       </c:forEach>
                     </c:if>
                     <c:if test="${empty mySlist}">
-                    	<tr><td></td><td></td><td align="center">업무 목록이 없습니다.</td></tr>
+						<tr><td colspan="6" align="center">업무 목록이 없습니다.</td></tr>
+                    </c:if>
+                    </c:if>
+                    
+                    <c:if test="${auth eq 'um'}">
+                    <c:if test="${not empty mySlist}">
+                    <%int cnt=1; %>
+                    <c:forEach var="myS" items="${mySlist}">
+                      <tr ondblclick="goMain(${myS.pno})">
+                        <th scope="row"><%=cnt++ %></th>
+                        <td>${myS.title}</td>
+                        <td>${myS.sname}</td>
+                        <td>
+                        <c:if test="${myS.status eq '진행중'}">
+                        	<span class="badge bg-primary">${myS.status}</span>
+                        </c:if>
+                        <c:if test="${myS.status eq '완료'}">
+                        	<span class="badge bg-success">${myS.status}</span>
+                        </c:if>
+                        <c:if test="${myS.status eq '막힘'}">
+                        	<span class="badge bg-danger">${myS.status}</span>
+                        </c:if>
+                        </td>
+                        <td><fmt:formatDate value="${myS.startDate}" pattern="yyyy-MM-dd"/></td>
+                        <td>
+	                        <div class="progress">
+		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+		              		</div>
+	              		</td>
+                      </tr>
+                      </c:forEach>
+                    </c:if>
+                    <c:if test="${empty mySlist}">
+                    	<tr><td colspan="6" align="center">업무 목록이 없습니다.</td></tr>
                     </c:if>
                     </c:if>
                     
