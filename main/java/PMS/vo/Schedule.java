@@ -2,13 +2,17 @@ package PMS.vo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Schedule {
 	private int sno;
 	private int pno;
 	private String sname;
 	private String status;
 	private int progress;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date startDate;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date endDate;
 	private String startDate_s;
 	private String endDate_s;

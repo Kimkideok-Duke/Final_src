@@ -23,13 +23,16 @@ public class MainService {
 		return dao.getSchedule(sno);
 	}
 	public void regSchedule(Schedule reg) {
-		
+		dao.regSchedule(reg);
 	}
 	public void uptSchedule(Schedule upt) {
 		dao.uptSchedule(upt);
 	}
 	public void delSchedule() {
 
+	}
+	public void uptScheduleByPM(Schedule upt) {
+		dao.uptScheduleByPM(upt);
 	}
 
 }

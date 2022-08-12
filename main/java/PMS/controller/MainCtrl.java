@@ -36,10 +36,12 @@ public class MainCtrl {
     	return "WEB-INF\\views\\ScheduleManage.jsp";
     }
     
-//	public String scheduleModal(@RequestParam(value = "sno", defaultValue = "1") int sno, Model d) {
-//		d.addAttribute("schedule", service.getSchedule(sno));
-//		return "pageJsonReport";
-//	}
+ // http://localhost:7080/PMS/scheduleModal.do?sno=2
+    @RequestMapping("scheduleModal.do")
+	public String scheduleModal(@RequestParam(value = "sno", defaultValue = "1") int sno, Model d) {
+		d.addAttribute("schedule", service.getSchedule(sno));
+		return "pageJsonReport";
+	}
     @RequestMapping("regSchedule.do")
 	public String regSchedule(Schedule reg, Model d) {
 		service.regSchedule(reg);
@@ -57,5 +59,16 @@ public class MainCtrl {
 		d.addAttribute("proc", "del");
 		return "WEB-INF\\views\\ScheduleManage.jsp";
 	}
-	
+	@RequestMapping("uptSchedulePM.do")
+	public String uptSchedulePM(Schedule upt, Model d) {
+		System.out.println();
+		service.uptScheduleByPM(upt);
+		
+		d.addAttribute("proc", "upt");
+		d.addAttribute("pno", service.getSchedule(upt.getSno()).getPno());
+		return "WEB-INF\\views\\Main.jsp";
+	}
+	/*
+	등록, 수정, 삭제할때 간트/풀캘린더 테이블 같이 dao로 CRUD하기
+	 */
 }

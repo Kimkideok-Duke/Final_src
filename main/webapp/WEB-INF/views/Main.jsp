@@ -43,6 +43,41 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#uptBtn").click(function(){
+			$("#uptSchedule").submit()
+		})
+
+	})
+	function chVal(sno){
+		console.log(sno)
+		$.ajax({
+			url:"${path}/scheduleModal.do",
+			data:"sno="+sno,
+			dataType:"json",
+			success:function(data){
+				var data = data.schedule
+				$("#sname").val(data.sname)
+				$("#status").val(data.status)
+				$("#progress").val(data.progress)
+				console.log(data.startDate)
+				console.log(data.endDate)
+				$("#startDate").val(data.startDate)
+				$("#endDate").val(data.endDate)
+				$("#budget").val(data.budget)
+				$("[name=sno]").val(sno)
+			}
+		})
+	}
+	var pno = "${pno}"
+	var proc = "${proc}"
+	if(proc=="upt"){
+		alert("수정성공!\n일정목록으로 이동합니다")
+		location.href="${path}/goMain.do?pno="+pno
+	}
+</script>
 </head>
 
 <body>
@@ -123,8 +158,8 @@
 			</thead>
 			<tbody>
 				<c:forEach var="schedule" items="${slist}">
-				<tr ondblclick="goSchedule()">
-				<th scope="row">${schedule.sno }</th>
+				<tr onclick="chVal(${schedule.sno })"data-bs-toggle="modal" data-bs-target="#basicModal">
+				<th scope="row" class="">${schedule.sno }</th>
 				<td>${schedule.sname}</td>
 				<td>${schedule.status}</td>
 				<td>진행도 :
@@ -140,8 +175,8 @@
 				<div class="progress">
             	   	<div class="progress-bar progress-bar-striped bg-${status}" role="progressbar" style="width: ${schedule.progress}%" aria-valuenow="${schedule.progress}" aria-valuemin="0" aria-valuemax="100">${schedule.progress}%</div>
               	</div></td>
-				<td>${schedule.startDate}</td>
-				<td>${schedule.endDate}</td>
+				<td><fmt:formatDate value="${schedule.startDate}" pattern="yyyy-MM-dd"/></td>
+				<td><fmt:formatDate value="${schedule.endDate}" pattern="yyyy-MM-dd"/></td>
 				<td>${schedule.budget}원</td>
 				<td><img src="a00_com/images/comment.png" width="30" height="30" onclick="goComment(${schedule.sno})"/></td>
 				</tr>
@@ -152,6 +187,68 @@
 	</div>
 </div>
             <!-- 일정관리 -->
+
+<!-- 모달창(임시) -->
+       <div class="modal fade" id="basicModal" tabindex="-1">
+         <div class="modal-dialog">
+           <div class="modal-content">
+                  <!-- 모달 상단 -->
+				      <div class="modal-header">
+				        <h5 class="modal-title">일정 수정</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <!-- 모달 내용 sname, status, progress, startDate, endDate, budget -->
+			      <div class="modal-body">
+			  		<form id="uptSchedule" action="${path}/uptSchedulePM.do" class="row g-3 needs-validation" novalidate>
+			             <div class="row mb-3" style="padding-top:15px;">
+			             <input type="hidden" name="sno" value=""/>
+			               <label for="inputText" class="col-sm-2 col-form-label">일정명</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="sname" name="sname" class="form-control" value="">
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">상태</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="status" name="status" class="form-control" value="" >
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">진행도</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="progress" name="progress" class="form-control" value="" >
+			               </div>
+			             </div>
+						<div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">시작일</label>
+			               <div class="col-sm-10">
+			                 <input type="date" id="startDate" name="startDate_s" class="form-control" value="">
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">마감일</label>
+			               <div class="col-sm-10">
+			                 <input type="date" id="endDate" name="endDate_s" class="form-control" value="" >
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">예산</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="budget" name="budget" class="form-control" value="" >
+			               </div>
+			             </div>
+			             	<button type="button" id="uptBtn" class="btn btn-primary">수정</button>
+			              </form>
+			           </div>
+			     <!-- 모달 하단 -->      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+				        <button type="button" class="btn btn-primary">저장</button>
+				      </div>
+           </div>
+         </div>
+       </div>
+
 
             <!-- Reports -->
             <div class="col-12">

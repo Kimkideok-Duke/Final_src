@@ -12,6 +12,7 @@ public interface MainDao {
 	public List<Schedule> getScheduleList(int pno);
 	public void regSchedule(Schedule reg);
 	public void uptSchedule(Schedule upt);
+	public void uptScheduleByPM(Schedule upt);
 	public void delSchedule();	
 	public Schedule getSchedule(int sno);
 	
