@@ -27,9 +27,10 @@ CREATE SEQUENCE seq_comm
 DROP SEQUENCE seq_comm;
 
 -- Comment 샘플 데이터
-INSERT INTO Comment_tb values(seq_comm.nextval,1,'E10000023','제출합니다','김길동',sysdate,sysdate);		
-INSERT INTO Comment_tb values(seq_comm.nextval,1,'E10000024','집갈래요ㅜㅜ','김유신',sysdate,sysdate);		
-INSERT INTO Comment_tb values(seq_comm.nextval,1,'E10000022','하기싫어요안할래요','서길동',sysdate,sysdate);			
+INSERT INTO Comment_tb values(seq_comm.nextval,1,'E10000003','제출합니다','홍길동',sysdate,sysdate);		
+		
+		SELECT * FROM account;
+
 			
 
 SELECT cno,content,writer,regdte,updte FROM Comment_tb
@@ -41,19 +42,19 @@ ORDER BY updte desc;
 CREATE TABLE File_tb(
 fname  varchar2(150) PRIMARY KEY,
 cno NUMBER,
-FOREIGN KEY (cno) REFERENCES Comment_tb (cno),
-fpath varchar2(200),
+FOREIGN KEY (cno) REFERENCES Comment_tb (cno) ON DELETE CASCADE,
+fpath varchar2(200)
 );
 
 SELECT * FROM File_tb;
-DROP TABLE File_tb;
+DROP table File_tb;
 	
 -- File 샘플 데이터
-insert into  File_tb values(seq_comm.currval,'/path', '파일명');
+insert into  File_tb values('/path',seq_comm.currval, '파일명');
+SELECT * FROM  FILE_TB;		
 
-SELECT s.*, f.fname 
-FROM SMCOMMENT s , smFile f
-WHERE s.CNO =f.CNO(+)
-and s.cno = 4;
-
+		SELECT * FROM comment_tb WHERE sno = #{sno}
+		ORDER BY regdte DESC;
+		
+		SELECT * FROM account;
 

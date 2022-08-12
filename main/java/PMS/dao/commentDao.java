@@ -6,10 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import PMS.vo.Comment;
 import PMS.vo.CommentFile;
+import PMS.vo.Schedule;
 
 @Repository
 public interface commentDao {
 	public List<Comment> commentList(int sno);
+	public String getTitle(int sno);
 	public void insertComment(Comment ins);
 	public Comment getDetail(int cno);
 	public void updateComment(Comment upt);		

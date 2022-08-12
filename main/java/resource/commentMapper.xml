@@ -5,30 +5,36 @@
 <mapper namespace="PMS.dao.commentDao">
 
 	<!-- commentList -->
-	<select id="commentList" resultType="comment">
-		SELECT * FROM comment_tb
-		ORDER BY regdte desc
+	<select id="commentList" parameterType="int"
+		resultType="comment">
+		SELECT * FROM comment_tb WHERE sno = #{sno}
+	</select>
+
+	<select id="getTitle" resultType="string" parameterType="int">
+		SELECT title
+		FROM project
+		WHERE pno = #{pno}
 	</select>
 
 	<!-- comment 등록 -->
 	<insert id="insertComment" parameterType="comment">
 		insert into comment_tb
-		values(seq_comm.nextval,1,
-		2,#{content},sysdate,sysdate)
+		values(seq_comm.nextval,#{sno},
+		#{userno},#{content},(SELECT name FROM
+		ACCOUNT WHERE USERNO = #{userno}),sysdate,sysdate)
 	</insert>
 	
 	<!-- comment 첨부파일 등록 -->
 	<insert id="insertFile" parameterType="commentfile">
-		insert into File_tb values(seq_comm.currval,
-		#{fpath}, #{fname}, '')
+	insert into File_tb values(#{fname},seq_comm.currval, #{fpath})
 	</insert>
 
 	<!-- comment Detail -->
 	<select id="getDetail" parameterType="int" resultType="comment">
-		SELECT s.*, f.fname 
+		SELECT c.*, f.fname 
 		FROM comment_tb c , File_tb f
-		WHERE s.CNO =f.CNO(+)
-		and s.cno = #{cno}
+		WHERE c.CNO =f.CNO(+)
+		and c.cno = #{cno}
 	</select>
 
     <!-- comment 수정 -->
@@ -44,10 +50,8 @@
 	<delete id="deleteComment" parameterType="int">
 		delete
 		from comment_tb
-		where rno = #{rno}
+		where cno = #{cno}
 	</delete>
-
-	
 
 </mapper>
 

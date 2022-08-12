@@ -24,6 +24,11 @@ public class commentService {
 		return dao.commentList(sno);
 	}
 	
+
+	public String getTitle(int sno) {
+		return dao.getTitle(sno);
+	}
+	
 	// 파일서버 정보(공통정보)
 	@Value("${upload}")
 	private String fpath;	

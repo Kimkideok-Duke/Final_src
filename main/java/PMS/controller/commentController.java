@@ -23,6 +23,7 @@ public class commentController {
 	// http://localhost:7080/PMS/commentList.do
 		@RequestMapping("commentList.do")
 		public String commentList(@RequestParam("sno") int sno, Model d) {
+	    	d.addAttribute("title", service.getTitle(sno));
 			d.addAttribute("clist", service.commentList(sno));
 			
 			return "WEB-INF\\views\\Comment.jsp";
