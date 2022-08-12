@@ -52,24 +52,35 @@
 
 	})
 	function chVal(sno){
-		console.log(sno)
 		$.ajax({
-			url:"${path}/scheduleModal.do",
+			url:"${path}/uptScheduleModal.do",
 			data:"sno="+sno,
 			dataType:"json",
 			success:function(data){
 				var data = data.schedule
+				$("#sno").val(sno)
 				$("#sname").val(data.sname)
 				$("#status").val(data.status)
 				$("#progress").val(data.progress)
-				console.log(data.startDate)
-				console.log(data.endDate)
 				$("#startDate").val(data.startDate)
 				$("#endDate").val(data.endDate)
 				$("#budget").val(data.budget)
-				$("[name=sno]").val(sno)
 			}
 		})
+	}
+	var auth = "${auth}"
+	function updateProc(){
+		if(auth=="pm" || auth=="admin"){
+			if(confirm("수정하시겠습니까?")){
+				$("form").attr("action","${path}/uptScheduleByPM.do");
+				$("form").submit();
+			}
+		}else{
+			if(confirm("수정하시겠습니까?")){
+				$("form").attr("action","${path}/uptSchedule.do");
+				$("form").submit();
+			}
+		}
 	}
 	var pno = "${pno}"
 	var proc = "${proc}"
@@ -141,7 +152,7 @@
           </div>
 
           <div class="card-body">
-            <h5 class="card-title">일정 목록 <span>| </span></h5>
+            <h5 class="card-title">일정 목록 <span>| 클릭시 수정</span></h5>
 
             <table class="table table-borderless datatable">
             <thead>
@@ -188,7 +199,7 @@
 </div>
             <!-- 일정관리 -->
 
-<!-- 모달창(임시) -->
+<!-- 모달창(PM수정) -->
        <div class="modal fade" id="basicModal" tabindex="-1">
          <div class="modal-dialog">
            <div class="modal-content">
@@ -199,9 +210,10 @@
 				      </div>
 				      <!-- 모달 내용 sname, status, progress, startDate, endDate, budget -->
 			      <div class="modal-body">
-			  		<form id="uptSchedule" action="${path}/uptSchedulePM.do" class="row g-3 needs-validation" novalidate>
+			      <!-- 권한 체크해서 form 경로 변경, input 숨기기 -->
+			  		<form id="uptSchedule" class="row g-3 needs-validation" novalidate>
 			             <div class="row mb-3" style="padding-top:15px;">
-			             <input type="hidden" name="sno" value=""/>
+			             <input type="hidden" id="sno" name="sno" value=""/>
 			               <label for="inputText" class="col-sm-2 col-form-label">일정명</label>
 			               <div class="col-sm-10">
 			                 <input type="text" id="sname" name="sname" class="form-control" value="">
@@ -237,13 +249,12 @@
 			                 <input type="text" id="budget" name="budget" class="form-control" value="" >
 			               </div>
 			             </div>
-			             	<button type="button" id="uptBtn" class="btn btn-primary">수정</button>
+			             	<button type="button" onclick="updateProc()" id="uptBtn" class="btn btn-primary">수정</button>
 			              </form>
 			           </div>
 			     <!-- 모달 하단 -->      
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-				        <button type="button" class="btn btn-primary">저장</button>
 				      </div>
            </div>
          </div>

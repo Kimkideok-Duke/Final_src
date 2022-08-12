@@ -37,8 +37,8 @@ public class MainCtrl {
     }
     
  // http://localhost:7080/PMS/scheduleModal.do?sno=2
-    @RequestMapping("scheduleModal.do")
-	public String scheduleModal(@RequestParam(value = "sno", defaultValue = "1") int sno, Model d) {
+    @RequestMapping("uptScheduleModal.do")
+	public String uptScheduleModal(@RequestParam(value = "sno", defaultValue = "1") int sno, Model d) {
 		d.addAttribute("schedule", service.getSchedule(sno));
 		return "pageJsonReport";
 	}
@@ -51,19 +51,17 @@ public class MainCtrl {
 	public String uptSchedule(Schedule upt, Model d) {
 		service.uptSchedule(upt);
 		d.addAttribute("proc", "upt");
-		return "WEB-INF\\views\\ScheduleManage.jsp";
+		return "WEB-INF\\views\\Main.jsp";
 	}
     @RequestMapping("delSchedule.do")
 	public String delSchedule(Model d) {
 		service.delSchedule();
 		d.addAttribute("proc", "del");
-		return "WEB-INF\\views\\ScheduleManage.jsp";
+		return "WEB-INF\\views\\Main.jsp";
 	}
-	@RequestMapping("uptSchedulePM.do")
-	public String uptSchedulePM(Schedule upt, Model d) {
-		System.out.println();
+	@RequestMapping("uptScheduleByPM.do")
+	public String uptScheduleByPM(Schedule upt, Model d) {
 		service.uptScheduleByPM(upt);
-		
 		d.addAttribute("proc", "upt");
 		d.addAttribute("pno", service.getSchedule(upt.getSno()).getPno());
 		return "WEB-INF\\views\\Main.jsp";
