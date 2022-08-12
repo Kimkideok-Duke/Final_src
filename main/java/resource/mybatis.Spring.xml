@@ -20,6 +20,7 @@
 		<typeAlias alias="Alert" type="PMS.vo.Alert"/>
 		<typeAlias alias="comment" type="PMS.vo.Comment"/>
 		<typeAlias alias="commentfile" type="PMS.vo.CommentFile"/>
+		<typeAlias alias="gantt" type="PMS.vo.Gantt"/>
 	</typeAliases>
 
 	<mappers>

@@ -71,13 +71,25 @@
   ======================================================== -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	var task = new Vue({
+		el:".gantt-target",
+		data:{start:"",end:"",name:"",progress:"",
+			ganttList:[] // 검색된 리스트데이터
+		}
+	});	
+
 	function SetValue(this){
 	range_val.value = this.value;
 	}
-	$("#frm01 [name=title]").val(event.title)
-	$("#frm01 [name=startdate]").val(event.startdate)
-	$("#frm01 [name=enddate]").val(event.enddate)
-	$("#frm01 [name=progress]").val(event.progress)
+	var tasks = [
+		{
+			start: {{gantt.start}},
+			end: {{gantt.end}},
+			name: {{gantt.name}},
+			progress:{{gantt.progress}}
+		}
+	]
 </script>
 
 </head>
@@ -111,12 +123,14 @@
                     </div>
                     <div class="modal-body">
 			      	  <div class="box">일정명 <input type="text" name="title" class="form-control"style="width:300px"></div>
-			      	  <div class="box">시작일 <input type="date" name="startdate" class="form-control" style="width:300px"></div>
-			      	  <div class="box">마감일 <input type="date" name="enddate" class="form-control" style="width:300px"></div><br>
-			      	  <div class="box_1">
+			      	  <div class="box">시작일 <input type="date" name="startDate" class="form-control" style="width:300px"></div>
+			      	  <div class="box">마감일 <input type="date" name="endDate" class="form-control" style="width:300px"></div>
+			      	  <div class="box">예산 <input type="text" name="budget" class="form-control" style="width:300px"></div>			      	  <div class="box_1">
+			      	  <!--
 			      	   진행도 <input type="range" name="progress" class="form-range" id="customRange1" value="0" min="0" max="100" style="width:220px"
 			      	   oninput="document.getElementById('value1').innerHTML=this.value;">
 			      	   <span id="value1">0</span>%
+			      	    -->
                      </div>
                     <div class="modal-footer">
                      <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" style="margin:auto; display:block;">등록</button>
@@ -126,17 +140,32 @@
               </div><!-- End Basic Modal-->
       	  </div>
     	</div>
+    	<div class="chart-controls">
+		    <p>Change Chart Timescale</p>
+		    <div class="button-cont">
+		        <button id="day-btn">
+		            Day
+		        </button>
+		
+		        <button id="week-btn">
+		            Week
+		        </button>
+		
+		        <button id="month-btn">
+		            Month
+		        </button>
+		    </div>
+		</div>
 	<script>
-	var tasks = [
-		{
-			start: '2022-07-15',
-			end: '2022-07-20',
-			name: '플로우차트',
-			id: "Task 1",
-			progress:90,
-			dependencies: 'Task 2'
-		}
-	]
+document.querySelector(".chart-controls #day-btn").addEventListener("click", () => {
+    ganttChart.change_view_mode("Day");
+})
+document.querySelector(".chart-controls #week-btn").addEventListener("click", () => {
+    ganttChart.change_view_mode("Week");
+})
+document.querySelector(".chart-controls #month-btn").addEventListener("click", () => {
+    ganttChart.change_view_mode("Month");
+})	
 var gantt_chart = new Gantt(".gantt-target", tasks, {
 	on_click: function (task) {
 		console.log(task);
@@ -153,6 +182,23 @@ var gantt_chart = new Gantt(".gantt-target", tasks, {
 	view_mode: 'Day',
 	language: 'en'
 });
+var gantt = new Gantt('#gantt', tasks, {
+	// can be a function that returns html
+	// or a simple html string
+	custom_popup_html: function(task) {
+	  // the task object will contain the updated
+	  // dates and progress value
+	  const end_date = task._end.format('MMM D');
+	  return `
+		<div class="details-container">
+		  <h5>${task.name}</h5>
+		  <p>Expected to finish by ${end_date}</p>
+		  <p>${task.progress}% completed!</p>
+		</div>
+	  `;
+	}
+});	
+	gantt.change_view_mode('Week')
 console.log(gantt_chart);
 	</script>
 

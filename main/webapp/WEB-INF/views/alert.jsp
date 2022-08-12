@@ -87,9 +87,9 @@
       </nav>
     </div>
 	<div class="box"></div>
-	    <div class="card" id="card" style="margin-left: auto; margin-right: auto; width:70%; height:100vh;padding:3%"">
+	    <div class="card" id="card" style="margin-left: auto; margin-right: auto; width:70%; height:70vh;padding:3%">
 	      <div class="card-body">
-	        <table class="table" style="margin-left: auto; margin-right: auto; width:90%;">
+	        <table class="table table-borderless datatable" style="margin-left: auto; margin-right: auto; width:90%;">
 	          <thead>
 	            <tr>
 	              <th scope="col">프로젝트</th>
@@ -106,32 +106,27 @@
 	              <td>${art.sname}</td>
 	              <!-- 마감 며칠전입니다.-->
 	              <c:choose>
+					<c:when test="${art.dday > 3}">
+						<td style="font-weight:bold">마감기한 ${art.dday}일전 입니다.</td>
+					</c:when>	              
 					<c:when test="${art.dday > 0}">
-						<td>마감기한 ${art.dday}일전 입니다.</td>
+						<td style="color:yellow; font-weight:bold">마감기한 ${art.dday}일전 입니다.</td>
 					</c:when>
 					<c:when test="${art.dday == 0}">
-						<td style="color:red">마감 당일 입니다.</td>
+						<td style="color:orange; font-weight:bold">마감 당일 입니다.</td>
 					</c:when>
 					<c:otherwise>
-						<td style="color:red">마감기한이 ${art.dday-(art.dday*2)}일 지났습니다.</td>
+						<td style="color:red; font-weight:bold">마감기한이 ${art.dday-(art.dday*2)}일 지났습니다.</td>
 					</c:otherwise>
 				</c:choose>
 	            </tr>
 	           </c:forEach> 
 	          </tbody>
 	        </table>
-	      <div class="card-foot">
-	     <!--
-            <nav aria-label="Page navigation example">
-              <ul class="pagination" style=" justify-content : center;">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-              </ul>
-            </nav>
-            -->
+	      <div class="card-foot"  style="padding:2%">
+			 <div style="text-align:right;">
+			  <span style="font-weight:bold">마감일 여유</span> /<span style="color:yellow; font-weight:bold">마감일 근접</span> /<span style="color:orange; font-weight:bold">마감당일</span> /<span style="color:red; font-weight:bold">마감일 지남</span>
+			 </div>
 	      </div>
 	      </div>
 	    </div>
