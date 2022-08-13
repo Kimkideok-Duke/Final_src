@@ -435,35 +435,45 @@
             </div>
           </div><!-- End Recent Activity -->
 
-          <!-- 참가자 -->
+              <!-- 참가자 Accordion without outline borders -->
           <div class="card">
             <div class="card-body pb-0">
-             <h5 class="card-title">참가자 <span>| Today</span></h5>
               <div class="vueel">
-              <button type="button" @click="getlist">리스트</button>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Dept</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(p, idx) in parlist">
-                    <th scope="row">{{idx+1}}</th>
-                    <td>{{p.name}}</td>
-                    <td>{{p.dept}}</td>
-                    <td>{{p.position}}</td>
-                    <td>{{p.email}}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed card-title" type="button" @click="getlist" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                      참가자 <span>| Today</span>
+                    </button>
+                  </h2>
+                  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+		               <table class="table table-striped">
+		                <thead>
+		                  <tr>
+		                    <th scope="col">#</th>
+		                    <th scope="col">Name</th>
+		                    <th scope="col">Dept</th>
+		                    <th scope="col">Position</th>
+		                    <th scope="col">Email</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+		                  <tr v-for="(p, idx) in parlist">
+		                    <th scope="row">{{idx+1}}</th>
+		                    <td>{{p.name}}</td>
+		                    <td>{{p.dept}}</td>
+		                    <td>{{p.position}}</td>
+		                    <td>{{p.email}}</td>
+		                  </tr>
+		                </tbody>
+		              </table>
+                    </div>
+                  </div>
+                </div>
+               </div>
               </div>
-          </div><!-- End 참가자 -->
-        </div><!-- End 참가자 -->
+             </div><!--참가자 End Accordion without outline borders -->
+        
           <!-- 채팅 -->
           <div class="card">
             <div class="card-body">
