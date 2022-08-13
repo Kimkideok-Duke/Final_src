@@ -4,6 +4,7 @@ import java.util.List;
 // PMS.dao.MainDao
 import org.springframework.stereotype.Repository;
 
+import PMS.vo.Account;
 import PMS.vo.Schedule;
 
 @Repository
@@ -15,5 +16,6 @@ public interface MainDao {
 	public void uptScheduleByPM(Schedule upt);
 	public void delSchedule();	
 	public Schedule getSchedule(int sno);
+	public List<Account> getPrjparticipant(int pno);
 	
 }

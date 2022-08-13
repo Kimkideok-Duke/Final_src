@@ -1,34 +1,26 @@
 package PMS.vo;
 // PMS.vo.MypageScheduleList
 public class MypageScheduleList {
-	private String title;
 	private String sname;
+	private String title;
+	private String pno;
 	private String name;
 	private String position;
-	private int pno;
 	public MypageScheduleList() {
 		// TODO Auto-generated constructor stub
 	}
-	public MypageScheduleList(String title, String sname, String name, String position) {
-		this.title = title;
+	public MypageScheduleList(String sname, String title, String pno, String name, String position) {
 		this.sname = sname;
+		this.title = title;
+		this.pno = pno;
 		this.name = name;
 		this.position = position;
 	}
-	
-	public MypageScheduleList(String title, String sname, String name, String position, int pno) {
-		this.title = title;
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
 		this.sname = sname;
-		this.name = name;
-		this.position = position;
-		this.pno = pno;
-	}
-	
-	public int getPno() {
-		return pno;
-	}
-	public void setPno(int pno) {
-		this.pno = pno;
 	}
 	public String getTitle() {
 		return title;
@@ -36,11 +28,11 @@ public class MypageScheduleList {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getSname() {
-		return sname;
+	public String getPno() {
+		return pno;
 	}
-	public void setSname(String sname) {
-		this.sname = sname;
+	public void setPno(String pno) {
+		this.pno = pno;
 	}
 	public String getName() {
 		return name;
@@ -54,5 +46,6 @@ public class MypageScheduleList {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+	
 	
 }

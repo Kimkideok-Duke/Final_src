@@ -84,6 +84,24 @@
 		FROM PROJECT
 		GROUP BY DEPT
 	</select>
+	
+	<!-- 프로젝트별 예산 -->
+	<select id="getProjectBudget" resultType="ProjectBudget" parameterType="string">
+		SELECT p.PNO, p.TITLE, SUM(s.BUDGET) projectbudget
+		FROM PROJECT p, SCHEDULE s
+		WHERE p.PNO = s.PNO(+)
+		AND p.PMNO = #{pmno}
+		GROUP BY p.PNO, p.TITLE
+	</select>
+	
+	<!-- 프로젝트별 참가인원 -->
+	<select id="getProjectUserCnt" resultType="ProjectUserCnt" parameterType="string">
+		SELECT p.PNO, p.TITLE, COUNT(pp.USERNO) usercnt
+		FROM PROJECT p, PRJPARTICIPANT pp
+		WHERE p.PNO = pp.PNO
+		AND p.PMNO = #{pmno}
+		GROUP BY p.PNO, p.TITLE
+	</select>
 </mapper>
 
 

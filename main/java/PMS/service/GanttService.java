@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import PMS.dao.GanttDao;
 import PMS.vo.Gantt;
 import PMS.vo.Schedule;
+import PMS.vo.GanttData;
 
 @Service
 public class GanttService {
@@ -33,5 +34,8 @@ public class GanttService {
 	public void deleteGantt(int sno) {
 		dao.deleteGantt(sno);
 	}
-
+	// 간트차트에 들어갈 일정 데이터 추출
+	public List<GanttData> getGanttData(int pno){
+		return dao.getGanttData(pno);
+	}
 }

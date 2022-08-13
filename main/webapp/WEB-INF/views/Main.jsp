@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 
 <html>
-
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -44,13 +44,41 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#uptBtn").click(function(){
 			$("#uptSchedule").submit()
 		})
-
-	})
+		
+		var vm = new Vue({
+			el:".vueel",
+			data:{msg:"리스트 출력", 
+				parlist:[]
+			},
+			methods:{
+				getlist:function(){
+					this.get()
+				},
+				get:function(){
+					var vm = this
+					$.ajax({
+						url:"${path}/getPrjparticipant.do?pno=${param.pno}",
+						dataType:"json",
+						async:false,
+						success:function(data){
+							vm.parlist = data.parlist
+							console.log("데이터")
+							console.log(data.parlist)
+						},
+						error:function(err){
+							console.log(err)
+						}	
+					})
+				}
+			}
+		})
+	});
 	function chVal(sno){
 		$.ajax({
 			url:"${path}/uptScheduleModal.do",
@@ -89,6 +117,54 @@
 		location.href="${path}/goMain.do?pno="+pno
 	}
 </script>
+  
+  
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['gantt']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Task ID');
+      data.addColumn('string', 'Task Name');
+      data.addColumn('date', 'Start Date');
+      data.addColumn('date', 'End Date');
+      data.addColumn('number', 'Duration');
+      data.addColumn('number', 'Percent Complete');
+      data.addColumn('string', 'Dependencies');
+      	var dlist = []
+		var gdata = []
+		$.ajax({
+			url:"${path}/getGanttData.do?pno=${param.pno}",
+			dataType:"json",
+			async:false,
+			success:function(dt){
+				var dt = dt.ganttData
+				$(dt).each(function(idx, d){
+					var sDate = d.startDate.replace(" ","T");
+					var eDate = d.endDate.replace(" ","T");
+					gdata = [String(d.sno), d.sname, new Date(sDate), new Date(eDate), null, d.progress, null]
+					dlist.push(gdata)
+					console.log(gdata)
+				})
+			}
+		})
+      	data.addRows(dlist);
+      var options = {
+        height: "100%",
+        width:"100%",
+        gantt: {
+          trackHeight: 30
+        }
+      };
+
+      var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+  </script>
 </head>
 
 <body>
@@ -105,7 +181,7 @@
           <div class="row">
 
             <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
+            <div class="col-lg-12">
 
               <div class="card info-card customers-card">
 
@@ -261,88 +337,20 @@
        </div>
 
 
-            <!-- Reports -->
+            <!-- Gantt Chart -->
             <div class="col-12">
               <div class="card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
-
-                  <!-- Line Chart -->
-                  <div id="reportsChart"></div>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Sales',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
-                  <!-- End Line Chart -->
-
-                </div>
-
-              </div>
-            </div><!-- End Reports -->
-
+                  <h5 class="card-title">간트차트 <span>ㅣ일정</span></h5>
+                  <c:if test="${not empty slist}">
+					<div id="chart_div"></div>
+				  </c:if>
+				  <c:if test="${empty slist}">
+				  	<h3 align="center">일정을 추가해주세요.</h3>
+				  </c:if>
+          </div>
+          </div>
+          </div>
           </div>
         </div><!-- End Left side columns -->
 
@@ -422,85 +430,80 @@
             </div>
           </div><!-- End Recent Activity -->
 
-          <!-- Website Traffic -->
+              <!-- 참가자 Accordion without outline borders -->
           <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
             <div class="card-body pb-0">
-              <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: 'Access From',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 1048,
-                          name: 'Search Engine'
-                        },
-                        {
-                          value: 735,
-                          name: 'Direct'
-                        },
-                        {
-                          value: 580,
-                          name: 'Email'
-                        },
-                        {
-                          value: 484,
-                          name: 'Union Ads'
-                        },
-                        {
-                          value: 300,
-                          name: 'Video Ads'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div>
-          </div><!-- End Website Traffic -->
-
-        </div><!-- End Right side columns -->
+              <div class="vueel">
+              <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed card-title" type="button" @click="getlist" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                      참가자 <span>| Today</span>
+                    </button>
+                  </h2>
+                  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+		               <table class="table table-striped">
+		                <thead>
+		                  <tr>
+		                    <th scope="col">#</th>
+		                    <th scope="col">Name</th>
+		                    <th scope="col">Dept</th>
+		                    <th scope="col">Position</th>
+		                    <th scope="col">Email</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+		                  <tr v-for="(p, idx) in parlist">
+		                    <th scope="row">{{idx+1}}</th>
+		                    <td>{{p.name}}</td>
+		                    <td>{{p.dept}}</td>
+		                    <td>{{p.position}}</td>
+		                    <td>{{p.email}}</td>
+		                  </tr>
+		                </tbody>
+		              </table>
+                    </div>
+                  </div>
+                </div>
+               </div>
+              </div>
+             </div><!--참가자 End Accordion without outline borders -->
+        
+          <!-- 채팅 -->
+          <div class="card">
+            <div class="card-body">
+             <h5 class="card-title">채팅 <span>| Today</span></h5>
+                           <!-- Floating Labels Form -->
+              <form class="row g-3">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="id" value="${name} (${dept})" readonly>
+                    <label for="id">사원번호</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating">
+                   <div id="chatArea">
+                    <div class="form-control" id="chatMessageArea" style="height: 200px;"></div>
+                    <label for="chatMessageArea">채팅 내용</label>
+                   </div> 
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="msg">
+                    <label for="msg">메세지 입력</label>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="button" id="enterBtn" class="btn btn-primary">채팅 입장</button>
+                  <button type="button" id="exitBtn" class="btn btn-danger">채팅 나가기</button>
+                  <button type="button" id="sndBtn" class="btn btn-success">메세지 전송</button>
+                </div>
+              </form><!-- End floating Labels Form -->
+             
+          </div>
+        </div><!-- End 채팅 -->
 
       </div>
     </section>
@@ -517,6 +520,99 @@ function goComment(sno){
 	location.href="${path}/commentList.do?sno="+sno;
 	
 }
+var wsocket;
+$(document).ready(function(){
+	$("#enterBtn").click(function(){
+		if(confirm("채팅방 접속합니다.")){
+			conn();
+			
+		}
+	});
+	// 아이디 입력 후,  enter 키를 입력시도 접속
+	$("#id").keyup(function(){
+		if(event.keyCode==13){
+			conn();
+		}
+	});
+	
+	$("#exitBtn").click(function(){
+		if(confirm("접속을 종료하시겠습니까?")){
+			wsocket.send("msg:"+$("#id").val()+":접속 종료 했습니다.")
+			wsocket.close();
+			// 서버 handler public void afterConnectionClosed()
+			// 와 연동
+		}
+	});
+	
+});
+function conn(){
+	wsocket = new WebSocket("ws:localhost:7080/${path}/chat-ws.do")
+	wsocket.onopen=function(evt){ // 접속하는 핸들러 메서드와 연결
+		console.log(evt)
+		// 능동적으로 서버에 소켓통신으로 메시지를 보내는 것..
+		wsocket.send("msg:"+$("#id").val()+":연결 접속했습니다.")
+		// "msg:himan:연결접속했습니다."
+		//  msg:전송자:메시지명
+		//  msg:그룹명:전송자:메시지  (단일 chatting/그룹 chatting)
+		
+		
+	}
+	// 메시지를 받을 때, 처리되는 메서드
+	// 서버에서 push방식으로 메시지를 전달 받는데..
+	/*
+	# 참고
+	1. webstorage 활용
+		1) 메시지 내용 임시 저장
+		2) 로그인한 id 임시 저장.
+		
+	
+	
+	*/
+	wsocket.onmessage=function(evt){
+		
+		var msg = evt.data
+		console.log(msg)
+		if(msg.substring(0,4)=="msg:"){
+			// mgs:그룹명:전송자:메시지  (단일 chatting/그룹 chatting)
+			// 그룹에 해당할 때만 메시지를 받아서 처리하게 처리..
+			
+			
+			// msg: 를 제외한 모든 문자열을 추출
+			var revMsg = msg.substring(4)
+			console.log("#메시지 받기#")
+			console.log(msg)
+			$("#chatMessageArea").append(revMsg+"<br>")	
+			// 자동 scolling 처리 로직
+			// 1.  전체 charMessageArea의 입력된 최대 높이 구하기
+			// 2. 포함하고 있는 div의 scollTop을 통해 최대한 내용으로 scrolling 하기
+			$("#chatArea").scrollTop(ma+=20);
+			console.log("chatArea길이:"+ma)
+		}
+	}
+	var ma = parseInt($("#chatMessageArea").height());	
+	// 접속을 종료 처리할 때
+	wsocket.onclose=function(){
+		alert($("#id").val()+"접속 종료합니다.")
+		$("#chatMessageArea").val("")
+		
+	}		
+	
+}
+
+$("#msg").keyup(function(){
+	if(event.keyCode==13){
+		wsocket.send("msg:"+$("#id").val()+":"+$(this).val())
+		$(this).val("").focus()
+	}
+	
+});
+// 전송 버튼을 클릭시에 메시지 전송
+$("#sndBtn").click(function(){
+	wsocket.send("msg:"+$("#id").val()+":"+$("#msg").val())
+	$("#msg").val("").focus()				
+	
+});
+
 </script>
 
   <!-- ======= Footer ======= -->

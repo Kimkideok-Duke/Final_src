@@ -14,10 +14,13 @@
 		<typeAlias alias="Project" type="PMS.vo.Project"/>
 		<typeAlias alias="DeptBudget" type="PMS.vo.DeptBudget"/>
 		<typeAlias alias="DeptCnt" type="PMS.vo.getDeptCnt"/>
+		<typeAlias alias="ProjectBudget" type="PMS.vo.ProjectBudget"/>
+		<typeAlias alias="ProjectUserCnt" type="PMS.vo.ProjectUserCnt"/>
 		<typeAlias alias="ProjectScheduleJoin" type="PMS.vo.ProjectScheduleJoin"/>
 		<typeAlias alias="prjParticipant" type="PMS.vo.PrjParticipant"/>
 		<typeAlias alias="Schedule" type="PMS.vo.Schedule"/>
 		<typeAlias alias="Alert" type="PMS.vo.Alert"/>
+		<typeAlias alias="ganttData" type="PMS.vo.GanttData"/>
 		<typeAlias alias="comment" type="PMS.vo.Comment"/>
 		<typeAlias alias="commentfile" type="PMS.vo.CommentFile"/>
 		<typeAlias alias="gantt" type="PMS.vo.Gantt"/>

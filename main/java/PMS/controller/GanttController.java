@@ -53,4 +53,10 @@ public class GanttController {
 		return "redirect:/getGantt.do";
 	}
 	
+	// http://localhost:8080/PMS/getGanttData.do
+	@RequestMapping("getGanttData.do")
+	public String getGanttData(@RequestParam("pno") int pno,Model d) {
+		d.addAttribute("ganttData", service.getGanttData(pno));
+		return "pageJsonReport";
+	}
 }

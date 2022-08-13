@@ -220,3 +220,16 @@ SELECT * FROM account ORDER BY userno desc;
 -- 사원정보 삭제
 DELETE FROM account
 WHERE userno = 'E10000080';
+
+-- 마이페이지 내 일정 리스트 (수정됨)
+SELECT sc.sname, p.title, p.pno, a.name, a.position
+FROM SCHEDULE sc, PROJECT p , account a
+WHERE sc.sno IN (
+	SELECT s.SNO
+	FROM SCHPARTICIPANT s
+	WHERE s.userno = 'E10000020'
+)
+AND sc.pno = p.pno
+AND a.userno = p.pmno
+;
+

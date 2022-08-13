@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import PMS.dao.MainDao;
+import PMS.vo.Account;
 import PMS.vo.Schedule;
 
 @Service
@@ -33,6 +34,9 @@ public class MainService {
 	}
 	public void uptScheduleByPM(Schedule upt) {
 		dao.uptScheduleByPM(upt);
+	}
+	public List<Account> getPrjparticipant(int pno){
+		return dao.getPrjparticipant(pno);
 	}
 
 }

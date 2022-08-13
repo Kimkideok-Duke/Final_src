@@ -10,7 +10,9 @@ import PMS.dao.ProjectDao;
 import PMS.vo.DeptBudget;
 import PMS.vo.PrjParticipant;
 import PMS.vo.Project;
+import PMS.vo.ProjectBudget;
 import PMS.vo.ProjectScheduleJoin;
+import PMS.vo.ProjectUserCnt;
 import PMS.vo.getDeptCnt;
 import PMS.vo.myProject;
 import PMS.vo.mySchedule;
@@ -68,5 +70,15 @@ public class ProjectService {
 	// 부서별 프로젝트 갯수
 	public List<getDeptCnt> getDeptCnt(){
 		return dao.getDeptCnt();
+	}
+	
+	// 프로젝트별 예산
+	public List<ProjectBudget> getProjectBudget(String pmno){
+		return dao.getProjectBudget(pmno);
+	}
+	
+	// 프로젝트별 참가인원수
+	public List<ProjectUserCnt> getProjectUserCnt(String pmno){
+		return dao.getProjectUserCnt(pmno);
 	}
 }
