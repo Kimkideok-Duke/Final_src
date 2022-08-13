@@ -87,4 +87,18 @@
 			</props>
 		</property>
 	</bean>
+		<!-- 웹 소켙 통신 handler(java) <==> client(js)  -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>  
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+	<mvc:default-servlet-handler/>
+	<!--  특정 url주소로 handler 객체를 호출 /chat-ws.do 를 호출해서 서버에 handler 객체를 호출..-->
+	<websocket:handlers>
+		<websocket:mapping handler="chatHandler" path="/chat-ws.do"/>
+		<websocket:handshake-interceptors>
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+			<!-- 로그인한 유저의 아이디를 알려면 http세션을 써야한다. 웹 소켓 세션에다가 http세션을 올려줘야 
+				접근이 가능하다. -->
+		</websocket:handshake-interceptors>
+	</websocket:handlers> 
+	
 </beans>
