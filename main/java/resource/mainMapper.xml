@@ -43,6 +43,12 @@
 			budget = #{budget}
 		WHERE sno = #{sno}
 	</update>
+	<select id="getPrjparticipant" resultType="account" parameterType="int">
+		SELECT a.userno, pno, name, email, dept, position
+		FROM PRJPARTICIPANT p, ACCOUNT a
+		WHERE p.USERNO = a.USERNO 
+		AND pno=#{pno}
+	</select>
 	
 </mapper>
 

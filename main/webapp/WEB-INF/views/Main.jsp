@@ -44,13 +44,41 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#uptBtn").click(function(){
 			$("#uptSchedule").submit()
 		})
-
-	})
+		
+		var vm = new Vue({
+			el:".vueel",
+			data:{msg:"리스트 출력", 
+				parlist:[]
+			},
+			methods:{
+				getlist:function(){
+					this.get()
+				},
+				get:function(){
+					var vm = this
+					$.ajax({
+						url:"${path}/getPrjparticipant.do?pno=${param.pno}",
+						dataType:"json",
+						async:false,
+						success:function(data){
+							vm.parlist = data.parlist
+							console.log("데이터")
+							console.log(data.parlist)
+						},
+						error:function(err){
+							console.log(err)
+						}	
+					})
+				}
+			}
+		})
+	});
 	function chVal(sno){
 		$.ajax({
 			url:"${path}/uptScheduleModal.do",
@@ -407,47 +435,33 @@
             </div>
           </div><!-- End Recent Activity -->
 
-          <!-- Website Traffic -->
+          <!-- 참가자 -->
           <div class="card">
             <div class="card-body pb-0">
-              <h5 class="card-title">참가자 <span>| Today</span></h5>
+             <h5 class="card-title">참가자 <span>| Today</span></h5>
+              <div class="vueel">
+              <button type="button" @click="getlist">리스트</button>
               <table class="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Dept</th>
                     <th scope="col">Position</th>
+                    <th scope="col">Email</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
+                  <tr v-for="(p, idx) in parlist">
+                    <th scope="row">{{idx+1}}</th>
+                    <td>{{p.name}}</td>
+                    <td>{{p.dept}}</td>
+                    <td>{{p.position}}</td>
+                    <td>{{p.email}}</td>
                   </tr>
                 </tbody>
               </table>
-
+              </div>
           </div><!-- End 참가자 -->
 
         </div><!-- End Right side columns -->

@@ -16,7 +16,7 @@ public class MainCtrl {
     
     // http://localhost:6080/PMS/goMain.do
     @RequestMapping("goMain.do")
-    public String main(@RequestParam(value="pno", defaultValue="2") int pno, Model d) {
+    public String main(@RequestParam(value="pno", defaultValue="") int pno, Model d) {
     	d.addAttribute("title", service.getTitleByNo(pno));
     	d.addAttribute("slist",service.getScheduleList(pno));
     	return "WEB-INF\\views\\Main.jsp";
@@ -69,4 +69,10 @@ public class MainCtrl {
 	/*
 	등록, 수정, 삭제할때 간트/풀캘린더 테이블 같이 dao로 CRUD하기
 	 */
+	//http://localhost:7080/PMS/getPrjparticipant.do?pno=2
+	@RequestMapping("getPrjparticipant.do")
+	public String getPrjparticipant(@RequestParam(value="pno", defaultValue="") int pno, Model d) {
+		d.addAttribute("parlist",service.getPrjparticipant(pno));
+		return "pageJsonReport";
+	}
 }
