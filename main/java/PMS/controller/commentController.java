@@ -3,6 +3,7 @@ package PMS.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,13 +25,20 @@ public class commentController {
 		@RequestMapping("commentList.do")
 		public String commentList(@RequestParam("sno") int sno, Model d) {
 	    	d.addAttribute("title", service.getTitle(sno));
+	    	d.addAttribute("sname", service.getSname(sno));
 			d.addAttribute("clist", service.commentList(sno));
 			
 			return "WEB-INF\\views\\Comment.jsp";
 		}	
 		
+		
 		@RequestMapping("commInsertForm.do")
 		public String commInsertForm() {
+			// HttpSession session, Model d
+			// String userno = (String)session.getAttribute("userNo");
+			// session.setAttribute("writer", service.getWriter(getName());
+			// d.addAttribute("writer", service.getWriter(userno));
+			
 			return "WEB-INF\\views\\insertComment.jsp";
 		}
 			

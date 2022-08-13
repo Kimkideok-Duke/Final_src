@@ -560,9 +560,8 @@ background-color: #f2f2f2;
               <div class="card top-selling overflow-auto">
 
                 <div class="card-body pb-0">
-                  <h5 class="card-title">Project이름 <span>| 일정이름</span></h5>
+                  <h5 class="card-title">${title} <span>| ${sname }</span></h5>
 	    	<button type="button" class="insertBtn" onclick="goInsert()">comment 등록</button>
-	    	
                
                 <!--  cno,content,regdte,updte  -->
                   <table class="table table-borderless">
@@ -637,6 +636,7 @@ background-color: #f2f2f2;
 	function goInsert(){
 		location.href="${path}/commInsertForm.do"
 	}
+
 	
 	function goDetail(cno){
 		location.href="${path}/commDetail.do?cno="+cno;

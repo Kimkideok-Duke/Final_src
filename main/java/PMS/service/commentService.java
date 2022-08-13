@@ -28,6 +28,13 @@ public class commentService {
 	public String getTitle(int sno) {
 		return dao.getTitle(sno);
 	}
+	public String getSname(int sno) {
+		return dao.getSname(sno);
+	}
+	
+	public String getWriter(String userno) {
+		return dao.getWriter(userno);
+	}
 	
 	// 파일서버 정보(공통정보)
 	@Value("${upload}")

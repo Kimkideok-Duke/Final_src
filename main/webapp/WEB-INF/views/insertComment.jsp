@@ -534,7 +534,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">아이템명</li>
+          <li class="breadcrumb-item">${sname }</li>
           <li class="breadcrumb-item active">Comment Insert</li>
         </ol>
       </nav>
@@ -657,8 +657,8 @@ var isInsert = "${isInsert}"
 		}
 	}
 	
-	function goList(){
-	location.href="${path}/commentList.do"
+	function goList(sno){
+	location.href="${path}/commentList.do?=sno"+sno;
 	}
 	
 </script>

@@ -12,6 +12,8 @@ import PMS.vo.Schedule;
 public interface commentDao {
 	public List<Comment> commentList(int sno);
 	public String getTitle(int sno);
+	public String getSname(int sno);
+	public String getWriter(String userno);
 	public void insertComment(Comment ins);
 	public Comment getDetail(int cno);
 	public void updateComment(Comment upt);		

@@ -11,10 +11,20 @@
 	</select>
 
 	<select id="getTitle" resultType="string" parameterType="int">
-		SELECT title
-		FROM project
-		WHERE pno = #{pno}
+		SELECT
+		title
+		FROM project p, SCHEDULE s 
+		WHERE s.PNO = p.PNO 
+		AND sno = #{sno}
 	</select>
+
+	<select id="getSname" resultType="string" parameterType="int">
+		SELECT
+		sname
+		FROM schedule
+		WHERE sno = #{sno}
+	</select>
+	
 
 	<!-- comment 등록 -->
 	<insert id="insertComment" parameterType="comment">
