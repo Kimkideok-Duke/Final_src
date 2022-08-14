@@ -134,13 +134,6 @@
       data.addColumn('number', 'Duration');
       data.addColumn('number', 'Percent Complete');
       data.addColumn('string', 'Dependencies');
-
-      
-      	/* var dlist = new Array(1);
-
-      	for (var i = 0; i < dlist.length; i++) {
-      		dlist[i] = new Array(7);
-      	} */
       	var dlist = []
 		var gdata = []
 		$.ajax({
@@ -156,15 +149,12 @@
 					dlist.push(gdata)
 					console.log(gdata)
 				})
-				//console.log()
-				//data.addRows(dlist);
 			}
-		//data.addRows(dlist);
 		})
       	data.addRows(dlist);
       var options = {
-        height: 300,
-        width:650,
+        height: "100%",
+        width:"100%",
         gantt: {
           trackHeight: 30
         }
@@ -191,7 +181,7 @@
           <div class="row">
 
             <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
+            <div class="col-lg-12">
 
               <div class="card info-card customers-card">
 
