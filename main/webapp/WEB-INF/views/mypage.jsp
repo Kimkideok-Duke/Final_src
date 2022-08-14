@@ -343,7 +343,7 @@
               <h5 class="card-title">진행중인 일정</h5>
 
               <!-- Table with hoverable rows -->
-              <table class="table table-hover">
+              <table class="table datatable">
                 <thead>
                   <tr>
                     <th scope="col">#</th>

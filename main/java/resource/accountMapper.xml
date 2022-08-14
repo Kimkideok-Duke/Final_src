@@ -33,32 +33,15 @@
 		WHERE userno = #{userno}
 	</update>
 	<select id="getMySList" resultType="mpsl" parameterType="string">
-		SELECT distinct p2.title, s.sname, a.name, a.position, p.pno
-		FROM SCHEDULE s, SCHPARTICIPANT p, PROJECT p2, ACCOUNT a 
-		WHERE s.sno in (
-			SELECT SNO
-			FROM SCHPARTICIPANT
-			WHERE userno = #{userno})
-		AND p2.pno in (
-			SELECT PNO
-			FROM SCHPARTICIPANT
-			WHERE userno = #{userno}
+		SELECT sc.sname, p.title, p.pno, a.name, a.position
+		FROM SCHEDULE sc, PROJECT p , account a
+		WHERE sc.sno IN (
+			SELECT s.SNO
+			FROM SCHPARTICIPANT s
+			WHERE s.userno = #{userno}
 		)
-		AND p.userno = #{userno}
-		AND a.userno in (
-			SELECT p2.PMNO 
-			FROM SCHEDULE s, SCHPARTICIPANT p, PROJECT p2
-			WHERE s.sno in (
-				SELECT SNO
-				FROM SCHPARTICIPANT
-				WHERE userno = #{userno})
-			AND p2.pno in (
-				SELECT PNO
-				FROM SCHPARTICIPANT
-				WHERE userno = #{userno}
-			)
-			AND p.userno = #{userno}
-		)
+		AND sc.pno = p.pno
+		AND a.userno = p.pmno
 	</select>
 	<insert id="insAccount" parameterType="account">
 	INSERT INTO account values('E'||to_char(acc_seq.nextval),#{pw},#{name},#{email}, '미정',
