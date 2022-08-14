@@ -342,7 +342,12 @@
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">간트차트 <span>ㅣ일정</span></h5>
-			<div id="chart_div"></div>
+                  <c:if test="${not empty slist}">
+					<div id="chart_div"></div>
+				  </c:if>
+				  <c:if test="${empty slist}">
+				  	<h3 align="center">일정을 추가해주세요.</h3>
+				  </c:if>
           </div>
           </div>
           </div>
