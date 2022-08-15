@@ -506,6 +506,76 @@
         </div><!-- End 채팅 -->
 
       </div>
+      <c:if test="${auth eq 'pm'}">
+      <div class="col-lg-12" align="center">
+      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
+      </div>
+      </c:if>
+      <c:if test="${auth eq 'admin'}">
+      <div class="col-lg-12" align="center">
+      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
+      </div>
+      </c:if>
+      
+      <div class="modal fade" id="verticalycentered" tabindex="-1">
+	       <div class="modal-dialog modal-dialog-centered">
+	         <div class="modal-content">
+	           <div class="modal-header">
+	             <h5 class="modal-title">프로젝트 수정/삭제</h5>
+	             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	           </div>
+	           <br>
+	           <div class="modal-body">
+				 <form class="row g-3 needs-validation" action="${path}/updateProject.do" novalidate>
+				 	<input type="hidden" name="pno" value="${param.pno}">
+				 	<%-- <div class="row mb-3">
+	                  <label class="col-sm-2 col-form-label">PM번호</label>
+	                  <div class="col-sm-10">
+	                    <input type="text" class="form-control" value="${pmno}" readonly>
+	                  </div>
+	               	</div> --%>
+	                <div class="col-md-8">
+	                  <div class="form-floating">
+	                    <input type="text" class="form-control" id="floatingName" name="title" placeholder="프로젝트명" value="${title}" required>
+	                    <label for="floatingName">프로젝트명</label>
+		                  <div class="invalid-feedback">
+		                    필수 입력정보 입니다.
+		                  </div>
+	                  </div>
+	                </div>
+	                <div class="col-sm-4">
+	                  <div class="form-floating mb-3">
+	                    <select name="dept" class="form-select" id="floatingDept" aria-label="Dept">
+	                      <option value="개발부">개발</option>
+	                      <option value="본부">본부</option>
+	                      <option value="영업부">영업</option>
+	                      <option value="인사부">인사</option>
+	                    </select>
+	                    <label for="floatingDept">부서</label>
+	                  </div>
+	                </div>
+	                <div class="text-center">
+	                  <button type="submit" class="btn btn-warning">프로젝트 수정</button>
+	                  <button type="button" class="btn btn-danger" onclick="deletePrj()">프로젝트 삭제</button>
+	                </div>
+	              </form>
+	              <script type="text/javascript">
+	              	function deletePrj(){
+	          			if(confirm("삭제하시겠습니까?\n삭제시 복구할 수 없습니다!!!")){
+	          				location.href="${path}/deleteProject.do?pno=${param.pno}"
+	          			}
+		          	}
+		          	var proc = "${proc}"
+		          	if(proc=="uptprj"){
+		          		alert("수정성공!")
+		          		location.href="${path}/goMain.do?pno=${param.pno}"
+		          	}
+	              </script>
+	           	</div>
+	          </div>
+	       	</div>
+	       
+         </div>
     </section>
 
   </main><!-- End #main -->

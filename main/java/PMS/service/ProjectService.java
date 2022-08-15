@@ -81,4 +81,15 @@ public class ProjectService {
 	public List<ProjectUserCnt> getProjectUserCnt(String pmno){
 		return dao.getProjectUserCnt(pmno);
 	}
+	
+	// 프로젝트 수정
+	public void updateProject(Project upt) {
+		dao.updateProject(upt);
+	}
+	
+	// 프로젝트 삭제
+	public void deleteProject(int pno) {
+		dao.deleteSchedule(pno);
+		dao.deleteProject(pno);
+	}
 }

@@ -102,6 +102,24 @@
 		AND p.PMNO = #{pmno}
 		GROUP BY p.PNO, p.TITLE
 	</select>
+	
+	<!-- 프로젝트 수정 -->
+	<update id="updateProject" parameterType="Project">
+		UPDATE PROJECT
+			SET TITLE = #{title},
+				DEPT  = #{dept}
+		WHERE PNO = #{pno}
+	</update>
+	
+	<!-- 프로젝트 삭제 -->
+	<delete id="deleteSchedule" parameterType="int">
+		DELETE FROM SCHEDULE
+		WHERE PNO = #{pno}
+	</delete>
+	<delete id="deleteProject" parameterType="int">
+		DELETE FROM PROJECT
+		WHERE PNO = #{pno}
+	</delete>
 </mapper>
 
 

@@ -196,8 +196,9 @@
 		              <h5 class="card-title">인원 현황 차트</h5>
 		
 		              <!-- Donut Chart -->
+		              <a href="${path}/goUmPage.do">
 		              <div class="memberChart" id="donutChart"></div>
-		
+					  </a>
 		              <script>
 						
 						var count = []
@@ -334,14 +335,14 @@
 	           </div>
 	           <br>
 	           <div class="modal-body">
-				 <form class="row g-3 needs-validation" action="${path}/addProject.do" novalidate>
+				 <form class="row g-3 needs-validation" action="${path}/updateProject.do" novalidate>
 				 	<div class="row mb-3">
 	                  <label class="col-sm-2 col-form-label">PM번호</label>
 	                  <div class="col-sm-10">
 	                    <input type="text" class="form-control" name="pmno" value="${userno}" readonly>
 	                  </div>
 	               	</div>
-	                <div class="col-md-6">
+	                <div class="col-md-8">
 	                  <div class="form-floating">
 	                    <input type="text" class="form-control" id="floatingName" name="title" placeholder="프로젝트명" required>
 	                    <label for="floatingName">프로젝트명</label>
@@ -373,13 +374,15 @@
          </div>
          <c:if test="${auth eq 'um'}">
 	       <div class="col-lg-5">
+	       	 
 	       	 <div class="card">
 	            <div class="card-body">
 	              <h5 class="card-title">인원 현황 차트</h5>
 	
 	              <!-- Donut Chart -->
+	              <a href="${path}/goUmPage.do">
 	              <div id="donutChart"></div>
-	
+				  </a>
 	              <script>
 					
 					var count = []
@@ -414,6 +417,7 @@
 	
 	            </div>
 	          </div>
+	          
             </div> 
             </c:if>
             
@@ -708,6 +712,12 @@
 				function goMain(pno){
 					location.href="${path}/goMain.do?pno="+pno
 				}
+				
+				var proc = "${proc}"
+	          	if(proc=="delprj"){
+	          		alert("삭제성공!")
+	          		location.href="${path}/entireDashboard.do"
+	          	}
 				</script>
                 </div>
 			  </div>

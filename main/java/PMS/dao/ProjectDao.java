@@ -56,4 +56,11 @@ public interface ProjectDao {
 	// 프로젝트별 참가인원수
 	public List<ProjectUserCnt> getProjectUserCnt(String pmno);
 	
+	// 프로젝트 수정
+	public void updateProject(Project upt);
+	
+	// 프로젝트 삭제(일정삭제->프로젝트삭제)
+	public void deleteSchedule(int pno);
+	public void deleteProject(int pno);
+	
 }
