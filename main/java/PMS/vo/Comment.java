@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class Comment {
 	private int cno;
 	private int sno;
-	private String userno;  
 	private String content;
 	private String writer;
 	private Date regdte;
@@ -21,11 +20,10 @@ public class Comment {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comment(int cno, int sno, String userno, String content, String writer, Date regdte, Date updte,
-			MultipartFile report, String fname) {
+	public Comment(int cno, int sno, String content, String writer, Date regdte, Date updte, MultipartFile report,
+			String fname) {
 		this.cno = cno;
 		this.sno = sno;
-		this.userno = userno;
 		this.content = content;
 		this.writer = writer;
 		this.regdte = regdte;
@@ -48,14 +46,6 @@ public class Comment {
 
 	public void setSno(int sno) {
 		this.sno = sno;
-	}
-
-	public String getUserno() {
-		return userno;
-	}
-
-	public void setUserno(String userno) {
-		this.userno = userno;
 	}
 
 	public String getContent() {

@@ -25,14 +25,21 @@
 		WHERE sno = #{sno}
 	</select>
 	
+	
+	<insert id="insertComment" parameterType="comment">
+		insert into comment_tb
+		values(seq_comm.nextval,#{sno},
+		#{content},#{writer},sysdate,sysdate)
+	</insert>
 
-	<!-- comment 등록 -->
+	<!-- comment 등록 
 	<insert id="insertComment" parameterType="comment">
 		insert into comment_tb
 		values(seq_comm.nextval,#{sno},
 		#{userno},#{content},(SELECT name FROM
 		ACCOUNT WHERE USERNO = #{userno}),sysdate,sysdate)
 	</insert>
+	-->
 	
 	<!-- comment 첨부파일 등록 -->
 	<insert id="insertFile" parameterType="commentfile">

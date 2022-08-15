@@ -9,13 +9,14 @@ CREATE TABLE Comment_tb(
 cno number PRIMARY KEY,
 sno NUMBER,
 FOREIGN KEY (sno) REFERENCES schedule (sno),
-userno varchar2(9),
-FOREIGN KEY (userno) REFERENCES account (userno),
 content varchar2(50),
 writer varchar2(20),
 regdte DATE,
 updte DATE
 );
+
+userno varchar2(9),
+FOREIGN KEY (userno) REFERENCES account (userno),
 
 DROP TABLE Comment_tb;
 SELECT * FROM Comment_tb;
@@ -27,7 +28,8 @@ CREATE SEQUENCE seq_comm
 DROP SEQUENCE seq_comm;
 
 -- Comment 샘플 데이터
-INSERT INTO Comment_tb values(seq_comm.nextval,1,'E10000003','제출합니다','홍길동',sysdate,sysdate);		
+INSERT INTO Comment_tb values(seq_comm.nextval,2,'E10000003','제출합니다','홍길동',sysdate,sysdate);		
+INSERT INTO Comment_tb values(seq_comm.nextval,3,'E10000003','안녕하세요','홍길동',sysdate,sysdate);		
 		
 		SELECT * FROM account;
 
@@ -57,4 +59,12 @@ SELECT * FROM  FILE_TB;
 		ORDER BY regdte DESC;
 		
 		SELECT * FROM account;
+	
+	SELECT * FROM SCHEDULE;
+	SELECT * FROM project;
 
+		SELECT
+		title
+		FROM project p, SCHEDULE s 
+		WHERE s.PNO = p.PNO 
+		AND sno = 4;

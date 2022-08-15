@@ -34,11 +34,6 @@ public class commentController {
 		
 		@RequestMapping("commInsertForm.do")
 		public String commInsertForm() {
-			// HttpSession session, Model d
-			// String userno = (String)session.getAttribute("userNo");
-			// session.setAttribute("writer", service.getWriter(getName());
-			// d.addAttribute("writer", service.getWriter(userno));
-			
 			return "WEB-INF\\views\\insertComment.jsp";
 		}
 			
