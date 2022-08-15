@@ -57,7 +57,18 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+     <c:if test="${auth eq 'admin'}">
+      <h1>전체 관리자용 대쉬보드</h1>
+     </c:if>
+     <c:if test="${auth eq 'pm'}">
+      <h1>프로젝트 관리자용 대쉬보드</h1>
+     </c:if>
+     <c:if test="${auth eq 'um'}">
+      <h1>유저 관리자용 대쉬보드</h1>
+     </c:if>
+     <c:if test="${auth eq 'user'}">
+      <h1>전체 대쉬보드</h1>
+     </c:if>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -119,7 +130,7 @@
 	              <h5 class="card-title">부서별 프로젝트 수</h5>
 	
 	              <!-- Bar Chart -->
-	              <canvas id="barChart" style="max-height: 183px;"></canvas>
+	              <canvas class="projectCntChart" id="barChart" style="max-height: 183px;"></canvas>
 	              <script>
 	              	var deptcnt = []
 					var cntdept = []
@@ -136,7 +147,7 @@
 						}
 					})
 	                document.addEventListener("DOMContentLoaded", () => {
-	                  new Chart(document.querySelector('#barChart'), {
+	                  new Chart(document.querySelector('.projectCntChart'), {
 	                    type: 'bar',
 	                    data: {
 	                      labels: cntdept,
@@ -408,49 +419,116 @@
             
             
             <c:if test="${auth eq 'pm'}">
-	       <div class="col-lg-4">
-	       	 <div class="card">
-	            <div class="card-body">
-	              <h5 class="card-title">부서별 예산</h5>
-	
-	              <!-- Donut Chart -->
-	              <div class="budgetChart" id="donutChart"></div>
-	
-	              <script>
-					
-					var deptbudget = []
-					var dept = []
-					$.ajax({
-						url:"${path}/getDeptBudget.do",
-						dataType:"json",
-						async:false,
-						success:function(data){
-							var data = data.deptbudget
-							$(data).each(function(idx, d){
-								deptbudget.push(Number(d.deptbudget))
-								dept.push(d.dept)
-							})
-						}
-					})
-	                document.addEventListener("DOMContentLoaded", () => {
-	                  new ApexCharts(document.querySelector(".budgetChart"), {
-	                    series: deptbudget,
-	                    chart: {
-	                      height: 250,
-	                      type: 'donut',
-	                      toolbar: {
-	                        show: true
-	                      }
-	                    },
-	                    labels: dept,
-	                  }).render();
-	                });
-	              </script>
-	              <!-- End Donut Chart -->
-	
+		       <div class="col-lg-4">
+		       	 <div class="card">
+		            <div class="card-body">
+		              <h5 class="card-title">프로젝트별 예산</h5>
+		
+		              <!-- Donut Chart -->
+		              <div class="projectbudgetChart" id="donutChart"></div>
+		
+		              <script>
+						
+						var projectbudget = []
+						var title = []
+						$.ajax({
+							url:"${path}/getProjectBudget.do",
+							dataType:"json",
+							async:false,
+							success:function(data){
+								var data = data.projectbudget
+								$(data).each(function(idx, d){
+									projectbudget.push(Number(d.projectbudget))
+									title.push(d.title)
+								})
+							}
+						})
+		                document.addEventListener("DOMContentLoaded", () => {
+		                  new ApexCharts(document.querySelector(".projectbudgetChart"), {
+		                    series: projectbudget,
+		                    chart: {
+		                      height: 250,
+		                      type: 'donut',
+		                      toolbar: {
+		                        show: true
+		                      }
+		                    },
+		                    labels: title,
+		                  }).render();
+		                });
+		              </script>
+		              <!-- End Donut Chart -->
+		
+		            </div>
+		          </div>
+		          
+		       	 <div class="card">
+		            <div class="card-body">
+		              <h5 class="card-title">프로젝트별 참가인원수</h5>
+		
+		              <!-- Donut Chart -->
+		              <canvas class="projectUserChart" id="barChart" style="max-height: 400px;"></canvas>
+		
+		              <script>
+						
+						var usercnt = []
+						var titleu = []
+						$.ajax({
+							url:"${path}/getProjectUserCnt.do",
+							dataType:"json",
+							async:false,
+							success:function(data){
+								var data = data.projectusercnt
+								$(data).each(function(idx, d){
+									usercnt.push(Number(d.usercnt))
+									titleu.push(d.title)
+								})
+							}
+						})
+		                document.addEventListener("DOMContentLoaded", () => {
+		                  new Chart(document.querySelector('.projectUserChart'), {
+		                    type: 'bar',
+		                    data: {
+		                      labels: titleu,
+		                      datasets: [{
+		                        label: '인원 수',
+		                        data: usercnt,
+		                        backgroundColor: [
+		                          'rgba(255, 99, 132, 0.2)',
+		                          'rgba(255, 159, 64, 0.2)',
+		                          'rgba(255, 205, 86, 0.2)',
+		                          'rgba(75, 192, 192, 0.2)',
+		                          'rgba(54, 162, 235, 0.2)',
+		                          'rgba(153, 102, 255, 0.2)',
+		                          'rgba(201, 203, 207, 0.2)'
+		                        ],
+		                        borderColor: [
+		                          'rgb(255, 99, 132)',
+		                          'rgb(255, 159, 64)',
+		                          'rgb(255, 205, 86)',
+		                          'rgb(75, 192, 192)',
+		                          'rgb(54, 162, 235)',
+		                          'rgb(153, 102, 255)',
+		                          'rgb(201, 203, 207)'
+		                        ],
+		                        borderWidth: 1
+		                      }]
+		                    },
+		                    options: {
+		                      scales: {
+		                        y: {
+		                          beginAtZero: true
+		                        }
+		                      }
+		                    }
+		                  });
+		                });
+		              </script>
+		              <!-- End Donut Chart -->
+		
+		            </div>
+		          </div>
 	            </div>
-	          </div>
-            </div>
             </c:if>
           </div>
 		<script>

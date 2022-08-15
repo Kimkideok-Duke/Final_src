@@ -65,4 +65,22 @@ public class ProjectController {
     	d.addAttribute("deptcnt", service.getDeptCnt());
     	return "pageJsonReport";
     }
+    
+    // 프로젝트별 예산
+    @RequestMapping("getProjectBudget.do")
+    public String getProjectBudget(HttpServletRequest request, Model d) {
+    	HttpSession session = request.getSession();
+    	String userno = (String)session.getAttribute("userno");
+    	d.addAttribute("projectbudget", service.getProjectBudget(userno));
+    	return "pageJsonReport";
+    }
+    
+    // 프로젝트별 참가인원수
+    @RequestMapping("getProjectUserCnt.do")
+    public String getProjectUserCnt(HttpServletRequest request, Model d) {
+    	HttpSession session = request.getSession();
+    	String userno = (String)session.getAttribute("userno");
+    	d.addAttribute("projectusercnt", service.getProjectUserCnt(userno));
+    	return "pageJsonReport";
+    }
 }
