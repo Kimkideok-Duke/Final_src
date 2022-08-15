@@ -29,8 +29,8 @@ public class MainService {
 	public void uptSchedule(Schedule upt) {
 		dao.uptSchedule(upt);
 	}
-	public void delSchedule() {
-
+	public void delSchedule(int sno) {
+		dao.delSchedule(sno);
 	}
 	public void uptScheduleByPM(Schedule upt) {
 		dao.uptScheduleByPM(upt);

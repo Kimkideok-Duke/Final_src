@@ -96,8 +96,30 @@
 			}
 		})
 	}
+	function regVal(){
+		$.ajax({
+			url:"${path}/regScheduleModal.do",
+			dataType:"json",
+			success:function(data){
+				var data = data.schedule
+				console.log(data.sno)
+				console.log(data.sname)
+				console.log(data.status)
+				console.log(data.progress)
+				console.log(data.startDate)
+				console.log(data.endDate)
+				console.log(data.budget)
+			}
+		})
+	}
 	var auth = "${auth}"
-	function updateProc(){
+	function regProc(){
+		if(confirm("등록하시겠습니까?")){
+			$("form").attr("action","${path}/regSchedule.do");
+			$("form").submit();
+		}
+	}
+	function uptProc(){
 		if(auth=="pm" || auth=="admin"){
 			if(confirm("수정하시겠습니까?")){
 				$("form").attr("action","${path}/uptScheduleByPM.do");
@@ -110,10 +132,21 @@
 			}
 		}
 	}
+	function delProc(){
+		if(confirm("삭제하시겠습니까?")){
+			var sno = $("#sno").val()
+			location.href="${path}/delSchedule.do?sno="+sno
+		}
+	}
+	
 	var pno = "${pno}"
 	var proc = "${proc}"
 	if(proc=="upt"){
-		alert("수정성공!\n일정목록으로 이동합니다")
+		alert("수정성공!")
+		location.href="${path}/goMain.do?pno="+pno
+	}
+	if(proc=="del"){
+		alert("삭제성공!")
 		location.href="${path}/goMain.do?pno="+pno
 	}
 </script>
@@ -271,6 +304,7 @@
 			</tbody>
 			</table>
    		 </div>
+   		 <button type="button" id="Btn01" class="btn btn-primary" onclick="chVal(${schedule.sno })"data-bs-toggle="modal" data-bs-target="#regModal">등록</button>
 	</div>
 </div>
             <!-- 일정관리 -->
@@ -325,7 +359,8 @@
 			                 <input type="text" id="budget" name="budget" class="form-control" value="" >
 			               </div>
 			             </div>
-			             	<button type="button" onclick="updateProc()" id="uptBtn" class="btn btn-primary">수정</button>
+			             	<button type="button" onclick="uptProc()" id="uptBtn" class="btn btn-primary">수정</button>
+			             	<button type="button" onclick="delProc()" id="delBtn" class="btn btn-danger">삭제</button>
 			              </form>
 			           </div>
 			     <!-- 모달 하단 -->      
@@ -335,7 +370,66 @@
            </div>
          </div>
        </div>
-
+       
+<!-- 모달창(일반등록) -->
+       <div class="modal fade" id="regModal" tabindex="-1">
+         <div class="modal-dialog">
+           <div class="modal-content">
+                  <!-- 모달 상단 -->
+				      <div class="modal-header">
+				        <h5 class="modal-title">일정 등록</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <!-- 모달 내용 sname, status, progress, startDate, endDate, budget -->
+			      <div class="modal-body">
+			      <!-- 권한 체크해서 form 경로 변경, input 숨기기 -->
+			  		<form id="regSchedule" class="row g-3 needs-validation" novalidate>
+			             <div class="row mb-3" style="padding-top:15px;">
+			               <label for="inputText" class="col-sm-2 col-form-label">일정명</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="snameReg" name="sname" class="form-control" value="">
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">상태</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="statusReg" name="status" class="form-control" value="" >
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">진행도</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="progressReg" name="progress" class="form-control" value="" >
+			               </div>
+			             </div>
+						<div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">시작일</label>
+			               <div class="col-sm-10">
+			                 <input type="date" id="startDateReg" name="startDate_s" class="form-control" value="">
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">마감일</label>
+			               <div class="col-sm-10">
+			                 <input type="date" id="endDateReg" name="endDate_s" class="form-control" value="" >
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">예산</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="budgetReg" name="budget" class="form-control" value="" >
+			               </div>
+			             </div>
+			             	<button type="button" onclick="regProc()" id="regBtn" class="btn btn-primary">등록</button>
+			              </form>
+			           </div>
+			     <!-- 모달 하단 -->      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+				      </div>	
+           </div>
+         </div>
+       </div>
 
             <!-- Gantt Chart -->
             <div class="col-12">
