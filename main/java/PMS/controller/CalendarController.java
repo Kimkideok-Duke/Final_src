@@ -29,17 +29,18 @@ public class CalendarController {
 	// http://localhost:6080/PMS/calList.do callist
 	@RequestMapping("calList.do")
 	public String calList(HttpServletRequest request, Model d) {
-		HttpSession session = request.getSession();
-		int pno = (int)session.getAttribute("pno");
-		List<Schedule> slist = mservice.getScheduleList(pno); //pno를 받아야함.
-		for(int idx=0;idx<slist.size();idx++) {
-			Date enddate = slist.get(idx).getEndDate();
-			Date startdate = slist.get(idx).getStartDate();
-			List<Calendar> clist = service.getCalList();
-			clist.get(idx).setStart(startdate);
-			clist.get(idx).setEnd(enddate);
-			d.addAttribute("callist", service.getCalList());
-		}
+//		HttpSession session = request.getSession();
+//		int pno = (int)session.getAttribute("pno");
+//		List<Schedule> slist = mservice.getScheduleList(pno); //pno를 받아야함.
+//		for(int idx=0;idx<slist.size();idx++) {
+//			Date enddate = slist.get(idx).getEndDate();
+//			Date startdate = slist.get(idx).getStartDate();
+//			List<Calendar> clist = service.getCalList();
+//			clist.get(idx).setStart(startdate);
+//			clist.get(idx).setEnd(enddate);
+//			d.addAttribute("callist", service.getCalList());
+//		}
+		d.addAttribute("callist", service.getCalList());
 		return "pageJsonReport";
 	}
 	// http://localhost:6080/PMS/calInsert.do

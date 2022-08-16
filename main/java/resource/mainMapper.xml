@@ -21,7 +21,7 @@
 	<insert id="regSchedule" parameterType="schedule">
 		INSERT INTO SCHEDULE
 		values(seq_sno.nextval, #{pno}, #{sname}, #{status}, #{progress}, 
-			to_date(#{startDate_s}, 'YYYY-MM-DD'), to_date(#{endDate_s}, 'YYYY-MM-DD'), #{budget});
+			to_date(#{startDate_s}, 'YYYY-MM-DD'), to_date(#{endDate_s}, 'YYYY-MM-DD'), #{budget})
 	</insert>
 	<update id="uptSchedule" parameterType="schedule">
 		UPDATE SCHEDULE

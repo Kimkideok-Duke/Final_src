@@ -115,15 +115,16 @@
 	var auth = "${auth}"
 	function regProc(){
 		if(confirm("등록하시겠습니까?")){
-			$("form").attr("action","${path}/regSchedule.do");
-			$("form").submit();
+			$("#regSchedule").attr("action","${path}/regSchedule.do");
+			console.log("################등록#############")
+			$("#regSchedule").submit();
 		}
 	}
 	function uptProc(){
 		if(auth=="pm" || auth=="admin"){
-			if(confirm("수정하시겠습니까?")){
-				$("form").attr("action","${path}/uptScheduleByPM.do");
-				$("form").submit();
+			if(confirm("수정하시겠습니까?(PM)")){
+				$("#uptSchedule").attr("action","${path}/uptScheduleByPM.do");
+				$("#uptSchedule").submit();
 			}
 		}else{
 			if(confirm("수정하시겠습니까?")){
@@ -150,8 +151,7 @@
 		location.href="${path}/goMain.do?pno="+pno
 	}
 </script>
-  
-  
+
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load('current', {'packages':['gantt']});
@@ -232,8 +232,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">${title}</h5>
-					진행도 : 
+                  <h5 class="card-title">${title}</h5> 
 					<div class="progress">
 	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 36%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">36%</div>
 	              	</div>
