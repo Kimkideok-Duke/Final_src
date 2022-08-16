@@ -36,6 +36,12 @@
 
   <!-- Template Main CSS File -->
   <link href="NiceAdmin/assets/css/style.css" rel="stylesheet">
+<style>
+	#chatArea{
+		height:200px;overflow-y:scroll;text-align:left;
+	}
+
+</style>
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.3.1
@@ -582,9 +588,9 @@
                 </div>
                 <div class="col-12">
                   <div class="form-floating">
-                   <div id="chatArea">
-                    <div class="form-control" id="chatMessageArea" style="height: 200px;"></div>
-                    <label for="chatMessageArea">채팅 내용</label>
+                  <div>채팅 내용</div>
+                   <div class="form-control" id="chatArea">
+                    <div id="chatMessageArea"></div>
                    </div> 
                   </div>
                 </div>
@@ -763,6 +769,7 @@ function conn(){
 	wsocket.onclose=function(){
 		alert($("#id").val()+"접속 종료합니다.")
 		$("#chatMessageArea").val("")
+		$("#chatArea").val("")
 		
 	}		
 	
