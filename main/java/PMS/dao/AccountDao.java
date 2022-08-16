@@ -46,4 +46,6 @@ public interface AccountDao {
 	public void delProfileImg(String userno);
 	// 현재 프로필사진 등록되어있는지 확인
 	public String checkProfileImg(String userno);
+	// 사원리스트
+	public List<Account> getAccountList();
 }
