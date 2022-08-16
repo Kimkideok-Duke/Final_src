@@ -20,6 +20,8 @@ import PMS.vo.Schedule;
 public class CalendarController {
 	@Autowired(required = false)
 	private CalendarService service;
+	
+	@Autowired(required = false)	
 	private MainService mservice;
 	// http://localhost:6080/PMS/calendar.do
 	@RequestMapping("calendar.do")
@@ -31,18 +33,18 @@ public class CalendarController {
 	public String calList(HttpServletRequest request, Model d) {
 		HttpSession session = request.getSession();
 		int pno = (int)session.getAttribute("pno");
-		System.out.println("###############"+pno+"#############");
 		List<Schedule> slist = mservice.getScheduleList(pno); //pno로 schedule list 받아옴
 		for(int idx=0;idx<slist.size();idx++) {
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String startdate = transFormat.format(slist.get(idx).getStartDate());// slist의 startdate,enddate값 추출
 			String enddate = transFormat.format(slist.get(idx).getEndDate()); //형변환
+			String title = slist.get(idx).getSname();
 			List<Calendar> clist = service.getCalList(); // calendar list 
-			clist.get(idx).setStart(startdate); // calendar list의 각 idx에 맞게 start, end값 설정
-			clist.get(idx).setEnd(enddate);
+			service.updateCalendar(new Calendar(title,startdate,enddate));
+			// calendar list의 각 idx에 맞게 start, end값 설정
 			d.addAttribute("callist", clist);
 		}
-		d.addAttribute("callist", service.getCalList());
+//		d.addAttribute("callist", service.getCalList());
 		return "pageJsonReport";
 	}
 	// http://localhost:6080/PMS/calInsert.do

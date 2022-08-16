@@ -10,6 +10,13 @@ public class Calendar {
 	private String backgroundColor;
 	private String textColor;
 	private boolean allDay;
+	
+	public Calendar(String title, String start, String end) {
+		super();
+		this.title = title;
+		this.start = start;
+		this.end = end;
+	}
 	public int getId() {
 		return id;
 	}
