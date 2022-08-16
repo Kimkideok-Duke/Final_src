@@ -115,6 +115,11 @@
 		FROM PROFILE
 		WHERE userno = #{userno}
 	</select>
+	
+	
+	<select id="getAccountList" resultType="account">
+		SELECT * FROM account
+	</select>
 </mapper>
 
 
