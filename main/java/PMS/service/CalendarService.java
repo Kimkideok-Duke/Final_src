@@ -25,5 +25,8 @@ public class CalendarService {
 	public void deleteCalendar(int id) {
 		dao.deleteCalendar(id);
 	}
+	public int getRecentSno() {
+      return dao.getRecentSno();
+   }
 	
 }

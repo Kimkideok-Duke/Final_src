@@ -167,4 +167,9 @@ public class AccountService {
 	public void delProfileImg(String userno) {
 		dao.delProfileImg(userno);
 	}
+	
+	// 사원리스트
+	public List<Account> getAccountList(){
+		return dao.getAccountList();
+	}
 }

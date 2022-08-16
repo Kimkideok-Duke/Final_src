@@ -197,7 +197,7 @@
 		})
       	data.addRows(dlist);
       var options = {
-        height: "100%",
+        height: 400,
         width:"100%",
         gantt: {
           trackHeight: 30
@@ -453,9 +453,9 @@
 				  <c:if test="${empty slist}">
 				  	<h3 align="center">일정을 추가해주세요.</h3>
 				  </c:if>
-          </div>
-          </div>
-          </div>
+          		</div>
+          	  </div>
+          	</div>
           </div>
         </div><!-- End Left side columns -->
 
@@ -567,10 +567,75 @@
 		                  </tr>
 		                </tbody>
 		              </table>
+		              <c:if test="${auth eq 'admin'}">
+		              <div class="col-lg-12" align="center">
+			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered">참가자 추가</button>
+			        </div>
+			        </c:if>
+			        <c:if test="${auth eq 'pm'}">
+		              <div class="col-lg-12" align="center">
+			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered">참가자 추가</button>
+			        </div>
+			        </c:if>
                     </div>
+                    
                   </div>
                 </div>
                </div>
+
+<script type="text/javascript">
+	var proc = "${proc}"
+  	if(proc=="insParPrj"){
+  		alert("${param.userno} 추가 성공!")
+  		location.href="${path}/goMain.do?pno=${param.pno}"
+  	}
+</script>        
+		      <div class="modal fade" id="verticalycentered" tabindex="-1">
+			       <div class="modal-dialog modal-dialog-centered">
+			         <div class="modal-content">
+			           <div class="modal-header">
+			             <h5 class="modal-title">참가자 추가</h5>
+			             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			           </div>
+			           <br>
+			           <div class="modal-body">
+						 <form class="row g-3 needs-validation" action="${path}/insParPrj.do?pno=${param.pno}" novalidate>
+						 	<input type="hidden" name="pno" value="${param.pno}">
+			                <div class="col-sm-12">
+			                  <div class="form-floating mb-3">
+			                  	<table class="table table-striped datatable">
+					                <thead>
+					                  <tr>
+					                    <th scope="col">   </th>
+					                    <th scope="col">이름</th>
+					                    <th scope="col">직급</th>
+					                    <th scope="col">부서</th>
+					                    <th scope="col">UserNo</th>
+					                  </tr>
+					                </thead>
+					                <tbody>
+					                <c:forEach var="a" items="${alist}">
+					                  <tr>
+					                    <td><input type="radio" value="${a.userno}" name="userno"></td>
+					                    <td>${a.name}</td>
+					                    <td>${a.position}</td>
+					                    <td>${a.dept}</td>
+					                    <td>${a.userno}</td>
+					                  </tr>
+					                </c:forEach>
+					                </tbody>
+					            </table>
+			                  </div>
+			                </div>
+			                <div class="text-center">
+			                  <button type="submit" class="btn btn-primary">추가</button>
+			                </div>
+			              </form>
+			           	</div>
+			          </div>
+			       	</div>
+			       
+		         </div>
               </div>
              </div><!--참가자 End Accordion without outline borders -->
         
@@ -583,7 +648,7 @@
                 <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="id" value="${name} (${dept})" readonly>
-                    <label for="id">사원번호</label>
+                    <label for="id">사원이름(부서명)</label>
                   </div>
                 </div>
                 <div class="col-12">
@@ -700,66 +765,27 @@ $(document).ready(function(){
 	$("#enterBtn").click(function(){
 		if(confirm("채팅방 접속합니다.")){
 			conn();
-			
 		}
 	});
-	// 아이디 입력 후,  enter 키를 입력시도 접속
-	$("#id").keyup(function(){
-		if(event.keyCode==13){
-			conn();
-		}
-	});
-	
 	$("#exitBtn").click(function(){
 		if(confirm("접속을 종료하시겠습니까?")){
 			wsocket.send("msg:"+$("#id").val()+":접속 종료 했습니다.")
 			wsocket.close();
-			// 서버 handler public void afterConnectionClosed()
-			// 와 연동
 		}
 	});
-	
 });
 function conn(){
-	wsocket = new WebSocket("ws:localhost:7080/${path}/chat-ws.do")
-	wsocket.onopen=function(evt){ // 접속하는 핸들러 메서드와 연결
-		console.log(evt)
-		// 능동적으로 서버에 소켓통신으로 메시지를 보내는 것..
+	wsocket = new WebSocket("ws:220.73.54.156:8080/${path}/chat-ws.do")
+	wsocket.onopen=function(evt){ 
 		wsocket.send("msg:"+$("#id").val()+":연결 접속했습니다.")
-		// "msg:himan:연결접속했습니다."
-		//  msg:전송자:메시지명
-		//  msg:그룹명:전송자:메시지  (단일 chatting/그룹 chatting)
-		
-		
 	}
 	// 메시지를 받을 때, 처리되는 메서드
-	// 서버에서 push방식으로 메시지를 전달 받는데..
-	/*
-	# 참고
-	1. webstorage 활용
-		1) 메시지 내용 임시 저장
-		2) 로그인한 id 임시 저장.
-		
-	
-	
-	*/
 	wsocket.onmessage=function(evt){
-		
 		var msg = evt.data
 		console.log(msg)
 		if(msg.substring(0,4)=="msg:"){
-			// mgs:그룹명:전송자:메시지  (단일 chatting/그룹 chatting)
-			// 그룹에 해당할 때만 메시지를 받아서 처리하게 처리..
-			
-			
-			// msg: 를 제외한 모든 문자열을 추출
 			var revMsg = msg.substring(4)
-			console.log("#메시지 받기#")
-			console.log(msg)
 			$("#chatMessageArea").append(revMsg+"<br>")	
-			// 자동 scolling 처리 로직
-			// 1.  전체 charMessageArea의 입력된 최대 높이 구하기
-			// 2. 포함하고 있는 div의 scollTop을 통해 최대한 내용으로 scrolling 하기
 			$("#chatArea").scrollTop(ma+=20);
 			console.log("chatArea길이:"+ma)
 		}
@@ -768,25 +794,19 @@ function conn(){
 	// 접속을 종료 처리할 때
 	wsocket.onclose=function(){
 		alert($("#id").val()+"접속 종료합니다.")
-		$("#chatMessageArea").val("")
-		$("#chatArea").val("")
-		
+		$("#chatMessageArea").empty();
 	}		
-	
 }
-
 $("#msg").keyup(function(){
 	if(event.keyCode==13){
 		wsocket.send("msg:"+$("#id").val()+":"+$(this).val())
 		$(this).val("").focus()
 	}
-	
 });
 // 전송 버튼을 클릭시에 메시지 전송
 $("#sndBtn").click(function(){
 	wsocket.send("msg:"+$("#id").val()+":"+$("#msg").val())
 	$("#msg").val("").focus()				
-	
 });
 
 </script>
