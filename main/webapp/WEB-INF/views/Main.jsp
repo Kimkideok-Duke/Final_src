@@ -36,6 +36,12 @@
 
   <!-- Template Main CSS File -->
   <link href="NiceAdmin/assets/css/style.css" rel="stylesheet">
+<style>
+	#chatArea{
+		height:200px;overflow-y:scroll;text-align:left;
+	}
+
+</style>
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.3.1
@@ -115,15 +121,16 @@
 	var auth = "${auth}"
 	function regProc(){
 		if(confirm("등록하시겠습니까?")){
-			$("form").attr("action","${path}/regSchedule.do");
-			$("form").submit();
+			$("#regSchedule").attr("action","${path}/regSchedule.do");
+			console.log("################등록#############")
+			$("#regSchedule").submit();
 		}
 	}
 	function uptProc(){
 		if(auth=="pm" || auth=="admin"){
-			if(confirm("수정하시겠습니까?")){
-				$("form").attr("action","${path}/uptScheduleByPM.do");
-				$("form").submit();
+			if(confirm("수정하시겠습니까?(PM)")){
+				$("#uptSchedule").attr("action","${path}/uptScheduleByPM.do");
+				$("#uptSchedule").submit();
 			}
 		}else{
 			if(confirm("수정하시겠습니까?")){
@@ -141,17 +148,21 @@
 	
 	var pno = "${pno}"
 	var proc = "${proc}"
+	var isReg = "${isReg}"
+	if(isReg=="Y"){
+		alert("등록 성공!")
+		location.href="${path}/goMain.do?pno="+pno		
+	}
 	if(proc=="upt"){
-		alert("수정성공!")
+		alert("수정 성공!")
 		location.href="${path}/goMain.do?pno="+pno
 	}
 	if(proc=="del"){
-		alert("삭제성공!")
+		alert("삭제 성공!")
 		location.href="${path}/goMain.do?pno="+pno
 	}
 </script>
-  
-  
+
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load('current', {'packages':['gantt']});
@@ -232,8 +243,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">${title}</h5>
-					진행도 : 
+                  <h5 class="card-title">${title}</h5> 
 					<div class="progress">
 	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 36%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">36%</div>
 	              	</div>
@@ -384,6 +394,7 @@
 			      <div class="modal-body">
 			      <!-- 권한 체크해서 form 경로 변경, input 숨기기 -->
 			  		<form id="regSchedule" class="row g-3 needs-validation" novalidate>
+			  			<input type="hidden" name="pno" value="${param.pno}">
 			             <div class="row mb-3" style="padding-top:15px;">
 			               <label for="inputText" class="col-sm-2 col-form-label">일정명</label>
 			               <div class="col-sm-10">
@@ -577,9 +588,9 @@
                 </div>
                 <div class="col-12">
                   <div class="form-floating">
-                   <div id="chatArea">
-                    <div class="form-control" id="chatMessageArea" style="height: 200px;"></div>
-                    <label for="chatMessageArea">채팅 내용</label>
+                  <div>채팅 내용</div>
+                   <div class="form-control" id="chatArea">
+                    <div id="chatMessageArea"></div>
                    </div> 
                   </div>
                 </div>
@@ -758,6 +769,7 @@ function conn(){
 	wsocket.onclose=function(){
 		alert($("#id").val()+"접속 종료합니다.")
 		$("#chatMessageArea").val("")
+		$("#chatArea").val("")
 		
 	}		
 	

@@ -155,7 +155,7 @@
       </li> --%><!-- End 간트차트 Nav -->
       
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="${path}/calendar.do">
           <i class="bi bi-calendar3"></i><span>fullcalendar</span>
         </a>
       </li><!-- End 풀캘린더 Nav -->

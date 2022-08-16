@@ -35,7 +35,7 @@
 		<mapper resource="resource/accountMapper.xml"/>
 		<mapper resource="resource/projectMapper.xml"/>
 		<mapper resource="resource/commentMapper.xml"/>
-		<mapper resource="resource/calendarMapper.xml"/>
+		<mapper resource="resource/fullCalendarMapper.xml"/>
 	</mappers>
 	
 </configuration>

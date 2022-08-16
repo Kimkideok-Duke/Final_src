@@ -30,6 +30,7 @@ public class MainCtrl {
     @RequestMapping("regSchedule.do")
 	public String regSchedule(Schedule reg, Model d) {
 		service.regSchedule(reg);
+		d.addAttribute("isReg","Y");
 		return "WEB-INF\\views\\Main.jsp";
 	}
     
