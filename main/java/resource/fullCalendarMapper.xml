@@ -32,5 +32,9 @@
 	<delete id="deleteCalendar" parameterType="int" >
 	   DELETE FROM calendar
 	   WHERE id= #{id}
-	</delete>  	
+	</delete>
+	<select id="getRecentSno" resultType="int">
+      SELECT max(sno) sno
+      FROM schedule
+   </select>
 </mapper>
