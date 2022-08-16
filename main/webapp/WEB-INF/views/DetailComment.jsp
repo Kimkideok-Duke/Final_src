@@ -129,7 +129,7 @@ text-decoration:underline;
                   </div>
                 </div>
                 
-                               <div class="col-md-12">
+                   <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" name="fname" class="form-control HV"  id="floatingName" value="${comment.fname}">
                     <label for="floatingName">첨부파일</label>
