@@ -196,7 +196,7 @@
 		})
       	data.addRows(dlist);
       var options = {
-        height: "100%",
+        height: 400,
         width:"100%",
         gantt: {
           trackHeight: 30
@@ -452,9 +452,9 @@
 				  <c:if test="${empty slist}">
 				  	<h3 align="center">일정을 추가해주세요.</h3>
 				  </c:if>
-          </div>
-          </div>
-          </div>
+          		</div>
+          	  </div>
+          	</div>
           </div>
         </div><!-- End Left side columns -->
 
