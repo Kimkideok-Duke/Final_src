@@ -118,7 +118,7 @@ background-color: #f2f2f2;
                       <tr ondblclick="goDetail(${l.cno})" >
                       <td><%=cnt+=1 %></td>
                       <td>${l.content}</td>
-                      <td></td>
+                      <td>${l.writer}</td>
                       <td><fmt:formatDate pattern="yyyy-MM-dd" value="${l.regdte}"/></td>
                       <td><fmt:formatDate pattern="yyyy-MM-dd" value="${l.updte}"/></td>
                       </tr>

@@ -99,7 +99,10 @@ text-decoration:underline;
 		   <div class="card">
             <div class="card-body">       
               <h5 class="card-title" style="font-weight: bold">일정 이름</h5>
-		             
+		    <form  id="form" action="${path}/commentList.do" method="post">
+			<input type="hidden" name="sno" value="${param.sno}"/>
+			</form>
+	    
 		     <div class="row g-3">     
 		     <div class="col-md-6">
                   <div class="form-floating">
@@ -220,7 +223,7 @@ text-decoration:underline;
 	var proc = "${proc}"
 	if(proc=="del"){
 		alert("삭제완료!!\n조회화면으로 이동!")
-		location.href="${path}/commentList.do="+sno;
+		$("#form").submit();
 	}
 
 </script>

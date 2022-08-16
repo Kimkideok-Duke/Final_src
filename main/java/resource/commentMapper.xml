@@ -8,6 +8,7 @@
 	<select id="commentList" parameterType="int"
 		resultType="comment">
 		SELECT * FROM comment_tb WHERE sno = #{sno}
+		ORDER BY updte DESC
 	</select>
 
 	<select id="getTitle" resultType="string" parameterType="int">
@@ -32,18 +33,10 @@
 		#{content},#{writer},sysdate,sysdate)
 	</insert>
 
-	<!-- comment 등록 
-	<insert id="insertComment" parameterType="comment">
-		insert into comment_tb
-		values(seq_comm.nextval,#{sno},
-		#{userno},#{content},(SELECT name FROM
-		ACCOUNT WHERE USERNO = #{userno}),sysdate,sysdate)
-	</insert>
-	-->
 	
 	<!-- comment 첨부파일 등록 -->
 	<insert id="insertFile" parameterType="commentfile">
-	insert into File_tb values(#{fname},seq_comm.currval, #{fpath})
+	insert into File_tb values(seq_comm.currval,#{fname}, #{fpath})
 	</insert>
 
 	<!-- comment Detail -->
