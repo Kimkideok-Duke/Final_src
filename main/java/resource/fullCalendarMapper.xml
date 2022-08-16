@@ -17,24 +17,35 @@
 		insert into calendar values(cal_seq.nextval,#{pno},#{sno},#{title},#{start},
 			#{end},#{content},null,#{backgroundColor},#{textColor},
 			#{allDay})				
-	</insert>	
+	</insert>
 	<update id="updateCalendar" parameterType="calendar">
-	 UPDATE calendar
-	    SET title = #{title},
-	        START1 = #{start},
-	        end1 = #{end},
-	        content = #{content},
-	        backgroundcolor=#{backgroundColor},
-	        textcolor=#{textColor},
-	        allday=#{allDay}
-	   WHERE id = #{id}
-	</update> 
+		UPDATE calendar
+			SET title = #{title},
+				start1 = #{start},
+				end1 = #{end},
+				content = #{content},
+				backgroundcolor = #{backgroundColor},
+				textcolor = #{textColor},
+				allday = #{allDay}
+			WHERE id = #{id}
+	</update>
 	<delete id="deleteCalendar" parameterType="int" >
 	   DELETE FROM calendar
 	   WHERE id= #{id}
-	</delete>
+	</delete>  	
 	<select id="getRecentSno" resultType="int">
-      SELECT max(sno) sno
-      FROM schedule
-   </select>
+		SELECT max(sno) sno
+		FROM schedule
+	</select>
+	<select id="getSnoId" resultType="int" parameterType="int">
+		SELECT sno
+		FROM calendar
+		WHERE id = #{id}
+	</select>
+	<select id="getScheduleId" resultType="Schedule" parameterType="int">
+		SELECT s.*
+		FROM calendar c, schedule s
+		WHERE c.id = #{id}
+		AND c.sno = s.sno
+	</select>
 </mapper>

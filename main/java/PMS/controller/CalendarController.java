@@ -55,10 +55,14 @@ public class CalendarController {
    // http://localhost:6080/PMS/calUpdate.do
    @RequestMapping("calUpdate.do")
    public String updateCalendar(Calendar upt) {
-      service.updateCalendar(upt);
+	  service.updateCalendar(upt);
       String startdate = upt.getStart().split("T")[0]; 
       String enddate = upt.getEnd().split("T")[0];
-      mservice.uptScheduleByPM(new Schedule(upt.getSno(), upt.getTitle(),"기본",0, startdate, enddate,0));
+      Schedule s = service.getScheduleId(upt.getId());
+      s.setSname(upt.getTitle());
+      s.setStartDate_s(startdate);
+      s.setEndDate_s(enddate);
+      mservice.uptScheduleByPM(s);
       return "redirect:/calendar.do";
    }
    // http://localhost:6080/PMS/calDelete.do

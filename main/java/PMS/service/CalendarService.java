@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import PMS.dao.CalendarDao;
 import PMS.vo.Calendar;
+import PMS.vo.Schedule;
 
 @Service
 public class CalendarService {
@@ -27,6 +28,12 @@ public class CalendarService {
 	}
 	public int getRecentSno() {
       return dao.getRecentSno();
-   }
+    }
+	public int getSnoId(int id) {
+		return dao.getSnoId(id);
+	}
+	public Schedule getScheduleId(int id) {
+		return dao.getScheduleId(id);
+	}
 	
 }

@@ -165,12 +165,11 @@
 	  });
 	
 		var pno = "${pno}";
-		var sno = "${sno}";
 	  function formData(event){
 		  // 매개변수로 받은 일정 내용을 설정처리..
 	 	  $("#frm01 [name=id]").val(event.id)
 	 	  $("#frm01 [name=pno]").val(pno)
-	 	  $("#frm01 [name=sno]").val(sno)
+	 	  $("#frm01 [name=sno]").val(event.sno)
 	 	  $("#frm01 [name=title]").val(event.title)
 	 	  $("#frm01 [name=start]").val(event.start.toISOString())
 	 	  if(event.end!=null){
@@ -207,11 +206,12 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      
       <div class="modal-body">
-		<form id="frm01" class="form"  method="post">
-			<input type="hidden" name="id" value="0"/>
-			<input type="hidden" name="pno" value="0"/>
-			<input type="hidden" name="sno" value="0"/>
+		<form id="frm01" class="form"  method="get">
+			<input type="text" name="id" value=""/>
+			<input type="text" name="pno" value=""/>
+			<input type="text" name="sno" value=""/>
 	     <div class="row">
 	      <div class="col">
 	        <input type="text" class="form-control" placeholder="제목 입력" 
@@ -264,8 +264,10 @@
       			$("#frm01").submit();
       		}
       	});
-      	$("#uptBtn").click(function(){ // calUpdate.do
+      	$("#uptBtn").click(function(){ // calUpdate.do  http://localhost:7080/PMS/calUpdate.do
       		if(confirm("수정하시겠습니까?")){
+      			$("#frm01 [name=pno]").val(1)
+      			$("#frm01 [name=sno]").val(1)
       			$("#frm01").attr("action","${path}/calUpdate.do");
       			$("#frm01").submit();
       		}

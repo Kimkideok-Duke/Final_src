@@ -20,7 +20,28 @@ SELECT * FROM SCHEDULE;
 			DROP TABLE 
 			insert into calendar values(cal_seq.nextval, 1, 2, '두일정등록','2022-08-21',
 				'2022-08-29','내용','navy','pink','yellow',1);
-			
-			insert into calendar values(cal_seq.nextval,#{pno},#{sno},#{title},#{start},
-			#{end},#{content},null,#{backgroundColor},#{textColor},
-			#{allDay})
+		
+
+SELECT * FROM CALENDAR c ;
+
+UPDATE calendar
+    SET title = 'test(2203)',
+        START1 = '2022-09-17T15:00:00.000Z', 
+        end1 = '2022-09-18T15:00:00.000Z',
+        content = 'test(2203)',
+        backgroundcolor='navy',
+        textcolor='pink',
+        allday=1
+WHERE id = 5
+
+SELECT sno
+FROM calendar
+WHERE id = 5;
+
+SELECT s.*
+FROM calendar c, schedule s
+WHERE c.id = 5
+AND c.sno = s.sno; 
+
+
+
