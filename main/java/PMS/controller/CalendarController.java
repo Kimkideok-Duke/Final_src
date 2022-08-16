@@ -38,6 +38,15 @@ public class CalendarController {
 	// http://localhost:6080/PMS/calInsert.do
 	@RequestMapping("calInsert.do")
 	public String calInsert(HttpServletRequest request, Calendar ins) {
+		HttpSession session = request.getSession();
+		int pno = (int)session.getAttribute("pno");
+		String startdate = ins.getStart().split("T")[0];
+		String enddate = ins.getEnd().split("T")[0];
+		Schedule reg = new Schedule(pno, ins.getTitle(),"기본",0, startdate, enddate,0);
+		int sno = reg.getSno();
+		mservice.regSchedule(reg);
+		ins.setPno(pno);
+		ins.setSno(sno);
 		service.insertCalendar(ins);
 		// 등록 후, 초기화면으로 이동
 		return "redirect:/calendar.do";
