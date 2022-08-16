@@ -142,12 +142,17 @@
 	
 	var pno = "${pno}"
 	var proc = "${proc}"
+	var isReg = "${isReg}"
+	if(isReg=="Y"){
+		alert("등록 성공!")
+		location.href="${path}/goMain.do?pno="+pno		
+	}
 	if(proc=="upt"){
-		alert("수정성공!")
+		alert("수정 성공!")
 		location.href="${path}/goMain.do?pno="+pno
 	}
 	if(proc=="del"){
-		alert("삭제성공!")
+		alert("삭제 성공!")
 		location.href="${path}/goMain.do?pno="+pno
 	}
 </script>
@@ -383,6 +388,7 @@
 			      <div class="modal-body">
 			      <!-- 권한 체크해서 form 경로 변경, input 숨기기 -->
 			  		<form id="regSchedule" class="row g-3 needs-validation" novalidate>
+			  			<input type="hidden" name="pno" value="${param.pno}">
 			             <div class="row mb-3" style="padding-top:15px;">
 			               <label for="inputText" class="col-sm-2 col-form-label">일정명</label>
 			               <div class="col-sm-10">
