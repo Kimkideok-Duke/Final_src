@@ -1,6 +1,6 @@
 package PMS.controller;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,17 +29,19 @@ public class CalendarController {
 	// http://localhost:6080/PMS/calList.do callist
 	@RequestMapping("calList.do")
 	public String calList(HttpServletRequest request, Model d) {
-//		HttpSession session = request.getSession();
-//		int pno = (int)session.getAttribute("pno");
-//		List<Schedule> slist = mservice.getScheduleList(pno); //pno를 받아야함.
-//		for(int idx=0;idx<slist.size();idx++) {
-//			Date enddate = slist.get(idx).getEndDate();
-//			Date startdate = slist.get(idx).getStartDate();
-//			List<Calendar> clist = service.getCalList();
-//			clist.get(idx).setStart(startdate);
-//			clist.get(idx).setEnd(enddate);
-//			d.addAttribute("callist", service.getCalList());
-//		}
+		HttpSession session = request.getSession();
+		int pno = (int)session.getAttribute("pno");
+		System.out.println("###############"+pno+"#############");
+		List<Schedule> slist = mservice.getScheduleList(pno); //pno로 schedule list 받아옴
+		for(int idx=0;idx<slist.size();idx++) {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String startdate = transFormat.format(slist.get(idx).getStartDate());// slist의 startdate,enddate값 추출
+			String enddate = transFormat.format(slist.get(idx).getEndDate()); //형변환
+			List<Calendar> clist = service.getCalList(); // calendar list 
+			clist.get(idx).setStart(startdate); // calendar list의 각 idx에 맞게 start, end값 설정
+			clist.get(idx).setEnd(enddate);
+			d.addAttribute("callist", clist);
+		}
 		d.addAttribute("callist", service.getCalList());
 		return "pageJsonReport";
 	}

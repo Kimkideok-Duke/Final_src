@@ -1,5 +1,8 @@
 package PMS.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +21,11 @@ public class MainCtrl {
     
     // http://localhost:6080/PMS/goMain.do
     @RequestMapping("goMain.do")
-    public String main(@RequestParam(value="pno", defaultValue="") int pno, Model d) {
+    public String main(HttpServletRequest request, @RequestParam(value="pno", defaultValue="") int pno, Model d) {
+		HttpSession session = request.getSession();
+		session.setAttribute("pno", pno);
     	d.addAttribute("title", service.getTitleByNo(pno));
-    	d.addAttribute("slist",service.getScheduleList(pno));
+    	d.addAttribute("slist",service.getScheduleList(pno));  	
     	return "WEB-INF\\views\\Main.jsp";
     }
     @RequestMapping("regScheduleModal.do")
@@ -57,6 +62,7 @@ public class MainCtrl {
 	public String delSchedule(@RequestParam(value = "sno") int sno, Model d) {
 		service.delSchedule(sno);
 		d.addAttribute("proc", "del");
+		d.addAttribute("pno", service.getSchedule(sno).getPno());
 		return "WEB-INF\\views\\Main.jsp";
 	}
 

@@ -122,7 +122,6 @@
 	function regProc(){
 		if(confirm("등록하시겠습니까?")){
 			$("#regSchedule").attr("action","${path}/regSchedule.do");
-			console.log("################등록#############")
 			$("#regSchedule").submit();
 		}
 	}
@@ -146,12 +145,12 @@
 		}
 	}
 	
-	var pno = "${pno}"
+	var pno = "${pno}" 
 	var proc = "${proc}"
 	var isReg = "${isReg}"
 	if(isReg=="Y"){
 		alert("등록 성공!")
-		location.href="${path}/goMain.do?pno="+pno		
+		location.href="${path}/goMain.do?pno=${param.pno}"		
 	}
 	if(proc=="upt"){
 		alert("수정 성공!")
