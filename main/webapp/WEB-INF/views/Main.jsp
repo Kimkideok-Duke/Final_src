@@ -582,7 +582,7 @@
                 <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="id" value="${name} (${dept})" readonly>
-                    <label for="id">사원번호</label>
+                    <label for="id">사원이름(부서명)</label>
                   </div>
                 </div>
                 <div class="col-12">
@@ -699,66 +699,27 @@ $(document).ready(function(){
 	$("#enterBtn").click(function(){
 		if(confirm("채팅방 접속합니다.")){
 			conn();
-			
 		}
 	});
-	// 아이디 입력 후,  enter 키를 입력시도 접속
-	$("#id").keyup(function(){
-		if(event.keyCode==13){
-			conn();
-		}
-	});
-	
 	$("#exitBtn").click(function(){
 		if(confirm("접속을 종료하시겠습니까?")){
 			wsocket.send("msg:"+$("#id").val()+":접속 종료 했습니다.")
 			wsocket.close();
-			// 서버 handler public void afterConnectionClosed()
-			// 와 연동
 		}
 	});
-	
 });
 function conn(){
 	wsocket = new WebSocket("ws:localhost:7080/${path}/chat-ws.do")
-	wsocket.onopen=function(evt){ // 접속하는 핸들러 메서드와 연결
-		console.log(evt)
-		// 능동적으로 서버에 소켓통신으로 메시지를 보내는 것..
+	wsocket.onopen=function(evt){ 
 		wsocket.send("msg:"+$("#id").val()+":연결 접속했습니다.")
-		// "msg:himan:연결접속했습니다."
-		//  msg:전송자:메시지명
-		//  msg:그룹명:전송자:메시지  (단일 chatting/그룹 chatting)
-		
-		
 	}
 	// 메시지를 받을 때, 처리되는 메서드
-	// 서버에서 push방식으로 메시지를 전달 받는데..
-	/*
-	# 참고
-	1. webstorage 활용
-		1) 메시지 내용 임시 저장
-		2) 로그인한 id 임시 저장.
-		
-	
-	
-	*/
 	wsocket.onmessage=function(evt){
-		
 		var msg = evt.data
 		console.log(msg)
 		if(msg.substring(0,4)=="msg:"){
-			// mgs:그룹명:전송자:메시지  (단일 chatting/그룹 chatting)
-			// 그룹에 해당할 때만 메시지를 받아서 처리하게 처리..
-			
-			
-			// msg: 를 제외한 모든 문자열을 추출
 			var revMsg = msg.substring(4)
-			console.log("#메시지 받기#")
-			console.log(msg)
 			$("#chatMessageArea").append(revMsg+"<br>")	
-			// 자동 scolling 처리 로직
-			// 1.  전체 charMessageArea의 입력된 최대 높이 구하기
-			// 2. 포함하고 있는 div의 scollTop을 통해 최대한 내용으로 scrolling 하기
 			$("#chatArea").scrollTop(ma+=20);
 			console.log("chatArea길이:"+ma)
 		}
@@ -767,25 +728,19 @@ function conn(){
 	// 접속을 종료 처리할 때
 	wsocket.onclose=function(){
 		alert($("#id").val()+"접속 종료합니다.")
-		$("#chatMessageArea").val("")
-		$("#chatArea").val("")
-		
+		$("#chatMessageArea").empty();
 	}		
-	
 }
-
 $("#msg").keyup(function(){
 	if(event.keyCode==13){
 		wsocket.send("msg:"+$("#id").val()+":"+$(this).val())
 		$(this).val("").focus()
 	}
-	
 });
 // 전송 버튼을 클릭시에 메시지 전송
 $("#sndBtn").click(function(){
 	wsocket.send("msg:"+$("#id").val()+":"+$("#msg").val())
 	$("#msg").val("").focus()				
-	
 });
 
 </script>
