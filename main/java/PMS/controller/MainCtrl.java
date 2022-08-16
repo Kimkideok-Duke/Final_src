@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import PMS.service.CalendarService;
 import PMS.service.MainService;
 import PMS.vo.Schedule;
 
@@ -17,6 +18,9 @@ public class MainCtrl {
     @Autowired(required=false)
     private MainService service;
     
+    @Autowired(required = false)
+	private CalendarService cservice;
+	
 	// http://localhost:6080/PMS/loginPage.do
     
     // http://localhost:6080/PMS/goMain.do

@@ -125,8 +125,6 @@
 	    	  $("#exampleModalLongTitle").text("일정상세");
 	    	  $("#modalBox").click(); // 모달창 로딩.. 
 	    	  formData(arg.event)
-	    	  
-
 	      },
 	      eventDrop:function(info){
 	    	  // 일정을 클릭해서 드랍처리 시, 날짜 변경
@@ -166,9 +164,13 @@
 
 	  });
 	
+		var pno = "${pno}";
+		var sno = "${sno}";
 	  function formData(event){
 		  // 매개변수로 받은 일정 내용을 설정처리..
 	 	  $("#frm01 [name=id]").val(event.id)
+	 	  $("#frm01 [name=pno]").val(pno)
+	 	  $("#frm01 [name=sno]").val(sno)
 	 	  $("#frm01 [name=title]").val(event.title)
 	 	  $("#frm01 [name=start]").val(event.start.toISOString())
 	 	  if(event.end!=null){
@@ -208,6 +210,8 @@
       <div class="modal-body">
 		<form id="frm01" class="form"  method="post">
 			<input type="hidden" name="id" value="0"/>
+			<input type="hidden" name="pno" value="0"/>
+			<input type="hidden" name="sno" value="0"/>
 	     <div class="row">
 	      <div class="col">
 	        <input type="text" class="form-control" placeholder="제목 입력" 

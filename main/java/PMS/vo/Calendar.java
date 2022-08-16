@@ -2,6 +2,8 @@ package PMS.vo;
 // PMS.vo.Calendar
 public class Calendar {
 	private int id;
+	private int pno;
+	private int sno;
 	private String title;
 	private String start;
 	private String end;
@@ -11,11 +13,17 @@ public class Calendar {
 	private String textColor;
 	private boolean allDay;
 	
-	public Calendar(String title, String start, String end) {
-		super();
-		this.title = title;
-		this.start = start;
-		this.end = end;
+	public int getSno() {
+		return sno;
+	}
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+	public int getPno() {
+		return pno;
+	}
+	public void setPno(int pno) {
+		this.pno = pno;
 	}
 	public int getId() {
 		return id;
