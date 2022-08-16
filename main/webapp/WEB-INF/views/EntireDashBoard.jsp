@@ -335,7 +335,7 @@
 	           </div>
 	           <br>
 	           <div class="modal-body">
-				 <form class="row g-3 needs-validation" action="${path}/updateProject.do" novalidate>
+				 <form class="row g-3 needs-validation" action="${path}/addProject.do" novalidate>
 				 	<div class="row mb-3">
 	                  <label class="col-sm-2 col-form-label">PM번호</label>
 	                  <div class="col-sm-10">
