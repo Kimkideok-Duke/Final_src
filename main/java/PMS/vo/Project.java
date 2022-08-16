@@ -33,6 +33,14 @@ public class Project {
 		this.dept = dept;
 		this.pmno = pmno;
 	}
+	
+	public Project(int pno, String title, String dept) {
+		super();
+		this.pno = pno;
+		this.title = title;
+		this.dept = dept;
+	}
+
 	public int getPno() {
 		return pno;
 	}

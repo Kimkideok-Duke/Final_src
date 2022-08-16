@@ -148,11 +148,11 @@
         </a>
       </li><!-- End 알림 Nav -->
 	  <c:if test="${not empty param.pno}">
-      <li class="nav-item">
+      <%--<li class="nav-item">
         <a class="nav-link collapsed" href="${path}/getGantt.do?pno=${param.pno}">
           <i class="bi bi-bar-chart"></i><span>Gantt Chart</span></i>
         </a>
-      </li><!-- End 간트차트 Nav -->
+      </li> --%><!-- End 간트차트 Nav -->
       
       <li class="nav-item">
         <a class="nav-link collapsed" href="#">

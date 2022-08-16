@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import PMS.service.ProjectService;
 import PMS.vo.PrjParticipant;
 import PMS.vo.Project;
+import PMS.vo.Schedule;
 
 @Controller
 public class ProjectController {
@@ -83,4 +85,20 @@ public class ProjectController {
     	d.addAttribute("projectusercnt", service.getProjectUserCnt(userno));
     	return "pageJsonReport";
     }
+    
+    // 프로젝트 수정
+    @RequestMapping("updateProject.do")
+	public String updateProject(Project upt, Model d) {
+		service.updateProject(upt);
+		d.addAttribute("proc", "uptprj");
+		return "WEB-INF/views/Main.jsp";
+	}
+    
+    // 프로젝트 삭제
+    @RequestMapping("deleteProject.do")
+	public String deleteProject(@RequestParam("pno") int pno, Model d) {
+		service.deleteProject(pno);
+		d.addAttribute("proc", "delprj");
+		return "WEB-INF/views/EntireDashBoard.jsp";
+	}
 }

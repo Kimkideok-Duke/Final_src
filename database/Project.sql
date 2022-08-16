@@ -21,6 +21,14 @@ INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','김유신'
 	'사원','서울시 마포구 서교동 447-5 201호','010-1234-5678',NULL,sysdate,'user');
 
 INSERT INTO PROJECT values(seq_pno.nextval, '첫프로젝트', '개발부', 'E10000004');
+
+UPDATE PROJECT
+	SET TITLE = #{title},
+		DEPT  = #{dept}
+WHERE PNO = #{pno};
+
+DELETE FROM SCHEDULE
+WHERE PNO = 20;
 /*
 프로젝트 생성
 INSERT INTO PROJECT values(seq_pno.nextval, #{title}, #{dept}, #{userno});
@@ -54,6 +62,19 @@ FROM PROJECT p, PRJPARTICIPANT pp
 WHERE p.PNO = pp.PNO
 AND p.PMNO = #{pmno}
 GROUP BY p.PNO, p.TITLE
+
+프로젝트 수정
+UPDATE PROJECT
+	SET TITLE = #{title},
+		DEPT  = #{dept}
+WHERE PNO = #{pno}
+
+프로젝트 삭제(일정삭제->프로젝트삭제)
+DELETE FROM PROJECT
+WHERE PNO = #{pno}
+
+DELETE FROM SCHEDULE
+WHERE PNO = #{pno}
 */
 SELECT * FROM PROJECT
 ORDER BY PNO;

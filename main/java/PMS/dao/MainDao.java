@@ -14,7 +14,7 @@ public interface MainDao {
 	public void regSchedule(Schedule reg);
 	public void uptSchedule(Schedule upt);
 	public void uptScheduleByPM(Schedule upt);
-	public void delSchedule();	
+	public void delSchedule(int sno);	
 	public Schedule getSchedule(int sno);
 	public List<Account> getPrjparticipant(int pno);
 	

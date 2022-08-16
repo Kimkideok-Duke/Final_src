@@ -96,8 +96,30 @@
 			}
 		})
 	}
+	function regVal(){
+		$.ajax({
+			url:"${path}/regScheduleModal.do",
+			dataType:"json",
+			success:function(data){
+				var data = data.schedule
+				console.log(data.sno)
+				console.log(data.sname)
+				console.log(data.status)
+				console.log(data.progress)
+				console.log(data.startDate)
+				console.log(data.endDate)
+				console.log(data.budget)
+			}
+		})
+	}
 	var auth = "${auth}"
-	function updateProc(){
+	function regProc(){
+		if(confirm("등록하시겠습니까?")){
+			$("form").attr("action","${path}/regSchedule.do");
+			$("form").submit();
+		}
+	}
+	function uptProc(){
 		if(auth=="pm" || auth=="admin"){
 			if(confirm("수정하시겠습니까?")){
 				$("form").attr("action","${path}/uptScheduleByPM.do");
@@ -110,10 +132,21 @@
 			}
 		}
 	}
+	function delProc(){
+		if(confirm("삭제하시겠습니까?")){
+			var sno = $("#sno").val()
+			location.href="${path}/delSchedule.do?sno="+sno
+		}
+	}
+	
 	var pno = "${pno}"
 	var proc = "${proc}"
 	if(proc=="upt"){
-		alert("수정성공!\n일정목록으로 이동합니다")
+		alert("수정성공!")
+		location.href="${path}/goMain.do?pno="+pno
+	}
+	if(proc=="del"){
+		alert("삭제성공!")
 		location.href="${path}/goMain.do?pno="+pno
 	}
 </script>
@@ -271,6 +304,7 @@
 			</tbody>
 			</table>
    		 </div>
+   		 <button type="button" id="Btn01" class="btn btn-primary" onclick="chVal(${schedule.sno })"data-bs-toggle="modal" data-bs-target="#regModal">등록</button>
 	</div>
 </div>
             <!-- 일정관리 -->
@@ -325,7 +359,8 @@
 			                 <input type="text" id="budget" name="budget" class="form-control" value="" >
 			               </div>
 			             </div>
-			             	<button type="button" onclick="updateProc()" id="uptBtn" class="btn btn-primary">수정</button>
+			             	<button type="button" onclick="uptProc()" id="uptBtn" class="btn btn-primary">수정</button>
+			             	<button type="button" onclick="delProc()" id="delBtn" class="btn btn-danger">삭제</button>
 			              </form>
 			           </div>
 			     <!-- 모달 하단 -->      
@@ -335,7 +370,66 @@
            </div>
          </div>
        </div>
-
+       
+<!-- 모달창(일반등록) -->
+       <div class="modal fade" id="regModal" tabindex="-1">
+         <div class="modal-dialog">
+           <div class="modal-content">
+                  <!-- 모달 상단 -->
+				      <div class="modal-header">
+				        <h5 class="modal-title">일정 등록</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <!-- 모달 내용 sname, status, progress, startDate, endDate, budget -->
+			      <div class="modal-body">
+			      <!-- 권한 체크해서 form 경로 변경, input 숨기기 -->
+			  		<form id="regSchedule" class="row g-3 needs-validation" novalidate>
+			             <div class="row mb-3" style="padding-top:15px;">
+			               <label for="inputText" class="col-sm-2 col-form-label">일정명</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="snameReg" name="sname" class="form-control" value="">
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">상태</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="statusReg" name="status" class="form-control" value="" >
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">진행도</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="progressReg" name="progress" class="form-control" value="" >
+			               </div>
+			             </div>
+						<div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">시작일</label>
+			               <div class="col-sm-10">
+			                 <input type="date" id="startDateReg" name="startDate_s" class="form-control" value="">
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">마감일</label>
+			               <div class="col-sm-10">
+			                 <input type="date" id="endDateReg" name="endDate_s" class="form-control" value="" >
+			               </div>
+			             </div>
+			             <div class="row mb-3">
+			               <label for="inputText" class="col-sm-2 col-form-label">예산</label>
+			               <div class="col-sm-10">
+			                 <input type="text" id="budgetReg" name="budget" class="form-control" value="" >
+			               </div>
+			             </div>
+			             	<button type="button" onclick="regProc()" id="regBtn" class="btn btn-primary">등록</button>
+			              </form>
+			           </div>
+			     <!-- 모달 하단 -->      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+				      </div>	
+           </div>
+         </div>
+       </div>
 
             <!-- Gantt Chart -->
             <div class="col-12">
@@ -506,6 +600,76 @@
         </div><!-- End 채팅 -->
 
       </div>
+      <c:if test="${auth eq 'pm'}">
+      <div class="col-lg-12" align="center">
+      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
+      </div>
+      </c:if>
+      <c:if test="${auth eq 'admin'}">
+      <div class="col-lg-12" align="center">
+      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
+      </div>
+      </c:if>
+      
+      <div class="modal fade" id="verticalycentered" tabindex="-1">
+	       <div class="modal-dialog modal-dialog-centered">
+	         <div class="modal-content">
+	           <div class="modal-header">
+	             <h5 class="modal-title">프로젝트 수정/삭제</h5>
+	             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	           </div>
+	           <br>
+	           <div class="modal-body">
+				 <form class="row g-3 needs-validation" action="${path}/updateProject.do" novalidate>
+				 	<input type="hidden" name="pno" value="${param.pno}">
+				 	<%-- <div class="row mb-3">
+	                  <label class="col-sm-2 col-form-label">PM번호</label>
+	                  <div class="col-sm-10">
+	                    <input type="text" class="form-control" value="${pmno}" readonly>
+	                  </div>
+	               	</div> --%>
+	                <div class="col-md-8">
+	                  <div class="form-floating">
+	                    <input type="text" class="form-control" id="floatingName" name="title" placeholder="프로젝트명" value="${title}" required>
+	                    <label for="floatingName">프로젝트명</label>
+		                  <div class="invalid-feedback">
+		                    필수 입력정보 입니다.
+		                  </div>
+	                  </div>
+	                </div>
+	                <div class="col-sm-4">
+	                  <div class="form-floating mb-3">
+	                    <select name="dept" class="form-select" id="floatingDept" aria-label="Dept">
+	                      <option value="개발부">개발</option>
+	                      <option value="본부">본부</option>
+	                      <option value="영업부">영업</option>
+	                      <option value="인사부">인사</option>
+	                    </select>
+	                    <label for="floatingDept">부서</label>
+	                  </div>
+	                </div>
+	                <div class="text-center">
+	                  <button type="submit" class="btn btn-warning">프로젝트 수정</button>
+	                  <button type="button" class="btn btn-danger" onclick="deletePrj()">프로젝트 삭제</button>
+	                </div>
+	              </form>
+	              <script type="text/javascript">
+	              	function deletePrj(){
+	          			if(confirm("삭제하시겠습니까?\n삭제시 복구할 수 없습니다!!!")){
+	          				location.href="${path}/deleteProject.do?pno=${param.pno}"
+	          			}
+		          	}
+		          	var proc = "${proc}"
+		          	if(proc=="uptprj"){
+		          		alert("수정성공!")
+		          		location.href="${path}/goMain.do?pno=${param.pno}"
+		          	}
+	              </script>
+	           	</div>
+	          </div>
+	       	</div>
+	       
+         </div>
     </section>
 
   </main><!-- End #main -->
