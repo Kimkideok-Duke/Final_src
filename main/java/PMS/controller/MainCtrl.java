@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import PMS.service.CalendarService;
+import PMS.service.AccountService;
 import PMS.service.MainService;
 import PMS.vo.Schedule;
 
@@ -17,10 +18,10 @@ import PMS.vo.Schedule;
 public class MainCtrl {
     @Autowired(required=false)
     private MainService service;
-    
     @Autowired(required = false)
 	private CalendarService cservice;
-	
+    @Autowired(required=false)
+    private AccountService serviceA;
 	// http://localhost:6080/PMS/loginPage.do
     
     // http://localhost:6080/PMS/goMain.do
@@ -29,7 +30,8 @@ public class MainCtrl {
 		HttpSession session = request.getSession();
 		session.setAttribute("pno", pno);
     	d.addAttribute("title", service.getTitleByNo(pno));
-    	d.addAttribute("slist",service.getScheduleList(pno));  	
+    	d.addAttribute("slist",service.getScheduleList(pno));
+    	d.addAttribute("alist", serviceA.getAccountList());
     	return "WEB-INF\\views\\Main.jsp";
     }
     @RequestMapping("regScheduleModal.do")

@@ -566,10 +566,75 @@
 		                  </tr>
 		                </tbody>
 		              </table>
+		              <c:if test="${auth eq 'admin'}">
+		              <div class="col-lg-12" align="center">
+			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered">참가자 추가</button>
+			        </div>
+			        </c:if>
+			        <c:if test="${auth eq 'pm'}">
+		              <div class="col-lg-12" align="center">
+			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered">참가자 추가</button>
+			        </div>
+			        </c:if>
                     </div>
+                    
                   </div>
                 </div>
                </div>
+
+<script type="text/javascript">
+	var proc = "${proc}"
+  	if(proc=="insParPrj"){
+  		alert("${param.userno} 추가 성공!")
+  		location.href="${path}/goMain.do?pno=${param.pno}"
+  	}
+</script>        
+		      <div class="modal fade" id="verticalycentered" tabindex="-1">
+			       <div class="modal-dialog modal-dialog-centered">
+			         <div class="modal-content">
+			           <div class="modal-header">
+			             <h5 class="modal-title">참가자 추가</h5>
+			             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			           </div>
+			           <br>
+			           <div class="modal-body">
+						 <form class="row g-3 needs-validation" action="${path}/insParPrj.do?pno=${param.pno}" novalidate>
+						 	<input type="hidden" name="pno" value="${param.pno}">
+			                <div class="col-sm-12">
+			                  <div class="form-floating mb-3">
+			                  	<table class="table table-striped datatable">
+					                <thead>
+					                  <tr>
+					                    <th scope="col">   </th>
+					                    <th scope="col">이름</th>
+					                    <th scope="col">직급</th>
+					                    <th scope="col">부서</th>
+					                    <th scope="col">UserNo</th>
+					                  </tr>
+					                </thead>
+					                <tbody>
+					                <c:forEach var="a" items="${alist}">
+					                  <tr>
+					                    <td><input type="radio" value="${a.userno}" name="userno"></td>
+					                    <td>${a.name}</td>
+					                    <td>${a.position}</td>
+					                    <td>${a.dept}</td>
+					                    <td>${a.userno}</td>
+					                  </tr>
+					                </c:forEach>
+					                </tbody>
+					            </table>
+			                  </div>
+			                </div>
+			                <div class="text-center">
+			                  <button type="submit" class="btn btn-primary">추가</button>
+			                </div>
+			              </form>
+			           	</div>
+			          </div>
+			       	</div>
+			       
+		         </div>
               </div>
              </div><!--참가자 End Accordion without outline borders -->
         

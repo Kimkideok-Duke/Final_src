@@ -43,7 +43,7 @@ public class ProjectController {
     	return "addPrjParticipant.do";
     }
     
-    // 프로젝트 참가자 추가
+    // 프로젝트 참가자 추가(프로젝트 생성시)
     @RequestMapping("addPrjParticipant.do")
     public String addPrjParticipant(HttpServletRequest request, Model d) {
     	HttpSession session = request.getSession();
@@ -52,6 +52,16 @@ public class ProjectController {
     	service.addPrjParticipant(pp);
     	d.addAttribute("isAddPrj", "Y");
     	return "WEB-INF/views/EntireDashBoard.jsp";
+    }
+    
+    // 프로젝트 참가자 추가
+    @RequestMapping("insParPrj.do")
+    public String insParPrj(HttpServletRequest request, PrjParticipant ins, Model d) {
+    	HttpSession session = request.getSession();
+    	int pno = (int)session.getAttribute("pno");
+    	service.addPrjParticipant(ins);
+    	d.addAttribute("proc", "insParPrj");
+    	return "WEB-INF/views/Main.jsp";
     }
     
     // 부서별 예산
