@@ -68,7 +68,8 @@ public class CalendarController {
    // http://localhost:6080/PMS/calDelete.do
    @RequestMapping("calDelete.do")
    public String deleteCalendar(int id) {
-      service.deleteCalendar(id);
+	  mservice.delSchedule(service.getSnoId(id));
+	  service.deleteCalendar(id);
       return "redirect:/calendar.do";
    }
 }
