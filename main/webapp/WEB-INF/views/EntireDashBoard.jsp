@@ -4,7 +4,9 @@
 	%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<fmt:requestEncoding value="utf-8"/>   
 <!DOCTYPE html>
 
 <html>
@@ -51,39 +53,58 @@
   	if(isAddPrj == "Y"){
   		location.href="${path}/entireDashboard.do"
   	}
+  	
+	$(document).ready(function(){
+		$("#selLan").val("${param.lang}")
+		$("#selLan").change(function(){
+			if($(this).val()!=""){
+				$("[name=lang]").val($(this).val())
+				$("#selLang").submit();
+			}
+		});
+	});
 </script>
  <jsp:include page="navi.jsp"/>
 
   <main id="main" class="main">
-
+	 <div class="col-lg-4">
     <div class="pagetitle">
      <c:if test="${auth eq 'admin'}">
-      <h1>전체 관리자용 대쉬보드</h1>
+      <h1><spring:message code="adminDashboard"/></h1>
      </c:if>
      <c:if test="${auth eq 'pm'}">
-      <h1>프로젝트 관리자용 대쉬보드</h1>
+      <h1><spring:message code="pmDashboard"/></h1>
      </c:if>
      <c:if test="${auth eq 'um'}">
-      <h1>유저 관리자용 대쉬보드</h1>
+      <h1><spring:message code="umDashboard"/></h1>
      </c:if>
      <c:if test="${auth eq 'user'}">
-      <h1>전체 대쉬보드</h1>
+      <h1><spring:message code="entireDashboard"/></h1>
      </c:if>
+     	
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item"><a href="index.html"><spring:message code="Home"/></a></li>
+          <li class="breadcrumb-item active"><spring:message code="Dashboard"/></li>
         </ol>
       </nav>
+      </div>
+      <select class="selLang" id="selLan">
+		<option value="ko"><spring:message code="ko"/></option>
+		<option value="en"><spring:message code="en"/></option>
+	</select>
+	<form id="selLang" class="form-inline" method="post">
+		<input type="hidden" name="lang" value=""/>
+	</form>
     </div><!-- End Page Title -->
-
+   	
     <section class="section dashboard">
     	<div class="row">
     	<c:if test="${auth eq 'admin'}">
 	       <div class="col-lg-4">
 	       	 <div class="card">
 	            <div class="card-body">
-	              <h5 class="card-title">부서별 예산</h5>
+	              <h5 class="card-title"><spring:message code="deptBudget"/></h5>
 	
 	              <!-- Donut Chart -->
 	              <div class="budgetChart" id="donutChart"></div>
@@ -127,7 +148,7 @@
             <div class="col-lg-4">
 	          <div class="card">
 	            <div class="card-body">
-	              <h5 class="card-title">부서별 프로젝트 수</h5>
+	              <h5 class="card-title"><spring:message code="deptprjCnt"/></h5>
 	
 	              <!-- Bar Chart -->
 	              <canvas class="projectCntChart" id="barChart" style="max-height: 183px;"></canvas>
@@ -193,7 +214,7 @@
 		       <div class="col-lg-4">
 		       	 <div class="card">
 		            <div class="card-body">
-		              <h5 class="card-title">인원 현황 차트</h5>
+		              <h5 class="card-title"><spring:message code="deptCnt"/></h5>
 		
 		              <!-- Donut Chart -->
 		              <a href="${path}/goUmPage.do">
@@ -239,14 +260,14 @@
       		<div class="col-lg-12">
       		<div class="card recent-sales overflow-auto">
 	      		<div class="card-body">
-	      		<h5 class="card-title">전체 프로젝트 목록</h5>
+	      		<h5 class="card-title"><spring:message code="entireProject"/></h5>
 	      		<table class="table datatable" >
                     <thead>
                       <tr>
-                        <th scope="col">번호</th>
-                        <th scope="col">프로젝트명</th>
-                        <th scope="col">부서</th>
-                        <th scope="col">담당자</th>
+                        <th scope="col"><spring:message code="pno"/></th>
+                        <th scope="col"><spring:message code="title"/></th>
+                        <th scope="col"><spring:message code="dept"/></th>
+                        <th scope="col"><spring:message code="manager"/></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -275,19 +296,19 @@
       	<div class="col-lg-7">
       		<div class="card info-card customers-card">
                 <div class="card-body">
-      				<h5 class="card-title">관리 프로젝트 목록</h5>
+      				<h5 class="card-title"><spring:message code="mgPrjList"/></h5>
       	</c:if>
       	<c:if test="${auth eq 'user'}">
       	<div class="col-lg-12">
       		<div class="card info-card customers-card">
                 <div class="card-body">
-                	<h5 class="card-title">내 프로젝트 목록</h5>
+                	<h5 class="card-title"><spring:message code="myPrjList"/></h5>
       	</c:if>
       	<c:if test="${auth eq 'um'}">
       	<div class="col-lg-7">
       		<div class="card info-card customers-card">
                 <div class="card-body">
-                	<h5 class="card-title">내 프로젝트 목록</h5>
+                	<h5 class="card-title"><spring:message code="myPrjList"/></h5>
       	</c:if>
 				<c:if test="${not empty myPlist}">
                   <div class="d-flex align-items-center">
@@ -312,7 +333,7 @@
 	              	</c:forEach>
               	</c:if>
 	              	<c:if test="${empty myPlist}">
-	              		<h6>참가중인 프로젝트가 없습니다.</h6>
+	              		<h6><spring:message code="noprjmsg"/></h6>
 	              	</c:if>
                   </div>
                   
@@ -330,14 +351,14 @@
 	       <div class="modal-dialog modal-dialog-centered">
 	         <div class="modal-content">
 	           <div class="modal-header">
-	             <h5 class="modal-title">프로젝트 등록</h5>
+	             <h5 class="modal-title"><spring:message code="deptBudget"/></h5>
 	             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	           </div>
 	           <br>
 	           <div class="modal-body">
 				 <form class="row g-3 needs-validation" action="${path}/addProject.do" novalidate>
 				 	<div class="row mb-3">
-	                  <label class="col-sm-2 col-form-label">PM번호</label>
+	                  <label class="col-sm-2 col-form-label"><spring:message code="deptBudget"/></label>
 	                  <div class="col-sm-10">
 	                    <input type="text" class="form-control" name="pmno" value="${userno}" readonly>
 	                  </div>
@@ -345,25 +366,25 @@
 	                <div class="col-md-8">
 	                  <div class="form-floating">
 	                    <input type="text" class="form-control" id="floatingName" name="title" placeholder="프로젝트명" required>
-	                    <label for="floatingName">프로젝트명</label>
+	                    <label for="floatingName"><spring:message code="title"/></label>
 		                  <div class="invalid-feedback">
-		                    필수 입력정보 입니다.
+		                    <spring:message code="nesmsg"/>
 		                  </div>
 	                  </div>
 	                </div>
 	                <div class="col-sm-4">
 	                  <div class="form-floating mb-3">
 	                    <select name="dept" class="form-select" id="floatingDept" aria-label="Dept">
-	                      <option value="개발부">개발</option>
-	                      <option value="본부">본부</option>
-	                      <option value="영업부">영업</option>
-	                      <option value="인사부">인사</option>
+	                      <option value="개발부"><spring:message code="deptDev"/></option>
+	                      <option value="본부"><spring:message code="deptHQ"/></option>
+	                      <option value="영업부"><spring:message code="deptsales"/></option>
+	                      <option value="인사부"><spring:message code="deptHR"/></option>
 	                    </select>
-	                    <label for="floatingDept">부서</label>
+	                    <label for="floatingDept"><spring:message code="dept"/></label>
 	                  </div>
 	                </div>
 	                <div class="text-center">
-	                  <button type="submit" class="btn btn-primary">신규 프로젝트 등록</button>
+	                  <button type="submit" class="btn btn-primary"><spring:message code="register"/></button>
 	                </div>
 	              </form>
 	              			  
@@ -377,7 +398,7 @@
 	       	 
 	       	 <div class="card">
 	            <div class="card-body">
-	              <h5 class="card-title">인원 현황 차트</h5>
+	              <h5 class="card-title"><spring:message code="deptCnt"/></h5>
 	
 	              <!-- Donut Chart -->
 	              <a href="${path}/goUmPage.do">
@@ -426,7 +447,7 @@
 		       <div class="col-lg-4">
 		       	 <div class="card">
 		            <div class="card-body">
-		              <h5 class="card-title">프로젝트별 예산</h5>
+		              <h5 class="card-title"><spring:message code="deptBudget"/></h5>
 		
 		              <!-- Donut Chart -->
 		              <div class="projectbudgetChart" id="donutChart"></div>
@@ -468,7 +489,7 @@
 		          
 		       	 <div class="card">
 		            <div class="card-body">
-		              <h5 class="card-title">프로젝트별 참가인원수</h5>
+		              <h5 class="card-title"><spring:message code="prjparCnt"/></h5>
 		
 		              <!-- Donut Chart -->
 		              <canvas class="projectUserChart" id="barChart" style="max-height: 400px;"></canvas>
@@ -547,28 +568,28 @@
 				
                 <div class="card-body">
                	  <c:if test="${auth eq 'admin'}">
-                  <h5 class="card-title">전체 업무 목록</h5>
+                  <h5 class="card-title"><spring:message code="fullsch"/></h5>
                   </c:if>
                   <c:if test="${auth eq 'user'}">
-                  <h5 class="card-title">내 업무목록</h5>
+                  <h5 class="card-title"><spring:message code="mysch"/></h5>
                   </c:if>
                   <c:if test="${auth eq 'um'}">
-                  <h5 class="card-title">내 업무목록</h5>
+                  <h5 class="card-title"><spring:message code="mysch"/></h5>
                   </c:if>
                   <c:if test="${auth eq 'pm'}">
-                  <h5 class="card-title">관리 업무목록</h5>
+                  <h5 class="card-title"><spring:message code="mgsch"/></h5>
                   </c:if>
                   <table class="table datatable" >
                     <thead>
                       <tr>
-                        <th scope="col">번호</th>
-                        <th scope="col">프로젝트명</th>
-                        <th scope="col">일정명</th>
-                        <th scope="col">상태</th>
-                        <th scope="col">마감일</th>
-                        <th scope="col">진행도</th>
+                        <th scope="col"><spring:message code="pno"/></th>
+                        <th scope="col"><spring:message code="title"/></th>
+                        <th scope="col"><spring:message code="sname"/></th>
+                        <th scope="col"><spring:message code="status"/></th>
+                        <th scope="col"><spring:message code="deadline"/></th>
+                        <th scope="col"><spring:message code="progress"/></th>
                         <c:if test="${auth eq 'admin'}">
-                        <th scope="col">부서</th>
+                        <th scope="col"><spring:message code="dept"/></th>
                         </c:if>
                       </tr>
                     </thead>
@@ -603,7 +624,7 @@
                       </c:forEach>
                     </c:if>
                     <c:if test="${empty slist}">
-						<tr><td colspan="7" align="center">업무 목록이 없습니다.</td></tr>
+						<tr><td colspan="7" align="center"><spring:message code="noschmsg"/></td></tr>
                     </c:if>
                     </c:if>
                     
@@ -637,7 +658,7 @@
                       </c:forEach>
                     </c:if>
                     <c:if test="${empty mySlist}">
-						<tr><td colspan="6" align="center">업무 목록이 없습니다.</td></tr>
+						<tr><td colspan="6" align="center"><spring:message code="noschmsg"/></td></tr>
                     </c:if>
                     </c:if>
                     
@@ -670,7 +691,7 @@
                       </c:forEach>
                     </c:if>
                     <c:if test="${empty mySlist}">
-                    	<tr><td colspan="6" align="center">업무 목록이 없습니다.</td></tr>
+                    	<tr><td colspan="6" align="center"><spring:message code="noschmsg"/></td></tr>
                     </c:if>
                     </c:if>
                     
@@ -703,7 +724,7 @@
                       </c:forEach>
                     </c:if>
                     <c:if test="${empty pmSlist}">
-                    	<tr><td></td><td></td><td align="center">업무 목록이 없습니다.</td></tr>
+                    	<tr><td></td><td></td><td align="center"><spring:message code="noschmsg"/></td></tr>
                     </c:if>
                     </c:if>
                     </tbody>

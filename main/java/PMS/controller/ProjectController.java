@@ -1,6 +1,9 @@
 package PMS.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,22 +11,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.LocaleResolver;
 
 import PMS.service.ProjectService;
 import PMS.vo.PrjParticipant;
 import PMS.vo.Project;
-import PMS.vo.Schedule;
 
 @Controller
 public class ProjectController {
 	@Autowired(required=false)
     private ProjectService service;
+	
+	@Autowired(required=false)
+	private LocaleResolver localResolver;
     
 	// http://localhost:8080/PMS/loginPage.do
     // http://localhost:8080/PMS/entireDashboard.do
     @RequestMapping("entireDashboard.do")
-    public String entireDashboard(HttpServletRequest request, Model d) {
+    public String entireDashboard(@RequestParam(value="lang", defaultValue = "") String lang,
+			HttpServletRequest request, HttpServletResponse response, Model d) {
     	HttpSession session = request.getSession();
+    	Locale locale = new Locale(lang);
+		localResolver.setLocale(request, response, locale);
     	String userno = (String)session.getAttribute("userno");
     	String auth = (String)session.getAttribute("auth");
     	d.addAttribute("plist", service.showAllProject());
