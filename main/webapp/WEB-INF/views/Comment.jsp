@@ -99,6 +99,7 @@ background-color: #f2f2f2;
           <h5 class="card-title">${title} <span>| ${sname }</span></h5>
 	    <form name="form" id="form" action="${path}/commInsertForm.do" method="post">
 			<input type="hidden" name="sno" value="${param.sno}"/>
+			<input type="hidden" name="pno" value="${param.pno}"/>
 	    	<button type="submit" class="insertBtn">comment 등록</button>
 	    </form>
                   <table class="table table-borderless datatable">
@@ -173,7 +174,7 @@ background-color: #f2f2f2;
 	}
 	
 	function goDetail(cno){
-		location.href="${path}/commDetail.do?cno="+cno;
+		location.href="${path}/commDetail.do?cno="+cno+"&sno="+"${param.sno}"+"&pno="+"${param.pno}";
 	}	
 	
 </script>

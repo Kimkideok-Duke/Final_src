@@ -23,7 +23,9 @@ public class commentController {
 	
 	// http://localhost:7080/PMS/commentList.do
 		@RequestMapping("commentList.do")
-		public String commentList(@RequestParam("sno") int sno, Model d) {
+		public String commentList(@RequestParam("sno") int sno,
+				@RequestParam("pno") int pno,
+				Model d) {
 	    	d.addAttribute("title", service.getTitle(sno));
 	    	d.addAttribute("sname", service.getSname(sno));
 			d.addAttribute("clist", service.commentList(sno));
@@ -38,7 +40,9 @@ public class commentController {
 		}
 			
 		@RequestMapping("commInsert.do")
-		public String commInsert(Comment ins, Model d) {
+		public String commInsert(@RequestParam("pno") int pno,
+				@RequestParam("sno") int sno,
+				Comment ins, Model d) {
 			service.insertComment(ins);
 			d.addAttribute("isInsert", "Y");
 			return "WEB-INF\\views\\insertComment.jsp";
@@ -51,28 +55,35 @@ public class commentController {
 		}
 		
 		@RequestMapping("commDetail.do")
-		public String commDetail(@RequestParam("cno") int cno, Model d){
+		public String commDetail(@RequestParam("cno") int cno,
+				@RequestParam("pno") int pno, Model d){
 			d.addAttribute("comment",service.getDetail(cno));
 			
 			return "WEB-INF\\views\\DetailComment.jsp";
 		}	
 		
 		@RequestMapping("commDelete.do")
-		public String commDelete(@RequestParam("cno") int cno, Model d) {
+		public String commDelete(@RequestParam("cno") int cno,
+				@RequestParam("sno") int sno,
+				@RequestParam("pno") int pno,Model d) {
 			service.deleteComment(cno);
 			d.addAttribute("proc", "del");
 			return "WEB-INF\\views\\DetailComment.jsp";
 		}
 		
 		@RequestMapping("commUpForm.do")
-		public String commUpForm(int cno, Model d) {
+		public String commUpForm(@RequestParam("cno") int cno,
+				@RequestParam("sno") int sno,
+				@RequestParam("pno") int pno,Model d) {
 			d.addAttribute("comment", service.getDetail(cno));
 			System.out.println("수정페이지이동");
 			return "WEB-INF\\views\\UpdateComment.jsp";
 		}
 			
 		@RequestMapping("commUpdate.do")
-		public String commUpdate(Comment upt, Model d) {
+		public String commUpdate(@RequestParam("sno") int sno,
+				@RequestParam("pno") int pno,
+				Comment upt, Model d) {
 			d.addAttribute("comment", service.updateComment(upt));
 			d.addAttribute("upt", "Y");
 			System.out.println("수정:"+upt.getContent());

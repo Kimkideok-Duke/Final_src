@@ -8,7 +8,6 @@
 	<select id="commentList" parameterType="int"
 		resultType="comment">
 		SELECT * FROM comment_tb WHERE sno = #{sno}
-		ORDER BY updte DESC
 	</select>
 
 	<select id="getTitle" resultType="string" parameterType="int">
@@ -29,7 +28,7 @@
 	
 	<insert id="insertComment" parameterType="comment">
 		insert into comment_tb
-		values(seq_comm.nextval,#{sno},
+		values(seq_comm.nextval,#{pno},#{sno},
 		#{content},#{writer},sysdate,sysdate)
 	</insert>
 

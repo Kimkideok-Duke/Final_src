@@ -101,6 +101,7 @@ text-decoration:underline;
               <h5 class="card-title" style="font-weight: bold">일정 이름</h5>
 		    <form  id="form" action="${path}/commentList.do" method="post">
 			<input type="hidden" name="sno" value="${param.sno}"/>
+			<input type="hidden" name="pno" value="${param.pno}"/>
 			</form>
 	    
 		     <div class="row g-3">     
@@ -211,12 +212,12 @@ text-decoration:underline;
 
 	function goUpdate(cno){
 		if(confirm("수정하시겠습니까?\n수정화면으로 이동!")){
-			location.href="${path}/commUpForm.do?cno="+cno;
+			location.href="${path}/commUpForm.do?cno="+cno+"&sno="+"${param.sno}"+"&pno="+"${param.pno}";
 		}
 	}
 	function goDelete(cno){
 		if(confirm("삭제하시겠습니까?")){
-			location.href="${path}/commDelete.do?cno="+cno;
+			location.href="${path}/commDelete.do?cno="+cno+"&sno="+"${param.sno}"+"&pno="+"${param.pno}";
 		}
 	}
 	

@@ -122,6 +122,7 @@
 	function regProc(){
 		if(confirm("등록하시겠습니까?")){
 			$("#regSchedule").attr("action","${path}/regSchedule.do");
+			console.log("################등록#############")
 			$("#regSchedule").submit();
 		}
 	}
@@ -145,12 +146,12 @@
 		}
 	}
 	
-	var pno = "${pno}" 
+	var pno = "${pno}"
 	var proc = "${proc}"
 	var isReg = "${isReg}"
 	if(isReg=="Y"){
 		alert("등록 성공!")
-		location.href="${path}/goMain.do?pno=${param.pno}"		
+		location.href="${path}/goMain.do?pno="+pno		
 	}
 	if(proc=="upt"){
 		alert("수정 성공!")
@@ -287,11 +288,11 @@
 			</thead>
 			<tbody>
 				<c:forEach var="schedule" items="${slist}">
-				<tr onclick="chVal(${schedule.sno })"data-bs-toggle="modal" data-bs-target="#basicModal">
+				<tr data-bs-toggle="modal" data-bs-target="#basicModal">
 				<th scope="row" class="">${schedule.sno }</th>
-				<td>${schedule.sname}</td>
-				<td>${schedule.status}</td>
-				<td>진행도 :
+				<td onclick="chVal(${schedule.sno })">${schedule.sname}</td>
+				<td onclick="chVal(${schedule.sno })">${schedule.status}</td>
+				<td onclick="chVal(${schedule.sno })">진행도 :
 				<c:set var="status" value="" />
 				<c:choose>
                 <c:when test="${schedule.progress eq 100}">
@@ -304,9 +305,9 @@
 				<div class="progress">
             	   	<div class="progress-bar progress-bar-striped bg-${status}" role="progressbar" style="width: ${schedule.progress}%" aria-valuenow="${schedule.progress}" aria-valuemin="0" aria-valuemax="100">${schedule.progress}%</div>
               	</div></td>
-				<td><fmt:formatDate value="${schedule.startDate}" pattern="yyyy-MM-dd"/></td>
-				<td><fmt:formatDate value="${schedule.endDate}" pattern="yyyy-MM-dd"/></td>
-				<td>${schedule.budget}원</td>
+				<td onclick="chVal(${schedule.sno })"><fmt:formatDate value="${schedule.startDate}" pattern="yyyy-MM-dd"/></td>
+				<td onclick="chVal(${schedule.sno })"><fmt:formatDate value="${schedule.endDate}" pattern="yyyy-MM-dd"/></td>
+				<td onclick="chVal(${schedule.sno })">${schedule.budget}원</td>
 				<td><img src="a00_com/images/comment.png" width="30" height="30" onclick="goComment(${schedule.sno})"/></td>
 				</tr>
 				</c:forEach>
@@ -485,7 +486,7 @@
                   <div class="activite-label">32 min</div>
                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                   <div class="activity-content">
-                    Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                    홍길동 <a href="#" class="fw-bold text-dark">Comment</a> 등록
                   </div>
                 </div><!-- End activity item-->
 
@@ -691,7 +692,7 @@ function goSchedule(){
 
 
 function goComment(sno){
-	location.href="${path}/commentList.do?sno="+sno;
+	location.href="${path}/commentList.do?sno="+sno+"&pno="+"${param.pno}";
 	
 }
 var wsocket;

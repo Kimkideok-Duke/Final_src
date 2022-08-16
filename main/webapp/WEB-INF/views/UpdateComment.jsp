@@ -75,8 +75,9 @@
     </div><!-- End Page Title -->
     
               <form id="frm02" name="frm02" action="${path}/commentList.do" enctype="multipart/form-data"
-               class="form" method="post">
+               class="form" method="get">
              <input type="hidden" name="sno" value="${param.sno}"/>
+             <input type="hidden" name="pno" value="${param.pno}"/>
              </form>
                                              
                 <div class="card">
@@ -84,7 +85,8 @@
               <h5 class="card-title">Comment Update</h5>
 
               <!-- Floating Labels Form -->
-              <form id="frm01" name="frm01"  class="form" method="post"  enctype="multipart/form-data">
+              <form id="frm01" name="frm01"  class="form" method="post"  enctype="multipart/form-data"
+              action="${path}/commentList.do">
               
               <input type="hidden" name="cno" value="${comment.cno}">
               
@@ -152,13 +154,13 @@
 
 <script type="text/javascript">	
 	function goList(){
-	location.href="${path}/commentList.do"
+	location.href="${path}/commentList.do?sno="+"${param.sno}"+"&pno="+"${param.pno}";
 	}
 	
 	function goUpdate(){
 			if(confirm("수정하시겠습니까?")){
 				var contentVal = $("[name=content]").val();
-				$("[name=frm01]").attr("action","${path}/commUpdate.do");
+				$("[name=frm01]").attr("action","${path}/commUpdate.do?sno="+"${param.sno}"+"&pno="+"${param.pno}");
 				$("[name=frm01]").submit();
 			}
 	}

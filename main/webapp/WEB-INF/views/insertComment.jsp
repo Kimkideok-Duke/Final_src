@@ -82,6 +82,7 @@
               <form id="frm01" name="frm01" action="${path}/commInsert.do" enctype="multipart/form-data"
                class="form" method="post">
                 <input type="hidden" name="sno" value="${param.sno}"/>
+                 <input type="hidden" name="pno" value="${param.pno}"/>
                 <div class="col-md-12">                  
                    <input type="text" class="form-control" value="${name}" name="writer" readonly>
                 </div>
@@ -109,6 +110,7 @@
               <form id="frm02" name="frm02" action="${path}/commentList.do" enctype="multipart/form-data"
                class="form" method="post">
                 <input type="hidden" name="sno" value="${param.sno}"/>
+                <input type="hidden" name="pno" value="${param.pno}"/>
                 </form>
 
 </div>
@@ -159,7 +161,7 @@ var isInsert = "${isInsert}"
 	}
 	
 	function goList(sno){
-	location.href="${path}/commentList.do?sno="+${param.sno};
+	location.href="${path}/commentList.do?sno="+"${param.sno}"+"&pno="+"${param.pno}";
 	}
 	
 </script>
