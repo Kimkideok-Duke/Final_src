@@ -39,7 +39,6 @@ public class CalendarController {
 		System.out.println(upt.getTitle());
 		System.out.println(upt.getStart());
 		
-		
 		service.updateCalendar(upt);
 		return "redirect:/calendar.do";
 	}

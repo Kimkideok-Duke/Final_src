@@ -24,6 +24,7 @@
 		<typeAlias alias="comment" type="PMS.vo.Comment"/>
 		<typeAlias alias="commentfile" type="PMS.vo.CommentFile"/>
 		<typeAlias alias="gantt" type="PMS.vo.Gantt"/>
+		<typeAlias alias="calendar" type="PMS.vo.Calendar"/>
 	</typeAliases>
 
 	<mappers>
@@ -34,6 +35,7 @@
 		<mapper resource="resource/accountMapper.xml"/>
 		<mapper resource="resource/projectMapper.xml"/>
 		<mapper resource="resource/commentMapper.xml"/>
+		<mapper resource="resource/calendarMapper.xml"/>
 	</mappers>
 	
 </configuration>

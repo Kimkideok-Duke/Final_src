@@ -165,7 +165,7 @@
 	    calendar.render();
 
 	  });
-	<!--
+	
 	  function formData(event){
 		  // 매개변수로 받은 일정 내용을 설정처리..
 	 	  $("#frm01 [name=id]").val(event.id)
@@ -181,7 +181,7 @@
 		  $("#frm01 [name=allDay]").val(""+event.allDay)   	  
 		  $("#frm01 [name=content]").val(event.extendedProps.content)  	  
 	  }
-	  -->
+	  
 </script>
 </head>
 <body>
