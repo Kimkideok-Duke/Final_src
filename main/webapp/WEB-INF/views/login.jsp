@@ -115,7 +115,7 @@
 		location.href="${path}/loginPage.do"
 	}
 	if("${passVal}"=="P"){
-		location.href="${path}/entireDashboard.do"
+		location.href="${path}/entireDashboard.do?lang=ko"
 	}
 	if("${passVal}"=="B"){
 		alert("비밀번호가 일치하지 않습니다.")

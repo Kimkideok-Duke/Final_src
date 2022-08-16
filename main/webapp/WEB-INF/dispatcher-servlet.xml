@@ -100,5 +100,20 @@
 				접근이 가능하다. -->
 		</websocket:handshake-interceptors>
 	</websocket:handlers> 
-	
+	<!-- 다국어 처리 모듈 등록
+	1. package명기준으로 message.msg로 등ㄹ고
+		src/main/java 하위에 패키지와 기준되는 파일로 등록을 한다. -->
+	<bean id="messageSource" 
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.msg</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 
+	2. 선택에 의해 언어 변환 처리를 위한 객체 등록
+	 -->
+	<bean id="localeResolver" 
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 </beans>
