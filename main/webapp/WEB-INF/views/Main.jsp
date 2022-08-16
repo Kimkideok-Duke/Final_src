@@ -709,7 +709,7 @@ $(document).ready(function(){
 	});
 });
 function conn(){
-	wsocket = new WebSocket("ws:localhost:7080/${path}/chat-ws.do")
+	wsocket = new WebSocket("ws:220.73.54.156:8080/${path}/chat-ws.do")
 	wsocket.onopen=function(evt){ 
 		wsocket.send("msg:"+$("#id").val()+":연결 접속했습니다.")
 	}
