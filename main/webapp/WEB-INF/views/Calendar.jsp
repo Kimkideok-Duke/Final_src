@@ -83,7 +83,6 @@
 		var date = toDay.toISOString().split("T")[0]
 		console.log(date)
 		
-		
 	    var calendarEl = document.getElementById('calendar');
 		
 	    var calendar = new FullCalendar.Calendar(calendarEl, {

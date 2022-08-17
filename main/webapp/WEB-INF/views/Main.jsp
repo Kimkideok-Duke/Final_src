@@ -103,6 +103,11 @@
 		})
 	}
 	function regVal(){
+		if($("[name=sname]").val()==""){
+			alert("일정명을 입력해주세요")
+			$("[name=sname]").focus()
+			return
+		}
 		$.ajax({
 			url:"${path}/regScheduleModal.do",
 			dataType:"json",
@@ -122,7 +127,6 @@
 	function regProc(){
 		if(confirm("등록하시겠습니까?")){
 			$("#regSchedule").attr("action","${path}/regSchedule.do");
-			console.log("################등록#############")
 			$("#regSchedule").submit();
 		}
 	}
@@ -314,7 +318,9 @@
 			</tbody>
 			</table>
    		 </div>
+   		 <c:if test="${auth eq 'admin' or auth eq 'pm'}">
    		 <button type="button" id="Btn01" class="btn btn-primary" onclick="chVal(${schedule.sno })"data-bs-toggle="modal" data-bs-target="#regModal">등록</button>
+		 </c:if>
 	</div>
 </div>
             <!-- 일정관리 -->
