@@ -16,4 +16,8 @@ public class AlertService {
 	public List<Alert> getAlert(String userno){
 		return dao.getAlert(userno);
 	}
+	public List<Alert> getAlertjson(String userno){
+		return dao.getAlertjson(userno);
+	}
+
 }
