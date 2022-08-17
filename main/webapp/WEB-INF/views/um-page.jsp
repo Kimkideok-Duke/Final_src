@@ -363,13 +363,32 @@
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">부서</label>
                   <div class="col-sm-10">
-                    <input type="text" id="uptDept" name="dept" class="form-control" value="" >
+                    <select class="form-select" aria-label="Default select example" id="uptDept" name="dept">
+                      <option value="미정">부서 선택</option> 
+                      <option value="개발부">개발부</option>
+                      <option value="기획부">기획부</option>
+                      <option value="사업부">사업부</option>
+                      <option value="디자인부">디자인부</option>
+                      <option value="품질관리부">품질관리부</option>
+                      <option value="마케팅부">마케팅부</option>
+                      <option value="인사부">인사부</option>
+                      <option value="경영관리부">경영관리부</option>
+                    </select>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">직급</label>
                   <div class="col-sm-10">
-                    <input type="text" id="uptPosition" name="position" class="form-control" value="" >
+                    <select class="form-select" aria-label="Default select example" id="uptPosition" name="position">
+                      <option value="신입">직급 선택</option> 
+                      <option value="사원">사원</option>
+                      <option value="주임">주임</option>
+                      <option value="과장">과장</option>
+                      <option value="차장">차장</option>
+                      <option value="부장">부장</option>
+                      <option value="이사">이사</option>
+                      <option value="ceo">ceo</option>
+                    </select>
                   </div>
                 </div>
                 <input type="hidden" name="userno" id="uptUserno" value="">
@@ -426,8 +445,8 @@
 				success:function(data){
 					var uVal = data.uptModalInfo
 					$("#uptName").val(uVal.name)
-					$("#uptDept").val(uVal.dept)
-					$("#uptPosition").val(uVal.position)
+					$("#uptDept").val(uVal.dept).prop("selected",true)
+					$("#uptPosition").val(uVal.position).prop("selected",true)
 					$('#uptAuth').val(uVal.auth).prop("selected",true)
 					$("#uptUserno").val(value)
 				}

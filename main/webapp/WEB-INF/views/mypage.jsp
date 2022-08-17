@@ -56,6 +56,18 @@
 		$("#pwDif").hide()		
 		var pwPattern = /^(?=.*[a-z])(?=.*\d)[a-z0-9_-]{8,16}$/
 		$("#pwChBtn").click(function(){
+			if($("#currentPassword").val()==""){
+				alert("현재 비밀번호를 입력해주세요")
+				return
+			}
+			if($("#newPassword").val()==""){
+				alert("새 비밀번호를 입력해주세요")
+				return
+			}
+			if($("#renewPassword").val()==""){
+				alert("비밀번호 확인을 입력해주세요")
+				return
+			}
 			if($("#currentPassword").val()!="${userInfo.pw}"){
 				alert("현재 비밀번호가 일치하지 않습니다.")
 				return
