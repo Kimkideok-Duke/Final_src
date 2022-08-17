@@ -38,5 +38,8 @@ public class MainService {
 	public List<Account> getPrjparticipant(int pno){
 		return dao.getPrjparticipant(pno);
 	}
-
+	// 프로젝트 진행도
+	public int getProgress(int pno) {
+		return dao.getProgress(pno);
+	}
 }

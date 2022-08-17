@@ -12,7 +12,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="${path}/entireDashboard.do?lang=ko" class="logo d-flex align-items-center">
         <img src="NiceAdmin/assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">Fine PMS</span>
       </a>
@@ -165,11 +165,11 @@
         </a>
       </li><!-- End Dashboard Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#">
           <i class="bi bi-calendar-plus"></i><span>Plan</span>
         </a>
-      </li><!-- End 일정관리 Nav -->
+      </li> --><!-- End 일정관리 Nav -->
 	  
       <li class="nav-item">
         <a class="nav-link collapsed" href="${path}/getAlert.do?userno=<%=(String)session.getAttribute("userno")%>">

@@ -49,7 +49,14 @@
 		WHERE p.USERNO = a.USERNO 
 		AND pno=#{pno}
 	</select>
-	
+	<!-- 프로젝트 진행도 -->
+	<select id="getProgress" resultType="int" parameterType="int">
+		SELECT NVL(AVG(s.PROGRESS),0)
+		FROM PROJECT p, SCHEDULE s
+		WHERE p.PNO = s.PNO(+)
+		AND p.PNO = #{pno}
+		GROUP BY p.PNO
+	</select>
 </mapper>
 
 

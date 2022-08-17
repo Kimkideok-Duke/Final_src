@@ -84,6 +84,13 @@
 				}
 			}
 		})
+		
+		$("#progress").change(function(){
+			$("#show").text($(this).val()+"%")
+	    });
+		$("#progressReg").change(function(){
+			$("#showReg").text($(this).val()+"%")
+	    });
 	});
 	function chVal(sno){
 		$.ajax({
@@ -103,6 +110,11 @@
 		})
 	}
 	function regVal(){
+		if($("[name=sname]").val()==""){
+			alert("일정명을 입력해주세요")
+			$("[name=sname]").focus()
+			return
+		}
 		$.ajax({
 			url:"${path}/regScheduleModal.do",
 			dataType:"json",
@@ -122,7 +134,6 @@
 	function regProc(){
 		if(confirm("등록하시겠습니까?")){
 			$("#regSchedule").attr("action","${path}/regSchedule.do");
-			console.log("################등록#############")
 			$("#regSchedule").submit();
 		}
 	}
@@ -245,7 +256,7 @@
                 <div class="card-body">
                   <h5 class="card-title">${title}</h5> 
 					<div class="progress">
-	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 36%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">36%</div>
+	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: ${prog}%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">${prog}%</div>
 	              	</div>
                 </div>
               </div>
@@ -287,9 +298,10 @@
                 </tr>
 			</thead>
 			<tbody>
+				<%int cnt=0; %>
 				<c:forEach var="schedule" items="${slist}">
 				<tr data-bs-toggle="modal" data-bs-target="#basicModal">
-				<th scope="row" class="">${schedule.sno }</th>
+				<th scope="row" class=""><%=++cnt %></th>
 				<td onclick="chVal(${schedule.sno })">${schedule.sname}</td>
 				<td onclick="chVal(${schedule.sno })">${schedule.status}</td>
 				<td onclick="chVal(${schedule.sno })">진행도 :
@@ -313,8 +325,13 @@
 				</c:forEach>
 			</tbody>
 			</table>
+			<div class="text-center">
+			<c:if test="${auth eq 'admin' or auth eq 'pm'}">
+	   			<button type="button" id="Btn01" class="btn btn-primary" onclick="chVal(${schedule.sno })"data-bs-toggle="modal" data-bs-target="#regModal">일정 등록</button>
+			</c:if>
+			</div>
    		 </div>
-   		 <button type="button" id="Btn01" class="btn btn-primary" onclick="chVal(${schedule.sno })"data-bs-toggle="modal" data-bs-target="#regModal">등록</button>
+   		 
 	</div>
 </div>
             <!-- 일정관리 -->
@@ -331,55 +348,84 @@
 				      <!-- 모달 내용 sname, status, progress, startDate, endDate, budget -->
 			      <div class="modal-body">
 			      <!-- 권한 체크해서 form 경로 변경, input 숨기기 -->
-			  		<form id="uptSchedule" class="row g-3 needs-validation" novalidate>
+			      	<c:if test="${auth eq 'admin'}">
+			  		<form id="uptSchedule" class="row g-3 needs-validation" action="${path}/uptScheduleByPM.do" novalidate>
+			  		</c:if>
+			  		<c:if test="${auth eq 'pm'}">
+			  		<form id="uptSchedule" class="row g-3 needs-validation" action="${path}/uptScheduleByPM.do" novalidate>
+			  		</c:if>
+			  		<c:if test="${auth eq 'admin'}">
+			  		<form id="uptSchedule" class="row g-3 needs-validation" action="${path}/uptSchedule.do" novalidate>
+			  		</c:if>
 			             <div class="row mb-3" style="padding-top:15px;">
 			             <input type="hidden" id="sno" name="sno" value=""/>
 			               <label for="inputText" class="col-sm-2 col-form-label">일정명</label>
 			               <div class="col-sm-10">
-			                 <input type="text" id="sname" name="sname" class="form-control" value="">
+			               	<div class="input-group has-validation">
+			                 <input type="text" id="sname" name="sname" class="form-control" placeholder="일정명" required>
+			                 <div class="invalid-feedback">
+			                    필수 입력 항목입니다.
+			                 </div>
+		                    </div>
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">상태</label>
 			               <div class="col-sm-10">
-			                 <input type="text" id="status" name="status" class="form-control" value="" >
+			                 <select class="form-select" id="status" name="status">
+			                      <option value="예정">예정</option>
+			                      <option value="진행중">진행중</option>
+			                      <option value="완료">완료</option>
+			                      <option value="중지">중지</option>
+			                      <option value="막힘">막힘</option>
+			                 </select>
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">진행도</label>
 			               <div class="col-sm-10">
-			                 <input type="text" id="progress" name="progress" class="form-control" value="" >
+			                 <input type="range" id="progress" name="progress" class="form-range" min="0" max="100" step="5" value="0"><p id="show" align="center"></p>
 			               </div>
 			             </div>
 						<div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">시작일</label>
 			               <div class="col-sm-10">
-			                 <input type="date" id="startDate" name="startDate_s" class="form-control" value="">
+			                 <input type="date" id="startDate" name="startDate_s" class="form-control" required>
 			               </div>
+			               <div class="invalid-feedback">
+			                    필수 입력 항목입니다.
+		                   </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">마감일</label>
 			               <div class="col-sm-10">
-			                 <input type="date" id="endDate" name="endDate_s" class="form-control" value="" >
+			                 <input type="date" id="endDate" name="endDate_s" class="form-control" required>
+			               </div>
+			               <div class="invalid-feedback">
+			                    필수 입력 항목입니다.
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">예산</label>
 			               <div class="col-sm-10">
-			                 <input type="text" id="budget" name="budget" class="form-control" value="" >
+			                 <input type="number" id="budget" name="budget" class="form-control" min="0" step="10000" value="" >
 			               </div>
 			             </div>
-			             	<button type="button" onclick="uptProc()" id="uptBtn" class="btn btn-primary">수정</button>
+			              <div class="row mb-3">
+			               <div class="text-end">
+			             	<button type="submit" class="btn btn-primary">수정</button>
 			             	<button type="button" onclick="delProc()" id="delBtn" class="btn btn-danger">삭제</button>
+		             	   </div>
+			              </div>
+			              </div>
 			              </form>
-			           </div>
+            </div>
 			     <!-- 모달 하단 -->      
-				      <div class="modal-footer">
+				      <!-- <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-				      </div>
+				      </div> -->
            </div>
          </div>
-       </div>
        
 <!-- 모달창(일반등록) -->
        <div class="modal fade" id="regModal" tabindex="-1">
@@ -393,24 +439,35 @@
 				      <!-- 모달 내용 sname, status, progress, startDate, endDate, budget -->
 			      <div class="modal-body">
 			      <!-- 권한 체크해서 form 경로 변경, input 숨기기 -->
-			  		<form id="regSchedule" class="row g-3 needs-validation" novalidate>
+			  		<form id="regSchedule" class="row g-3 needs-validation" action="${path}/regSchedule.do" novalidate>
 			  			<input type="hidden" name="pno" value="${param.pno}">
 			             <div class="row mb-3" style="padding-top:15px;">
 			               <label for="inputText" class="col-sm-2 col-form-label">일정명</label>
 			               <div class="col-sm-10">
-			                 <input type="text" id="snameReg" name="sname" class="form-control" value="">
+			               	<div class="input-group has-validation">
+			                 <input type="text" id="snameReg" name="sname" class="form-control" placeholder="일정명" required>
+			                 <div class="invalid-feedback">
+			                    필수 입력 항목입니다.
+			                 </div>
+		                    </div>
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">상태</label>
 			               <div class="col-sm-10">
-			                 <input type="text" id="statusReg" name="status" class="form-control" value="" >
+			                 <select class="form-select" id="statusReg" name="status">
+			                      <option value="예정" selected>예정</option>
+			                      <option value="진행중">진행중</option>
+			                      <option value="완료">완료</option>
+			                      <option value="중지">중지</option>
+			                      <option value="막힘">막힘</option>
+			                 </select>
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">진행도</label>
 			               <div class="col-sm-10">
-			                 <input type="text" id="progressReg" name="progress" class="form-control" value="" >
+			                 <input type="range" id="progressReg" name="progress" class="form-range" min="0" max="100" step="5" value="0"><p id="showReg" align="center"></p>
 			               </div>
 			             </div>
 						<div class="row mb-3">
@@ -428,16 +485,19 @@
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">예산</label>
 			               <div class="col-sm-10">
-			                 <input type="text" id="budgetReg" name="budget" class="form-control" value="" >
+			                 <input type="number" id="budgetReg" name="budget" class="form-control" min="0" step="10000" value="0" >
 			               </div>
 			             </div>
-			             	<button type="button" onclick="regProc()" id="regBtn" class="btn btn-primary">등록</button>
-			              </form>
+			             
+			             <div class="row">
+			             	<button type="submit" class="btn btn-primary">등록</button>
+			             </div>
+			             </form>
 			           </div>
 			     <!-- 모달 하단 -->      
-				      <div class="modal-footer">
+				      <!-- <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-				      </div>	
+				      </div>	 -->
            </div>
          </div>
        </div>
@@ -569,12 +629,12 @@
 		              </table>
 		              <c:if test="${auth eq 'admin'}">
 		              <div class="col-lg-12" align="center">
-			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered">참가자 추가</button>
+			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addparti">참가자 추가</button>
 			        </div>
 			        </c:if>
 			        <c:if test="${auth eq 'pm'}">
 		              <div class="col-lg-12" align="center">
-			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered">참가자 추가</button>
+			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addparti">참가자 추가</button>
 			        </div>
 			        </c:if>
                     </div>
@@ -590,7 +650,7 @@
   		location.href="${path}/goMain.do?pno=${param.pno}"
   	}
 </script>        
-		      <div class="modal fade" id="verticalycentered" tabindex="-1">
+		      <div class="modal fade" id="addparti" tabindex="-1">
 			       <div class="modal-dialog modal-dialog-centered">
 			         <div class="modal-content">
 			           <div class="modal-header">
@@ -683,11 +743,11 @@
       </c:if>
       <c:if test="${auth eq 'admin'}">
       <div class="col-lg-12" align="center">
-      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
+      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#projectoption"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
       </div>
       </c:if>
       
-      <div class="modal fade" id="verticalycentered" tabindex="-1">
+      <div class="modal fade" id="projectoption" tabindex="-1">
 	       <div class="modal-dialog modal-dialog-centered">
 	         <div class="modal-content">
 	           <div class="modal-header">
@@ -716,10 +776,14 @@
 	                <div class="col-sm-4">
 	                  <div class="form-floating mb-3">
 	                    <select name="dept" class="form-select" id="floatingDept" aria-label="Dept">
-	                      <option value="개발부">개발</option>
-	                      <option value="본부">본부</option>
-	                      <option value="영업부">영업</option>
-	                      <option value="인사부">인사</option>
+	                      <option value="개발부">개발부</option>
+	                      <option value="기획부">기획부</option>
+	                      <option value="사업부">사업부</option>
+	                      <option value="디자인부">디자인부</option>
+	                      <option value="품질관리부">품질관리부</option>
+	                      <option value="마케팅부">마케팅부</option>
+	                      <option value="인사부">인사부</option>
+	                      <option value="경영관리부">경영관리부</option>
 	                    </select>
 	                    <label for="floatingDept">부서</label>
 	                  </div>

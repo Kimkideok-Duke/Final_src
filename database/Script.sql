@@ -17,11 +17,12 @@ SELECT * FROM SCHEDULE;
 			create sequence cal_seq
 				start with 1
 				minvalue 1;
-			DROP TABLE 
+			DROP TABLE CALENDAR ;
+			DROP SEQUENCE cal_seq;
 			insert into calendar values(cal_seq.nextval, 1, 2, '두일정등록','2022-08-21',
 				'2022-08-29','내용','navy','pink','yellow',1);
-		
 
+			
 SELECT * FROM CALENDAR c ;
 
 UPDATE calendar
@@ -42,6 +43,5 @@ SELECT s.*
 FROM calendar c, schedule s
 WHERE c.id = 5
 AND c.sno = s.sno; 
-
 
 

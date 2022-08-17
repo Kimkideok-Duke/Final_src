@@ -17,5 +17,6 @@ public interface MainDao {
 	public void delSchedule(int sno);	
 	public Schedule getSchedule(int sno);
 	public List<Account> getPrjparticipant(int pno);
-	
+	// 프로젝트 진행도
+	public int getProgress(int pno);
 }

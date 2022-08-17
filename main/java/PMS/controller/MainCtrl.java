@@ -32,6 +32,7 @@ public class MainCtrl {
     	d.addAttribute("title", service.getTitleByNo(pno));
     	d.addAttribute("slist",service.getScheduleList(pno));
     	d.addAttribute("alist", serviceA.getAccountList());
+    	d.addAttribute("prog", service.getProgress(pno));
     	return "WEB-INF\\views\\Main.jsp";
     }
     @RequestMapping("regScheduleModal.do")
@@ -65,10 +66,12 @@ public class MainCtrl {
 	}
 	
     @RequestMapping("delSchedule.do")
-	public String delSchedule(@RequestParam(value = "sno") int sno, Model d) {
-		service.delSchedule(sno);
+	public String delSchedule(HttpServletRequest request, @RequestParam(value = "sno") int sno, Model d) {
+    	HttpSession session = request.getSession();
+    	int pno = (int)session.getAttribute("pno");
+    	service.delSchedule(sno);
 		d.addAttribute("proc", "del");
-		d.addAttribute("pno", service.getSchedule(sno).getPno());
+		d.addAttribute("pno", pno);
 		return "WEB-INF\\views\\Main.jsp";
 	}
 
