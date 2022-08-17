@@ -249,7 +249,7 @@
                 <div class="card-body">
                   <h5 class="card-title">${title}</h5> 
 					<div class="progress">
-	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 36%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">36%</div>
+	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: ${prog}%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">${prog}%</div>
 	              	</div>
                 </div>
               </div>
@@ -722,10 +722,14 @@
 	                <div class="col-sm-4">
 	                  <div class="form-floating mb-3">
 	                    <select name="dept" class="form-select" id="floatingDept" aria-label="Dept">
-	                      <option value="개발부">개발</option>
-	                      <option value="본부">본부</option>
-	                      <option value="영업부">영업</option>
-	                      <option value="인사부">인사</option>
+	                      <option value="개발부">개발부</option>
+	                      <option value="기획부">기획부</option>
+	                      <option value="사업부">사업부</option>
+	                      <option value="디자인부">디자인부</option>
+	                      <option value="품질관리부">품질관리부</option>
+	                      <option value="마케팅부">마케팅부</option>
+	                      <option value="인사부">인사부</option>
+	                      <option value="경영관리부">경영관리부</option>
 	                    </select>
 	                    <label for="floatingDept">부서</label>
 	                  </div>
