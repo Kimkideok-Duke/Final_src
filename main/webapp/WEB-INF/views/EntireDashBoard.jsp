@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
-<fmt:requestEncoding value="utf-8"/>   
+<fmt:requestEncoding value="utf-8"/>
 <!DOCTYPE html>
 
 <html>
@@ -89,13 +89,13 @@
         </ol>
       </nav>
       </div>
-      <select class="selLang" id="selLan">
+      <%-- <select class="selLang" id="selLan">
 		<option value="ko"><spring:message code="ko"/></option>
 		<option value="en"><spring:message code="en"/></option>
 	</select>
 	<form id="selLang" class="form-inline" method="post">
 		<input type="hidden" name="lang" value=""/>
-	</form>
+	</form> --%>
     </div><!-- End Page Title -->
    	
     <section class="section dashboard">

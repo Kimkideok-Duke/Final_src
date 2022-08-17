@@ -4,8 +4,9 @@
     %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
-<fmt:requestEncoding value="utf-8"/>     
+<fmt:requestEncoding value="utf-8"/>   
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -19,6 +20,34 @@
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
+		
+		<!-- Multi Language -->
+		<li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="ri-global-line"></i>
+          </a><!-- End Notification Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow multiLang">
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="${path}/entireDashboard.do?lang=ko">
+                <img alt="ko" src="img/free-icon-south-korea-2151378.png" width="30">
+                <span><h6><spring:message code="ko"/></h6></span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="${path}/entireDashboard.do?lang=en">
+                <img alt="ko" src="img/free-icon-united-states-206626.png" width="30">
+                <span><h6><spring:message code="en"/></h6></span>
+              </a>
+            </li>
+          </ul><!-- End Notification Dropdown Items -->
+
+        </li><!-- Multi Language End -->
 
         <li class="nav-item dropdown">
 
