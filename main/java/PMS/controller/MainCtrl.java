@@ -32,7 +32,7 @@ public class MainCtrl {
     	d.addAttribute("title", service.getTitleByNo(pno));
     	d.addAttribute("slist",service.getScheduleList(pno));
     	d.addAttribute("alist", serviceA.getAccountList());
-    	d.addAttribute("prog", service.getProgress(pno));
+    	//d.addAttribute("prog", service.getProgress(pno));
     	return "WEB-INF\\views\\Main.jsp";
     }
     @RequestMapping("regScheduleModal.do")
