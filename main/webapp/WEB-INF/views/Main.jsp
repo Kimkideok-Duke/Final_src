@@ -207,8 +207,9 @@
 			}
 		})
       	data.addRows(dlist);
+      	console.log(dlist.length)
       var options = {
-        height: 400,
+        height: (30*dlist.length)+50,
         width:"100%",
         gantt: {
           trackHeight: 30
