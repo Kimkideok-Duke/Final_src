@@ -351,14 +351,14 @@
 	       <div class="modal-dialog modal-dialog-centered">
 	         <div class="modal-content">
 	           <div class="modal-header">
-	             <h5 class="modal-title"><spring:message code="deptBudget"/></h5>
+	             <h5 class="modal-title"><spring:message code="addPrj"/></h5>
 	             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	           </div>
 	           <br>
 	           <div class="modal-body">
 				 <form class="row g-3 needs-validation" action="${path}/addProject.do" novalidate>
 				 	<div class="row mb-3">
-	                  <label class="col-sm-2 col-form-label"><spring:message code="deptBudget"/></label>
+	                  <label class="col-sm-2 col-form-label"><spring:message code="pmno"/></label>
 	                  <div class="col-sm-10">
 	                    <input type="text" class="form-control" name="pmno" value="${userno}" readonly>
 	                  </div>
