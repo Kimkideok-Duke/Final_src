@@ -607,11 +607,17 @@
                         <td>${s.title}</td>
                         <td>${s.sname}</td>
                         <td>
+                        <c:if test="${s.status eq '예정'}">
+                        	<span class="badge bg-secondary">${s.status}</span>
+                        </c:if>
                         <c:if test="${s.status eq '진행중'}">
                         	<span class="badge bg-primary">${s.status}</span>
                         </c:if>
                         <c:if test="${s.status eq '완료'}">
                         	<span class="badge bg-success">${s.status}</span>
+                        </c:if>
+                        <c:if test="${s.status eq '중지'}">
+                        	<span class="badge bg-warning">${s.status}</span>
                         </c:if>
                         <c:if test="${s.status eq '막힘'}">
                         	<span class="badge bg-danger">${s.status}</span>
@@ -620,7 +626,7 @@
                         <td><fmt:formatDate value="${s.startDate}" pattern="yyyy-MM-dd"/></td>
                         <td>
 	                        <div class="progress">
-		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${s.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${s.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${s.progress}%</div>
 		              		</div>
 	              		</td>
 	              		<td>${s.dept}</td>
@@ -642,11 +648,17 @@
                         <td>${myS.title}</td>
                         <td>${myS.sname}</td>
                         <td>
+                        <c:if test="${myS.status eq '예정'}">
+                        	<span class="badge bg-secondary">${myS.status}</span>
+                        </c:if>
                         <c:if test="${myS.status eq '진행중'}">
                         	<span class="badge bg-primary">${myS.status}</span>
                         </c:if>
                         <c:if test="${myS.status eq '완료'}">
                         	<span class="badge bg-success">${myS.status}</span>
+                        </c:if>
+                        <c:if test="${myS.status eq '중지'}">
+                        	<span class="badge bg-warning">${myS.status}</span>
                         </c:if>
                         <c:if test="${myS.status eq '막힘'}">
                         	<span class="badge bg-danger">${myS.status}</span>
@@ -655,7 +667,7 @@
                         <td><fmt:formatDate value="${myS.startDate}" pattern="yyyy-MM-dd"/></td>
                         <td>
 	                        <div class="progress">
-		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
 		              		</div>
 	              		</td>
                       </tr>
@@ -675,11 +687,17 @@
                         <td>${myS.title}</td>
                         <td>${myS.sname}</td>
                         <td>
+                        <c:if test="${myS.status eq '예정'}">
+                        	<span class="badge bg-secondary">${myS.status}</span>
+                        </c:if>
                         <c:if test="${myS.status eq '진행중'}">
                         	<span class="badge bg-primary">${myS.status}</span>
                         </c:if>
                         <c:if test="${myS.status eq '완료'}">
                         	<span class="badge bg-success">${myS.status}</span>
+                        </c:if>
+                        <c:if test="${myS.status eq '중지'}">
+                        	<span class="badge bg-warning">${myS.status}</span>
                         </c:if>
                         <c:if test="${myS.status eq '막힘'}">
                         	<span class="badge bg-danger">${myS.status}</span>
@@ -688,7 +706,7 @@
                         <td><fmt:formatDate value="${myS.startDate}" pattern="yyyy-MM-dd"/></td>
                         <td>
 	                        <div class="progress">
-		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
 		              		</div>
 	              		</td>
                       </tr>
@@ -708,11 +726,17 @@
                         <td>${pmS.title}</td>
                         <td>${pmS.sname}</td>
                         <td>
+                        <c:if test="${pmS.status eq '예정'}">
+                        	<span class="badge bg-secondary">${pmS.status}</span>
+                        </c:if>
                         <c:if test="${pmS.status eq '진행중'}">
                         	<span class="badge bg-primary">${pmS.status}</span>
                         </c:if>
                         <c:if test="${pmS.status eq '완료'}">
                         	<span class="badge bg-success">${pmS.status}</span>
+                        </c:if>
+                        <c:if test="${pmS.status eq '중지'}">
+                        	<span class="badge bg-warning">${pmS.status}</span>
                         </c:if>
                         <c:if test="${pmS.status eq '막힘'}">
                         	<span class="badge bg-danger">${pmS.status}</span>
@@ -721,7 +745,7 @@
                         <td><fmt:formatDate value="${pmS.startDate}" pattern="yyyy-MM-dd"/></td>
                         <td>
 	                        <div class="progress">
-		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${pmS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${pmS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${pmS.progress}%</div>
 		              		</div>
 	              		</td>
                       </tr>
