@@ -18,4 +18,11 @@ public class AlertController {
 		d.addAttribute("art",service.getAlert(userno));
 		return "WEB-INF\\views\\alert.jsp";
 	}
+	@RequestMapping("getAlertjson.do")
+	public String getAlertjson(@RequestParam(value="userno", defaultValue="") String userno, Model d) {
+		d.addAttribute("art",service.getAlertjson(userno));
+		return "pageJsonReport";
+	}
+
+	
 }
