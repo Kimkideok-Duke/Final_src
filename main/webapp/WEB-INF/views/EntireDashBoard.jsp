@@ -376,9 +376,13 @@
 	                  <div class="form-floating mb-3">
 	                    <select name="dept" class="form-select" id="floatingDept" aria-label="Dept">
 	                      <option value="개발부"><spring:message code="deptDev"/></option>
-	                      <option value="본부"><spring:message code="deptHQ"/></option>
-	                      <option value="영업부"><spring:message code="deptsales"/></option>
-	                      <option value="인사부"><spring:message code="deptHR"/></option>
+	                      <option value="기획부"><spring:message code="deptPlan"/></option>
+	                      <option value="사업부"><spring:message code="deptDiv"/></option>
+	                      <option value="디자인부"><spring:message code="deptDesign"/></option>
+	                      <option value="품질관리부"><spring:message code="deptQC"/></option>
+	                      <option value="마케팅부"><spring:message code="deptMarketing"/></option>
+	                      <option value="인사부"><spring:message code="deptPS"/></option>
+	                      <option value="경영관리부"><spring:message code="deptAdmin"/></option>
 	                    </select>
 	                    <label for="floatingDept"><spring:message code="dept"/></label>
 	                  </div>
