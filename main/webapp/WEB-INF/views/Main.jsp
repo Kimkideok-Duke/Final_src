@@ -249,7 +249,7 @@
                 <div class="card-body">
                   <h5 class="card-title">${title}</h5> 
 					<div class="progress">
-	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 30%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">30%</div>
+	                	<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: ${prog}%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100">${prog}%</div>
 	              	</div>
                 </div>
               </div>
