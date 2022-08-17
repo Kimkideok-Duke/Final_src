@@ -569,12 +569,12 @@
 		              </table>
 		              <c:if test="${auth eq 'admin'}">
 		              <div class="col-lg-12" align="center">
-			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered">참가자 추가</button>
+			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addparti">참가자 추가</button>
 			        </div>
 			        </c:if>
 			        <c:if test="${auth eq 'pm'}">
 		              <div class="col-lg-12" align="center">
-			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered">참가자 추가</button>
+			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addparti">참가자 추가</button>
 			        </div>
 			        </c:if>
                     </div>
@@ -590,7 +590,7 @@
   		location.href="${path}/goMain.do?pno=${param.pno}"
   	}
 </script>        
-		      <div class="modal fade" id="verticalycentered" tabindex="-1">
+		      <div class="modal fade" id="addparti" tabindex="-1">
 			       <div class="modal-dialog modal-dialog-centered">
 			         <div class="modal-content">
 			           <div class="modal-header">
@@ -683,11 +683,11 @@
       </c:if>
       <c:if test="${auth eq 'admin'}">
       <div class="col-lg-12" align="center">
-      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
+      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#projectoption"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
       </div>
       </c:if>
       
-      <div class="modal fade" id="verticalycentered" tabindex="-1">
+      <div class="modal fade" id="projectoption" tabindex="-1">
 	       <div class="modal-dialog modal-dialog-centered">
 	         <div class="modal-content">
 	           <div class="modal-header">
