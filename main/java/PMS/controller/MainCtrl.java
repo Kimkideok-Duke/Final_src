@@ -13,6 +13,7 @@ import PMS.service.CalendarService;
 import PMS.service.AccountService;
 import PMS.service.MainService;
 import PMS.vo.Schedule;
+import PMS.service.TimelineService;
 
 @Controller
 public class MainCtrl {
@@ -22,6 +23,8 @@ public class MainCtrl {
 	private CalendarService cservice;
     @Autowired(required=false)
     private AccountService serviceA;
+    @Autowired(required=false)
+    private TimelineService serviceT;
 	// http://localhost:6080/PMS/loginPage.do
     
     // http://localhost:6080/PMS/goMain.do
@@ -33,6 +36,7 @@ public class MainCtrl {
     	d.addAttribute("slist",service.getScheduleList(pno));
     	d.addAttribute("alist", serviceA.getAccountList());
     	d.addAttribute("prog", service.getProgress(pno));
+    	d.addAttribute("tlist",serviceT.getTimeline(pno));
     	return "WEB-INF\\views\\Main.jsp";
     }
     @RequestMapping("regScheduleModal.do")

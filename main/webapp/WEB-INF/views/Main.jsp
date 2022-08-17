@@ -538,61 +538,64 @@
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">타임라인 <span>| Today</span></h5>
+              <h5 class="card-title">타임라인 <span>| ${title}</span></h5>
 
-              <div class="activity">
-
+              <div class="activity">       
+                                 
+                <c:forEach var="t" items="${tlist}">
+                <c:choose>
+                <c:when test="${t.cno == 0}">
+                 <div class="activity-item d-flex">
+                  <div class="activite-label">56 min</div>
+                  <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>            
+                  <div class="activity-content">${t.sname } 일정이 등록되었습니다.</div>
+                </div><!-- End activity item-->
+                </c:when>
+                <c:otherwise>
+                
+                <c:if test="${t.regdte eq t.updte}">
                 <div class="activity-item d-flex">
                   <div class="activite-label">32 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                  <div class="activity-content">
-                    홍길동 <a href="#" class="fw-bold text-dark">Comment</a> 등록
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">56 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                  <div class="activity-content">
-                    Voluptatem blanditiis blanditiis eveniet
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">2 hrs</div>
-                  <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                  <div class="activity-content">
-                    Voluptates corrupti molestias voluptatem
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">1 day</div>
-                  <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                  <div class="activity-content">
-                    Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">2 days</div>
                   <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
                   <div class="activity-content">
-                    Est sit eum reiciendis exercitationem
+                    ${t.writer}님이 일정 ${t.sno}에 <a href="#" class="fw-bold text-dark">코멘트${t.cno }</a> 를 등록하였습니다.
                   </div>
                 </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">4 weeks</div>
-                  <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
+                 </c:if>
+                <c:if test="${t.regdte ne t.updte}"> 
+                 <div class="activity-item d-flex">
+                  <div class="activite-label">32 min</div>
+                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                   <div class="activity-content">
-                    Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
+                   일정 ${t.sno}에 <a href="#" class="fw-bold text-dark">코멘트${t.cno} </a> 가 수정되었습니다.
                   </div>
-                </div><!-- End activity item-->
+                </div><!-- End activity item--> 
+                </c:if>
+
+            
+                </c:otherwise>  
+                </c:choose>
+                </c:forEach>
+
+       <%-- Timeline Circle Color
+       => Red   
+       <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+       => Green   
+       <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+       => Yellow
+       <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+       => Blue
+       <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
+       => Sky Blue
+       <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
+       => DarkGreen
+       <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
+       --%>
 
               </div>
 
             </div>
+
           </div><!-- End Recent Activity -->
 
               <!-- 참가자 Accordion without outline borders -->
