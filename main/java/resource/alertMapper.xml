@@ -9,4 +9,11 @@
 		WHERE s.sno = sp.sno AND sp.pno = p.pno
 		AND userno = #{userno} AND STATUS!='완료'
 	</select>	
+	<select id="getAlertnavi" resultType="Alert" parameterType="string">
+		SELECT sp.userno, p.title, s.sname, s.status,TO_DATE(ENDDATE , 'YYYY-MM-DD') -TO_DATE(SYSDATE , 'YYYY-MM-DD')dday
+		FROM SCHEDULE s ,SCHPARTICIPANT sp, PROJECT p
+		WHERE s.sno = sp.sno AND sp.pno = p.pno
+		AND userno = #{userno} AND STATUS!='완료'
+	</select>	
+	
 </mapper>
