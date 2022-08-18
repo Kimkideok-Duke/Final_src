@@ -83,6 +83,7 @@
                class="form" method="post">
                 <input type="hidden" name="sno" value="${param.sno}"/>
                 <input type="hidden" name="pno" value="${param.pno}"/>
+                <input type="hidden" name="sname" value="${sname}"/>
                 <input type="hidden" name="state" value="댓글등록"/>
                 <div class="col-md-12">                  
                    <input type="text" class="form-control" value="${name}" name="writer" readonly>

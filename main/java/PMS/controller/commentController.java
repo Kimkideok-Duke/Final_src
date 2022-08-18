@@ -45,10 +45,10 @@ public class commentController {
 		@RequestMapping("commInsert.do")
 		public String commInsert(@RequestParam("pno") int pno,
 				@RequestParam("sno") int sno,
-				Comment ins,Timeline ins2, Model d) {
+				Comment ins,Timeline ins2, Model d) {			
 			service.insertComment(ins);
 			serviceT.insertTimeline(ins2);
-			
+			d.addAttribute("sname", service.getSname(sno));
 			d.addAttribute("isInsert", "Y");
 			return "WEB-INF\\views\\insertComment.jsp";
 		}
@@ -61,9 +61,10 @@ public class commentController {
 		
 		@RequestMapping("commDetail.do")
 		public String commDetail(@RequestParam("cno") int cno,
-				@RequestParam("pno") int pno, Model d){
+				@RequestParam("pno") int pno,
+				@RequestParam("sno") int sno,Model d){
 			d.addAttribute("comment",service.getDetail(cno));
-			
+			d.addAttribute("sname", service.getSname(sno));
 			return "WEB-INF\\views\\DetailComment.jsp";
 		}	
 		
@@ -72,6 +73,7 @@ public class commentController {
 				@RequestParam("sno") int sno,
 				@RequestParam("pno") int pno,Model d) {
 			service.deleteComment(cno);
+			d.addAttribute("sname", service.getSname(sno));
 			d.addAttribute("proc", "del");
 			return "WEB-INF\\views\\DetailComment.jsp";
 		}
@@ -81,6 +83,7 @@ public class commentController {
 				@RequestParam("sno") int sno,
 				@RequestParam("pno") int pno,Model d) {
 			d.addAttribute("comment", service.getDetail(cno));
+			d.addAttribute("sname", service.getSname(sno));
 			System.out.println("수정페이지이동");
 			return "WEB-INF\\views\\UpdateComment.jsp";
 		}

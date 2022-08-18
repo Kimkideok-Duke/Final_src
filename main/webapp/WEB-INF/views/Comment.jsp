@@ -100,6 +100,7 @@ background-color: #f2f2f2;
 	    <form name="form" id="form" action="${path}/commInsertForm.do" method="post">
 			<input type="hidden" name="sno" value="${param.sno}"/>
 			<input type="hidden" name="pno" value="${param.pno}"/>
+			<input type="hidden" name="sname" value="${sname}"/>
 	    	<button type="submit" class="insertBtn">comment 등록</button>
 	    </form>
                   <table class="table table-borderless datatable">

@@ -91,6 +91,7 @@
              <input type="hidden" name="sno" value="${param.sno}"/>
              <input type="hidden" name="pno" value="${param.pno}"/>
               <input type="hidden" name="cno" value="${comment.cno}">
+              <input type="hidden" name="sname" value="${sname}">           
               <input type="hidden" name="state" value="댓글수정"/>
               
                 <div class="col-md-12">                  

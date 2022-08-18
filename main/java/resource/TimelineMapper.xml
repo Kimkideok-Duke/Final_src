@@ -9,9 +9,11 @@
 	SELECT * from Timeline where pno = #{pno}
 	</select>
 	
+
 	<!-- Timeline 등록 -->
 	<insert id="insertTimeline" parameterType="Timeline">
-	insert into Timeline values(seq_time.nextval,#{pno},#{sno},#{writer},sysdate,#{state})
+	insert into Timeline values(seq_time.nextval,#{pno},seq_sno.currval,#{writer},#{sname},sysdate,#{state})
+	order BY tdte asc
 	</insert>
 
 </mapper>

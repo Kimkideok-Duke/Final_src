@@ -102,6 +102,7 @@ text-decoration:underline;
 		    <form  id="form" action="${path}/commentList.do" method="post">
 			<input type="hidden" name="sno" value="${param.sno}"/>
 			<input type="hidden" name="pno" value="${param.pno}"/>
+			<input type="hidden" name="sname" value="${sname}"/>
 			</form>
 	    
 		     <div class="row g-3">     
