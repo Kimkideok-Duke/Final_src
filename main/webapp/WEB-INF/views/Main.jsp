@@ -207,8 +207,9 @@
 			}
 		})
       	data.addRows(dlist);
+      	console.log(dlist.length)
       var options = {
-        height: 400,
+        height: (30*dlist.length)+50,
         width:"100%",
         gantt: {
           trackHeight: 30
@@ -303,9 +304,25 @@
 				<tr data-bs-toggle="modal" data-bs-target="#basicModal">
 				<th scope="row" class=""><%=++cnt %></th>
 				<td onclick="chVal(${schedule.sno })">${schedule.sname}</td>
-				<td onclick="chVal(${schedule.sno })">${schedule.status}</td>
-				<td onclick="chVal(${schedule.sno })">진행도 :
-				<c:set var="status" value="" />
+				<td onclick="chVal(${schedule.sno })">
+					<c:if test="${schedule.status eq '예정'}">
+                    	<span class="badge bg-secondary">${schedule.status}</span>
+                    </c:if>
+                    <c:if test="${schedule.status eq '진행중'}">
+                    	<span class="badge bg-primary">${schedule.status}</span>
+                    </c:if>
+                    <c:if test="${schedule.status eq '완료'}">
+                    	<span class="badge bg-success">${schedule.status}</span>
+                    </c:if>
+                    <c:if test="${schedule.status eq '중지'}">
+                    	<span class="badge bg-warning">${schedule.status}</span>
+                    </c:if>
+                    <c:if test="${schedule.status eq '막힘'}">
+                    	<span class="badge bg-danger">${schedule.status}</span>
+                    </c:if>
+				</td>
+				<td onclick="chVal(${schedule.sno })">
+				<%-- <c:set var="status" value="" />
 				<c:choose>
                 <c:when test="${schedule.progress eq 100}">
                 	<c:set var="status" value="success" /></c:when>
@@ -313,10 +330,25 @@
 	               	<c:set var="status" value="warning" /></c:when>
 				<c:otherwise>
 					<c:set var="status" value="danger" /></c:otherwise>
-                </c:choose>
-				<div class="progress">
-            	   	<div class="progress-bar progress-bar-striped bg-${status}" role="progressbar" style="width: ${schedule.progress}%" aria-valuenow="${schedule.progress}" aria-valuemin="0" aria-valuemax="100">${schedule.progress}%</div>
-              	</div></td>
+                </c:choose> --%>
+					<div class="progress">
+	              		<c:if test="${schedule.status eq '예정'}">
+	              		<div class="progress-bar bg-secondary" role="progressbar" style="width: ${schedule.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${schedule.progress}%</div>
+              			</c:if>
+              			<c:if test="${schedule.status eq '진행중'}">
+                		<div class="progress-bar bg-primary" role="progressbar" style="width: ${schedule.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${schedule.progress}%</div>
+              			</c:if>
+              			<c:if test="${schedule.status eq '완료'}">
+                		<div class="progress-bar bg-success" role="progressbar" style="width: ${schedule.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${schedule.progress}%</div>
+              			</c:if>
+              			<c:if test="${schedule.status eq '중지'}">
+                		<div class="progress-bar bg-warning" role="progressbar" style="width: ${schedule.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${schedule.progress}%</div>
+              			</c:if>
+              			<c:if test="${schedule.status eq '막힘'}">
+                		<div class="progress-bar bg-danger" role="progressbar" style="width: ${schedule.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${schedule.progress}%</div>
+              			</c:if>
+	              	</div>
+              	</td>
 				<td onclick="chVal(${schedule.sno })"><fmt:formatDate value="${schedule.startDate}" pattern="yyyy-MM-dd"/></td>
 				<td onclick="chVal(${schedule.sno })"><fmt:formatDate value="${schedule.endDate}" pattern="yyyy-MM-dd"/></td>
 				<td onclick="chVal(${schedule.sno })">${schedule.budget}원</td>

@@ -626,7 +626,21 @@
                         <td><fmt:formatDate value="${s.startDate}" pattern="yyyy-MM-dd"/></td>
                         <td>
 	                        <div class="progress">
+	                        	<c:if test="${s.status eq '예정'}">
+		                		<div class="progress-bar bg-secondary" role="progressbar" style="width: ${s.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${s.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${s.status eq '진행중'}">
+		                		<div class="progress-bar bg-primary" role="progressbar" style="width: ${s.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${s.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${s.status eq '완료'}">
 		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${s.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${s.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${s.status eq '중지'}">
+		                		<div class="progress-bar bg-warning" role="progressbar" style="width: ${s.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${s.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${s.status eq '막힘'}">
+		                		<div class="progress-bar bg-danger" role="progressbar" style="width: ${s.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${s.progress}%</div>
+		              			</c:if>
 		              		</div>
 	              		</td>
 	              		<td>${s.dept}</td>
@@ -667,7 +681,21 @@
                         <td><fmt:formatDate value="${myS.startDate}" pattern="yyyy-MM-dd"/></td>
                         <td>
 	                        <div class="progress">
+								<c:if test="${myS.status eq '예정'}">
+		                		<div class="progress-bar bg-secondary" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${myS.status eq '진행중'}">
+		                		<div class="progress-bar bg-primary" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${myS.status eq '완료'}">
 		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${myS.status eq '중지'}">
+		                		<div class="progress-bar bg-warning" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${myS.status eq '막힘'}">
+		                		<div class="progress-bar bg-danger" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
+		              			</c:if>
 		              		</div>
 	              		</td>
                       </tr>
@@ -706,7 +734,20 @@
                         <td><fmt:formatDate value="${myS.startDate}" pattern="yyyy-MM-dd"/></td>
                         <td>
 	                        <div class="progress">
+		                		<c:if test="${myS.status eq '예정'}">
+		              			</c:if>
+		              			<c:if test="${myS.status eq '진행중'}">
+		                		<div class="progress-bar bg-primary" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${myS.status eq '완료'}">
 		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${myS.status eq '중지'}">
+		                		<div class="progress-bar bg-warning" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${myS.status eq '막힘'}">
+		                		<div class="progress-bar bg-danger" role="progressbar" style="width: ${myS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${myS.progress}%</div>
+		              			</c:if>
 		              		</div>
 	              		</td>
                       </tr>
@@ -745,7 +786,21 @@
                         <td><fmt:formatDate value="${pmS.startDate}" pattern="yyyy-MM-dd"/></td>
                         <td>
 	                        <div class="progress">
+								<c:if test="${pmS.status eq '예정'}">
+		                		<div class="progress-bar bg-secondary" role="progressbar" style="width: ${pmS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${pmS.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${pmS.status eq '진행중'}">
+		                		<div class="progress-bar bg-primary" role="progressbar" style="width: ${pmS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${pmS.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${pmS.status eq '완료'}">
 		                		<div class="progress-bar bg-success" role="progressbar" style="width: ${pmS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${pmS.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${pmS.status eq '중지'}">
+		                		<div class="progress-bar bg-warning" role="progressbar" style="width: ${pmS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${pmS.progress}%</div>
+		              			</c:if>
+		              			<c:if test="${pmS.status eq '막힘'}">
+		                		<div class="progress-bar bg-danger" role="progressbar" style="width: ${pmS.progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${pmS.progress}%</div>
+		              			</c:if>
 		              		</div>
 	              		</td>
                       </tr>
