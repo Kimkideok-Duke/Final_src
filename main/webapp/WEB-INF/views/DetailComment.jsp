@@ -130,7 +130,7 @@ text-decoration:underline;
                 </div>
                 
                    <div class="col-md-12">
-                  <div class="form-floating">
+                  <div class="form-floating">      
                     <input type="text" name="fname" class="form-control HV"  id="floatingName" value="${comment.fname}">
                     <label for="floatingName">첨부파일</label>
                   </div>
@@ -159,7 +159,7 @@ text-decoration:underline;
 				</div>
 				</div>
 
-
+<%-- 
           <div class="card">
             <div class="card-body">       
               <h5 class="card-title" style="font-weight: bold">댓글 List</h5>
@@ -172,7 +172,7 @@ text-decoration:underline;
               </div>
             </div>
             </div>
-            
+--%>            
           </div>
         </section>
 
@@ -182,14 +182,10 @@ text-decoration:underline;
 	<!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+     
     </div>
     <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+     
     </div>
   </footer><!-- End Footer -->
 

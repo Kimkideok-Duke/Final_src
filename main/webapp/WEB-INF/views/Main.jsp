@@ -546,7 +546,7 @@
                 <c:choose>
                 <c:when test="${t.cno == 0}">
                  <div class="activity-item d-flex">
-                  <div class="activite-label">56 min</div>
+                  <div class="activite-label"> 분 전</div>
                   <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>            
                   <div class="activity-content">${t.sname } 일정이 등록되었습니다.</div>
                 </div><!-- End activity item-->
@@ -555,7 +555,7 @@
                 
                 <c:if test="${t.regdte eq t.updte}">
                 <div class="activity-item d-flex">
-                  <div class="activite-label">32 min</div>
+                  <div class="activite-label"> 분 전</div>
                   <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
                   <div class="activity-content">
                     ${t.writer}님이 일정 ${t.sno}에 <a href="#" class="fw-bold text-dark">코멘트${t.cno }</a> 를 등록하였습니다.
@@ -564,7 +564,7 @@
                  </c:if>
                 <c:if test="${t.regdte ne t.updte}"> 
                  <div class="activity-item d-flex">
-                  <div class="activite-label">32 min</div>
+                  <div class="activite-label"> 분 전</div>
                   <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                   <div class="activity-content">
                    일정 ${t.sno}에 <a href="#" class="fw-bold text-dark">코멘트${t.cno} </a> 가 수정되었습니다.
@@ -906,6 +906,8 @@ $("#sndBtn").click(function(){
 
   <!-- Template Main JS File -->
   <script src="NiceAdmin/assets/js/main.js"></script>
+  
+
 
 </body>
 

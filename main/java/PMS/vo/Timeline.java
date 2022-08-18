@@ -1,9 +1,7 @@
 package PMS.vo;
 
 import java.util.Date;
-/* 
- SELECT s.pno,s.SNAME,c.CNO ,c.WRITER,c.REGDTE  FROM comment_tb c FULL OUTER JOIN SCHEDULE s ON (s.sno=c.sno);
- */
+
 public class Timeline {
 private int pno;
 private String sname;
@@ -12,6 +10,7 @@ private int sno;
 private String writer;
 private Date regdte;
 private Date updte;
+
 public Timeline() {
 	super();
 	// TODO Auto-generated constructor stub
