@@ -151,9 +151,13 @@
 		}
 	}
 	function delProc(){
-		if(confirm("삭제하시겠습니까?")){
-			var sno = $("#sno").val()
-			location.href="${path}/delSchedule.do?sno="+sno
+		if(auth=="pm" || auth=="admin"){
+			if(confirm("삭제하시겠습니까?")){
+				var sno = $("#sno").val()
+				location.href="${path}/delSchedule.do?sno="+sno
+			}			
+		}else{
+			alert("권한이 없습니다!")
 		}
 	}
 	
