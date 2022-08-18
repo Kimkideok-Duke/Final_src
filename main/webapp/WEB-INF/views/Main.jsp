@@ -632,7 +632,7 @@
 
               <!-- 참가자 Accordion without outline borders -->
           <div class="card">
-            <div class="card-body pb-0">
+            <div class="card-body">
               <div class="vueel">
               <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
@@ -677,7 +677,7 @@
                   </div>
                 </div>
                </div>
-
+			</div>
 <script type="text/javascript">
 	var proc = "${proc}"
   	if(proc=="insParPrj"){
@@ -731,7 +731,7 @@
 			       	</div>
 			       
 		         </div>
-              </div>
+              
              </div><!--참가자 End Accordion without outline borders -->
         
           <!-- 채팅 -->
@@ -773,7 +773,7 @@
       </div>
       <c:if test="${auth eq 'pm'}">
       <div class="col-lg-12" align="center">
-      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
+      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#projectoption"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
       </div>
       </c:if>
       <c:if test="${auth eq 'admin'}">
