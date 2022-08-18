@@ -4,7 +4,7 @@ jdbc.user=pms
 jdbc.pass=1111
 
 # 파일 업로드 정보
-upload=C:/a01_javaexp/workspace/PMS/src/main/webapp/fileupload/
+upload=C:/Users/kkd90/Desktop/JAVA_EDU/TeamProject/PMS/src/main/webapp/fileupload/
 
 # 프로필 이미지 업로드 정보
-uploadpf=C:/a01_javaexp/workspace/PMS/src/main/webapp/NiceAdmin/assets/img/profile/
+uploadpf=C:/Users/kkd90/Desktop/JAVA_EDU/TeamProject/PMS/src/main/webapp/NiceAdmin/assets/img/profile/
