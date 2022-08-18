@@ -612,7 +612,7 @@
                 <c:choose>
                 <c:when test="${t.state == '일정등록'}">
                  <div class="activity-item d-flex">
-                  <div class="activite-label">방금전</div>
+                  <div class="activite-label">${t.calTime}</div>
                   <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>            
                   <div class="activity-content">${t.sname } 일정이 등록되었습니다.</div>
                 </div><!-- End activity item-->
@@ -620,7 +620,7 @@
                 
                 <c:when test="${t.state == '댓글등록'}">
                  <div class="activity-item d-flex">
-                  <div class="activite-label">방금전</div>
+                  <div class="activite-label">${t.calTime}</div>
                   <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
                   <div class="activity-content">${t.writer}님이 ${t.sname } 코멘트를 등록하였습니다.</div>
                 </div><!-- End activity item-->               
@@ -628,7 +628,7 @@
                 
                  <c:otherwise>                
                 <div class="activity-item d-flex">
-                  <div class="activite-label">방금전</div>
+                  <div class="activite-label">${t.calTime}</div>
                   <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                   <div class="activity-content">${t.writer}님이 코멘트를 수정하였습니다.</div>
                 </div><!-- End activity item-->

@@ -5,25 +5,27 @@ import java.util.Date;
 public class Timeline {
 private int tno;
 private int pno; 
-private int sno;
 private String writer;
 private String sname;
 private Date tdte;
 private String state;
+
+// 타임라인 계산
+private String calTime;
 
 public Timeline() {
 	super();
 	// TODO Auto-generated constructor stub
 }
 
-public Timeline(int tno, int pno, int sno, String writer, String sname, Date tdte, String state) {
+public Timeline(int tno, int pno, String writer, String sname, Date tdte, String state,String calTime) {
 	this.tno = tno;
 	this.pno = pno;
-	this.sno = sno;
 	this.writer = writer;
 	this.sname = sname;
 	this.tdte = tdte;
 	this.state = state;
+	this.calTime = calTime;
 }
 
 public int getTno() {
@@ -40,14 +42,6 @@ public int getPno() {
 
 public void setPno(int pno) {
 	this.pno = pno;
-}
-
-public int getSno() {
-	return sno;
-}
-
-public void setSno(int sno) {
-	this.sno = sno;
 }
 
 public String getWriter() {
@@ -81,5 +75,14 @@ public String getState() {
 public void setState(String state) {
 	this.state = state;
 }
+
+public String getCalTime() {
+	return calTime;
+}
+
+public void setCalTime(String calTime) {
+	this.calTime = calTime;
+}
+
 
 }

@@ -38,7 +38,8 @@ public class commentController {
 		
 		
 		@RequestMapping("commInsertForm.do")
-		public String commInsertForm() {
+		public String commInsertForm(@RequestParam("sno") int sno,Model d) {
+			d.addAttribute("sname", service.getSname(sno));
 			return "WEB-INF\\views\\insertComment.jsp";
 		}
 			
@@ -48,7 +49,6 @@ public class commentController {
 				Comment ins,Timeline ins2, Model d) {			
 			service.insertComment(ins);
 			serviceT.insertTimeline(ins2);
-			d.addAttribute("sname", service.getSname(sno));
 			d.addAttribute("isInsert", "Y");
 			return "WEB-INF\\views\\insertComment.jsp";
 		}
@@ -64,7 +64,6 @@ public class commentController {
 				@RequestParam("pno") int pno,
 				@RequestParam("sno") int sno,Model d){
 			d.addAttribute("comment",service.getDetail(cno));
-			d.addAttribute("sname", service.getSname(sno));
 			return "WEB-INF\\views\\DetailComment.jsp";
 		}	
 		
