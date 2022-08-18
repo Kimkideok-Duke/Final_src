@@ -151,9 +151,13 @@
 		}
 	}
 	function delProc(){
-		if(confirm("삭제하시겠습니까?")){
-			var sno = $("#sno").val()
-			location.href="${path}/delSchedule.do?sno="+sno
+		if(auth=="pm" || auth=="admin"){
+			if(confirm("삭제하시겠습니까?")){
+				var sno = $("#sno").val()
+				location.href="${path}/delSchedule.do?sno="+sno
+			}			
+		}else{
+			alert("권한이 없습니다!")
 		}
 	}
 	
@@ -422,25 +426,34 @@
 						<div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">시작일</label>
 			               <div class="col-sm-10">
+			               <div class="input-group has-validation">
 			                 <input type="date" id="startDate" name="startDate_s" class="form-control" required>
+			                 <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				             </div>
+				            </div>
 			               </div>
-			               <div class="invalid-feedback">
-			                    필수 입력 항목입니다.
-		                   </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">마감일</label>
 			               <div class="col-sm-10">
+			               	<div class="input-group has-validation">
 			                 <input type="date" id="endDate" name="endDate_s" class="form-control" required>
-			               </div>
-			               <div class="invalid-feedback">
-			                    필수 입력 항목입니다.
+			                 <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				             </div>
+			                </div>
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">예산</label>
 			               <div class="col-sm-10">
-			                 <input type="number" id="budget" name="budget" class="form-control" min="0" step="10000" value="" >
+			               	<div class="input-group has-validation">
+			                 <input type="number" id="budget" name="budget" class="form-control" min="0" step="10000" required>
+				               <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				               </div>
+			               	</div>
 			               </div>
 			             </div>
 			              <div class="row mb-3">
@@ -505,19 +518,34 @@
 						<div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">시작일</label>
 			               <div class="col-sm-10">
-			                 <input type="date" id="startDateReg" name="startDate_s" class="form-control" value="">
+			               <div class="input-group has-validation">
+			                 <input type="date" id="startDateReg" name="startDate_s" class="form-control" required>
+			                 <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				             </div>
+				            </div>
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">마감일</label>
 			               <div class="col-sm-10">
-			                 <input type="date" id="endDateReg" name="endDate_s" class="form-control" value="" >
+			               	<div class="input-group has-validation">
+			                 <input type="date" id="endDateReg" name="endDate_s" class="form-control" required>
+			                 <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				             </div>
+			                </div>
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">예산</label>
 			               <div class="col-sm-10">
-			                 <input type="number" id="budgetReg" name="budget" class="form-control" min="0" step="10000" value="0" >
+			               	<div class="input-group has-validation">
+			                 <input type="number" id="budgetReg" name="budget" class="form-control" min="0" step="10000" value="0" required>
+			               	 <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				             </div>
+				            </div>
 			               </div>
 			             </div>
 			             
@@ -632,7 +660,7 @@
 
               <!-- 참가자 Accordion without outline borders -->
           <div class="card">
-            <div class="card-body pb-0">
+            <div class="card-body">
               <div class="vueel">
               <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
@@ -677,7 +705,7 @@
                   </div>
                 </div>
                </div>
-
+			</div>
 <script type="text/javascript">
 	var proc = "${proc}"
   	if(proc=="insParPrj"){
@@ -731,7 +759,7 @@
 			       	</div>
 			       
 		         </div>
-              </div>
+              
              </div><!--참가자 End Accordion without outline borders -->
         
           <!-- 채팅 -->
@@ -773,7 +801,7 @@
       </div>
       <c:if test="${auth eq 'pm'}">
       <div class="col-lg-12" align="center">
-      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
+      <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#projectoption"><i class="bx bx-wrench"></i> 프로젝트 수정/삭제</button>
       </div>
       </c:if>
       <c:if test="${auth eq 'admin'}">

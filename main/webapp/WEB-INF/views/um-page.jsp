@@ -397,7 +397,7 @@
                   <label class="col-sm-2 col-form-label">권한</label>
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example" id="uptAuth" name="auth">
-                      <option>권한 선택</option> 
+                      <option value="">권한 선택</option> 
                       <option value="user">일반 사용자</option>
                       <option value="um">인사 관리자</option>
                       <option value="pm">프로젝트 관리자</option>
