@@ -14,9 +14,13 @@ public class TimelineService {
 	private TimelineDao dao;
 	
 	public List<Timeline> getTimeline(int pno){	
-		return dao.getTimeline(pno);
+		return dao.getTimeline(pno);		
 	}
 	
-}
+	public void insertTimeline(Timeline ins2) {
+		dao.insertTimeline(ins2);	
+	}
+	}
+
 
 

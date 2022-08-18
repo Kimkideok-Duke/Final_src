@@ -124,7 +124,7 @@ text-decoration:underline;
      
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName" value="${name}"  readonly>
+                    <input type="text" class="form-control" id="floatingName"  value="${name}"  readonly>
                     <label for="floatingName">작성자</label>
                   </div>
                 </div>

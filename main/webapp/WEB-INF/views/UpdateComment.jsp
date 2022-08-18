@@ -88,10 +88,13 @@
               <form id="frm01" name="frm01"  class="form" method="post"  enctype="multipart/form-data"
               action="${path}/commentList.do">
               
+             <input type="hidden" name="sno" value="${param.sno}"/>
+             <input type="hidden" name="pno" value="${param.pno}"/>
               <input type="hidden" name="cno" value="${comment.cno}">
+              <input type="hidden" name="state" value="댓글수정"/>
               
                 <div class="col-md-12">                  
-                   <input type="text" class="form-control" value="${comment.writer}" disabled>
+                   <input type="text" class="form-control" name="writer" value="${comment.writer}" disabled>
                 </div>
                 
                 <div class="input-group mb-3">         
@@ -105,7 +108,7 @@
                     <textarea class="form-control" id="content" name="content" style="height: 180px;">${comment.content}</textarea>
                     <label for="floatingTextarea">수정할 내용을 입력해 주세요...</label>
                   </div>
-                </div>
+                </div> 
                 
                 
                 <div class="text-center">

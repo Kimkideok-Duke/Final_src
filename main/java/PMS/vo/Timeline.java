@@ -3,26 +3,29 @@ package PMS.vo;
 import java.util.Date;
 
 public class Timeline {
-private int pno;
-private String sname;
-private int cno;
+private int tno;
+private int pno; 
 private int sno;
 private String writer;
-private Date regdte;
-private Date updte;
+private Date tdte;
+private String state;
 
 public Timeline() {
 	super();
 	// TODO Auto-generated constructor stub
 }
-public Timeline(int pno, String sname, int cno, int sno, String writer, Date regdte, Date updte) {
+public Timeline(int tno, int pno,int sno,String writer, Date tdte,String state) {
+	this.tno = tno;
 	this.pno = pno;
-	this.sname = sname;
-	this.cno = cno;
-	this.sno = sno;
 	this.writer = writer;
-	this.regdte = regdte;
-	this.updte = updte;
+	this.tdte = tdte;
+	this.state = state;
+}
+public int getTno() {
+	return tno;
+}
+public void setTno(int tno) {
+	this.tno = tno;
 }
 public int getPno() {
 	return pno;
@@ -30,18 +33,7 @@ public int getPno() {
 public void setPno(int pno) {
 	this.pno = pno;
 }
-public String getSname() {
-	return sname;
-}
-public void setSname(String sname) {
-	this.sname = sname;
-}
-public int getCno() {
-	return cno;
-}
-public void setCno(int cno) {
-	this.cno = cno;
-}
+
 public int getSno() {
 	return sno;
 }
@@ -54,17 +46,18 @@ public String getWriter() {
 public void setWriter(String writer) {
 	this.writer = writer;
 }
-public Date getRegdte() {
-	return regdte;
+public Date getTdte() {
+	return tdte;
 }
-public void setRegdte(Date regdte) {
-	this.regdte = regdte;
+public void setTdte(Date tdte) {
+	this.tdte = tdte;
 }
-public Date getUpdte() {
-	return updte;
+public String getState() {
+	return state;
 }
-public void setUpdte(Date updte) {
-	this.updte = updte;
+public void setState(String state) {
+	this.state = state;
 }
+
 
 }

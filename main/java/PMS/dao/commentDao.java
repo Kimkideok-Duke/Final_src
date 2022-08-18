@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import PMS.vo.Comment;
 import PMS.vo.CommentFile;
 import PMS.vo.Schedule;
+import PMS.vo.Timeline;
 
 @Repository
 public interface commentDao {

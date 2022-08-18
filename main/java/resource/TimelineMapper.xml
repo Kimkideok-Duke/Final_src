@@ -6,10 +6,13 @@
 
 	<!-- Timeline List -->
 	<select id="getTimeline" parameterType="int" resultType="Timeline">
-	SELECT s.pno,s.SNAME,c.CNO ,c.WRITER,c.REGDTE, c.sno,c.updte
-	FROM comment_tb c FULL OUTER JOIN SCHEDULE s ON (s.sno=c.sno)
-	WHERE s.pno= #{pno}
+	SELECT * from Timeline where pno = #{pno}
 	</select>
+	
+	<!-- Timeline 등록 -->
+	<insert id="insertTimeline" parameterType="Timeline">
+	insert into Timeline values(seq_time.nextval,#{pno},#{sno},#{writer},sysdate,#{state})
+	</insert>
 
 </mapper>
 

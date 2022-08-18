@@ -9,11 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import PMS.service.CalendarService;
 import PMS.service.AccountService;
+import PMS.service.CalendarService;
 import PMS.service.MainService;
-import PMS.vo.Schedule;
 import PMS.service.TimelineService;
+import PMS.vo.Schedule;
+import PMS.vo.Timeline;
 
 @Controller
 public class MainCtrl {
@@ -36,7 +37,7 @@ public class MainCtrl {
     	d.addAttribute("slist",service.getScheduleList(pno));
     	d.addAttribute("alist", serviceA.getAccountList());
     	d.addAttribute("prog", service.getProgress(pno));
-    	d.addAttribute("tlist",serviceT.getTimeline(pno));
+    	d.addAttribute("tmlist",serviceT.getTimeline(pno));
     	return "WEB-INF\\views\\Main.jsp";
     }
     @RequestMapping("regScheduleModal.do")
@@ -44,8 +45,9 @@ public class MainCtrl {
 		return "pageJsonReport";
 	}
     @RequestMapping("regSchedule.do")
-	public String regSchedule(Schedule reg, Model d) {
+	public String regSchedule(Schedule reg,Timeline ins2, Model d) {
 		service.regSchedule(reg);
+		serviceT.insertTimeline(ins2);
 		d.addAttribute("isReg","Y");
 		return "WEB-INF\\views\\Main.jsp";
 	}

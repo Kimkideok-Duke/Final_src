@@ -9,4 +9,5 @@ import PMS.vo.Timeline;
 @Repository
 public interface TimelineDao {
 	public List<Timeline> getTimeline(int pno);
+	public void insertTimeline(Timeline ins2);
 }

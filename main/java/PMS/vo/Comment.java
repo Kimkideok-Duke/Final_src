@@ -11,8 +11,8 @@ public class Comment {
 	private int sno;
 	private String content;
 	private String writer;
-	private Date regdte;
-	private Date updte;
+	private Date  regdte;
+	private Date  updte;
 	private MultipartFile report;
 	private String fname;
 	
