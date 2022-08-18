@@ -1,6 +1,7 @@
 SELECT * FROM project;
 
 SELECT * FROM SCHEDULE;
+SELECT * FROM CALENDAR c ;
 			create table calendar(
 				id number primary key,
 				pno NUMBER,

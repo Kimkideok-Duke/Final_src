@@ -1,5 +1,10 @@
 package PMS.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.TimeZone;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +18,7 @@ import PMS.service.AccountService;
 import PMS.service.CalendarService;
 import PMS.service.MainService;
 import PMS.service.TimelineService;
+import PMS.vo.Calendar;
 import PMS.vo.Schedule;
 import PMS.vo.Timeline;
 
@@ -45,9 +51,17 @@ public class MainCtrl {
 		return "pageJsonReport";
 	}
     @RequestMapping("regSchedule.do")
-	public String regSchedule(Schedule reg,Timeline ins2, Model d) {
-		service.regSchedule(reg);
-		serviceT.insertTimeline(ins2);
+	public String regSchedule(HttpServletRequest request, Schedule reg,Timeline ins2, Model d) {
+		HttpSession session = request.getSession();
+		int pno = (int)session.getAttribute("pno");
+    	service.regSchedule(reg);
+//		serviceT.insertTimeline(ins2);
+		String start = reg.getStartDate_s();
+		String end = reg.getEndDate_s();
+		start = start+"T15:00:00.000Z";
+		end = end+"T15:00:00.000Z";
+		Calendar ins = new Calendar(pno, reg.getSno(), reg.getSname(), start, end, "", "pink", "yellow", true);
+		cservice.insertCalendar(ins);
 		d.addAttribute("isReg","Y");
 		return "WEB-INF\\views\\Main.jsp";
 	}
@@ -60,6 +74,7 @@ public class MainCtrl {
     @RequestMapping("uptSchedule.do")
 	public String uptSchedule(Schedule upt, Model d) {
 		service.uptSchedule(upt);
+		
 		d.addAttribute("proc", "upt");
 		return "WEB-INF\\views\\Main.jsp";
 	}
@@ -68,6 +83,10 @@ public class MainCtrl {
 		service.uptScheduleByPM(upt);
 		d.addAttribute("proc", "upt");
 		d.addAttribute("pno", service.getSchedule(upt.getSno()).getPno());
+		String start = LocalDate.parse(upt.getStartDate_s()).plusDays(1).toString();
+		String end = LocalDate.parse(upt.getEndDate_s()).plusDays(1).toString();
+		Calendar uptCal = new Calendar(upt.getSno(), upt.getSname(), start, end);
+		cservice.updateCalendar2(uptCal);
 		return "WEB-INF\\views\\Main.jsp";
 	}
 	
@@ -76,6 +95,8 @@ public class MainCtrl {
     	HttpSession session = request.getSession();
     	int pno = (int)session.getAttribute("pno");
     	service.delSchedule(sno);
+    	// sno로 id값 찾기
+    	cservice.deleteCalendar(cservice.getIdBySno(sno));
 		d.addAttribute("proc", "del");
 		d.addAttribute("pno", pno);
 		return "WEB-INF\\views\\Main.jsp";

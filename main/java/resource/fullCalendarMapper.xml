@@ -29,6 +29,13 @@
 				allday = #{allDay}
 			WHERE id = #{id}
 	</update>
+	<update id="updateCalendar2" parameterType="calendar">
+		UPDATE calendar
+			SET title = #{title},
+				start1 = #{start},
+				end1 = #{end}
+			WHERE sno = #{sno}
+	</update>
 	<delete id="deleteCalendar" parameterType="int" >
 	   DELETE FROM calendar
 	   WHERE id= #{id}
@@ -48,4 +55,9 @@
 		WHERE c.id = #{id}
 		AND c.sno = s.sno
 	</select>
+	<select id="getIdBySno" resultType="int" parameterType="int">
+		SELECT id
+		FROM calendar
+		WHERE sno = #{sno}
+	</select>	
 </mapper>

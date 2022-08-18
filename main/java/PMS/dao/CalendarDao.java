@@ -20,4 +20,6 @@ public interface CalendarDao {
 	public int getSnoId(int id);
 	// 캘린더 id로 schedule 객체 리턴
 	public Schedule getScheduleId(int id);
+	public void updateCalendar2(Calendar uptCal);
+	public int getIdBySno(int sno);
 }

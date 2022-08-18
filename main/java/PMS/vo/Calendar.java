@@ -13,6 +13,49 @@ public class Calendar {
 	private String textColor;
 	private boolean allDay;
 	
+	public Calendar() {
+		super();
+	}
+
+	public Calendar(int sno, String title, String start, String end) {
+		super();
+		this.sno = sno;
+		this.title = title;
+		this.start = start;
+		this.end = end;
+	}
+
+	public Calendar(int pno, int sno, String title, String start, String end, String content, String backgroundColor,
+			String textColor, boolean allDay) {
+		super();
+		this.pno = pno;
+		this.sno = sno;
+		this.title = title;
+		this.start = start;
+		this.end = end;
+		this.content = content;
+		this.backgroundColor = backgroundColor;
+		this.textColor = textColor;
+		this.allDay = allDay;
+	}
+
+	public Calendar(int id, int pno, int sno, String title, String start, String end, String content,
+			String borderColor, String backgroundColor, String textColor, boolean allDay) {
+		super();
+		this.id = id;
+		this.pno = pno;
+		this.sno = sno;
+		this.title = title;
+		this.start = start;
+		this.end = end;
+		this.content = content;
+		this.borderColor = borderColor;
+		this.backgroundColor = backgroundColor;
+		this.textColor = textColor;
+		this.allDay = allDay;
+	}
+
+
 	public int getSno() {
 		return sno;
 	}

@@ -35,5 +35,11 @@ public class CalendarService {
 	public Schedule getScheduleId(int id) {
 		return dao.getScheduleId(id);
 	}
+	public void updateCalendar2(Calendar uptCal) {
+		dao.updateCalendar2(uptCal);
+	}
+	public int getIdBySno(int sno) {
+		return dao.getIdBySno(sno);
+	}
 	
 }
