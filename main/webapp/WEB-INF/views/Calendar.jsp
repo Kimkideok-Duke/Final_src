@@ -114,6 +114,7 @@
 	    	  $("#frm01 [name=start]").val(arg.start.toISOString())
 	    	  $("#frm01 [name=end]").val(arg.end.toISOString())
 	    	  $("#frm01 [name=allDay]").val(""+arg.allDay)
+	    	  $("#frm01 [name=pno]").val(pno)
 	    	  // 내용은 추가적으로 넣을 예정..
 	      },
 	      // 있는 데이터를 클릭시, (상세 내용을 보고 수정/삭제..)
