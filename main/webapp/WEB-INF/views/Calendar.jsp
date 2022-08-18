@@ -209,9 +209,9 @@
       
       <div class="modal-body">
 		<form id="frm01" class="form"  method="get">
-			<input type="text" name="id" value=""/>
-			<input type="text" name="pno" value=""/>
-			<input type="text" name="sno" value=""/>
+			<input type="hidden" name="id" value="0"/>
+			<input type="hidden" name="pno" value="0"/>
+			<input type="hidden" name="sno" value="0"/>
 	     <div class="row">
 	      <div class="col">
 	        <input type="text" class="form-control" placeholder="제목 입력" 
