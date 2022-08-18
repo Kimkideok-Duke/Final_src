@@ -422,25 +422,34 @@
 						<div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">시작일</label>
 			               <div class="col-sm-10">
+			               <div class="input-group has-validation">
 			                 <input type="date" id="startDate" name="startDate_s" class="form-control" required>
+			                 <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				             </div>
+				            </div>
 			               </div>
-			               <div class="invalid-feedback">
-			                    필수 입력 항목입니다.
-		                   </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">마감일</label>
 			               <div class="col-sm-10">
+			               	<div class="input-group has-validation">
 			                 <input type="date" id="endDate" name="endDate_s" class="form-control" required>
-			               </div>
-			               <div class="invalid-feedback">
-			                    필수 입력 항목입니다.
+			                 <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				             </div>
+			                </div>
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">예산</label>
 			               <div class="col-sm-10">
-			                 <input type="number" id="budget" name="budget" class="form-control" min="0" step="10000" value="" >
+			               	<div class="input-group has-validation">
+			                 <input type="number" id="budget" name="budget" class="form-control" min="0" step="10000" required>
+				               <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				               </div>
+			               	</div>
 			               </div>
 			             </div>
 			              <div class="row mb-3">
@@ -505,19 +514,34 @@
 						<div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">시작일</label>
 			               <div class="col-sm-10">
-			                 <input type="date" id="startDateReg" name="startDate_s" class="form-control" value="2022-08-18">
+			               <div class="input-group has-validation">
+			                 <input type="date" id="startDateReg" name="startDate_s" class="form-control" required>
+			                 <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				             </div>
+				            </div>
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">마감일</label>
 			               <div class="col-sm-10">
-			                 <input type="date" id="endDateReg" name="endDate_s" class="form-control" value="2022-08-31" >
+			               	<div class="input-group has-validation">
+			                 <input type="date" id="endDateReg" name="endDate_s" class="form-control" required>
+			                 <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				             </div>
+			                </div>
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">예산</label>
 			               <div class="col-sm-10">
-			                 <input type="number" id="budgetReg" name="budget" class="form-control" min="0" step="10000" value="0" >
+			               	<div class="input-group has-validation">
+			                 <input type="number" id="budgetReg" name="budget" class="form-control" min="0" step="10000" value="0" required>
+			               	 <div class="invalid-feedback">
+				                    필수 입력 항목입니다.
+				             </div>
+				            </div>
 			               </div>
 			             </div>
 			             
