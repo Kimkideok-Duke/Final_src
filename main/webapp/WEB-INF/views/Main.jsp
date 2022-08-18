@@ -505,13 +505,13 @@
 						<div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">시작일</label>
 			               <div class="col-sm-10">
-			                 <input type="date" id="startDateReg" name="startDate_s" class="form-control" value="">
+			                 <input type="date" id="startDateReg" name="startDate_s" class="form-control" value="2022-08-18">
 			               </div>
 			             </div>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">마감일</label>
 			               <div class="col-sm-10">
-			                 <input type="date" id="endDateReg" name="endDate_s" class="form-control" value="" >
+			                 <input type="date" id="endDateReg" name="endDate_s" class="form-control" value="2022-08-31" >
 			               </div>
 			             </div>
 			             <div class="row mb-3">
