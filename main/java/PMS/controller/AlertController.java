@@ -25,7 +25,10 @@ public class AlertController {
 	@RequestMapping("getAlertnavi.do")
 	public String getAlertnavi(HttpServletRequest request, Model d) {
 		HttpSession session = request.getSession();
-		String userno = (String)session.getAttribute("userno");
+		String userno = "";
+		if(session!=null && session.getAttribute("uerno")!=null) {
+			userno = (String)session.getAttribute("userno");
+		}	
 		d.addAttribute("art",service.getAlertnavi(userno));
 		return "pageJsonReport";
 	}
