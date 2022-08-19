@@ -8,7 +8,6 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>   
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<% String userno=request.getParameter("userno"); %>
 <script>
 	$(document).ready(function(){
 		var vm01 = new Vue({
@@ -90,6 +89,7 @@
           </a><!-- End Notification Icon -->
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style="width:300px">
             <li class="dropdown-header">
+            <i class="bi bi-exclamation-circle text-warning"></i>
               알림
             </li>
             <li>
@@ -99,7 +99,7 @@
             <li class="notification-item">
               <div v-for="(al, idx) in art">
                 <h4>프로젝트 / {{al.title}}</h4>
-                <p>{{al.sname}} 마감 {{al.dday}}일 남았습니다.<p>
+                <p>{{al.sname}} 일정 마감 {{al.dday}}일 남았습니다.<p>
               </div>
             </li>
 
