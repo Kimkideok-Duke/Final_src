@@ -45,6 +45,12 @@
 	.thick{
 	font-weight : 1000;
 	}
+	
+	.tm{
+	color:blue; 
+	font-size:10px;
+	}
+	
 
 </style>
 
@@ -636,31 +642,30 @@
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
+                  <h6>타임라인</h6>
                 </li>
 
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
+                <li><a class="dropdown-item" href="${path}/goTimeline.do?pno=${param.pno}">타임라인 더보기</a></li>
               </ul>
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">타임라인 <span>| ${title}</span></h5>
+              <h5 class="card-title">타임라인 <span>| ${title}<br></span>
+              <span style="color:#8c8c8c; font-size:12px;">⏲ 최근 15개까지 화면에 노출</span></h5>
 
               <div class="activity">       
                                  
-                <c:forEach var="t" items="${tmlist}">
+                <c:forEach var="t" items="${tmlist}" begin="0" end="14" varStatus="status">
                 
                 <c:choose>
                 <c:when test="${t.state == '일정등록'}">
                  <div class="activity-item d-flex">
                   <div class="activite-label">${t.calTime }</div>
                   <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>            
-                  <div class="activity-content">${t.sname } <span class="thick">일정</span>이 등록되었습니다.</div>
+                  <div class="activity-content">#${t.sname } <span class="thick">일정</span>이 등록되었습니다.</div>
                 </div><!-- End activity item-->
                 </c:when>
-                
+              <%-- 
                <c:when test="${t.state == '일정수정'}">
                  <div class="activity-item d-flex">
                   <div class="activite-label">${t.calTime}</div>
@@ -676,19 +681,19 @@
                   <div class="activity-content">${t.sname } <span class="thick">일정</span>이 삭제되었습니다.</div>
                   </div><!-- End activity item-->               
                 </c:when>
-                
+             --%>      
                 <c:when test="${t.state == '댓글등록'}">
                  <div class="activity-item d-flex">                 
                   <div class="activite-label">${t.calTime }</div>
                   <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                  <div class="activity-content">${t.writer}님이 ${t.sname } 일정에 <span class="thick">코멘트</span>를 등록하였습니다.</div>
+                  <div class="activity-content">${t.writer}님이 #${t.sname } 일정에 <span class="thick">코멘트</span>를 등록하였습니다.</div>
                 </div><!-- End activity item-->               
                 </c:when>
 
                 <c:when test="${t.state == '댓글삭제'}">
                  <div class="activity-item d-flex">
                   <div class="activite-label">${t.calTime}</div>
-                  <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
+                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                   <div class="activity-content">${t.sname } 일정에 <span class="thick">코멘트</span>가 삭제되었습니다.</div>
                   </div><!-- End activity item-->               
                 </c:when>
@@ -697,8 +702,8 @@
                  <c:otherwise>                
                 <div class="activity-item d-flex">
                   <div class="activite-label">${t.calTime}</div>
-                   <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                  <div class="activity-content">${t.sname } 일정에 <span class="thick">코멘트</span>가 수정되었습니다.</div>
+                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                  <div class="activity-content">#${t.sname } 일정에 <span class="thick">코멘트</span>가 수정되었습니다.</div>
                 </div><!-- End activity item-->
                 
                 

@@ -19,6 +19,7 @@ import PMS.vo.Calendar;
 import PMS.vo.SchParticipant;
 import PMS.vo.Schedule;
 import PMS.vo.Timeline;
+import PMS.vo.TimeResult;
 
 @Controller
 public class MainCtrl {
@@ -59,6 +60,8 @@ public class MainCtrl {
     	}
     	service.regSchedule(reg);
 		serviceT.insertTimeline(ins2);
+		ins2.setTmResult(ins2.getSname()+" 일정이 등록되었습니다.");
+		serviceT.insResult(ins2);
 		String start = reg.getStartDate_s();
 		String end = reg.getEndDate_s();
 		start = start+"T15:00:00.000Z";
