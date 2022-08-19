@@ -7,7 +7,40 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>   
-
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<% String userno=request.getParameter("userno"); %>
+<script>
+	$(document).ready(function(){
+		var vm01 = new Vue({
+			el:".vueeltag",
+			data:{msg:"리스트 출력", 
+				art:[]
+			},
+			methods:{
+				getartlist:function(){
+					this.getart()
+				},
+				getart:function(){
+					var vm01 = this
+					$.ajax({
+						url:"${path}/getAlertnavi.do",
+						dataType:"json",
+						async:false,
+						success:function(data){
+							vm01.art = data.art
+							console.log("데이터")
+							console.log(data.art)
+						},
+						error:function(err){
+							console.log(err)
+							alert("실패")
+						}	
+					})
+				}
+			}
+		})
+	});
+</script>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -50,27 +83,23 @@
         </li><!-- Multi Language End -->
 
         <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+		<div class="vueeltag">
+          <a class="nav-link nav-icon" href="#" @click="getartlist" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">1</span>
+            <span class="badge bg-primary badge-number"></span>
           </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style="width:300px">
             <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+              알림
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
+              <div v-for="(al, idx) in art">
+                <h4>프로젝트 / {{al.title}}</h4>
+                <p>{{al.sname}} 마감 {{al.dday}}일 남았습니다.<p>
               </div>
             </li>
 
@@ -78,11 +107,11 @@
               <hr class="dropdown-divider">
             </li>
             <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
+              <a href="${path}/getAlert.do?userno=<%=(String)session.getAttribute("userno")%>">Show all notifications</a>
             </li>
 
           </ul><!-- End Notification Dropdown Items -->
-
+		</div>
         </li><!-- End Notification Nav -->
 
         <li class="nav-item dropdown pe-3">

@@ -1,5 +1,8 @@
 package PMS.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +23,9 @@ public class AlertController {
 	}
 	// http://localhost:7080/PMS/getAlertnavi.do?userno=E10000020
 	@RequestMapping("getAlertnavi.do")
-	public String getAlertnavi(@RequestParam(value="userno", defaultValue="")String userno, Model d) {
+	public String getAlertnavi(HttpServletRequest request, Model d) {
+		HttpSession session = request.getSession();
+		String userno = (String)session.getAttribute("userno");
 		d.addAttribute("art",service.getAlertnavi(userno));
 		return "pageJsonReport";
 	}

@@ -96,8 +96,12 @@ public class MainCtrl {
     	int pno = (int)session.getAttribute("pno");
     	service.delSchedule(sno);
     	// sno로 id값 찾기
-    	cservice.deleteCalendar(cservice.getIdBySno(sno));
-		d.addAttribute("proc", "del");
+    	try {
+    		cservice.deleteCalendar(cservice.getIdBySno(sno));
+    	}catch(Exception e){
+    		e.getMessage();
+    	}
+    	d.addAttribute("proc", "del");
 		d.addAttribute("pno", pno);
 		return "WEB-INF\\views\\Main.jsp";
 	}
