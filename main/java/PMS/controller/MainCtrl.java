@@ -1,9 +1,6 @@
 package PMS.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +16,7 @@ import PMS.service.CalendarService;
 import PMS.service.MainService;
 import PMS.service.TimelineService;
 import PMS.vo.Calendar;
+import PMS.vo.SchParticipant;
 import PMS.vo.Schedule;
 import PMS.vo.Timeline;
 
@@ -123,5 +121,17 @@ public class MainCtrl {
 	public String getPrjparticipant(@RequestParam(value="pno", defaultValue="") int pno, Model d) {
 		d.addAttribute("parlist",service.getPrjparticipant(pno));
 		return "pageJsonReport";
+	}
+	// http://localhost:8080/PMS/showSchPartiInfo.do
+	@RequestMapping("showSchPartiInfo.do")
+	public String showSchPartiInfo(@RequestParam("sno") int sno, Model d) {
+		d.addAttribute("schParInfo", service.showSchPartiInfo(sno));
+		return "pageJsonReport";
+	}
+	
+	@RequestMapping("insSchParticipant.do")
+	public String insSchParticipant(SchParticipant ins, Model d) {
+		service.insSchParticipant(ins);
+		return "";
 	}
 }

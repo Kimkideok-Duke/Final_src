@@ -57,7 +57,15 @@
 		AND p.PNO = #{pno}
 		GROUP BY p.PNO
 	</select>
-</mapper>
-
-
-   
+	<!-- 일정 참가자 추가 -->
+	<insert id="insSchParticipant" parameterType="SchParticipant">
+		INSERT INTO SCHPARTICIPANT values(#{userno}, #{sno}, #{pno})
+	</insert>
+	<!-- 일정 참가자 조회 -->
+	<select id="showSchPartiInfo" resultType="SchPartiInfo" parameterType="int">
+		SELECT s.SNO, a.USERNO, a.NAME, a.POSITION, a.DEPT
+		FROM SCHPARTICIPANT s, ACCOUNT a
+		WHERE s.USERNO = a.USERNO 
+		AND sno = #{sno}
+	</select>
+</mapper> 

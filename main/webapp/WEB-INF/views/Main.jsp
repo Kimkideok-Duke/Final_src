@@ -104,6 +104,7 @@
 			dataType:"json",
 			success:function(data){
 				var data = data.schedule
+				var Globalsno=sno
 				$("#sno").val(sno)
 				$("#sname").val(data.sname)
 				$("#status").val(data.status)
@@ -139,7 +140,40 @@
 			alert("권한이 없습니다!")
 		}
 	}
-	
+	var ckClk = false;
+	function schpartBtn(){
+		ckClk = !ckClk
+		var sno = $("#sno").val()
+		console.log(ckClk)
+		$.ajax({
+			url:"${path}/showSchPartiInfo.do",
+			data: "sno="+sno,
+			dataType:"json",
+			success:function(data){
+				var list = data.schParInfo
+				console.log(list)
+				if(list.length==0){
+					var addHTML="<tr><td colspan='5' align='center'>참가자가 없습니다.</td></tr>"
+				}else{
+					var addHTML=""
+						$(list).each(function(idx, sp){
+							addHTML+="<tr><td>"+(idx+1)+"</td><td>"+sp.name+"</td>"+
+								"<td>"+sp.dept+"</td><td>"+sp.position+"</td>"+
+								"<td>"+sp.userno+"</td></tr>"
+					});
+				}
+				console.log(addHTML)
+				$("#schparti").html(addHTML)
+			}
+		}); 
+	}
+	function rstBtn(){
+		if(ckClk){
+			$('#schptBtn').trigger('click')
+			console.log(ckClk)	
+		}
+	}
+		
 	var pno = "${pno}"
 	var proc = "${proc}"
 	var isReg = "${isReg}"
@@ -185,12 +219,10 @@
 					var eDate = d.endDate.replace(" ","T");
 					gdata = [String(d.sno), d.sname, new Date(sDate), new Date(eDate), null, d.progress, null]
 					dlist.push(gdata)
-					console.log(gdata)
 				})
 			}
 		})
       	data.addRows(dlist);
-      	console.log(dlist.length)
       var options = {
         height: (30*dlist.length)+50,
         width:"100%",
@@ -358,7 +390,7 @@
                   <!-- 모달 상단 -->
 				      <div class="modal-header">
 				        <h5 class="modal-title">일정 수정</h5>
-				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				        <button type="button" id="closeBtn" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="rstBtn()"></button>
 				      </div>
 				      <!-- 모달 내용 sname, status, progress, startDate, endDate, budget -->
 			      <div class="modal-body">
@@ -433,6 +465,38 @@
 				                    필수 입력 항목입니다.
 				               </div>
 			               	</div>
+			               </div>
+			             </div>
+			             
+			             <div class="row mb-3">
+			               <div class="col-sm-12">
+			                 <div class="accordion accordion-flush" id="accordionSchParti">
+				                <div class="accordion-item">
+				                  <h2 class="accordion-header" id="flush-headingTwo">
+				                    <button class="accordion-button collapsed card-title" type="button" id="schptBtn" onclick="schpartBtn()" data-bs-toggle="collapse" data-bs-target="#SchPartiInfo" aria-expanded="false" aria-controls="SchPartiInfo">
+				                      참가자목록
+				                    </button>
+				                  </h2>
+				                    <div id="SchPartiInfo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="accordionSchParti">
+				                      <div class="accordion-body">
+						               <table class="table table-striped">
+						                <thead>
+						                  <tr>
+						                    <th scope="col">#</th>
+						                    <th scope="col">이름</th>
+						                    <th scope="col">부서</th>
+						                    <th scope="col">직급</th>
+						                    <th scope="col">사원번호</th>
+						                  </tr>
+						                </thead>
+						                <tbody id=schparti>
+						                </tbody>
+						              </table>
+						              </div>
+				                    </div>
+				                    
+				                  </div>
+				                </div>
 			               </div>
 			             </div>
 			       </c:if>
@@ -678,6 +742,7 @@
                     </button>
                   </h2>
                   <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+	               <div class="accordion-body">
 		               <table class="table table-striped">
 		                <thead>
 		                  <tr>
@@ -708,6 +773,7 @@
 			      	  	<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addparti">참가자 추가</button>
 			        </div>
 			        </c:if>
+			        </div>
                     </div>
                     
                   </div>
@@ -880,7 +946,8 @@
 	          </div>
 	       	</div>
 	       
-         </div>
+      </div>
+      </div>
     </section>
 
   </main><!-- End #main -->

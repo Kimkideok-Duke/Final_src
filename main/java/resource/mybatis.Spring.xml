@@ -19,6 +19,8 @@
 		<typeAlias alias="ProjectScheduleJoin" type="PMS.vo.ProjectScheduleJoin"/>
 		<typeAlias alias="prjParticipant" type="PMS.vo.PrjParticipant"/>
 		<typeAlias alias="Schedule" type="PMS.vo.Schedule"/>
+		<typeAlias alias="SchParticipant" type="PMS.vo.SchParticipant"/>
+		<typeAlias alias="SchPartiInfo" type="PMS.vo.SchPartiInfo"/>
 		<typeAlias alias="Alert" type="PMS.vo.Alert"/>
 		<typeAlias alias="ganttData" type="PMS.vo.GanttData"/>
 		<typeAlias alias="comment" type="PMS.vo.Comment"/>
