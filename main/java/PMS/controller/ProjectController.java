@@ -33,7 +33,10 @@ public class ProjectController {
     	HttpSession session = request.getSession();
     	Locale locale = new Locale(lang);
 		localResolver.setLocale(request, response, locale);
-    	String userno = (String)session.getAttribute("userno");
+    	String userno = "";
+    	if(session!=null&&session.getAttribute("userno")!=null) {
+    		userno=(String)session.getAttribute("userno");
+    	}
     	String auth = (String)session.getAttribute("auth");
     	d.addAttribute("plist", service.showAllProject());
     	d.addAttribute("slist", service.showAllSchedule());
@@ -56,7 +59,10 @@ public class ProjectController {
     @RequestMapping("addPrjParticipant.do")
     public String addPrjParticipant(HttpServletRequest request, Model d) {
     	HttpSession session = request.getSession();
-    	String userno = (String)session.getAttribute("userno");
+    	String userno = "";
+    	if(session!=null&&session.getAttribute("userno")!=null) {
+    		userno=(String)session.getAttribute("userno");
+    	}
     	PrjParticipant pp = new PrjParticipant(userno, service.getMaxPno(userno));
     	service.addPrjParticipant(pp);
     	d.addAttribute("isAddPrj", "Y");
@@ -65,9 +71,7 @@ public class ProjectController {
     
     // 프로젝트 참가자 추가
     @RequestMapping("insParPrj.do")
-    public String insParPrj(HttpServletRequest request, PrjParticipant ins, Model d) {
-    	HttpSession session = request.getSession();
-    	int pno = (int)session.getAttribute("pno");
+    public String insParPrj(PrjParticipant ins, Model d) {
     	service.addPrjParticipant(ins);
     	d.addAttribute("proc", "insParPrj");
     	return "WEB-INF/views/Main.jsp";
