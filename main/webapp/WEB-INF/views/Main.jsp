@@ -125,37 +125,10 @@
 			dataType:"json",
 			success:function(data){
 				var data = data.schedule
-				console.log(data.sno)
-				console.log(data.sname)
-				console.log(data.status)
-				console.log(data.progress)
-				console.log(data.startDate)
-				console.log(data.endDate)
-				console.log(data.budget)
 			}
 		})
 	}
 	var auth = "${auth}"
-	function regProc(){
-		if(confirm("등록하시겠습니까?")){
-			$("#regSchedule").attr("action","${path}/regSchedule.do");
-			$("#regSchedule").submit();
-
-		}
-	}
-	function uptProc(){
-		if(auth=="pm" || auth=="admin"){
-			if(confirm("수정하시겠습니까?(PM)")){
-				$("#uptSchedule").attr("action","${path}/uptScheduleByPM.do");
-				$("#uptSchedule").submit();
-			}
-		}else{
-			if(confirm("수정하시겠습니까?")){
-				$("form").attr("action","${path}/uptSchedule.do");
-				$("form").submit();
-			}
-		}
-	}
 	function delProc(){
 		if(auth=="pm" || auth=="admin"){
 			if(confirm("삭제하시겠습니까?")){
@@ -390,15 +363,13 @@
 				      <!-- 모달 내용 sname, status, progress, startDate, endDate, budget -->
 			      <div class="modal-body">
 			      <!-- 권한 체크해서 form 경로 변경, input 숨기기 -->
-			      	<c:if test="${auth eq 'admin'}">
+			      	<c:if test="${auth eq 'admin' or auth eq 'pm'}">
 			  		<form id="uptSchedule" class="row g-3 needs-validation" action="${path}/uptScheduleByPM.do" novalidate>
 			  		</c:if>
-			  		<c:if test="${auth eq 'pm'}">
-			  		<form id="uptSchedule" class="row g-3 needs-validation" action="${path}/uptScheduleByPM.do" novalidate>
-			  		</c:if>
-			  		<c:if test="${auth eq 'admin'}">
+			  		<c:if test="${auth eq 'um' or auth eq 'user'}">
 			  		<form id="uptSchedule" class="row g-3 needs-validation" action="${path}/uptSchedule.do" novalidate>
 			  		</c:if>
+			  		<c:if test="${auth eq 'admin' or auth eq 'pm'}">
 			             <div class="row mb-3" style="padding-top:15px;">
 			             <input type="hidden" id="sno" name="sno" value=""/>
 			               <label for="inputText" class="col-sm-2 col-form-label">일정명</label>
@@ -423,12 +394,14 @@
 			                 </select>
 			               </div>
 			             </div>
+	             </c:if>
 			             <div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">진행도</label>
 			               <div class="col-sm-10">
 			                 <input type="range" id="progress" name="progress" class="form-range" min="0" max="100" step="5" value="0"><p id="show" align="center"></p>
 			               </div>
 			             </div>
+			       <c:if test="${auth eq 'admin' or auth eq 'pm'}">
 						<div class="row mb-3">
 			               <label for="inputText" class="col-sm-2 col-form-label">시작일</label>
 			               <div class="col-sm-10">
@@ -462,6 +435,7 @@
 			               	</div>
 			               </div>
 			             </div>
+			       </c:if>
 			              <div class="row mb-3">
 			               <div class="text-end">
 			             	<button type="submit" class="btn btn-primary">수정</button>
