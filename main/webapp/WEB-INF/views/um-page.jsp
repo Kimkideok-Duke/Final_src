@@ -62,9 +62,26 @@
 				alert("신규사원 이메일을 입력해주세요")
 				$("[name=email]").focus()
 				return
-			} 
+			}
+			var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			var namePatternKr = /^[가-힣]+$/;
+			var namePatternEn = /^[a-zA-Z\s]+$/;
 			var name = $("[name=name]").val()
 			var email = $("[name=email]").val()
+			if(name.length<2){
+				alert("이름을 두 글자 이상 입력해주세요")
+				$("[name=name]").focus()
+				return
+			}
+			if(!name.match(namePatternKr) && !name.match(namePatternEn)){
+				alert("이름 형식이 올바르지 않습니다.\n(한글만 혹은 영문만 등록이 가능합니다.)")
+				return
+			}
+			if(!email.match(emailPattern)){
+				alert("이메일 형식이 올바르지 않습니다.")
+				$("[name=email]").focus()
+				return
+			}
 			$.ajax({
 				url:"${path}/addAccount.do",
 				data:"name="+name+"&email="+email,
