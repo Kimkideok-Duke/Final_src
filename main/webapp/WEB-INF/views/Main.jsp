@@ -614,8 +614,7 @@
                 </c:when>
                 
                 <c:when test="${t.state == '댓글등록'}">
-                 <div class="activity-item d-flex">
-                  <div class="activite-label">방금전</div>
+                 <div class="activity-item d-flex">                 
                   <div class="activite-label">${t.calTime }</div>
                   <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
                   <div class="activity-content">${t.writer}님이 ${t.sname } 일정에 <span class="thick">코멘트</span>를 등록하였습니다.</div>
