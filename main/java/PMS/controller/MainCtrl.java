@@ -55,7 +55,7 @@ public class MainCtrl {
 		HttpSession session = request.getSession();
 		int pno = (int)session.getAttribute("pno");
     	service.regSchedule(reg);
-//		serviceT.insertTimeline(ins2);
+		serviceT.insertTimeline(ins2);
 		String start = reg.getStartDate_s();
 		String end = reg.getEndDate_s();
 		start = start+"T15:00:00.000Z";
