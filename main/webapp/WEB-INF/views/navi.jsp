@@ -40,6 +40,12 @@
 			}
 		})
 	});
+<script type="text/javascript">
+	var usernoSession = "${userno}"
+	if(usernoSession==""){
+		alert("로그인 후 이용가능합니다.")
+		location.href="${path}/loginPage.do"
+	}
 </script>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -201,7 +207,7 @@
       </li> --><!-- End 일정관리 Nav -->
 	  
       <li class="nav-item">
-        <a class="nav-link collapsed" href="${path}/getAlert.do?userno=<%=(String)session.getAttribute("userno")%>">
+        <a class="nav-link collapsed" href="${path}/getAlert.do?userno=${userno}%>">
           <i class="bi bi-bell"></i><span>Notifications</span>
         </a>
       </li><!-- End 알림 Nav -->
@@ -225,20 +231,21 @@
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
-	<% if(!((String)session.getAttribute("auth")).equals("user")&&!((String)session.getAttribute("auth")).equals("pm")){ %>
+	<%--<% if(!((String)session.getAttribute("auth")).equals("user")&&!((String)session.getAttribute("auth")).equals("pm")){ --%>
+      <c:if test="${auth != 'user' && auth != 'pm'}">
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#admin-nav" data-bs-toggle="collapse"  href="#">
           <i class="bi bi-person-check"></i>
           <span>Manager</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="admin-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <%if(((String)session.getAttribute("auth")).equals("um") || ((String)session.getAttribute("auth")).equals("admin")){ %>
+         <%-- <%if(((String)session.getAttribute("auth")).equals("um") || ((String)session.getAttribute("auth")).equals("admin")){ %> --%>
           <li>
             <a href="${path}/goUmPage.do">
               <i class="bi bi-circle"></i><span>User Management</span>
             </a>
           </li>
-          <%} %>
+       </c:if>
           <%-- <%if(!((String)session.getAttribute("auth")).equals("um")){ %>
           <li>
             <a href="${path}/goAdminPage.do">
@@ -247,7 +254,7 @@
           </li>
           <%} %> --%>
         </ul>
-      </li><%}%><!-- End 관리자페이지 Page Nav -->
+      </li><%--<%}--%><!-- End 관리자페이지 Page Nav -->
 
     </ul>
 

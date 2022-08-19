@@ -76,7 +76,7 @@ public class AccountController {
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "WEB-INF\\views\\login.jsp";
+		return "redirect:/loginPage.do";
 	}
 	
 	// 샘플페이지#########################
@@ -91,7 +91,10 @@ public class AccountController {
 	@RequestMapping("goMyPage.do")
 	public String goMyPage(HttpServletRequest request, Model d) {
 		HttpSession session = request.getSession();
-		String userno = (String)session.getAttribute("userno");
+		String userno = "";
+		if(session!=null && session.getAttribute("userno")!=null) {
+			userno = (String)session.getAttribute("userno");
+		}
 		d.addAttribute("userInfo", service.getUserDetail(userno));
 		d.addAttribute("userSList", service.getMySList(userno));
 		d.addAttribute("profile",service.getProfilePath(userno));
