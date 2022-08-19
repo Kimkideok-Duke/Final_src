@@ -8,7 +8,6 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>   
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<% String userno=request.getParameter("userno"); %>
 <script>
 	$(document).ready(function(){
 		var vm01 = new Vue({
@@ -40,6 +39,12 @@
 			}
 		})
 	});
+<script type="text/javascript">
+	var usernoSession = "${userno}"
+	if(usernoSession==""){
+		alert("로그인 후 이용가능합니다.")
+		location.href="${path}/loginPage.do"
+	}
 </script>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -90,6 +95,7 @@
           </a><!-- End Notification Icon -->
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style="width:300px">
             <li class="dropdown-header">
+            <i class="bi bi-exclamation-circle text-warning"></i>
               알림
             </li>
             <li>
@@ -99,7 +105,7 @@
             <li class="notification-item">
               <div v-for="(al, idx) in art">
                 <h4>프로젝트 / {{al.title}}</h4>
-                <p>{{al.sname}} 마감 {{al.dday}}일 남았습니다.<p>
+                <p>{{al.sname}} 일정 마감 {{al.dday}}일 남았습니다.<p>
               </div>
             </li>
 
@@ -201,7 +207,7 @@
       </li> --><!-- End 일정관리 Nav -->
 	  
       <li class="nav-item">
-        <a class="nav-link collapsed" href="${path}/getAlert.do?userno=<%=(String)session.getAttribute("userno")%>">
+        <a class="nav-link collapsed" href="${path}/getAlert.do?userno=${userno}%>">
           <i class="bi bi-bell"></i><span>Notifications</span>
         </a>
       </li><!-- End 알림 Nav -->
@@ -225,20 +231,21 @@
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
-	<% if(!((String)session.getAttribute("auth")).equals("user")&&!((String)session.getAttribute("auth")).equals("pm")){ %>
+	<%--<% if(!((String)session.getAttribute("auth")).equals("user")&&!((String)session.getAttribute("auth")).equals("pm")){ --%>
+      <c:if test="${auth != 'user' && auth != 'pm'}">
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#admin-nav" data-bs-toggle="collapse"  href="#">
           <i class="bi bi-person-check"></i>
           <span>Manager</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="admin-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <%if(((String)session.getAttribute("auth")).equals("um") || ((String)session.getAttribute("auth")).equals("admin")){ %>
+         <%-- <%if(((String)session.getAttribute("auth")).equals("um") || ((String)session.getAttribute("auth")).equals("admin")){ %> --%>
           <li>
             <a href="${path}/goUmPage.do">
               <i class="bi bi-circle"></i><span>User Management</span>
             </a>
           </li>
-          <%} %>
+       </c:if>
           <%-- <%if(!((String)session.getAttribute("auth")).equals("um")){ %>
           <li>
             <a href="${path}/goAdminPage.do">
@@ -247,7 +254,7 @@
           </li>
           <%} %> --%>
         </ul>
-      </li><%}%><!-- End 관리자페이지 Page Nav -->
+      </li><%--<%}--%><!-- End 관리자페이지 Page Nav -->
 
     </ul>
 

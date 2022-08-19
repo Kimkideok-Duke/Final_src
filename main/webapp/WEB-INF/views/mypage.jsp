@@ -137,6 +137,7 @@
 	
 
 </script>
+
 <style type="text/css">
 .mypageSchList:hover{
 	background-color:rgb(236, 236, 236);

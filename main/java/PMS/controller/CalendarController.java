@@ -39,7 +39,10 @@ public class CalendarController {
    @RequestMapping("calInsert.do")
    public String calInsert(HttpServletRequest request, Calendar ins) {
       HttpSession session = request.getSession();
-      int pno = (int)session.getAttribute("pno");
+      int pno = 0;
+      if(session!=null && session.getAttribute("pno")!=null) {
+    	  pno = (int)session.getAttribute("pno");
+      }
       String startdate = ins.getStart().split("T")[0];
       String enddate= ins.getEnd().split("T")[0];
       Schedule reg = new Schedule(pno, ins.getTitle(), "기본", 0, startdate, enddate, 0);

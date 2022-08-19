@@ -233,4 +233,5 @@ AND sc.pno = p.pno
 AND a.userno = p.pmno
 ;
 
-SELECT * FROM SCHEDULE s WHERE pno = 0;
+SELECT * FROM project;
+SELECT * FROM schedule WHERE pno = 2;

@@ -1,9 +1,6 @@
 package PMS.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +16,7 @@ import PMS.service.CalendarService;
 import PMS.service.MainService;
 import PMS.service.TimelineService;
 import PMS.vo.Calendar;
+import PMS.vo.SchParticipant;
 import PMS.vo.Schedule;
 import PMS.vo.Timeline;
 
@@ -38,7 +36,9 @@ public class MainCtrl {
     @RequestMapping("goMain.do")
     public String main(HttpServletRequest request, @RequestParam(value="pno", defaultValue="") int pno, Model d) {
 		HttpSession session = request.getSession();
-		session.setAttribute("pno", pno);
+    	if(session!=null && session.getAttribute("pno")!=null) {
+    		session.setAttribute("pno", pno);
+    	}
     	d.addAttribute("title", service.getTitleByNo(pno));
     	d.addAttribute("slist",service.getScheduleList(pno));
     	d.addAttribute("alist", serviceA.getAccountList());
@@ -53,14 +53,18 @@ public class MainCtrl {
     @RequestMapping("regSchedule.do")
 	public String regSchedule(HttpServletRequest request, Schedule reg,Timeline ins2, Model d) {
 		HttpSession session = request.getSession();
-		int pno = (int)session.getAttribute("pno");
+    	int pno = 0;
+		if(session!=null && session.getAttribute("pno")!=null) {
+    		pno = (int)session.getAttribute("pno");
+    	}
     	service.regSchedule(reg);
 		serviceT.insertTimeline(ins2);
 		String start = reg.getStartDate_s();
 		String end = reg.getEndDate_s();
 		start = start+"T15:00:00.000Z";
 		end = end+"T15:00:00.000Z";
-		Calendar ins = new Calendar(pno, reg.getSno(), reg.getSname(), start, end, "", "pink", "yellow", true);
+		int sno = cservice.getRecentSno();
+		Calendar ins = new Calendar(pno, sno, reg.getSname(), start, end, "", "pink", "yellow", true);
 		cservice.insertCalendar(ins);
 		d.addAttribute("isReg","Y");
 		return "WEB-INF\\views\\Main.jsp";
@@ -93,7 +97,10 @@ public class MainCtrl {
     @RequestMapping("delSchedule.do")
 	public String delSchedule(HttpServletRequest request, @RequestParam(value = "sno") int sno, Model d) {
     	HttpSession session = request.getSession();
-    	int pno = (int)session.getAttribute("pno");
+    	int pno = 0;
+    	if(session!=null && session.getAttribute("pno")!=null) {
+    		pno = (int)session.getAttribute("pno");
+    	}
     	service.delSchedule(sno);
     	// sno로 id값 찾기
     	try {
@@ -114,5 +121,17 @@ public class MainCtrl {
 	public String getPrjparticipant(@RequestParam(value="pno", defaultValue="") int pno, Model d) {
 		d.addAttribute("parlist",service.getPrjparticipant(pno));
 		return "pageJsonReport";
+	}
+	// http://localhost:8080/PMS/showSchPartiInfo.do
+	@RequestMapping("showSchPartiInfo.do")
+	public String showSchPartiInfo(@RequestParam("sno") int sno, Model d) {
+		d.addAttribute("schParInfo", service.showSchPartiInfo(sno));
+		return "pageJsonReport";
+	}
+	
+	@RequestMapping("insSchParticipant.do")
+	public String insSchParticipant(SchParticipant ins, Model d) {
+		service.insSchParticipant(ins);
+		return "";
 	}
 }
