@@ -34,27 +34,3 @@ fpath varchar2(200)
 
 SELECT * FROM File_tb;
 DROP table File_tb;
-
-
-SELECT sysdate-hiredate FROM emp;
-
-SELECT floor((sysdate-hiredate)/365) || '년 전' FROM emp;
-SELECT floor((sysdate-hiredate)) || '일 전' FROM emp;
-SELECT floor(((sysdate-hiredate)-(floor((sysdate-hiredate))))*24) || '시간 전' FROM emp;
-SELECT floor(((sysdate-hiredate)-(floor((sysdate-hiredate))))*24) || '분 전' FROM emp;
-
-
-SELECT sysdate-hiredate
-CASE WHEN sal >=   THEN '일 전'
-WHEN sal >= 4000  THEN '분 후'
-WHEN sal >= 3000 THEN '시간 전'
-ELSE '방금 전'
-END 타임라인
-FROM emp;
-
-SELECT * FROM emp;
-
-SELECT sysdate FROM dual;
-SELECT hiredate FROM emp;
-
-

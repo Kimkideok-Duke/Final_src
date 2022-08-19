@@ -71,8 +71,9 @@ public class commentController {
 		@RequestMapping("commDelete.do")
 		public String commDelete(@RequestParam("cno") int cno,
 				@RequestParam("sno") int sno,
-				@RequestParam("pno") int pno,Model d) {
+				@RequestParam("pno") int pno,Timeline ins2,Model d) {
 			service.deleteComment(cno);
+			serviceT.insertTimeline(ins2);
 			d.addAttribute("sname", service.getSname(sno));
 			d.addAttribute("proc", "del");
 			return "WEB-INF\\views\\DetailComment.jsp";
@@ -92,7 +93,8 @@ public class commentController {
 		public String commUpdate(@RequestParam("sno") int sno,
 				@RequestParam("pno") int pno,
 				Comment upt,Timeline ins2, Model d) {
-			d.addAttribute("comment", service.updateComment(upt));			
+			d.addAttribute("comment", service.updateComment(upt));
+			serviceT.insertTimeline(ins2);
 			d.addAttribute("upt", "Y");
 			System.out.println("수정:"+upt.getContent());
 			return "WEB-INF\\views\\UpdateComment.jsp";

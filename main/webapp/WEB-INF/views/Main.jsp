@@ -40,6 +40,11 @@
 	#chatArea{
 		height:200px;overflow-y:scroll;text-align:left;
 	}
+	
+		
+	.thick{
+	font-weight : 1000;
+	}
 
 </style>
 
@@ -614,7 +619,7 @@
                  <div class="activity-item d-flex">
                   <div class="activite-label">방금전</div>
                   <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>            
-                  <div class="activity-content">${t.sname } 일정이 등록되었습니다.</div>
+                  <div class="activity-content">${t.sname } <span class="thick">일정</span>이 등록되었습니다.</div>
                 </div><!-- End activity item-->
                 </c:when>
                 
@@ -622,15 +627,25 @@
                  <div class="activity-item d-flex">
                   <div class="activite-label">방금전</div>
                   <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                  <div class="activity-content">${t.writer}님이 ${t.sname } 코멘트를 등록하였습니다.</div>
+                  <div class="activity-content">${t.writer}님이 ${t.sname } 일정에 <span class="thick">코멘트</span>를 등록하였습니다.</div>
                 </div><!-- End activity item-->               
                 </c:when>
                 
+                
+                <c:when test="${t.state == '댓글삭제'}">
+                 <div class="activity-item d-flex">
+                  <div class="activite-label">${t.calTime}</div>
+                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+                  <div class="activity-content">${t.sname } 일정에 <span class="thick">코멘트</span>가 삭제되었습니다.</div>
+                  </div><!-- End activity item-->               
+                </c:when>
+                
+                
                  <c:otherwise>                
                 <div class="activity-item d-flex">
-                  <div class="activite-label">방금전</div>
-                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                  <div class="activity-content">${t.writer}님이 코멘트를 수정하였습니다.</div>
+                  <div class="activite-label">${t.calTime}</div>
+                   <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
+                  <div class="activity-content">${t.sname } 일정에 <span class="thick">코멘트</span>가 수정되었습니다.</div>
                 </div><!-- End activity item-->
                 
                 

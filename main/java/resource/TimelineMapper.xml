@@ -6,7 +6,13 @@
 
 	<!-- Timeline List -->
 	<select id="getTimeline" parameterType="int" resultType="Timeline">
-	SELECT * from Timeline where pno = #{pno}
+	SELECT t.*,
+	<![CDATA[CASE WHEN TO_number(sysdate-t.tdte)*24*60 <= 60 THEN '방금전']]>
+	<![CDATA[WHEN TO_number(sysdate-t.tdte)*24 <= 24 THEN trunc(TO_number(sysdate-t.tdte)*24) || '시간 전']]>
+	<![CDATA[WHEN TO_number(sysdate-t.tdte) <= 31 THEN trunc(TO_number(sysdate-t.tdte)) || '일 전']]>
+	ELSE substr(t.tdte,1,10)
+	END AS calTime
+	FROM Timeline t WHERE pno = #{pno} order BY tdte desc
 	</select>
 	
 
