@@ -38,7 +38,9 @@ public class MainCtrl {
     @RequestMapping("goMain.do")
     public String main(HttpServletRequest request, @RequestParam(value="pno", defaultValue="") int pno, Model d) {
 		HttpSession session = request.getSession();
-		session.setAttribute("pno", pno);
+    	if(session!=null && session.getAttribute("pno")!=null) {
+    		session.setAttribute("pno", pno);
+    	}
     	d.addAttribute("title", service.getTitleByNo(pno));
     	d.addAttribute("slist",service.getScheduleList(pno));
     	d.addAttribute("alist", serviceA.getAccountList());
@@ -53,7 +55,10 @@ public class MainCtrl {
     @RequestMapping("regSchedule.do")
 	public String regSchedule(HttpServletRequest request, Schedule reg,Timeline ins2, Model d) {
 		HttpSession session = request.getSession();
-		int pno = (int)session.getAttribute("pno");
+    	int pno = 0;
+		if(session!=null && session.getAttribute("pno")!=null) {
+    		pno = (int)session.getAttribute("pno");
+    	}
     	service.regSchedule(reg);
 		serviceT.insertTimeline(ins2);
 		String start = reg.getStartDate_s();
@@ -94,7 +99,10 @@ public class MainCtrl {
     @RequestMapping("delSchedule.do")
 	public String delSchedule(HttpServletRequest request, @RequestParam(value = "sno") int sno, Model d) {
     	HttpSession session = request.getSession();
-    	int pno = (int)session.getAttribute("pno");
+    	int pno = 0;
+    	if(session!=null && session.getAttribute("pno")!=null) {
+    		pno = (int)session.getAttribute("pno");
+    	}
     	service.delSchedule(sno);
     	// sno로 id값 찾기
     	try {
