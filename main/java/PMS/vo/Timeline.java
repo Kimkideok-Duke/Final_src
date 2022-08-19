@@ -11,13 +11,15 @@ private Date tdte;
 private String state;
 //타임라인 계산
 private String calTime;
+// 타임라인 상세 결과
+private String tmResult;
 
 public Timeline() {
 	super();
 	// TODO Auto-generated constructor stub
 }
 
-public Timeline(int tno, int pno, String writer, String sname, Date tdte, String state, String calTime) {
+public Timeline(int tno, int pno, String writer, String sname, Date tdte, String state, String calTime, String tmResult) {
 	this.tno = tno;
 	this.pno = pno;
 	this.writer = writer;
@@ -25,6 +27,7 @@ public Timeline(int tno, int pno, String writer, String sname, Date tdte, String
 	this.tdte = tdte;
 	this.state = state;
 	this.calTime = calTime;
+	this.tmResult =tmResult;
 }
 
 public int getTno() {
@@ -81,6 +84,14 @@ public String getCalTime() {
 
 public void setCalTime(String calTime) {
 	this.calTime = calTime;
+}
+
+public String getTmResult() {
+	return tmResult;
+}
+
+public void setTmResult(String tmResult) {
+	this.tmResult = tmResult;
 }
 
 

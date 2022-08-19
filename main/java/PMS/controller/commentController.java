@@ -49,6 +49,8 @@ public class commentController {
 				Comment ins,Timeline ins2, Model d) {			
 			service.insertComment(ins);
 			serviceT.insertTimeline(ins2);
+			ins2.setTmResult(ins2.getWriter()+"님이 "+ins2.getSname()+" 일정에 코멘트를 등록하였습니다.");
+			serviceT.insResult(ins2);
 			d.addAttribute("isInsert", "Y");			
 			return "WEB-INF\\views\\insertComment.jsp";
 		}
@@ -74,6 +76,8 @@ public class commentController {
 				@RequestParam("pno") int pno,Timeline ins2,Model d) {
 			service.deleteComment(cno);
 			serviceT.insertTimeline(ins2);
+			ins2.setTmResult(ins2.getSname()+" 일정에 코멘트가 삭제되었습니다.");
+			serviceT.insResult(ins2);
 			d.addAttribute("comment",service.getDetail(cno));
 			d.addAttribute("sname", service.getSname(sno));
 			d.addAttribute("proc", "del");
@@ -96,10 +100,19 @@ public class commentController {
 				Comment upt,Timeline ins2, Model d) {
 			d.addAttribute("comment", service.updateComment(upt));		
 			serviceT.insertTimeline(ins2);
+			ins2.setTmResult(ins2.getSname()+" 일정에 코멘트가 수정되었습니다.");
+			System.out.println(ins2.getTmResult());
+			serviceT.insResult(ins2);
 			d.addAttribute("upt", "Y");
 			System.out.println("수정:"+upt.getContent());
 			return "WEB-INF\\views\\UpdateComment.jsp";
 		}
-
+		
+		@RequestMapping("goTimeline.do")
+		public String getTmDetail(@RequestParam("pno") int pno, Model d) {
+	    	d.addAttribute("detail", serviceT.getTmDetail(pno));
+			
+			return "WEB-INF\\views\\TimelineDetail.jsp";
+		}
 
 	}

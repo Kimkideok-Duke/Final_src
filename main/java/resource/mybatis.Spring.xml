@@ -26,6 +26,7 @@
 		<typeAlias alias="gantt" type="PMS.vo.Gantt"/>
 		<typeAlias alias="calendar" type="PMS.vo.Calendar"/>
 		<typeAlias alias="timeline" type="PMS.vo.Timeline"/>
+		<typeAlias alias="timeResult" type="PMS.vo.TimeResult"/>
 	</typeAliases>
 
 	<mappers>

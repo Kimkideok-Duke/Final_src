@@ -45,33 +45,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <!-- padding: 16px 32px; -->
-  <style>
-  .insertBtn {
-  border: none;
-  background: #0D6EFD; 
-  border-radius : 30px;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  padding: 5px 10px;
-  margin-bottom: 20px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-.insertBtn:hover {
-  background-color: #dee2e6;
-  color: #0D6EFD;
-  font-weight: bold;
-}
-
-.HV:hover{
-background-color: #f2f2f2;
-}  
-  </style>
+  
 </head>
 
 <body>
@@ -81,48 +55,39 @@ background-color: #f2f2f2;
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Comment List</h1>
+      <h1>타임라인 목록</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Comment</li>
+          <li class="breadcrumb-item active">Timeline List</li>
         </ol>
       </nav>
     </div>
     <section class="section dashboard">
-        <!-- Top Selling -->
+
             <div class="col-12">
               <div class="card top-selling overflow-auto">
 
 		
           <div class="card-body pb-0">
-          <h5 class="card-title">${title} <span>| ${sname }</span></h5>
-	    <form name="form" id="form" action="${path}/commInsertForm.do" method="post">
-			<input type="hidden" name="sno" value="${param.sno}"/>
-			<input type="hidden" name="pno" value="${param.pno}"/>
-			<input type="hidden" name="sname" value="${sname}"/>
-	    	<button type="submit" class="insertBtn">comment 등록</button>
-	    </form>
+          <h5 class="card-title">프로젝트 의 타임라인 목록 입니다.</h5>
+
                   <table class="table table-borderless datatable">
                     <thead style="text-align:center">
                       <tr>
                         <th scope="col">NO.</th>
-                        <th scope="col">내용</th>
-                        <th scope="col">작성자</th>                       
-                        <th scope="col">등록일</th>
-                        <th scope="col">수정일</th>
+                        <th scope="col">활동내용</th>                     
+                        <th scope="col">타임라인</th>
                       </tr>
                     </thead>
                     
                      <% int cnt=0; %>
                       <tbody>
-                    <c:forEach var="l" items="${clist}">                 
-                      <tr class="HV" ondblclick="goDetail(${l.cno})" >
+                    <c:forEach var="d" items="${detail}">                 
+                      <tr>
                       <td><%=cnt+=1 %></td>
-                      <td>${l.content}</td>
-                      <td>${l.writer}</td>
-                      <td><fmt:formatDate pattern="yyyy-MM-dd" value="${l.regdte}"/></td>
-                      <td><fmt:formatDate pattern="yyyy-MM-dd" value="${l.updte}"/></td>
+                      <td>${d.tmResult}</td>
+                      <td>${d.calTime}</td>
                       </tr>
                       </c:forEach>
                     </tbody>
@@ -170,13 +135,7 @@ background-color: #f2f2f2;
 		
 		--%>	
 	});
-	function goInsert(){
-		$("form").submit();	
-	}
-	
-	function goDetail(cno){
-		location.href="${path}/commDetail.do?cno="+cno+"&sno="+"${param.sno}"+"&pno="+"${param.pno}";
-	}	
+
 	
 </script>
 </body>
