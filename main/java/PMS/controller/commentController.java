@@ -72,10 +72,7 @@ public class commentController {
 		public String commDelete(@RequestParam("cno") int cno,
 				@RequestParam("sno") int sno,
 				@RequestParam("pno") int pno,Timeline ins2,Model d) {
-			System.out.println(ins2.getPno());
-			System.out.println(ins2.getSname());
-			System.out.println(ins2.getWriter());
-			System.out.println(ins2.getState());
+			service.deleteComment(cno);
 			serviceT.insertTimeline(ins2);
 			d.addAttribute("comment",service.getDetail(cno));
 			d.addAttribute("sname", service.getSname(sno));
@@ -97,8 +94,7 @@ public class commentController {
 		public String commUpdate(@RequestParam("sno") int sno,
 				@RequestParam("pno") int pno,
 				Comment upt,Timeline ins2, Model d) {
-			d.addAttribute("comment", service.updateComment(upt));
-			
+			d.addAttribute("comment", service.updateComment(upt));		
 			serviceT.insertTimeline(ins2);
 			d.addAttribute("upt", "Y");
 			System.out.println("수정:"+upt.getContent());
