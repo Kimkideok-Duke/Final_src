@@ -5,21 +5,21 @@
 <mapper namespace="PMS.dao.TimelineDao">
 
 	<!-- Timeline List -->
-	<select id="getTimeline" parameterType="int" resultType="Timeline">
+	<select id="getTimeline" parameterType="int" resultType="Timeline">	
 	SELECT t.*,
-	<![CDATA[CASE WHEN TO_number(sysdate-t.tdte)*24*60 <= 60 THEN '방금전']]>
+	<![CDATA[CASE WHEN TO_number(sysdate-t.tdte)*24*60*60 <= 60 THEN '방금전']]>
+	<![CDATA[WHEN TO_number(sysdate-t.tdte)*24*60 <= 60 THEN trunc(TO_number(sysdate-t.tdte)*24*60) || '분 전']]>
 	<![CDATA[WHEN TO_number(sysdate-t.tdte)*24 <= 24 THEN trunc(TO_number(sysdate-t.tdte)*24) || '시간 전']]>
 	<![CDATA[WHEN TO_number(sysdate-t.tdte) <= 31 THEN trunc(TO_number(sysdate-t.tdte)) || '일 전']]>
 	ELSE substr(t.tdte,1,10)
 	END AS calTime
-	FROM Timeline t WHERE pno = #{pno} order BY tdte desc
+	FROM Timeline t WHERE pno =#{pno} order BY tdte desc
 	</select>
 	
 
 	<!-- Timeline 등록 -->
 	<insert id="insertTimeline" parameterType="Timeline">
-	insert into Timeline values(seq_time.nextval,#{pno},seq_sno.currval,#{writer},#{sname},sysdate,#{state})
-	order BY tdte asc
+	insert into Timeline values(seq_time.nextval,#{pno},#{writer},#{sname},sysdate,#{state})
 	</insert>
 
 </mapper>

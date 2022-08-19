@@ -99,9 +99,15 @@ text-decoration:underline;
 		   <div class="card">
             <div class="card-body">       
               <h5 class="card-title" style="font-weight: bold">일정 이름</h5>
-		    <form  id="form" action="${path}/commentList.do" method="post">
+		    <form  id="form" name="form" action="${path}/commentList.do" method="post">
 			<input type="hidden" name="sno" value="${param.sno}"/>
 			<input type="hidden" name="pno" value="${param.pno}"/>
+			</form>
+	    
+	    	<form  id="form2" name="form2" action="${path}/commDelete.do" method="post">
+	    	<input type="hidden" name="cno" value="${param.cno}"/>
+	    	<input type="hidden" name="sno" value="${param.sno}"/>
+			<input type="text" name="pno" value="${param.pno}"/>
 			<input type="text" name="sname" value="${sname}"/>			
 			<input type="text" name="state" value="댓글삭제"/>
 			<input type="text" name="writer" value="${name}"/>
@@ -217,6 +223,7 @@ text-decoration:underline;
 	function goDelete(cno){
 		if(confirm("삭제하시겠습니까?")){
 			location.href="${path}/commDelete.do?cno="+cno+"&sno="+"${param.sno}"+"&pno="+"${param.pno}";
+			$("[name=form2]").submit();
 		}
 	}
 	
