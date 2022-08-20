@@ -39,7 +39,8 @@
 			}
 		})
 	});
-<script type="text/javascript">
+	
+
 	var usernoSession = "${userno}"
 	if(usernoSession==""){
 		alert("로그인 후 이용가능합니다.")
@@ -113,7 +114,7 @@
               <hr class="dropdown-divider">
             </li>
             <li class="dropdown-footer">
-              <a href="${path}/getAlert.do?userno=<%=(String)session.getAttribute("userno")%>">Show all notifications</a>
+              <a href="${path}/getAlert.do?userno=${userno}">Show all notifications</a>
             </li>
 
           </ul><!-- End Notification Dropdown Items -->
@@ -207,7 +208,7 @@
       </li> --><!-- End 일정관리 Nav -->
 	  
       <li class="nav-item">
-        <a class="nav-link collapsed" href="${path}/getAlert.do?userno=${userno}%>">
+        <a class="nav-link collapsed" href="${path}/getAlert.do?userno=${userno}">
           <i class="bi bi-bell"></i><span>Notifications</span>
         </a>
       </li><!-- End 알림 Nav -->
