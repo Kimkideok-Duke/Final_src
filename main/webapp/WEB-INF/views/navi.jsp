@@ -153,23 +153,6 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -232,31 +215,13 @@
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
-	<%--<% if(!((String)session.getAttribute("auth")).equals("user")&&!((String)session.getAttribute("auth")).equals("pm")){ --%>
       <c:if test="${auth != 'user' && auth != 'pm'}">
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#admin-nav" data-bs-toggle="collapse"  href="#">
-          <i class="bi bi-person-check"></i>
-          <span>Manager</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" href="${path}/goUmPage.do">
+          <i class="bi bi-person-check"></i><span>User Management</span>
         </a>
-        <ul id="admin-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-         <%-- <%if(((String)session.getAttribute("auth")).equals("um") || ((String)session.getAttribute("auth")).equals("admin")){ %> --%>
-          <li>
-            <a href="${path}/goUmPage.do">
-              <i class="bi bi-circle"></i><span>User Management</span>
-            </a>
-          </li>
-       </c:if>
-          <%-- <%if(!((String)session.getAttribute("auth")).equals("um")){ %>
-          <li>
-            <a href="${path}/goAdminPage.do">
-              <i class="bi bi-circle"></i><span>Project Management</span>
-            </a>
-          </li>
-          <%} %> --%>
-        </ul>
       </li><%--<%}--%><!-- End 관리자페이지 Page Nav -->
-
+       </c:if>
     </ul>
 
   </aside><!-- End Sidebar-->

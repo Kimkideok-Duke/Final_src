@@ -158,7 +158,7 @@
 
       <nav> <%-- 페이지 경로 --%>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="${path}/entire.do">Main</a></li>
+          <li class="breadcrumb-item"><a href="${path}/entireDashboard.do">Main</a></li>
           <li class="breadcrumb-item active">My Page</li>
         </ol>
       </nav>
