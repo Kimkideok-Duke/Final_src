@@ -14,6 +14,11 @@ public class SchParticipant {
 		this.sno = sno;
 		this.pno = pno;
 	}
+	public SchParticipant(String userno, int sno) {
+		super();
+		this.userno = userno;
+		this.sno = sno;
+	}
 	public String getUserno() {
 		return userno;
 	}

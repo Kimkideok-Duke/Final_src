@@ -103,14 +103,18 @@
 			$("#showReg").text($(this).val()+"%")
 	    });
 	});
+	var ckClk = false;
 	function chVal(sno){
+		if(ckClk){
+			$('#schptBtn').trigger('click')
+			console.log(ckClk)	
+		}
 		$.ajax({
 			url:"${path}/uptScheduleModal.do",
 			data:"sno="+sno,
 			dataType:"json",
 			success:function(data){
 				var data = data.schedule
-				var Globalsno=sno
 				$("#sno").val(sno)
 				$("#sname").val(data.sname)
 				$("#status").val(data.status)
@@ -146,7 +150,11 @@
 			alert("권한이 없습니다!")
 		}
 	}
-	var ckClk = false;
+	function delSchParti(sno, userno){
+		if(confirm("삭제하시겠습니까?"))
+		location.href="${path}/delSchParticipant.do?userno="+userno+"&sno="+sno
+	}
+	
 	function schpartBtn(){
 		ckClk = !ckClk
 		var sno = $("#sno").val()
@@ -157,6 +165,7 @@
 			dataType:"json",
 			success:function(data){
 				var list = data.schParInfo
+				$("#inssno").val(sno)
 				console.log(list)
 				if(list.length==0){
 					var addHTML="<tr><td colspan='5' align='center'>참가자가 없습니다.</td></tr>"
@@ -179,7 +188,7 @@
 			console.log(ckClk)	
 		}
 	}
-		
+	
 	var pno = "${pno}"
 	var proc = "${proc}"
 	var isReg = "${isReg}"
@@ -322,8 +331,10 @@
 			<tbody>
 				<%int cnt=0; %>
 				<c:forEach var="schedule" items="${slist}">
+				
 				<tr data-bs-toggle="modal" data-bs-target="#basicModal">
 				<th scope="row" class=""><%=++cnt %></th>
+				
 				<td onclick="chVal(${schedule.sno })">${schedule.sname}</td>
 				<td onclick="chVal(${schedule.sno })">
 					<c:if test="${schedule.status eq '예정'}">
@@ -407,9 +418,10 @@
 			  		<c:if test="${auth eq 'um' or auth eq 'user'}">
 			  		<form id="uptSchedule" class="row g-3 needs-validation" action="${path}/uptSchedule.do" novalidate>
 			  		</c:if>
+			  		<input type="hidden" id="sno" name="sno" value=""/>
 			  		<c:if test="${auth eq 'admin' or auth eq 'pm'}">
 			             <div class="row mb-3" style="padding-top:15px;">
-			             <input type="hidden" id="sno" name="sno" value=""/>
+			             
 			               <label for="inputText" class="col-sm-2 col-form-label">일정명</label>
 			               <div class="col-sm-10">
 			               	<div class="input-group has-validation">
@@ -473,7 +485,7 @@
 			               	</div>
 			               </div>
 			             </div>
-			             
+			            </c:if>
 			             <div class="row mb-3">
 			               <div class="col-sm-12">
 			                 <div class="accordion accordion-flush" id="accordionSchParti">
@@ -498,6 +510,9 @@
 						                <tbody id=schparti>
 						                </tbody>
 						              </table>
+						              	<div class="text-center">
+						              	  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSchparti">참가자 추가</button>
+						              	</div>
 						              </div>
 				                    </div>
 				                    
@@ -505,9 +520,10 @@
 				                </div>
 			               </div>
 			             </div>
-			       </c:if>
+			       
 			              <div class="row mb-3">
 			               <div class="text-end">
+			                
 			             	<button type="submit" class="btn btn-primary">수정</button>
 			             	<button type="button" onclick="delProc()" id="delBtn" class="btn btn-danger">삭제</button>
 		             	   </div>
@@ -521,7 +537,67 @@
 				      </div> -->
            </div>
          </div>
-       
+
+<!-- 일정 참가자 추가 -->
+<script type="text/javascript">
+	var proc = "${proc}"
+  	if(proc=="insParSch"){
+  		alert("${param.userno} 추가 성공!")
+  		location.href="${path}/goMain.do?pno=${param.pno}"
+  	}
+	if(proc=="delParSch"){
+		alert("참가자 삭제 성공!")
+		location.href="${path}/goMain.do?pno=${param.pno}"
+	}
+</script>        
+		      <div class="modal fade" id="addSchparti" tabindex="-1">
+			       <div class="modal-dialog modal-dialog-centered">
+			         <div class="modal-content">
+			           <div class="modal-header">
+			             <h5 class="modal-title">프로젝트 참가자 추가</h5>
+			             <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#basicModal"></button>
+			           </div>
+			           <br>
+			           <div class="modal-body">
+						 <form class="row g-3 needs-validation" action="${path}/insSchParticipant.do" novalidate>
+						 	<input type="hidden" name="pno" value="${param.pno}">
+						 	<input type="hidden" name="sno" id="inssno" value="">
+			                <div class="col-sm-12">
+			                  <div class="form-floating mb-3">
+			                  	<table class="table table-striped datatable">
+					                <thead>
+					                  <tr>
+					                    <th scope="col">   </th>
+					                    <th scope="col">이름</th>
+					                    <th scope="col">직급</th>
+					                    <th scope="col">부서</th>
+					                    <th scope="col">UserNo</th>
+					                  </tr>
+					                </thead>
+					                <tbody>
+					                <c:forEach var="sp" items="${schPlist}">
+					                  <tr>
+					                    <td><input type="radio" value="${sp.userno}" name="userno"></td>
+					                    <td>${sp.name}</td>
+					                    <td>${sp.position}</td>
+					                    <td>${sp.dept}</td>
+					                    <td>${sp.userno}</td>
+					                  </tr>
+					                </c:forEach>
+					                </tbody>
+					            </table>
+			                  </div>
+			                </div>
+			                <div class="text-center">
+			                  <button type="submit" class="btn btn-primary">추가</button>
+			                </div>
+			              </form>
+			           	</div>
+			          </div>
+			       	</div>
+			       
+		         </div>
+		         
 <!-- 모달창(일반등록) -->
        <div class="modal fade" id="regModal" tabindex="-1">
          <div class="modal-dialog">
@@ -860,7 +936,7 @@
 			       <div class="modal-dialog modal-dialog-centered">
 			         <div class="modal-content">
 			           <div class="modal-header">
-			             <h5 class="modal-title">참가자 추가</h5>
+			             <h5 class="modal-title">프로젝트 참가자 추가</h5>
 			             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			           </div>
 			           <br>

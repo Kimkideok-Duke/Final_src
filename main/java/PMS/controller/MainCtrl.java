@@ -16,10 +16,10 @@ import PMS.service.CalendarService;
 import PMS.service.MainService;
 import PMS.service.TimelineService;
 import PMS.vo.Calendar;
+import PMS.vo.PrjParticipant;
 import PMS.vo.SchParticipant;
 import PMS.vo.Schedule;
 import PMS.vo.Timeline;
-import PMS.vo.TimeResult;
 
 @Controller
 public class MainCtrl {
@@ -45,6 +45,7 @@ public class MainCtrl {
     	d.addAttribute("alist", serviceA.getAccountList());
     	d.addAttribute("prog", service.getProgress(pno));
     	d.addAttribute("tmlist",serviceT.getTimeline(pno));
+    	d.addAttribute("schPlist", service.getPrjparticipant(pno));
     	return "WEB-INF\\views\\Main.jsp";
     }
     @RequestMapping("regScheduleModal.do")
@@ -81,7 +82,7 @@ public class MainCtrl {
     @RequestMapping("uptSchedule.do")
 	public String uptSchedule(Schedule upt, Model d) {
 		service.uptSchedule(upt);
-		
+		d.addAttribute("pno", service.getSchedule(upt.getSno()).getPno());
 		d.addAttribute("proc", "upt");
 		return "WEB-INF\\views\\Main.jsp";
 	}
@@ -125,6 +126,8 @@ public class MainCtrl {
 		d.addAttribute("parlist",service.getPrjparticipant(pno));
 		return "pageJsonReport";
 	}
+	
+	// 일정 참가자 조회
 	// http://localhost:8080/PMS/showSchPartiInfo.do
 	@RequestMapping("showSchPartiInfo.do")
 	public String showSchPartiInfo(@RequestParam("sno") int sno, Model d) {
@@ -132,10 +135,30 @@ public class MainCtrl {
 		return "pageJsonReport";
 	}
 	
+	// 일정 참가자 추가
 	@RequestMapping("insSchParticipant.do")
 	public String insSchParticipant(SchParticipant ins, Model d) {
 		service.insSchParticipant(ins);
-		return "";
+		d.addAttribute("proc", "insParSch");
+		d.addAttribute("presno", ins.getSno());
+		return "WEB-INF/views/Main.jsp";
+	}
+	
+	// 일정 참가자 삭제
+	@RequestMapping("delSchParticipant.do")
+	public String delSchParticipant(SchParticipant del, Model d) {
+		service.delSchParticipant(del);
+		d.addAttribute("proc", "delParSch");
+		return "WEB-INF/views/Main.jsp";
+	}
+	
+	// 프로젝트 참가자 삭제
+	@RequestMapping("delPrjParticipant.do")
+	public String delPrjParticipant(PrjParticipant del, Model d) {
+		service.delSchPrjParticipant(del);
+		service.delPrjParticipant(del);
+		d.addAttribute("proc", "delParPrj");
+		return "WEB-INF/views/Main.jsp";
 	}
 	
     @RequestMapping("getSchStatus.do")

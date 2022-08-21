@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import PMS.dao.MainDao;
 import PMS.vo.Account;
+import PMS.vo.PrjParticipant;
 import PMS.vo.SchPartiInfo;
 import PMS.vo.SchParticipant;
 import PMS.vo.Schedule;
@@ -57,5 +58,18 @@ public class MainService {
 	// 일정 진행상태 수 조회
 	public List<ScheduleStatusCnt> getStatusCnt(int pno){
 		return dao.getStatusCnt(pno);
+	}
+	
+	// 일정 참가자 삭제
+	public void delSchParticipant(SchParticipant del) {
+		dao.delSchParticipant(del);
+	}
+	// 일정 참가자 삭제
+	public void delSchPrjParticipant(PrjParticipant del) {
+		dao.delSchPrjParticipant(del);
+	}
+	// 프로젝트 참가자 삭제
+	public void delPrjParticipant(PrjParticipant del) {
+		dao.delPrjParticipant(del);
 	}
 }

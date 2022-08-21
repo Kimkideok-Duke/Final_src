@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import PMS.vo.Account;
+import PMS.vo.PrjParticipant;
 import PMS.vo.SchPartiInfo;
 import PMS.vo.SchParticipant;
 import PMS.vo.Schedule;
@@ -28,4 +29,12 @@ public interface MainDao {
 	public List<SchPartiInfo> showSchPartiInfo(int sno);
 	// 일정 진행상태 수 조회
 	public List<ScheduleStatusCnt> getStatusCnt(int pno);
+	// 프로젝트 참가자 조회
+	public List<Account> getPrjPartiList(int pno);
+	// 일정 참가자 삭제
+	public void delSchParticipant(SchParticipant del);
+	// 일정 참가자 삭제
+	public void delSchPrjParticipant(PrjParticipant del);
+	// 프로젝트 참가자 삭제
+	public void delPrjParticipant(PrjParticipant del);
 }

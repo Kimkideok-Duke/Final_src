@@ -75,4 +75,19 @@
 	WHERE pno=#{pno}
 	GROUP BY STATUS
 	</select>
-</mapper> 
+	<!-- 일정 참가자 삭제 -->
+	<delete id="delSchParticipant" parameterType="SchParticipant">
+		DELETE FROM SCHPARTICIPANT
+		WHERE sno = #{sno} AND USERNO = #{userno}
+	</delete>
+	<!-- 일정 참가자 삭제(프로젝트 참가자 삭제) -->
+	<delete id="delSchPrjParticipant" parameterType="PrjParticipant">
+		DELETE FROM SCHPARTICIPANT
+		WHERE pno = #{pno} AND USERNO = #{userno}
+	</delete>
+	<!-- 프로젝트 참가자 삭제 -->
+	<delete id="delPrjParticipant" parameterType="PrjParticipant">
+		DELETE FROM PRJPARTICIPANT 
+		WHERE PNO = #{PNO} AND USERNO = #{USERNO}
+	</delete>
+</mapper>
