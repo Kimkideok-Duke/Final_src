@@ -137,4 +137,10 @@ public class MainCtrl {
 		service.insSchParticipant(ins);
 		return "";
 	}
+	
+    @RequestMapping("getSchStatus.do")
+    public String getStatusCnt(@RequestParam("pno") int pno,Model d) {
+    	d.addAttribute("statuscnt", service.getStatusCnt(pno));
+    	return "pageJsonReport";
+    }
 }

@@ -29,6 +29,7 @@
 		<typeAlias alias="calendar" type="PMS.vo.Calendar"/>
 		<typeAlias alias="timeline" type="PMS.vo.Timeline"/>
 		<typeAlias alias="timeResult" type="PMS.vo.TimeResult"/>
+		<typeAlias alias="StatusCnt" type="PMS.vo.ScheduleStatusCnt"/>
 	</typeAliases>
 
 	<mappers>

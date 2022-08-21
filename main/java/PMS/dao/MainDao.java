@@ -8,6 +8,7 @@ import PMS.vo.Account;
 import PMS.vo.SchPartiInfo;
 import PMS.vo.SchParticipant;
 import PMS.vo.Schedule;
+import PMS.vo.ScheduleStatusCnt;
 
 @Repository
 public interface MainDao {
@@ -25,4 +26,6 @@ public interface MainDao {
 	public void insSchParticipant(SchParticipant ins);
 	// 일정 참가자 조회
 	public List<SchPartiInfo> showSchPartiInfo(int sno);
+	// 일정 진행상태 수 조회
+	public List<ScheduleStatusCnt> getStatusCnt(int pno);
 }

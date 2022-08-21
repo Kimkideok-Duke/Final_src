@@ -72,3 +72,10 @@ FROM Timeline t,TResult r WHERE pno =2 AND t.tno =r.tno order BY tdte DESC;
 
 
 
+
+-- 진행상태 갯수
+SELECT STATUS, count(*) stCnt
+FROM SCHEDULE
+WHERE pno = 2
+GROUP BY STATUS;
+

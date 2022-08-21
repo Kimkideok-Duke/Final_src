@@ -645,13 +645,13 @@
                   <h6>타임라인</h6>
                 </li>
 
-                <li><a class="dropdown-item" href="${path}/goTimeline.do?pno=${param.pno}&title=${title}">타임라인 더보기</a></li>
+                <li><a class="dropdown-item" href="${path}/goTimeline.do?pno=${param.pno}&title=${param.title}">타임라인 더보기</a></li>
               </ul>
             </div>
 
             <div class="card-body">
               <h5 class="card-title">타임라인 <span>| ${title}<br></span>
-              <span style="color:#8c8c8c; font-size:12px;">⏲ 최근 15개까지 화면에 노출</span></h5>
+              <span style="color:#8c8c8c; font-size:12px;">⏲️ 최근 15개까지 화면에 노출</span></h5>
 
               <div class="activity">       
                                  
@@ -734,6 +734,68 @@
             </div>
 
           </div><!-- End Recent Activity -->
+          
+           <!-- 진행도 chart -->
+           <div class="card">
+                 <!-- Radial Bar Chart -->
+              <div class="StatusCntChart card-body" id="radialBarChart">
+              <h5 class="card-title">전체일정 진행상태<span><br></span>
+              <span style="color:#8c8c8c; font-size:12px;">📅 일정을 완료하세요!</span></h5>
+              <script> 
+              var statuscnt = []
+              var status = []
+				$.ajax({
+					url:"${path}/getSchStatus.do",
+					dataType:"json",
+					async:false,
+					success:function(data){
+						var data = data.statuscnt
+						$(data).each(function(idx, d){
+							statuscnt.push(Number(d.statuscnt))
+							status.push(d.status)
+						})
+					}
+				})
+                document.addEventListener("DOMContentLoaded", () => {
+                  new ApexCharts(document.querySelector(".StatusCntChart"), {
+                    series: statuscnt,
+                    chart: {
+                      height: 250,
+                      type: 'radialBar',
+                      toolbar: {
+                        show: true
+                      }
+                    },
+                    plotOptions: {
+                      radialBar: {
+                        dataLabels: {
+                          name: {
+                            fontSize: '22px',
+                          },
+                          value: {
+                            fontSize: '16px',
+                          },
+                          total: {
+                            show: true,
+                            label: 'Total',
+                            formatter: function(w) {
+                              // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
+                              return 249
+                            }
+                          }
+                        }
+                      }
+                    },
+                    labels: STATUS,
+                  }).render();
+                });
+              </script>
+              <!-- End Radial Bar Chart -->  
+					
+                </div>
+
+            </div><!-- 진행도 chart End -->
+          
 
               <!-- 참가자 Accordion without outline borders -->
           <div class="card">
