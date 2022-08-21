@@ -107,10 +107,11 @@ text-decoration:underline;
 	    	<form  id="form2" name="form2" action="${path}/commDelete.do" method="post">
 	    	<input type="hidden" name="cno" value="${param.cno}"/>
 	    	<input type="hidden" name="sno" value="${param.sno}"/>
-			<input type="text" name="pno" value="${param.pno}"/>
-			<input type="text" name="sname" value="${sname}"/>			
-			<input type="text" name="state" value="댓글삭제"/>
-			<input type="text" name="writer" value="${name}"/>
+			<input type="hidden" name="pno" value="${param.pno}"/>
+			<input type="hidden" name="sname" value="${sname}"/>			
+			<input type="hidden" name="state" value="댓글삭제"/>
+			<input type="hidden" name="name" value="${name }"/>
+			<input type="hidden" name="writer" value="${comment.writer }"/>
 			</form>
 	    
 		     <div class="row g-3">     
@@ -133,7 +134,7 @@ text-decoration:underline;
      
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName"  value="${name}"  readonly>
+                    <input type="text" class="form-control" id="floatingName" name="writer" value="${comment.writer}"  readonly>
                     <label for="floatingName">작성자</label>
                   </div>
                 </div>
@@ -222,6 +223,12 @@ text-decoration:underline;
 	}
 	function goDelete(cno){
 		if(confirm("삭제하시겠습니까?")){
+			var Loginid = $("[name=name]").val();	
+			var writer = $("[name=writer]").val();
+			if (Loginid !== writer) {        
+				alert("본인이 작성한 댓글만 삭제 가능합니다!!");            
+				return false;       
+				}
 			location.href="${path}/commDelete.do?cno="+cno+"&sno="+"${param.sno}"+"&pno="+"${param.pno}";
 			$("[name=form2]").submit();
 		}
@@ -232,6 +239,7 @@ text-decoration:underline;
 		alert("삭제완료!!\n조회화면으로 이동!")
 		$("#form").submit();
 	}
+	
 
 </script>
 </body>

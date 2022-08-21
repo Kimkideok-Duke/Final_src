@@ -93,6 +93,7 @@
               <input type="hidden" name="cno" value="${comment.cno}">          
                  <input type="hidden" name="sname" value="${sname}">                      
               <input type="hidden" name="state" value="댓글수정"/>
+              <input type="hidden" name="name" value="${name }"/>
               <input type="hidden" name="writer" value="${comment.writer}"/>
               
                 <div class="col-md-12">                  
@@ -158,19 +159,28 @@
 	location.href="${path}/commentList.do?sno="+"${param.sno}"+"&pno="+"${param.pno}";
 	}
 	
-	function goUpdate(){
-			if(confirm("수정하시겠습니까?")){
-				var contentVal = $("[name=content]").val();
-				$("[name=frm01]").attr("action","${path}/commUpdate.do?sno="+"${param.sno}"+"&pno="+"${param.pno}");
-				$("[name=frm01]").submit();
+	function goUpdate(){        		           
+		var Loginid = $("[name=name]").val();	
+		var writer = $("[name=writer]").val();
+		if(confirm("수정하시겠습니까?")){      
+		if (Loginid !== writer) {        
+			alert("본인이 작성한 댓글만 수정 가능합니다!!");            
+			return false;       
 			}
-	}
+		var contentVal = $("[name=content]").val();	
+		$("[name=frm01]").attr("action","${path}/commUpdate.do?sno="+"${param.sno}"+"&pno="+"${param.pno}");
+		$("[name=frm01]").submit();
+		}
+		}
+
 	var upt = "${upt}"
 	if(upt=="Y"){
 		if(confirm("수정완료!!\n 조회화면으로 이동!")){
 			$("#frm02").submit();
 		}
 	}
+	
+	
 
 </script>
 

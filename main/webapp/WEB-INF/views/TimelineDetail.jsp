@@ -47,6 +47,11 @@
   <!-- padding: 16px 32px; -->
   
 </head>
+<style>
+.fcl{
+color:
+}
+</style>
 
 <body>
 <jsp:include page="navi.jsp"/>
@@ -70,8 +75,8 @@
 
 		
           <div class="card-body pb-0">
-          <h5 class="card-title">프로젝트 의 타임라인 목록 입니다.</h5>
-
+          <br>
+          <h6 class="card-title"> #${param.title}의 타임라인 목록 입니다.</h6>
                   <table class="table table-borderless datatable">
                     <thead style="text-align:center">
                       <tr>

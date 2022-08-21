@@ -645,7 +645,7 @@
                   <h6>타임라인</h6>
                 </li>
 
-                <li><a class="dropdown-item" href="${path}/goTimeline.do?pno=${param.pno}">타임라인 더보기</a></li>
+                <li><a class="dropdown-item" href="${path}/goTimeline.do?pno=${param.pno}&title=${title}">타임라인 더보기</a></li>
               </ul>
             </div>
 
@@ -694,7 +694,7 @@
                  <div class="activity-item d-flex">
                   <div class="activite-label">${t.calTime}</div>
                   <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                  <div class="activity-content">${t.sname } 일정에 <span class="thick">코멘트</span>가 삭제되었습니다.</div>
+                  <div class="activity-content">#${t.sname } 일정에 <span class="thick">코멘트</span>가 삭제되었습니다.</div>
                   </div><!-- End activity item-->               
                 </c:when>
                 
