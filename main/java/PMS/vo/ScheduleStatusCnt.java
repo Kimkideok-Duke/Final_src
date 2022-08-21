@@ -3,15 +3,17 @@ package PMS.vo;
 public class ScheduleStatusCnt {
 	private int pno;
 	private String status;
-	private int StatusCnt;
+	private int stCnt;
+	private int stRatio;
 	public ScheduleStatusCnt() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ScheduleStatusCnt(int pno, String status, int statusCnt) {
+	public ScheduleStatusCnt(int pno, String status, int stCnt, int stRatio) {
 		this.pno = pno;
 		this.status = status;
-		StatusCnt = statusCnt;
+		this.stCnt = stCnt;
+		this.stRatio = stRatio;
 	}
 	public int getPno() {
 		return pno;
@@ -25,12 +27,16 @@ public class ScheduleStatusCnt {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getStatusCnt() {
-		return StatusCnt;
+	public int getStCnt() {
+		return stCnt;
 	}
-	public void setStatusCnt(int statusCnt) {
-		StatusCnt = statusCnt;
+	public void setStCnt(int stCnt) {
+		this.stCnt = stCnt;
 	}
-	
-	
+	public int getStRatio() {
+		return stRatio;
+	}
+	public void setStRatio(int stRatio) {
+		this.stRatio = stRatio;
+	}
 }

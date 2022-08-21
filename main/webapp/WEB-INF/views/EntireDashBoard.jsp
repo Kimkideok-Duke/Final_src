@@ -229,6 +229,7 @@
 							dataType:"json",
 							async:false,
 							success:function(data){
+								console.log('seccuss');
 								var data = data.deptCnt
 								$(data).each(function(idx, d){
 									count.push(Number(d.count))

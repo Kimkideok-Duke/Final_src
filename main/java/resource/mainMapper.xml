@@ -69,10 +69,10 @@
 		AND sno = #{sno}
 	</select>
 	<!-- 일정 진행상태수 조회 -->
-	<select id="getStatus" resultType="StatusCnt">
-		SELECT STATUS, count(*) statuscnt
-		FROM SCHEDULE
-		WHERE pno = #{pno}
-		GROUP BY STATUS
+	<select id="getStatusCnt" resultType="ScheduleStatusCnt" parameterType="int">
+	SELECT STATUS, COUNT(*) stCnt, round(RATIO_TO_REPORT(COUNT(*)) OVER()*100,2) stRatio
+	FROM SCHEDULE
+	WHERE pno=#{pno}
+	GROUP BY STATUS
 	</select>
 </mapper> 

@@ -79,3 +79,20 @@ FROM SCHEDULE
 WHERE pno = 2
 GROUP BY STATUS;
 
+select STATUS, count(*) * 100.0 / (select count(*) from SCHEDULE)
+from SCHEDULE
+group by STATUS;
+
+ SELECT * FROM SCHEDULE; 
+--비율 계산 => 특정값 / 전체값 * 100 = n%
+-- 전체값 : 35개
+SELECT COUNT(*) stCnt FROM SCHEDULE;
+-- 특정값 : 16, 12, 2, 5
+SELECT STATUS, count(*) stcnt FROM SCHEDULE GROUP BY STATUS;
+-- 비율계산
+
+
+SELECT STATUS, COUNT(*) stCnt, round(RATIO_TO_REPORT(COUNT(*)) OVER()*100,2) stRatio
+FROM SCHEDULE
+GROUP BY STATUS;
+

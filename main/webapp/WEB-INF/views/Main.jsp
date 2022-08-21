@@ -742,23 +742,25 @@
               <h5 class="card-title">전체일정 진행상태<span><br></span>
               <span style="color:#8c8c8c; font-size:12px;">📅 일정을 완료하세요!</span></h5>
               <script> 
-              var statuscnt = []
-              var status = []
+              var ratio = []
+              var schstatus = []
+              var cnt = []
 				$.ajax({
-					url:"${path}/getSchStatus.do",
+					url:"${path}/getSchStatus.do?pno=${param.pno}",
 					dataType:"json",
 					async:false,
-					success:function(data){
-						var data = data.statuscnt
+					success:function(data){						
+						var data = data.stRatio
 						$(data).each(function(idx, d){
-							statuscnt.push(Number(d.statuscnt))
-							status.push(d.status)
+							ratio.push(Number(d.stRatio))
+							schstatus.push(d.status)
+							cnt.push(d.stCnt)
 						})
 					}
 				})
                 document.addEventListener("DOMContentLoaded", () => {
                   new ApexCharts(document.querySelector(".StatusCntChart"), {
-                    series: statuscnt,
+                    series: ratio,
                     chart: {
                       height: 250,
                       type: 'radialBar',
@@ -780,13 +782,13 @@
                             label: 'Total',
                             formatter: function(w) {
                               // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                              return 249
+                              return 
                             }
                           }
                         }
                       }
                     },
-                    labels: STATUS,
+                    labels: schstatus,
                   }).render();
                 });
               </script>

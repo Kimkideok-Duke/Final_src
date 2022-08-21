@@ -140,7 +140,7 @@ public class MainCtrl {
 	
     @RequestMapping("getSchStatus.do")
     public String getStatusCnt(@RequestParam("pno") int pno,Model d) {
-    	d.addAttribute("statuscnt", service.getStatusCnt(pno));
+    	d.addAttribute("stRatio", service.getStatusCnt(pno));
     	return "pageJsonReport";
     }
 }
