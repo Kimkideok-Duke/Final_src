@@ -831,7 +831,7 @@
               <script> 
               var ratio = []
               var schstatus = []
-              var cnt = []
+
 				$.ajax({
 					url:"${path}/getSchStatus.do?pno=${param.pno}",
 					dataType:"json",
@@ -841,7 +841,6 @@
 						$(data).each(function(idx, d){
 							ratio.push(Number(d.stRatio))
 							schstatus.push(d.status)
-							cnt.push(d.stCnt)
 						})
 					}
 				})
@@ -866,7 +865,7 @@
                           },
                           total: {
                             show: true,
-                            label: 'Total',
+                            label: 'STATUS',
                             formatter: function(w) {
                               // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
                               return 
