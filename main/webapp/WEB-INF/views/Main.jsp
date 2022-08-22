@@ -565,7 +565,7 @@
 			       <div class="modal-dialog modal-dialog-centered">
 			         <div class="modal-content">
 			           <div class="modal-header">
-			             <h5 class="modal-title">프로젝트 참가자 추가</h5>
+			             <h5 class="modal-title">일정 참가자 추가</h5>
 			             <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#basicModal"></button>
 			           </div>
 			           <br>
