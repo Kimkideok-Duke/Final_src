@@ -48,6 +48,11 @@ public class ProjectController {
     	return "WEB-INF/views/EntireDashBoard.jsp";
     }
     
+    @RequestMapping("setLang.do")
+    public String setLang(@RequestParam("lang") String lang) {
+    	return "WEB-INF/views/setLanguage.jsp";
+    }
+    
     // 프로젝트 추가
     @RequestMapping("addProject.do")
     public String addProject(Project ins, Model d) {
