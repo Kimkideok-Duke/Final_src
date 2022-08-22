@@ -1,6 +1,7 @@
 package PMS.controller;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -37,9 +38,7 @@ public class MainCtrl {
     @RequestMapping("goMain.do")
     public String main(HttpServletRequest request, @RequestParam(value="pno", defaultValue="") int pno, Model d) {
 		HttpSession session = request.getSession();
-    	if(session!=null && session.getAttribute("pno")!=null) {
-    		session.setAttribute("pno", pno);
-    	}
+		session.setAttribute("pno", pno);
     	d.addAttribute("title", service.getTitleByNo(pno));
     	d.addAttribute("slist",service.getScheduleList(pno));
     	d.addAttribute("alist", serviceA.getAccountList());
@@ -146,9 +145,15 @@ public class MainCtrl {
 	
 	// 일정 참가자 삭제
 	@RequestMapping("delSchParticipant.do")
-	public String delSchParticipant(SchParticipant del, Model d) {
+	public String delSchParticipant(HttpServletRequest request, SchParticipant del, Model d) {
+		HttpSession session = request.getSession();
+    	int pno = 0;
+    	if(session!=null&&session.getAttribute("pno")!=null) {
+    		pno=(int)session.getAttribute("pno");
+    	}
 		service.delSchParticipant(del);
 		d.addAttribute("proc", "delParSch");
+		d.addAttribute("pno", pno);
 		return "WEB-INF/views/Main.jsp";
 	}
 	

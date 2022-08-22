@@ -172,7 +172,7 @@
 				}else{
 					var addHTML=""
 						$(list).each(function(idx, sp){
-							addHTML+="<tr><td>"+(idx+1)+"</td><td>"+sp.name+"</td>"+
+							addHTML+="<tr onDblclick='delPart2("+sp.sno+",\""+sp.userno+"\")'><td>"+(idx+1)+"</td><td>"+sp.name+"</td>"+
 								"<td>"+sp.dept+"</td><td>"+sp.position+"</td>"+
 								"<td>"+sp.userno+"</td></tr>"
 					});
@@ -182,6 +182,13 @@
 			}
 		}); 
 	}
+	
+	function delPart2(sno, userno){
+		if(confirm(userno+"을 일정"+sno+"에서 제외하시겠습니까?"))
+		// 삭제 controller 호출
+		location.href="${path}/delSchParticipant.do?sno="+sno+"&userno="+userno
+	}
+	
 	function rstBtn(){
 		if(ckClk){
 			$('#schptBtn').trigger('click')
@@ -510,9 +517,11 @@
 						                <tbody id=schparti>
 						                </tbody>
 						              </table>
+						              <c:if test="${auth eq 'admin' or auth eq 'pm'}">
 						              	<div class="text-center">
 						              	  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSchparti">참가자 추가</button>
 						              	</div>
+						              </c:if>
 						              </div>
 				                    </div>
 				                    
@@ -525,7 +534,9 @@
 			               <div class="text-end">
 			                
 			             	<button type="submit" class="btn btn-primary">수정</button>
+			             	<c:if test="${auth eq 'admin' or auth eq 'pm'}">
 			             	<button type="button" onclick="delProc()" id="delBtn" class="btn btn-danger">삭제</button>
+			             	</c:if>
 		             	   </div>
 			              </div>
 			              </div>
@@ -546,8 +557,8 @@
   		location.href="${path}/goMain.do?pno=${param.pno}"
   	}
 	if(proc=="delParSch"){
-		alert("참가자 삭제 성공!")
-		location.href="${path}/goMain.do?pno=${param.pno}"
+		alert("${param.userno} 삭제 성공!")
+		location.href="${path}/goMain.do?pno=${pno}"
 	}
 </script>        
 		      <div class="modal fade" id="addSchparti" tabindex="-1">
