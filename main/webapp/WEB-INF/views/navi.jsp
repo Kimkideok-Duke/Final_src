@@ -102,14 +102,12 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
-            <li class="notification-item">
-              <div v-for="(al, idx) in art">
-                <h4>프로젝트 / {{al.title}}</h4>
-                <p>{{al.sname}} 일정 마감 {{al.dday}}일 남았습니다.<p>
-              </div>
-            </li>
-
+			<div v-for="(al, idx) in art">
+             <li class="notification-item">
+                <h4>{{al.title}}</h4>
+                <p>{{al.sname}} 일정 마감 {{al.dday}}일 남았습니다.</p>
+           	 </li>
+			</div>
             <li>
               <hr class="dropdown-divider">
             </li>

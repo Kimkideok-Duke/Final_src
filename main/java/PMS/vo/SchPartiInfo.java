@@ -1,6 +1,7 @@
 package PMS.vo;
 
 public class SchPartiInfo {
+	private int pno;
 	private int sno;
 	private String userno;
 	private String name;
@@ -11,6 +12,16 @@ public class SchPartiInfo {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public SchPartiInfo(int pno, int sno, String userno, String name, String position, String dept) {
+		super();
+		this.pno = pno;
+		this.sno = sno;
+		this.userno = userno;
+		this.name = name;
+		this.position = position;
+		this.dept = dept;
+	}
+
 	public SchPartiInfo(int sno, String userno, String name, String position, String dept) {
 		super();
 		this.sno = sno;
@@ -18,6 +29,14 @@ public class SchPartiInfo {
 		this.name = name;
 		this.position = position;
 		this.dept = dept;
+	}
+
+	public int getPno() {
+		return pno;
+	}
+
+	public void setPno(int pno) {
+		this.pno = pno;
 	}
 
 	public int getSno() {

@@ -63,7 +63,7 @@
 	</insert>
 	<!-- 일정 참가자 조회 -->
 	<select id="showSchPartiInfo" resultType="SchPartiInfo" parameterType="int">
-		SELECT s.SNO, a.USERNO, a.NAME, a.POSITION, a.DEPT
+		SELECT s.PNO, s.SNO, a.USERNO, a.NAME, a.POSITION, a.DEPT
 		FROM SCHPARTICIPANT s, ACCOUNT a
 		WHERE s.USERNO = a.USERNO 
 		AND sno = #{sno}
