@@ -27,7 +27,7 @@ public interface MainDao {
 	public void insSchParticipant(SchParticipant ins);
 	// 일정 참가자 조회
 	public List<SchPartiInfo> showSchPartiInfo(int sno);
-	// 일정 진행상태 수 조회
+	// 일정 진행상태 별 조회
 	public List<ScheduleStatusCnt> getStatusCnt(int pno);
 	// 프로젝트 참가자 조회
 	public List<Account> getPrjPartiList(int pno);
@@ -37,4 +37,5 @@ public interface MainDao {
 	public void delSchPrjParticipant(PrjParticipant del);
 	// 프로젝트 참가자 삭제
 	public void delPrjParticipant(PrjParticipant del);
+	
 }
