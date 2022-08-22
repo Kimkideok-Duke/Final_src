@@ -186,6 +186,8 @@
 </script>
 </head>
 <body>
+<jsp:include page="navi.jsp"/>
+<main id="main" class="main">
 <div id='calendar'></div>
 <h2 data-toggle="modal" id="modalBox"  
 	data-target="#exampleModalCenter" style="display:none;">모달창 로딩</h2>
@@ -299,5 +301,6 @@
 	<script type="text/javascript">
 
 	</script>
+	</main>
 </body>
 </html>
