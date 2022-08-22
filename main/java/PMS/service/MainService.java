@@ -55,7 +55,7 @@ public class MainService {
 		return dao.showSchPartiInfo(sno);
 	}
 	
-	// 일정 진행상태 수 조회
+	// 일정 진행상태별 비율 조회
 	public List<ScheduleStatusCnt> getStatusCnt(int pno){
 		return dao.getStatusCnt(pno);
 	}
@@ -72,4 +72,5 @@ public class MainService {
 	public void delPrjParticipant(PrjParticipant del) {
 		dao.delPrjParticipant(del);
 	}
+
 }
