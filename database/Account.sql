@@ -46,13 +46,13 @@ CREATE SEQUENCE acc_seq
 INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','홍길동','himan7777@naver.com', '본부',
 	'ceo','서울시 마포구 서교동 447-5 201호','010-1234-5678',NULL,sysdate,'admin');
 
-INSERT INTO account values('E10000004','abcabc123','김길동','himan7777@naver.com', '개발부',
+INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','김길동','himan7777@naver.com', '개발부',
 	'부장','서울시 마포구 서교동 447-5 201호','010-1234-5678',NULL,sysdate,'pm');
 
 INSERT INTO account values('E'||to_char(acc_seq.nextval),'abcabc123','서길동','himan7777@naver.com', '개발부',
 	'과장','서울시 마포구 서교동 447-5 204호','010-1934-5978',NULL,sysdate,'um');
 
-SELECT * FROM account ORDER BY userno DESC ;
+SELECT * FROM account;
 SELECT * FROM profile;
 
 /*
@@ -233,5 +233,3 @@ AND sc.pno = p.pno
 AND a.userno = p.pmno
 ;
 
-SELECT * FROM project;
-SELECT * FROM schedule WHERE pno = 2;

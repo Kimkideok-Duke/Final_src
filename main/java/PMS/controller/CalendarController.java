@@ -45,7 +45,7 @@ public class CalendarController {
       }
       String startdate = ins.getStart().split("T")[0];
       String enddate= ins.getEnd().split("T")[0];
-      Schedule reg = new Schedule(pno, ins.getTitle(), "기본", 0, startdate, enddate, 0);
+      Schedule reg = new Schedule(pno, ins.getTitle(), "예정", 0, startdate, enddate, 0);
       mservice.regSchedule(reg);
       int sno = service.getRecentSno();
       ins.setPno(pno);
