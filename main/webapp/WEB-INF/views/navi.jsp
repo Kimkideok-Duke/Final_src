@@ -69,7 +69,7 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow multiLang">
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="${path}/entireDashboard.do?lang=ko">
+              <a class="dropdown-item d-flex align-items-center" href="${path}/setLang.do?lang=ko">
                 <img alt="ko" src="img/free-icon-south-korea-2151378.png" width="30">
                 <span><h6><spring:message code="ko"/></h6></span>
               </a>
@@ -79,7 +79,7 @@
             </li>
             
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="${path}/entireDashboard.do?lang=en">
+              <a class="dropdown-item d-flex align-items-center" href="${path}/setLang.do?lang=en">
                 <img alt="ko" src="img/free-icon-united-states-206626.png" width="30">
                 <span><h6><spring:message code="en"/></h6></span>
               </a>
@@ -97,7 +97,7 @@
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style="width:300px">
             <li class="dropdown-header">
             <i class="bi bi-exclamation-circle text-warning"></i>
-              알림
+              <spring:message code="Notifications"/>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -147,7 +147,7 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" href="${path}/goMyPage.do">
                 <i class="bi bi-person"></i>
-                <span>My Profile</span>
+                <span><spring:message code="MyProfile"/></span>
               </a>
             </li>
             <li>
@@ -160,7 +160,7 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" href="${path}/logout.do">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
+                <span><spring:message code="SignOut"/></span>
               </a>
             </li>
 
@@ -178,9 +178,9 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="${path}/entireDashboard.do">
+        <a class="nav-link collapsed" href="${path}/entireDashboard.do?lang=${setlang}">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span><spring:message code="Dashboard"/></span>
         </a>
       </li><!-- End Dashboard Nav -->
 
@@ -192,7 +192,7 @@
 	  
       <li class="nav-item">
         <a class="nav-link collapsed" href="${path}/getAlert.do?userno=${userno}">
-          <i class="bi bi-bell"></i><span>Notifications</span>
+          <i class="bi bi-bell"></i><span><spring:message code="Notifications"/></span>
         </a>
       </li><!-- End 알림 Nav -->
 	  <c:if test="${not empty param.pno}">
@@ -204,7 +204,7 @@
       
       <li class="nav-item">
         <a class="nav-link collapsed" href="${path}/calendar.do">
-          <i class="bi bi-calendar3"></i><span>fullcalendar</span>
+          <i class="bi bi-calendar3"></i><span><spring:message code="fullcalendar"/></span>
         </a>
       </li><!-- End 풀캘린더 Nav -->
       </c:if>
@@ -212,13 +212,13 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="${path}/goMyPage.do">
           <i class="bi bi-person"></i>
-          <span>Profile</span>
+          <span><spring:message code="Profile"/></span>
         </a>
       </li><!-- End Profile Page Nav -->
       <c:if test="${auth != 'user' && auth != 'pm'}">
       <li class="nav-item">
         <a class="nav-link collapsed" href="${path}/goUmPage.do">
-          <i class="bi bi-person-check"></i><span>User Management</span>
+          <i class="bi bi-person-check"></i><span><spring:message code="UserManagement"/></span>
         </a>
       </li><%--<%}--%><!-- End 관리자페이지 Page Nav -->
        </c:if>
