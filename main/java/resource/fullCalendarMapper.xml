@@ -10,8 +10,10 @@
 		<result column="start1" property="start"/>
 		<result column="end1" property="end"/>
 	</resultMap> 
-	<select id="getCalList" resultMap="calResult">
-		select * from calendar
+	<select id="getCalList" parameterType="int" resultMap="calResult">
+		select *
+		from calendar
+		where pno = #{pno}
 	</select> 
 	<insert id="insertCalendar" parameterType="calendar" >
 		insert into calendar values(cal_seq.nextval,#{pno},#{sno},#{title},#{start},

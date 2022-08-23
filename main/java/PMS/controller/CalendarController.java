@@ -31,8 +31,13 @@ public class CalendarController {
    }
    // http://localhost:6080/PMS/calList.do callist
    @RequestMapping("calList.do")
-   public String calList(Model d) {
-      d.addAttribute("callist", service.getCalList());
+   public String calList(HttpServletRequest request, Model d) {
+		HttpSession session = request.getSession();
+    	int pno = 0;
+		if(session!=null && session.getAttribute("pno")!=null) {
+    		pno = (int)session.getAttribute("pno");
+    	}
+      d.addAttribute("callist", service.getCalList(pno));
       return "pageJsonReport";
    }
    // http://localhost:6080/PMS/calInsert.do

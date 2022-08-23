@@ -14,8 +14,8 @@ public class CalendarService {
 	@Autowired(required=false)
 	private CalendarDao dao;
 	
-	public List<Calendar> getCalList(){
-		return dao.getCalList();
+	public List<Calendar> getCalList(int pno){
+		return dao.getCalList(pno);
 	}
 	public void insertCalendar(Calendar ins) {
 		dao.insertCalendar(ins);

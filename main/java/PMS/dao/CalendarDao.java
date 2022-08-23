@@ -11,7 +11,7 @@ import PMS.vo.Schedule;
 @Repository
 public interface CalendarDao {
 
-	public List<Calendar> getCalList();
+	public List<Calendar> getCalList(int pno);
 	public void insertCalendar(Calendar ins);
 	public void updateCalendar(Calendar upt);
 	public void deleteCalendar(int id);  

@@ -90,8 +90,12 @@ public class MainCtrl {
 		service.uptScheduleByPM(upt);
 		d.addAttribute("proc", "upt");
 		d.addAttribute("pno", service.getSchedule(upt.getSno()).getPno());
-		String start = LocalDate.parse(upt.getStartDate_s()).plusDays(1).toString();
-		String end = LocalDate.parse(upt.getEndDate_s()).plusDays(1).toString();
+		String start = upt.getStartDate_s();
+		String end = upt.getEndDate_s();
+		start = start+"T15:00:00.000Z";
+		end = end+"T15:00:00.000Z";
+//		String start = LocalDate.parse(upt.getStartDate_s()).plusDays(1).toString();
+//		String end = LocalDate.parse(upt.getEndDate_s()).plusDays(1).toString();
 		Calendar uptCal = new Calendar(upt.getSno(), upt.getSname(), start, end);
 		cservice.updateCalendar2(uptCal);
 		return "WEB-INF\\views\\Main.jsp";
