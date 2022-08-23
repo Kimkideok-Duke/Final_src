@@ -258,6 +258,7 @@
 				$.ajax({
 					url:"${path}/deptCnt.do",
 					dataType:"json",
+					async:false,
 					success:function(data){
 						var data = data.deptCnt
 						$(data).each(function(idx, d){
