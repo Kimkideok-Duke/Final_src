@@ -67,7 +67,7 @@ public class MainCtrl {
 		start = start+"T15:00:00.000Z";
 		end = end+"T15:00:00.000Z";
 		int sno = cservice.getRecentSno();
-		Calendar ins = new Calendar(pno, sno, reg.getSname(), start, end, "", "pink", "yellow", true);
+		Calendar ins = new Calendar(pno, sno, reg.getSname(), start, end, "", "#0099cc", "#ccffff", true);
 		cservice.insertCalendar(ins);
 		d.addAttribute("isReg","Y");
 		return "WEB-INF\\views\\Main.jsp";
