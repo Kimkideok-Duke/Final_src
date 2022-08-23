@@ -4,9 +4,7 @@
 CREATE TABLE Comment_tb(
 cno number PRIMARY KEY,
 pno NUMBER,
-FOREIGN KEY (pno) REFERENCES project (pno),
 sno NUMBER,
-FOREIGN KEY (sno) REFERENCES schedule (sno),
 content varchar2(50),
 writer varchar2(20),
 regdte DATE,

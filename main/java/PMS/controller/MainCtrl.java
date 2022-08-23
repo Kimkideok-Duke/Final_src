@@ -94,8 +94,6 @@ public class MainCtrl {
 		String end = upt.getEndDate_s();
 		start = start+"T15:00:00.000Z";
 		end = end+"T15:00:00.000Z";
-//		String start = LocalDate.parse(upt.getStartDate_s()).plusDays(1).toString();
-//		String end = LocalDate.parse(upt.getEndDate_s()).plusDays(1).toString();
 		Calendar uptCal = new Calendar(upt.getSno(), upt.getSname(), start, end);
 		cservice.updateCalendar2(uptCal);
 		return "WEB-INF\\views\\Main.jsp";
